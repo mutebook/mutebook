@@ -1,0 +1,229 @@
+@chr b  *
+@chr em /
+#-------------------------------------------------------------------------------
+= Elements of CM
+CM is interpretted sequentially line-by-line, in one pass, top to bottom.
+
+== Markup characters
+Certain characters trigger markup processing, if they occur in a specific
+context: most do only if they are in the first position on a line. The markup
+characters are: {~\\}, {~@}, {~#}, {~=}, {~-}, {~.}, {~*}, {~~}, {~\{}, {~\|},
+and {~\}}; the characters may be changed and a few additonal markup characters
+may be set through pragmas.
+
+== Escape
+{~\\} "escapes", in the usual way, the following character (makes it literal),
+such as in case that it would otherwise trigger a markup processing. It also has
+two other functions:
+* {~\\n} forces a line break in the output
+* {~\\} as the last (non-blank) character on a line continues the content on the
+  following line.
+
+~~~.nohighlight
+\= this line is not a header and ends in a backslash: \\
+====== This is a header that spreads \
+over two source lines, and has a line break\n in it.
+~~~
+
+produces:
+---.box
+\= this line is not a header and ends in a backslash: \\
+====== This is a header that spreads \
+over two source lines, and has a line break\n in it.
+---
+
+== Pragmas
+A line that starts with {~@} in the first position is a {:pragma|pragmas.html}.
+Pragmas are used for configuring or changing CM features and have effect from
+the following line until the end of the page (or until other pragma changes the
+same feature).
+
+== Comments
+A line that starts with {~#} in the first position is a comment and is ignored.
+~~~.nohighlight
+# a comment
+~~~
+
+produces nothing:
+---.box
+---
+
+== Headers
+A line that starts with one or more (up to six) {~=} in the first position is
+a header of the corresponding level. The leading sequence of {~=} may be
+optionally followed by on or more /class attributes/. Class attributes
+should correspond to {:class selectors|https://www.w3schools.com/cssref/sel_class.asp}
+in the active css style sheet.
+~~~.nohighlight
+= First-level header
+== Second level
+==.hr Second level underlined
+==== Forth rulez
+~~~
+
+produces:
+---.box
+= First-level header
+== Second level
+==.hr Second level underlined
+==== Forth rulez
+---
+
+== Lists
+{~-} resp. {~*} in the first position on a line, followed by a space or class
+attributes, turns that line into an item of an unordered resp. ordered list.
+The class attributes in the first item of the same kind is applied to the list
+container; possible class attributes on the second and following lines are
+ignored. The text of a list item can continue on the following line(s), if those
+begin with a whitespace.
+
+Lists cannot be nested.
+~~~.nohighlight
+-.right floating right
+* one
+* two
+* three,
+  continued
+- a
+- b
+- c
+~~~
+
+produces:
+---.box
+-.right floating right
+* one
+* two
+* three,
+  continued
+- a
+- b
+- c
+---
+
+== Code blocks
+Exactly three {~~} in the first position on a line delimit a code block
+(pre-formatted text). The opening {~~~~} may be followed by class attributes.
+Code blocks may not be nested. The content of a code block is treated as a
+programming language by {:https://highlightjs.org/}. To prevent highlighting,
+use a {~.nohighlight} attribute.
+
+The text in a code block is interpreted literally and no markup processing takes
+place, with the exception of {~~~~} that end the code block.
+
+@chr pre -
+---
+~~~
+// javascript
+let hello = () => 'Hello, World!'; // a 'fat' arrow function
+~~~
+~~~.nohighlight
+let hello = () => 'Hello, World!'; // a 'fat' arrow function
+~~~
+~~~
+// C
+int main(int argc, char** argc) {
+  return 0;
+}
+~~~
+---
+@chr pre ~
+
+produces:
+---.box
+~~~
+// javascript
+let hello = () => 'Hello, World!'; // a 'fat' arrow function
+~~~
+~~~.nohighlight
+let hello = () => 'Hello, World!'; // a 'fat' arrow function
+~~~
+~~~
+// C
+int main(int argc, char** argc) {
+  return 0;
+}
+~~~
+---
+
+== Sections
+Three {~-} in the first position on a line indicate the beginning or ending of
+a "fenced" section block. The {~---} may be followed by a section tag, and then
+by class attributes. Used section tags should correspond to {:HTML block-level
+elements|https://www.w3schools.com/html/html_blocks.asp}. Sections /may/ be nested.
+
+{~---} that is not followed by a section tag indicates a section ending,
+if inside of a section; otherwise it indicates a section beginning and the tag
+{~div} is assumed (which is, very likely, the most common case).
+
+~~~.nohighlight
+before floating boxes
+--- div
+---.box.left
+floating left
+---
+---.box.right
+floating right
+---
+---
+~~~
+
+produces:
+---.box
+before floating boxes
+--- div
+---.box.left
+floating left
+---
+---.box.right
+floating right
+---
+---
+---
+
+== Horizontal line
+Four or more {~-} in the first position:
+~~~.nohighlight
+section
+-------
+section
+~~~
+
+produce a horizonal line:
+---.box
+section
+-------
+section
+---
+
+== Paragraphs
+Paragraphs of text are separated by: blank lines, headers, code blocks,
+sections, and horizontal lines. In addition, lines that begin with {~.} in the
+first position also start a new paragraph.
+
+~~~.nohighlight
+Paragraph,
+still a paragraph.
+
+A new paragraph.
+On two source lines.
+. Another paragraph without a blank line.
+-----
+Another one.
+~~~
+
+produces:
+---.box
+Paragraph,
+still a paragraph.
+
+A new paragraph.
+On two source lines.
+. Another paragraph without a blank line.
+-----
+Another one.
+---
+
+--------------------------------------------------------------------------------
+{prev.left Back: } {next.right Next: }
+#-------------------------------------------------------------------------------

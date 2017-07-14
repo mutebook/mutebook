@@ -1,0 +1,74 @@
+// load and parse page content
+/* global cm:false cm_book:false */
+
+(function () {
+
+class BookAdapter extends cm.Adapter {
+  constructor () {
+    super();
+    this.book = cm_book;
+
+    // reverse-lookup in toc
+    const toc = this.book.toc;
+    this.tocKeySrc = {};
+    for (const key of Object.keys(toc))
+      this.tocKeySrc[toc[key][2]] = key;
+
+    this.thisTocKey =
+      this.tocKeySrc[this.book.pagePath + this.book.pageFile];
+  }
+
+  tocTxLink (off = 0) {
+    const entry = this.book.tocEntry(this.thisTocKey);
+    return entry ? this.book.tocTxLink(entry[3] + off)
+                 : super.tocTxLink(off);
+  }
+}
+
+cm.Adapter = BookAdapter;
+
+cm.goto = (ln, anchor) => {
+  const ev = window.event;
+  if (ev.ctrlKey || ev.metaKey)
+    return true; // follow href in another tab
+  top.postMessage(['goto', ln, anchor], '*');
+  return false;
+};
+
+const setDocumentBody = function (tx) {
+  const html = cm.process(tx);
+  document.body.innerHTML = `<article>${html}</article>`;
+
+  // scroll to anchor, if any
+  const els = document.querySelector(`a[href="${location.hash}"]`);
+  if (els)
+    els.scrollIntoView(true);
+
+  // highlight code, if any
+  if (cm.parser.hasPre)
+    cm_book.loadScript('js/3rd/highlight.pack.js').onload = function () {
+      document.querySelectorAll('pre code').forEach(
+        /* global hljs:false */
+        (block) => hljs.highlightBlock(block));
+    };
+
+  // mathjax, if any
+  if (cm.parser.hasJax)
+    cm_book.loadScript('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML');
+};
+
+if ('undefined' !== typeof document) {
+  let src = cm_book.source;
+  if (!src)
+    if ((src = document.querySelector('body > pre')))
+      src = src.innerText;
+    else
+      src = '';
+  setDocumentBody(src);
+}
+
+if (cm_book.conf.statcounter)
+  cm_book.loadScript('../statcounter.js');
+
+}());
+// eof

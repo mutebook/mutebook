@@ -1,0 +1,54 @@
+@chr b  *
+@chr em /
+#-------------------------------------------------------------------------------
+= Compact Markup (CM)
+CM is a simple, lightweight, extensible, and configurable compact document
+{wp markup language}:
+- CM is /simple/: only a small set of most common formatting features are built
+  into the CM syntax, and therefore parsing CM is straighforward and unambiguous.
+- CM is /lightweight/: CM is a {wp lightweight markup language}. Also, thanks to
+  its simplicity, CM parsers and processors are lightweight.
+- CM is /extensible/: additional formatting features are realized through
+  {:hooks}. CM has a small set of set of ready-to-use hooks; it is quite
+  straightforward to add custom hooks.
+- CM is /configurable/: some aspects of CM syntax are configurable through {a
+  pragmas}. When CM is used in a {:CM book|book} (a navigable website),
+  configuration is also possible globally for all pages in the book
+  (in the {~conf.js} script).
+
+== Editors and processors
+CM, as a lightweight markup language, is reasonably easy to read and edit in its
+source plain text form. Two canonical CM parsers and associated CM book
+processors are provided: one set written in JavaScript that allows CM to be
+embedded into web pages and processed in a standard-compliant web browser
+completely on the client side. The second set is implemented in PHP 7 and is
+intended for the use of CM on a web server.
+
+== This documentation is itself a CM website
+These pages are, naturally, created using CM. They serve a triple purpose:
+as a reference CM documentation, as a template of a CM-enabled (JavaScript)
+website template, and to test and demonstrate all CM features.
+
+== Source files
+This CM repositories are hosted at {:https://github.com/CompactMarkup}.
+
+== Live version
+These pages can be viewed live:
+* on {:GitHub Pages|https://compactmarkup.github.io/cm.docs/}
+* locally, by opening the {~index.html} file from a local copy of the repository
+  in a web browser.
+
+== Requirements
+# TODO wikipedia links {aw ..} {wa ..} {a.wp ..} {wp ..} ?
+The CM JavaScript engine is written in {:ES6|http://es6-features.org/};
+most modern browsers support it. In case that a CM-enabled website is opened in
+an older browser, it fails graciously with an information message.
+
+# TODO anchor() s.a. == #contact Bug reports ...
+== {a|#contact} Bug reports, requests, questions, contact
+To suggest improvements, request new features, explanations etc.:
+- create a {:GitHub issue|https://github.com/CompactMarkup/cm.docs/issues}
+- send a message to the {:author|https://github.com/jburle}
+--------------------------------------------------------------------------------
+{prev.left Back: } {next.right Next: }
+#-------------------------------------------------------------------------------

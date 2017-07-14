@@ -1,0 +1,38 @@
+@chr b  *
+@chr em /
+#-------------------------------------------------------------------------------
+= CM labs (experimental features)
+
+== Tables
+~~~.nohighlight
+--- table
+[th1][th2][th3][th4]
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+---
+~~~
+
+produces:
+---.box
+--- table
+[th1][th2][th3][th4]
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+---
+---
+
+== Mathjax
+~~~.nohighlight
+{x x < y}
+~~~
+
+produces:
+---.box
+{x x < y}
+---
+
+--------------------------------------------------------------------------------
+{prev.left Back: } {next.right Next: }
+#-------------------------------------------------------------------------------

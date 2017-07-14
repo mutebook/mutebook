@@ -1,0 +1,15 @@
+@chr b  *
+@chr em /
+#-------------------------------------------------------------------------------
+= Pragmas
+
+Various parameters of CM processing can be changed by
+{:pragmas|https://en.wikipedia.org/wiki/Directive_(programming)} (directives).
+A pragma starts with {~@} in the first position on a line, followed by the
+pragma type, followed by a value or values.
+
+/This page shall be completed in the near future./
+
+--------------------------------------------------------------------------------
+{prev.left Back: } {next.right Next: }
+#-------------------------------------------------------------------------------

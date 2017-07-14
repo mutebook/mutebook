@@ -1,0 +1,158 @@
+@chr b  *
+@chr em /
+#-------------------------------------------------------------------------------
+= Hooks
+Hooks are a powerful mechanism of CM. Hooks implement some built-in features and
+also can be used to extend CM.
+
+A hook starts with {~\{} and ends with {~\}}. Within a hook (that is not a simple
+formatting or a typographical hook, {~\|} separates its arguments; hook arguments
+are in the following text called /parts/ of a hook.
+
+Hooks are of three kinds:
+* simple formatting hooks,
+* typographical hooks, and
+* processing hooks: built-in and custom.
+
+Hooks can be nested (hooks within hooks) and {~\{} will trigger a hook processing
+anywhere in the text, with these exceptions:
+- not in a code block
+- not if {~\{} is escaped ({~\\\{}).
+
+== Simple formatting hooks
+A simple formatting hook begins with {~\{}, followed by a single format
+indicating character and a content. The format indicating character can be:
+- {~*} for bolded text
+- {~/} for emphasised text (italics)
+- {~#} for monospaced text (inline code snippet)
+
+~~~.nohighlight
+This is {*bold}, this is {/emphasized}, and this is {~monospaced and {*bold}}.
+~~~
+
+produces
+---.box
+This is {*bold}, this is {/emphasized}, and this is {~monospaced and {*bold}}.
+---
+
+==== Shortcut
+Marking bold resp. emphasized text may be done in a shortcut way, by surrounding
+the text by a pair of {~*} resp. {~/}. This feature must be first enabled by
+pragmas:
+~~~.nohighlight
+@chr b  *
+@chr em /
+
+This is *bold*, and this is /emphasized/.
+~~~
+
+produces
+---.box
+This is *bold*, and this is /emphasized/.
+---
+
+== Typographical hooks
+Typographical hooks are used to enter special characters into the output.
+Of course, they are not strictly needed, since CM supports utf-8, but do come
+handy.
+~~~.nohighlight
+{=>} {<=} {->} {<-} {--} {---}
+~~~
+
+produces
+---.box
+{=>} {<=} {->} {<-} {--} {---}
+---
+
+== Built-in processing hooks
+A processing hook has, immediately after the opening {~\{}, a tag that is
+optionally followed by class attributes. If the hook has parts (arguments),
+the first one is separated from the tag by blank space; the second and following
+parts are separated by {~\|}.
+
+The hook parts are forwarded for a specific processing (based on the tag) and
+the resulting value is inserted into the output text, or to further hook
+processing in the case of nested hooks.
+
+Three kinds of hooks are built-in in into the CM parser:
+
+=== Links and anchors
+The link ({~a}) hook has two parts: the text and the link. If only one part is
+provided, it becomes both the text and the link. Links can be /absolute/
+(typically used for outside web pages), /root-relative/ (relative to the CM
+website root), or /relative/ (relative to the current page).
+
+The ({~a}) hook can also specify a page anchor to which other links may refer.
+# TODO update to HTML5 http://stackoverflow.com/questions/484719
+
+~~~.nohighlight
+# an absolute link; the text and the link are the same
+- {:https://github.com/scgmlz/CompactMarkup}
+# an absolute link with different text and link values
+- {:GitHub|https://github.com/scgmlz/CompactMarkup}
+# a relative link to a page
+- {:About|about.html}
+# a root-relative link to a page
+- {:About|/pages/about.html}
+# an anchor on this page
+- {a|#hereItIs} Here
+# a link to the anchor
+- go to {:#hereItIs} or go to {:the anchor|#hereItIs}
+# an inter-page link to an anchor
+- go to {:contact|about.html#contact}
+  or go to {:contact|../pages/about.html#contact}
+  or go to {:contact|/pages/about.html#contact}
+~~~
+
+produces:
+---.box
+# an absolute link; the text and the link are the same
+- {:https://github.com/scgmlz/CompactMarkup}
+# an absolute link with different text and link values
+- {:GitHub|https://github.com/scgmlz/CompactMarkup}
+# a relative link to a page
+- {:About|about.html}
+# a root-relative link to a page
+- {:About|/pages/about.html}
+# an anchor on this page
+- {a|#hereItIs} Here
+# a link to the anchor
+- go to {:#hereItIs} or go to {:the anchor|#hereItIs}
+# an inter-page link to an anchor
+- go to {:contact|about.html#contact}
+  or go to {:contact|../pages/about.html#contact}
+  or go to {:contact|/pages/about.html#contact}
+---
+
+=== Images
+An image hook inserts an image into the page. It has a tag {~img}, and two parts:
+the source link and alternate text. The source link can have one of the three
+(absolute, root-relative, relative) forms:
+
+~~~.nohighlight
+# three times the same image
+{img https://compactmarkup.github.io/cm.docs/pages/images/cm.png}
+{img /pages/images/mb.png}
+{img images/mb.png}
+~~~
+
+produces:
+---.box
+# three times the same image
+{img https://compactmarkup.github.io/cm.docs/pages/images/cm.png}
+{img /pages/images/mb.png}
+{img images/mb.png}
+---
+
+=== {~next} and {~prev}
+The two rather special built-in processing hooks support inter-page navigation;
+the insert a link to the next resp. previous page,if such a page exists.
+~~~.nohighlight
+{prev.left Back: } {next.right Next: }
+~~~
+
+produces:
+---.box
+{prev.left Back: } {next.right Next: }
+---
+#-------------------------------------------------------------------------------
