@@ -29,31 +29,23 @@
       return false;
 
     const clsActive = 'active';
-    Object.keys(book.toc).forEach((key) => {
-      const t = book.toc[key];
-    });
     if (activeMenuKey)
-      book.toc[activeMenuKey][4].classList.remove(clsActive);
-    book.toc[activeMenuKey = key][4].classList.add(clsActive);
+      book.toc[activeMenuKey][3].classList.remove(clsActive);
+    book.toc[activeMenuKey = key][3].classList.add(clsActive);
 
     iframe.src = book.resolveSrc(key) + anchor;
     return true;
   };
 
   // construct menu
-  Object.keys(book.toc).forEach((key) => {
+  Object.keys(book.toc).forEach((key) => {//==>
     const t = book.toc[key];
-    const [lvl, title] = t;
-    const cnt = lvl % 100, level = (lvl - cnt) / 100;
-
     const a = document.createElement('a');
     a.addEventListener('click', () => selTocItem(key, ''));
 
     const mi = document.createElement('menuitem');
-    mi.innerHTML = title;
-    mi.classList.add(`level${level}`);
-    if (!cnt)
-      mi.classList.add(`cnt0`);
+    mi.innerHTML = t[0];
+//==>    mi.classList.add(`level${level}`);
 
     menu.appendChild(a).appendChild(mi);
     t.push(mi);

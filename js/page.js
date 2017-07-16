@@ -20,7 +20,7 @@ class BookAdapter extends cm.Adapter {
 
   tocTxLink (off = 0) {
     const entry = this.book.tocEntry(this.thisTocKey);
-    return entry ? this.book.tocTxLink(entry[3] + off)
+    return entry ? this.book.tocTxLink(entry[2] + off)
                  : super.tocTxLink(off);
   }
 }

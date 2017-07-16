@@ -58,9 +58,8 @@ var cm_book = {
   resolveLink: function (ln) {
     if (0 <= ln.indexOf('://'))
       return ln;
-
     try {
-      ln = '/' + this.toc[ln][2];
+      ln = '/' + this.toc[ln][1];
     } catch (err) {
       ln = ln.startsWith('/') ? ln : cm_book.pagePath + ln;
     }
@@ -69,11 +68,10 @@ var cm_book = {
   },
   resolveSrc: function (key) {
     try {
-      var src = '/index.php?pg=' + this.toc[key][2];
+      var src = '/index.php?pg=' + this.toc[key][1];
     } catch (err) {
       return '';
     }
-
     return src;
   },
   loadScript: function (src, onLoad) {
@@ -91,7 +89,7 @@ var cm_book = {
   },
   tocTxLink: function (index) {
     try {
-      var link = Object.keys(cm_book.toc)[index], tx = cm_book.toc[link][1];
+      var link = Object.keys(cm_book.toc)[index], tx = cm_book.toc[link][1]; // => 0
       return [tx, link];
     } catch (err) {
       return ['', ''];
@@ -109,31 +107,27 @@ function split_line($l, $n) {
   return array_pad(array_map('trim', explode(';', $l)), $n, '');
 }
 
-function toc($path, $level) {
+function toc($path) { //==>
   global $docRoot;
   if (!($f = fopen($docRoot.$path.'TOC', 'r')))
     return;
   list($title, $hashPrefix) = split_line(fgets($f), 2);
   if ($hashPrefix)
     $hashPrefix .= ':';
-  // level by 100: 0, 100, 200 ...
-  // count in each section: 000, 001, 002, ...
-  $i = $level;
   while (!feof($f)) {
     if ($l = trim(fgets($f))) {
       list($file, $tag, $hash) = split_line($l, 3);
       if ('/' === substr($file, -1)) { // sub
-        toc($path.$file, 100 + $level);
+        toc($path.$file);
       } else {
-        echo "'$hashPrefix$hash': [$i, '$tag', '$path$file'],\n";
+        echo "'$hashPrefix$hash': ['$tag', '$path$file'],\n";
       }
     }
-    ++$i;
   }
   fclose($f);
 }
 
-toc($pagesPath, 0);
+toc($pagesPath);
 
 echo "};\n";
 ?>
@@ -149,23 +143,6 @@ echo "};\n";
 
   <main>
     <nav id="nav">
-      <menu>
-        <a><menuitem class="active">L0</menuitem></a>
-        <a><menuitem class="section open">L1</menuitem></a>
-        <div class="open">
-          <a><menuitem class="active">L1 a</menuitem></a>
-          <a><menuitem class="">L1 b</menuitem></a>
-          <a><menuitem class="open">L2</menuitem></a>
-          <div class="closed">
-            <a><menuitem class="">L2 a</menuitem></a>
-            <a><menuitem class="">L2 b</menuitem></a>
-          </div>
-        </div>
-        <a><menuitem class="">L0</menuitem></a>
-        <a><menuitem class="">L0</menuitem></a>
-      </menu>
-    </nav>
-    <nav id="nav.old">
       <menu></menu>
     </nav>
     <article></article>
@@ -205,6 +182,6 @@ echo "};\n";
 </script>
 <?php if ($isDevelopment): ?>
 <script>_watch_files=['./index.php','assets/*','js/*','pg/*','pg/*/*']</script>
-<script src='/.dev/.watch.js'></script>--> <?php endif; ?>
+<script src='/.dev/.watch.js'></script> <?php endif; ?>
 </html>
 
