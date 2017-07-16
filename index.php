@@ -152,8 +152,9 @@ echo "};\n";
 
 <?php else: ?>
 <pre>
-<?= htmlentities(file_get_contents($docRoot.$pagePath.$pageFile)); ?>
-
+<?= htmlentities(@file_get_contents($docRoot.$pagePath.$pageFile)); ?>
+----
+{prev.left Back: } {next.right Next: }
 </pre>
 <?php endif; ?>
 </body>

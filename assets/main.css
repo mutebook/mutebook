@@ -164,13 +164,15 @@ body > main > nav {
 }
 nav#nav > menu div {
   margin-left: 6px;
-  border-left: thin solid #10147e;
+  border-left: thin dotted #c60;
 }
 nav#nav > menu div:not(.open) {
   display: none;
 }
 menuitem {
-  border-right: 6px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
 }
 menuitem:before {
   content: url(theme/tri_blank.png);
@@ -185,7 +187,7 @@ menuitem.section.open:before {
   content: url(theme/tri_down.png);
 }
 menuitem.active {
-  border-right-color: #c60;
+  border-color: #c60;
 }
 menuitem {
   color: #10147e;
