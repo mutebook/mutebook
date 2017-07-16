@@ -1,5 +1,5 @@
 Mutebook;
-about.cm    ; About; about
 outline.cm  ; Outline;  outline
+how/
+cm/
 glossary.cm ; Glossary; glossary
-cm/         ; CM Markup

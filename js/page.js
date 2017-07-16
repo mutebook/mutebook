@@ -10,17 +10,17 @@ class BookAdapter extends cm.Adapter {
 
     // reverse-lookup in toc
     const toc = this.book.toc;
-    this.tocKeySrc = {};
+    this.tocKeyPath = {};
     for (const key of Object.keys(toc))
-      this.tocKeySrc[toc[key][2]] = key;
+      this.tocKeyPath[toc[key][1]] = key;
 
     this.thisTocKey =
-      this.tocKeySrc[this.book.pagePath + this.book.pageFile];
+      this.tocKeyPath[this.book.pagePath + this.book.pageFile];
   }
 
   tocTxLink (off = 0) {
     const entry = this.book.tocEntry(this.thisTocKey);
-    return entry ? this.book.tocTxLink(entry[2] + off)
+    return entry ? this.book.tocTxLink(entry[4] + off)
                  : super.tocTxLink(off);
   }
 }

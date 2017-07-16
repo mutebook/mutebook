@@ -108,7 +108,7 @@ nav#nav > menu menuitem {
   display: block;
 }
 menuitem {
-  padding-top: 6px;
+  padding: 3px 0;
   white-space: nowrap;
   font-size: 96%;
 }
@@ -166,7 +166,7 @@ nav#nav > menu div {
   margin-left: 6px;
   border-left: thin solid #10147e;
 }
-nav#nav > menu div.closed {
+nav#nav > menu div:not(.open) {
   display: none;
 }
 menuitem {
@@ -178,10 +178,10 @@ menuitem:before {
 menuitem.section {
   font-weight: bold;
 }
-menuitem.closed:before {
+menuitem.section:before {
   content: url(theme/tri_right.png);
 }
-menuitem.open:before {
+menuitem.section.open:before {
   content: url(theme/tri_down.png);
 }
 menuitem.active {

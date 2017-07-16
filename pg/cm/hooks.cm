@@ -132,7 +132,7 @@ the source link and alternate text. The source link can have one of the three
 ~~~.nohighlight
 # three times the same image
 {img https://compactmarkup.github.io/cm.docs/pages/images/cm.png}
-{img /pages/images/mb.png}
+{img /pg/cm/images/mb.png}
 {img images/mb.png}
 ~~~
 
@@ -140,7 +140,7 @@ produces:
 ---.box
 # three times the same image
 {img https://compactmarkup.github.io/cm.docs/pages/images/cm.png}
-{img /pages/images/mb.png}
+{img /pg/cm/images/mb.png}
 {img images/mb.png}
 ---
 

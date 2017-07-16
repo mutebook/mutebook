@@ -22,34 +22,74 @@
   const iframe = document.querySelector('iframe#article');
 
   // select menu item and fetch the article
-  const selTocItem = function (indexOrKey, anchor) {
+  const selTocItem = function (indexOrKey, anchor = '') {
     navCs.remove(clsIn);
     const key = book.tocKey(indexOrKey);
     if (!key)
       return false;
 
-    const clsActive = 'active';
-    if (activeMenuKey)
-      book.toc[activeMenuKey][3].classList.remove(clsActive);
-    book.toc[activeMenuKey = key][3].classList.add(clsActive);
+    const clsActive = 'active', clsOpen = 'open';
+    if (activeMenuKey) { // close
+      let t = book.toc[activeMenuKey];
+      while (t) {
+        let div = t[6];
+        if (div) div.classList.remove(clsOpen);
+        const mi = t[5];
+        mi.classList.remove(clsActive);
+        mi.classList.remove(clsOpen);
+        t = book.toc[t[2]];
+      }
+    }
+
+    activeMenuKey = key;
+    // open
+    let t = book.toc[activeMenuKey];
+    t[5].classList.add(clsActive);
+    while (t) {
+      let div = t[6];
+      if (div) div.classList.add(clsOpen);
+      t[5].classList.add(clsOpen);
+      t = book.toc[t[2]];
+    }
 
     iframe.src = book.resolveSrc(key) + anchor;
     return true;
   };
 
   // construct menu
-  Object.keys(book.toc).forEach((key) => {//==>
-    const t = book.toc[key];
-    const a = document.createElement('a');
-    a.addEventListener('click', () => selTocItem(key, ''));
+  let menuKeys = Object.keys(book.toc);
+  let menuIndex = 0;
+  const constructMenu = function (parentElem, currentSection) {
+    while (menuIndex < menuKeys.length) {
+      const key = menuKeys[menuIndex];
+      const t = book.toc[key];
+      const [title, file, parentSection, thisSection] = t;
 
-    const mi = document.createElement('menuitem');
-    mi.innerHTML = t[0];
-//==>    mi.classList.add(`level${level}`);
+      if (thisSection != currentSection && parentSection != currentSection)
+        break;
 
-    menu.appendChild(a).appendChild(mi);
-    t.push(mi);
-  });
+      ++menuIndex;
+      const a = document.createElement('a');
+      a.addEventListener('click', () => selTocItem(key));
+      const mi = document.createElement('menuitem');
+      mi.innerHTML = title;
+      parentElem.appendChild(a).appendChild(mi);
+      t.push(mi);
+
+      if (thisSection === currentSection) {
+        t.push(null);
+        continue;
+      }
+
+      mi.classList.add('section');
+      const div = document.createElement('div');
+      parentElem.appendChild(div);
+      t.push(div);
+      constructMenu(div, thisSection);
+    }
+  };
+
+  constructMenu(menu, 'index');
 
   // communication from the article frame
   window.onmessage = (msg) => {
@@ -63,7 +103,7 @@
   };
 
   // and initialize
-  selTocItem(0, '');
+  selTocItem(0);
 }());
 
 // eof

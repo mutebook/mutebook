@@ -1,5 +1,5 @@
 <?php
-$isDevelopment = true;
+$isDevelopment = false;
 
 // request;
 if (($pg = @$_REQUEST['pg'])) {
@@ -89,7 +89,7 @@ var cm_book = {
   },
   tocTxLink: function (index) {
     try {
-      var link = Object.keys(cm_book.toc)[index], tx = cm_book.toc[link][1]; // => 0
+      var link = Object.keys(cm_book.toc)[index], tx = cm_book.toc[link][0];
       return [tx, link];
     } catch (err) {
       return ['', ''];
@@ -107,27 +107,29 @@ function split_line($l, $n) {
   return array_pad(array_map('trim', explode(';', $l)), $n, '');
 }
 
-function toc($path) { //==>
+function toc($path, $sectionHash) {
   global $docRoot;
   if (!($f = fopen($docRoot.$path.'TOC', 'r')))
     return;
   list($title, $hashPrefix) = split_line(fgets($f), 2);
   if ($hashPrefix)
     $hashPrefix .= ':';
+  $indexHash = $hashPrefix.'index';
+  echo "'$indexHash': ['$title', '${path}index.cm', '$sectionHash', '$indexHash'],\n";
   while (!feof($f)) {
     if ($l = trim(fgets($f))) {
-      list($file, $tag, $hash) = split_line($l, 3);
+      list($file, $title, $hash) = split_line($l, 3);
       if ('/' === substr($file, -1)) { // sub
-        toc($path.$file);
+        toc($path.$file, $indexHash);
       } else {
-        echo "'$hashPrefix$hash': ['$tag', '$path$file'],\n";
+        echo "'$hashPrefix$hash': ['$title', '$path$file', '$indexHash', '$indexHash'],\n";
       }
     }
   }
   fclose($f);
 }
 
-toc($pagesPath);
+toc($pagesPath, '');
 
 echo "};\n";
 ?>
@@ -182,6 +184,7 @@ echo "};\n";
 </script>
 <?php if ($isDevelopment): ?>
 <script>_watch_files=['./index.php','assets/*','js/*','pg/*','pg/*/*']</script>
-<script src='/.dev/.watch.js'></script> <?php endif; ?>
+<script src='/.dev/.watch.js'></script>
+<?php endif; ?>
 </html>
 

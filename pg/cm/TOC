@@ -1,5 +1,4 @@
 Compact Markup; cm
-about.cm   ; About;     about
 elems.cm   ; Elements;  elems
 hooks.cm   ; Hooks;     hooks
 book.cm    ; Book;      book
