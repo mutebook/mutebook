@@ -108,8 +108,7 @@ nav#nav > menu menuitem {
   display: block;
 }
 menuitem {
-  padding: 6px;
-  margin: 6px 0;
+  padding-top: 6px;
   white-space: nowrap;
   font-size: 96%;
 }
@@ -163,20 +162,33 @@ body > main > nav {
     transition: left .22s ease;
   }
 }
+nav#nav > menu div {
+  margin-left: 6px;
+  border-left: thin solid #10147e;
+}
+nav#nav > menu div.closed {
+  display: none;
+}
 menuitem {
-  border-left: thick solid transparent;
-  border-right: thick solid transparent;
+  border-right: 6px solid transparent;
 }
-menuitem.level0 {
-  background: #10147e;
-  color: white;
+menuitem:before {
+  content: url(theme/tri_blank.png);
 }
-menuitem:not(.level0) {
-  color: #10147e;
+menuitem.section {
+  font-weight: bold;
+}
+menuitem.closed:before {
+  content: url(theme/tri_right.png);
+}
+menuitem.open:before {
+  content: url(theme/tri_down.png);
 }
 menuitem.active {
-  border-left-color: #06c;
   border-right-color: #06c;
+}
+menuitem {
+  color: #10147e;
 }
 article .right {
   float: right;

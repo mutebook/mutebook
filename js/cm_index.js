@@ -15,7 +15,7 @@
   document.querySelector('a#nav').onclick = () => navCs.toggle(clsIn);
 
   // menu
-  const menu = nav.querySelector('menu'), menuItem = {};
+  const menu = nav.querySelector('menu');
   let activeMenuKey = null;
 
   // article frame
@@ -29,9 +29,12 @@
       return false;
 
     const clsActive = 'active';
+    Object.keys(book.toc).forEach((key) => {
+      const t = book.toc[key];
+    });
     if (activeMenuKey)
-      menuItem[activeMenuKey].classList.remove(clsActive);
-    menuItem[activeMenuKey = key].classList.add(clsActive);
+      book.toc[activeMenuKey][4].classList.remove(clsActive);
+    book.toc[activeMenuKey = key][4].classList.add(clsActive);
 
     iframe.src = book.resolveSrc(key) + anchor;
     return true;
@@ -39,7 +42,9 @@
 
   // construct menu
   Object.keys(book.toc).forEach((key) => {
-    const [level, title] = book.toc[key];
+    const t = book.toc[key];
+    const [lvl, title] = t;
+    const cnt = lvl % 100, level = (lvl - cnt) / 100;
 
     const a = document.createElement('a');
     a.addEventListener('click', () => selTocItem(key, ''));
@@ -47,9 +52,11 @@
     const mi = document.createElement('menuitem');
     mi.innerHTML = title;
     mi.classList.add(`level${level}`);
+    if (!cnt)
+      mi.classList.add(`cnt0`);
 
     menu.appendChild(a).appendChild(mi);
-    menuItem[key] = mi;
+    t.push(mi);
   });
 
   // communication from the article frame

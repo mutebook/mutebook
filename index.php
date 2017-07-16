@@ -1,4 +1,6 @@
 <?php
+$isDevelopment = true;
+
 // request;
 if (($pg = @$_REQUEST['pg'])) {
   $isIndex = false;
@@ -114,15 +116,19 @@ function toc($path, $level) {
   list($title, $hashPrefix) = split_line(fgets($f), 2);
   if ($hashPrefix)
     $hashPrefix .= ':';
+  // level by 100: 0, 100, 200 ...
+  // count in each section: 000, 001, 002, ...
+  $i = $level;
   while (!feof($f)) {
     if ($l = trim(fgets($f))) {
       list($file, $tag, $hash) = split_line($l, 3);
       if ('/' === substr($file, -1)) { // sub
-        toc($path.$file, 1 + $level);
+        toc($path.$file, 100 + $level);
       } else {
-        echo "'$hashPrefix$hash': [$level, '$tag', '$path$file'],\n";
+        echo "'$hashPrefix$hash': [$i, '$tag', '$path$file'],\n";
       }
     }
+    ++$i;
   }
   fclose($f);
 }
@@ -143,6 +149,23 @@ echo "};\n";
 
   <main>
     <nav id="nav">
+      <menu>
+        <a><menuitem class="active">L0</menuitem></a>
+        <a><menuitem class="section open">L1</menuitem></a>
+        <div class="open">
+          <a><menuitem class="active">L1 a</menuitem></a>
+          <a><menuitem class="">L1 b</menuitem></a>
+          <a><menuitem class="open">L2</menuitem></a>
+          <div class="closed">
+            <a><menuitem class="">L2 a</menuitem></a>
+            <a><menuitem class="">L2 b</menuitem></a>
+          </div>
+        </div>
+        <a><menuitem class="">L0</menuitem></a>
+        <a><menuitem class="">L0</menuitem></a>
+      </menu>
+    </nav>
+    <nav id="nav.old">
       <menu></menu>
     </nav>
     <article></article>
@@ -180,5 +203,8 @@ echo "};\n";
 <?php endif; ?>
 }());
 </script>
+<?php if ($isDevelopment): ?>
+<script>_watch_files=['./index.php','assets/*','js/*','pg/*','pg/*/*']</script>
+<script src='/.dev/.watch.js'></script>--> <?php endif; ?>
 </html>
 
