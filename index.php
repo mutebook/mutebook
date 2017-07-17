@@ -1,5 +1,5 @@
 <?php
-$isDevelopment = false;
+$isDevelopment = false; // (0 === strpos(@$_SERVER['DOCUMENT_ROOT'], '/home/jan/'));
 
 // request;
 if (($pg = @$_REQUEST['pg'])) {
@@ -59,12 +59,16 @@ var cm_book = {
     if (0 <= ln.indexOf('://'))
       return ln;
     try {
-      ln = '/' + this.toc[ln][1];
+      ln = '?pg=' + this.toc[ln][1]; // TODO hack
     } catch (err) {
       ln = ln.startsWith('/') ? ln : cm_book.pagePath + ln;
     }
 
     return ln;
+  },
+  resolveDirLink: function (ln) {
+    ln = this.toc[ln][1];
+    return ln.substr(0, ln.lastIndexOf('/'));
   },
   resolveSrc: function (key) {
     try {
@@ -107,14 +111,23 @@ function split_line($l, $n) {
   return array_pad(array_map('trim', explode(';', $l)), $n, '');
 }
 
+$checkHashes = [];
+function checkHash($path, $hash) {
+  global $checkHashes;
+  if (@$checkHashes[$hash])
+    error_log("in path [$path], hash already exists: [$hash]");
+  $checkHashes[$hash] = true;
+  return $hash;
+}
+
 function toc($path, $sectionHash) {
   global $docRoot;
-  if (!($f = fopen($docRoot.$path.'TOC', 'r')))
+  if (!($f = @fopen($docRoot.$path.'TOC', 'r')))
     return;
   list($title, $hashPrefix) = split_line(fgets($f), 2);
   if ($hashPrefix)
     $hashPrefix .= ':';
-  $indexHash = $hashPrefix.'index';
+  $indexHash = checkHash($path, $hashPrefix.'index');
   echo "'$indexHash': ['$title', '${path}index.cm', '$sectionHash', '$indexHash'],\n";
   while (!feof($f)) {
     if ($l = trim(fgets($f))) {
@@ -122,7 +135,8 @@ function toc($path, $sectionHash) {
       if ('/' === substr($file, -1)) { // sub
         toc($path.$file, $indexHash);
       } else {
-        echo "'$hashPrefix$hash': ['$title', '$path$file', '$indexHash', '$indexHash'],\n";
+        $pageHash = checkHash($path, $hashPrefix.$hash);
+        echo "'$pageHash': ['$title', '$path$file', '$indexHash', '$indexHash'],\n";
       }
     }
   }
@@ -153,6 +167,7 @@ echo "};\n";
 <?php else: ?>
 <pre>
 <?= htmlentities(@file_get_contents($docRoot.$pagePath.$pageFile)); ?>
+
 ----
 {prev.left Back: } {next.right Next: }
 </pre>
@@ -184,8 +199,8 @@ echo "};\n";
 }());
 </script>
 <?php if ($isDevelopment): ?>
-<script>_watch_files=['./index.php','assets/*','js/*','pg/*','pg/*/*']</script>
-<script src='/.dev/.watch.js'></script>
+<script>_watch_files=['./index.php','assets/*','js/*','pg/*','pg/*/*','pg/*/*/*','pg/*/*/*/*']</script>
+<script src='/.dev/watch.js'></script>
 <?php endif; ?>
 </html>
 

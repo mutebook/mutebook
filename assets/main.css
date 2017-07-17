@@ -164,15 +164,10 @@ body > main > nav {
 }
 nav#nav > menu div {
   margin-left: 6px;
-  border-left: thin dotted #c60;
+  border-left: thin solid #c60;
 }
 nav#nav > menu div:not(.open) {
   display: none;
-}
-menuitem {
-  border-right: 4px solid transparent;
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid transparent;
 }
 menuitem:before {
   content: url(theme/tri_blank.png);
@@ -186,8 +181,13 @@ menuitem.section:before {
 menuitem.section.open:before {
   content: url(theme/tri_down.png);
 }
+menuitem.activepath {
+  border-bottom: thin solid #c60;
+}
 menuitem.active {
-  border-color: #c60;
+  background-color: #fff6ed;
+  border-bottom: thin solid #c60;
+  border-right: thin solid #c60;
 }
 menuitem {
   color: #10147e;
@@ -319,11 +319,22 @@ article pre {
 article pre,
 article code {
   background: #f8f8f8;
+  padding: 0 2px;
+}
+article code.inline {
+  color: #d54;
 }
 article img {
   max-width: 460px;
   max-height: 320px;
   vertical-align: middle;
+}
+article table {
+  border-collapse: collapse;
+}
+article table.border {
+  border-collapse: collapse;
+  border: 1px solid gray;
 }
 article table thead {
   font-weight: bold;
@@ -332,8 +343,11 @@ article table td {
   vertical-align: top;
   padding: 6px;
 }
-article table td + td {
-  padding-left: 0;
+article table.border th {
+  border: 1px solid gray;
+}
+article table.border td {
+  border: 1px solid gray;
 }
 article table td.label {
   text-align: right;
@@ -342,7 +356,6 @@ article table td.required:before {
   content: '• ';
 }
 article form > table {
-  border-collapse: collapse;
 }
 @media (max-width: 768px) {
   article form > table {
@@ -440,4 +453,8 @@ a.wp:after {
 }
 body > pre {
   display: none;
+}
+
+span.error {
+  color: red;
 }

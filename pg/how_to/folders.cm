@@ -1,0 +1,51 @@
+@chr b  *
+@chr em /
+#-------------------------------------------------------------------------------
+= Folder structure
+
+All the content of mutebook is in the {~pg/} folder and subfolders.
+The {~pg/} folder corresponds to the top level of the book, and its subfolders
+(three levels) to book volumes, chapters, and sections
+(in the following text all called 'section').
+
+Every folder in the hierarchy *must* contain two files:
+* {~TOC}: defines the table of content of the corresponding level
+* {~index.cm}: contains the first page
+
+== The TOC files
+
+The first line contains two elements, separated by a semicolon:
+- the title of the section, as it appears in the table of contents
+- the /identifier prefix/ for the section
+
+The rest are one line for each page (except index.cm). Each line contains:
+- a page description, or
+- a sub-section reference
+
+The page description has three elements, separated by semicolons:
+- the plain file name
+- the title of the page, as it appears in the table of contents
+- the page identifier
+
+The sub-section reference contains only the subfolder name, terminated by a {~/}.
+
+Spaces around elements are allowed.
+
+== Page identifiers
+
+Every and each page has a text identifier, defined in the {~TOC} file, prefixed
+by an index identifier and {~:}. The page identifier is to be used to refer to
+the page in links. Using the page identifier instead of a page file path allows
+the page files to be moved around the book easier, without breaking the links.
+/(Not yet perfected, needs some re-thinking, but it is a start.)/
+
+The /qualified/ page identifiers (the combination of page prefix + ':' + identifier)
+must be unique in the book.
+
+Note: page prefix is (so far, must be) empty in the top-level section.
+
+== index.cm
+
+Except the fact that one {~index.cm} must be present in each folder and that it
+is not exlicitely declared in {~TOC}, its structure is the same as that of other
+pages.

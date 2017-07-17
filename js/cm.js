@@ -164,6 +164,17 @@ class CM_html_adapter extends CM_adapter {
     return this.book.resolveLink(ln);
   }
 
+  fileLink (ln) {
+    if (0 <= ln.indexOf('://'))
+      return this.book.resolveLink(ln);
+    const pos = ln.indexOf('/');
+    if (0 < pos) {
+      var fl = this.book.resolveDirLink(ln.substr(0, pos) + ':index');
+      return fl + ln.substr(pos);
+    }
+    // TODO else return site root +
+  }
+
   gotoLink (ln, anchor) {
     if (window === top) // not in a frame
       return '';
@@ -241,6 +252,12 @@ class CM_html_output extends CM_output {
     return this._attr('class', cs.length ? cs.join(' ') : '');
   }
 
+  error (tx) {
+    this.span(['error'])
+    this.put(tx);
+    this.secEnd();
+  }
+
   putTag (tag, cs = [], extra = '', closed = false) {
     this.put(`${cm.LT}${tag}${this._cls(cs)}${extra}${closed ? '/' : ''}>`);
   }
@@ -299,7 +316,7 @@ class CM_html_output extends CM_output {
   }
 
   code () {
-    this.sec('code');
+    this.sec('code', ['inline']);
   }
 
   hr (cs = []) {
@@ -328,7 +345,7 @@ class CM_html_output extends CM_output {
 
   img (src, alt, cs = []) {
     this.putTag('img', cs,
-      this._attr('src', this.adapter.link(src)) + this._attr('alt', alt));
+      this._attr('src', this.adapter.fileLink(src)) + this._attr('alt', alt));
   }
 
   anchor (ln) {
@@ -718,6 +735,7 @@ class CM_parser {
       break;
     }
     default:
+      this.out.error(`{${hook}...}`);
       break;
     }
   }
@@ -733,7 +751,7 @@ class CM_parser {
       break;
     case ':':
       inp.skip();
-      hooked = 'a'; // TODO remeve {a ...}
+      hooked = 'a'; // TODO remove {a ...}
       break;
     default:
       hooked = this.ident();

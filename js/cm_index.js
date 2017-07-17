@@ -28,15 +28,16 @@
     if (!key)
       return false;
 
-    const clsActive = 'active', clsOpen = 'open';
+    const clsActive = 'active', clsActivePath = 'activepath', clsOpen = 'open';
     if (activeMenuKey) { // close
       let t = book.toc[activeMenuKey];
       while (t) {
         let div = t[6];
         if (div) div.classList.remove(clsOpen);
-        const mi = t[5];
-        mi.classList.remove(clsActive);
-        mi.classList.remove(clsOpen);
+        const miCls = t[5].classList;
+        miCls.remove(clsActive);
+        miCls.remove(clsActivePath);
+        miCls.remove(clsOpen);
         t = book.toc[t[2]];
       }
     }
@@ -50,6 +51,7 @@
       if (div) div.classList.add(clsOpen);
       t[5].classList.add(clsOpen);
       t = book.toc[t[2]];
+      if (t && t[2]) t[5].classList.add(clsActivePath);
     }
 
     iframe.src = book.resolveSrc(key) + anchor;
