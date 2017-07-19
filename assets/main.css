@@ -206,7 +206,6 @@ article .box {
   overflow-x: auto;
 }
 article .indent {
-  border: thin solid red;
   margin-left: 1em;
 }
 article .clrBanner {
