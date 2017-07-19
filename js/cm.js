@@ -735,7 +735,8 @@ class CM_parser {
       break;
     }
     default:
-      this.out.error(`{${hook}...}`);
+      const ps = parts.join('|');
+      this.out.error(`{${hook} ${ps}}`);
       break;
     }
   }
