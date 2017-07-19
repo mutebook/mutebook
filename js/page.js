@@ -53,8 +53,12 @@ const setDocumentBody = function (tx) {
     };
 
   // mathjax, if any
-  if (cm.parser.hasJax)
-    cm_book.loadScript('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML');
+  if (cm.parser.hasMath) {
+    cm_book.loadCSS('js/3rd/katex.min.css');
+    cm_book.loadScript('js/3rd/katex.min.js').onload = function () {
+      cm_book.loadScript('js/3rd/katex-render.min.js');
+    };
+  }
 };
 
 if ('undefined' !== typeof document) {

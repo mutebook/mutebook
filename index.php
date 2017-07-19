@@ -1,5 +1,5 @@
 <?php
-$isDevelopment = false; // (0 === strpos(@$_SERVER['DOCUMENT_ROOT'], '/home/jan/'));
+$isDevelopment = false; // (0 === strpos(@$_SERVER['DOCUMENT_ROOT'], '/Users/jan/'));
 
 // request;
 if (($pg = @$_REQUEST['pg'])) {
@@ -77,6 +77,13 @@ var cm_book = {
       return '';
     }
     return src;
+  },
+  loadCSS: function (href) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+    return link;
   },
   loadScript: function (src, onLoad) {
     var where = document.body || document.head;
