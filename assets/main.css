@@ -208,8 +208,8 @@ article .box {
 article .indent {
   margin-left: 1em;
 }
-article .jax {
-  background: #eef;
+article .math {
+  background: #f8f8ff;
   padding: 0 4px;
 }
 article .clrBanner {

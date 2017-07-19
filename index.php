@@ -78,6 +78,13 @@ var cm_book = {
     }
     return src;
   },
+  loadCSS: function (href) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+    return link;
+  },
   loadScript: function (src, onLoad) {
     var where = document.body || document.head;
     var script = document.createElement('script');

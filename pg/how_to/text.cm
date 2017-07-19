@@ -297,6 +297,20 @@ inside:
 {img ht/images/mb.png|image relative to identifier prefix 'ht'}
 ---
 
+=== Formulas
+
+Mathematical formulas can be entered using the TeX syntax and typeset by
+{:KaTeX|https://khan.github.io/KaTeX/function-support.html}. Surround the
+formulas by {~\{$} and {~$\}} (this is a special hook notation that does not
+allow nested hooks and insted passes curly braces on to TeX).
+~~~.nohighlight
+{$ 20 \times 10^{0.0002} $}
+~~~
+produces:
+---.box
+{$ 20 \times 10^{0.0002} $}
+---
+
 == Tables
 
 The support of tables is in development ('experimental').

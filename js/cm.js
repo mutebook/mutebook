@@ -387,7 +387,7 @@ class CM_parser {
     this._inList = this._inListItem =
     this._inTable =
     this._inB = this._inEm =
-    this.hasPre = this.hasJax = false;
+    this.hasPre = this.hasMath = false;
 
     this._sects = this._hooks = 0;
   }
@@ -849,8 +849,8 @@ class CM_parser {
         break;
       s += c;
     }
-    this.hasJax = true;
-    return `\\(${s}\\)`;
+    this.hasMath = true;
+    return `(math((${s}))math)`;
   }
 
   doLine () {
@@ -860,7 +860,7 @@ class CM_parser {
         this.out.putEsc(this.inp.next());
       else if (chr.hook1 === c) {
         if (this.match('$')) { // TODO hack
-          this.out.sec('span', ['jax']);
+          this.out.sec('span', ['math']);
           this.out.put(this.doJax());
           this.out.secEnd();
       } else
