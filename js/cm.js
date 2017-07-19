@@ -431,6 +431,17 @@ class CM_parser {
     return this.inp.nextCont(this.chr.esc, 0 < this._hooks);
   }
 
+  match (s) { // TODO out ?
+    let i = 0;
+    for (const c of s) {
+      if (c !== this.inp.peek(i))
+        return false;
+      ++i;
+    }
+    this.inp.skip(i);
+    return true;
+  }
+
   endPar () {
     if (this._inPar)
       this.out.secEnd();
@@ -728,12 +739,6 @@ class CM_parser {
       this.out.a(tx, link, cs);
       break;
     }
-    case 'x': {
-      const [tx] = padParts(1);
-      this.out.put(`$$${tx}$$`);
-      this.hasJax = true;
-      break;
-    }
     default:
       const ps = parts.join('|');
       this.out.error(`{${hook} ${ps}}`);
@@ -760,7 +765,7 @@ class CM_parser {
 
     const chr = this.chr;
     if (hooked) {
-      const cs = this.cs(), parts = []; let part = '';
+      const cs = this.cs(), parts = []; let part = '', c;
       inp.skipWhite();
       while (cm.NUL !== (c = this.nextCont()))
         if (chr.esc === c)
@@ -837,14 +842,30 @@ class CM_parser {
       this.out.put(c);
   }
 
+  doJax() {
+    let c, s = '';
+    while (cm.NUL !== (c = this.nextCont())) {
+      if ('$' === c && this.match(this.chr.hook3))
+        break;
+      s += c;
+    }
+    this.hasJax = true;
+    return `\\(${s}\\)`;
+  }
+
   doLine () {
     const chr = this.chr; let c;
     while (cm.NUL !== (c = this.nextCont()))
       if (chr.esc === c)
         this.out.putEsc(this.inp.next());
-      else if (chr.hook1 === c)
-        this.out.put(this.doHook());
-      else
+      else if (chr.hook1 === c) {
+        if (this.match('$')) { // TODO hack
+          this.out.sec('span', ['jax']);
+          this.out.put(this.doJax());
+          this.out.secEnd();
+      } else
+          this.out.put(this.doHook());
+      } else
         this.doChar(c);
   }
 
