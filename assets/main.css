@@ -85,7 +85,7 @@ a#nav {
   }
 }
 nav#nav {
-  width: 140px;
+  width: 16em;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -95,7 +95,7 @@ nav#nav {
     position: fixed;
     z-index: 1;
     top: 0;
-    left: -140px;
+    left: -16em;
   }
   nav#nav.slideIn {
     left: 0;
