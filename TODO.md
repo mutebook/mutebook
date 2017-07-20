@@ -8,3 +8,4 @@
   the menu folder opened / closed as needed, on small screens menu slides out.
 
 # Bugs
+* none
