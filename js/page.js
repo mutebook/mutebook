@@ -46,7 +46,7 @@ const setDocumentBody = function (tx) {
 
   // highlight code, if any
   if (cm.parser.hasPre)
-    cm_book.loadScript('js/3rd/highlight.pack.js').onload = function () {
+    cm_book.loadScript('js/3rd/highlight.pack.js').onload = () => {
       document.querySelectorAll('pre code').forEach(
         /* global hljs:false */
         (block) => hljs.highlightBlock(block));
@@ -55,7 +55,7 @@ const setDocumentBody = function (tx) {
   // mathjax, if any
   if (cm.parser.hasMath) {
     cm_book.loadCSS('js/3rd/katex.min.css');
-    cm_book.loadScript('js/3rd/katex.min.js').onload = function () {
+    cm_book.loadScript('js/3rd/katex.min.js').onload = () => {
       cm_book.loadScript('js/3rd/katex-render.min.js');
     };
   }

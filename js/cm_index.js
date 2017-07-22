@@ -58,6 +58,14 @@
     return true;
   };
 
+  const gotogoto /*TODO consolidate with cm.goto */ = (ln, anchor) => {
+    const ev = window.event;
+    if (ev.ctrlKey || ev.metaKey)
+      return true; // follow href in another tab
+    top.postMessage(['goto', ln, anchor], '*');
+    return false;
+  };
+
   // construct menu
   let menuKeys = Object.keys(book.toc);
   let menuIndex = 0;
@@ -74,7 +82,9 @@
       const arrow = document.createElement('a');
       arrow.classList.add('arrow');
       const a = document.createElement('a');
-      a.addEventListener('click', () => selTocItem(key));
+      a.href = '?pg=' + t[1];
+//      a.addEventListener('click', () => selTocItem(key));
+      a.onclick = () => { return gotogoto(t[4], ''); };
       const mi = document.createElement('menuitem');
       a.innerHTML = title;
       const miElem = parentElem.appendChild(mi);
@@ -90,7 +100,7 @@
       mi.classList.add('section');
       const div = document.createElement('div');
       parentElem.appendChild(div);
-      arrow.addEventListener('click', function () {
+      arrow.addEventListener('click', () => {
         mi.classList.toggle('open');
         div.classList.toggle('open');
       });
