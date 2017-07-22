@@ -219,8 +219,11 @@ article .diagram {
   border: thin solid gray;
   border-radius: 5px;
 }
-article .math {
-  padding: 0 4px;
+article .math:before {
+  content: ' '; /* separate from inline text */
+}
+article .math:after {
+  content: ' '; /* separate from inline text */
 }
 article .clrBanner {
   color: #10147e !important;
