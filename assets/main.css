@@ -405,11 +405,7 @@ a.extern {
   color: #093;
 }
 a.wp:after {
-  content: "w";
-  font-size: 60%;
-  font-weight: bold;
-  color: #000;
-  vertical-align: top;
+  content: url(theme/wp.png);
 }
 .hljs {
   overflow-x: auto;

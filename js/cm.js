@@ -358,7 +358,8 @@ class CM_html_output extends CM_output {
     if (ln.startsWith('#'))
       trg = this._attr('href', ln);
     else {
-      if (0 <= ln.indexOf('://')) // absolute
+      const extern = (0 <= ln.indexOf('://'));
+      if (extern)
         cs.push('extern');
       const hashPos = ln.lastIndexOf('#');
       let anchor = '';
@@ -368,6 +369,8 @@ class CM_html_output extends CM_output {
       }
       trg = this._attr('href', this.adapter.link(ln) + anchor) +
                                this.adapter.gotoLink(ln, anchor);
+      if (extern)
+        trg += this._attr('target', 'cm_book_extern');
     }
     this.putTag('a', cs, trg);
     this.put(tx);
