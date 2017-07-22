@@ -169,16 +169,21 @@ nav#nav > menu div {
 nav#nav > menu div:not(.open) {
   display: none;
 }
-menuitem:before {
+/* nav#nav > menu a.arrow ... */
+/* nav#nav > menu menuitem ... */
+a.arrow {
+  padding: 0 2px;
+}
+a.arrow:before {
   content: url(theme/tri_blank.png);
 }
 menuitem.section {
   font-weight: bold;
 }
-menuitem.section:before {
+menuitem.section > a.arrow:before {
   content: url(theme/tri_right.png);
 }
-menuitem.section.open:before {
+menuitem.section.open > a.arrow:before {
   content: url(theme/tri_down.png);
 }
 menuitem.activepath {
@@ -189,7 +194,7 @@ menuitem.active {
   border-bottom: thin solid #c60;
   border-right: thin solid #c60;
 }
-menuitem {
+menuitem > a {
   color: #10147e;
 }
 article .right {

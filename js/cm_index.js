@@ -71,11 +71,15 @@
         break;
 
       ++menuIndex;
+      const arrow = document.createElement('a');
+      arrow.classList.add('arrow');
       const a = document.createElement('a');
       a.addEventListener('click', () => selTocItem(key));
       const mi = document.createElement('menuitem');
-      mi.innerHTML = title;
-      parentElem.appendChild(a).appendChild(mi);
+      a.innerHTML = title;
+      const miElem = parentElem.appendChild(mi);
+      miElem.appendChild(arrow);
+      miElem.appendChild(a);
       t.push(mi);
 
       if (thisSection === currentSection) {
@@ -86,6 +90,11 @@
       mi.classList.add('section');
       const div = document.createElement('div');
       parentElem.appendChild(div);
+      arrow.addEventListener('click', function () {
+        mi.classList.toggle('open');
+        div.classList.toggle('open');
+      });
+
       t.push(div);
       constructMenu(div, thisSection);
     }
