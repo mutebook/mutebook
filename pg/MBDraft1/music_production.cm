@@ -1,46 +1,38 @@
 = Introduction to Music Production
-\n
-==== What is Music Production?
-\n
-Without becoming too philosophical, let us start with a brief description of what happens in music production and recording so that we know what we have to learn in order to prepare for creative work in the music industry. At some point MUTEBOOK might include some chapters on the history of recording, but there are great {online resources|link} already which you can study for now. Recording is a relatively young art (just over 100 years old), but technological developments have been introduced constantly and have changed the way music is created, recorded and produced. {add more here}
-\n
-\n
-{insert diagram showing ensemble, performance, audience, etc.}
 
+==== What is Music Production?
+
+Without becoming too philosophical, let us start with a brief description of what happens in music production and recording so that we know what we have to learn in order to prepare for creative work in the music industry. At some point MUTEBOOK might include some chapters on the history of recording, but there are great {online resources|link} already which you can study for now. Recording is a relatively young art (just over 100 years old), but technological developments have been introduced constantly and have changed the way music is created, recorded and produced. {add more here}
+
+---.diagram
+{insert diagram showing ensemble, performance, audience, etc.}
+---
 
 So in short, the music production process is the process of capturing a musical performance or idea so that an audience can enjoy it at a different time and a different place than the original performance. In some situations the music might have never been performed as heard by the listener coming from the final medium. Techniques (overdubs, editing, etc.) and tools might have been used that create a listening experience that does not have much to do with how the music might have been performed inside the studio. The following paragraphs will differentiate between natural recording (even though this is a terrible term and there is nothing unnatural about recording in a studio) and studio recording, so let us first discuss these two approaches. {section needs to be extended}
-\n
-\n
 
 ==== Natural Recording
-\n
 Most classical music is recorded in acoustic environments where classical music is usually performed (e.g., {concert halls|link}, {churches|link}). The space in which the performance takes place and its acoustic properties play an important role for the audience’s experience. As most of the people who listen to classical music at home have experienced classical music performed live in a concert hall there are certain expectations (concerning spatial impression, stereo image, timbre, etc.) the recording has to meet in order to appeal to them. Therefore, oftentimes when recording classical music the entire ensemble plays within the same space and the direct sound and the reflections are all captured simultaneously and the final result tries to create the sensation of a better live performance. This is sometimes called {/natural recording}. While there are some audiophiles out there who refuse to use anything else than microphones (some of them never more than two), working in classical music does not mean that you should rule out any other tools right away. If an equalizer, compressor, or an alternative way of recording improves the final result, you should use it by all means. Just keep in mind that the listener might expect a {/natural} sounding result. Classical music production will be discussed in greater detail in another {section\link}.
-\n
-\n
+
 
 ==== Studio Recording
-\n
+
 In most of the other music genres, artificial reverb could be used during the live performance that is not linked to the venue at all. This could be the case for the production itself as well and as such, artificial acoustics are applied to tracks that are recorded dry (without reverb). While in natural recording it is usually expected that the entire ensemble is placed within the same acoustic space, in other genres it is not uncommon to hear many different reverbs with various acoustic properties on different tracks or groups of tracks.
-\n
+
 However, the acoustics of recording studios still play an important role and certain studios are famous for their unique sound, even though artificial reverb is added later. Afterall, you superimpose the artificial reverb onto anything that is captured during the recording session, including any trace of the acoustic space in which the recordings took place. Depending on the artists, the recording venue and the type of production, sometimes the whole band is recorded simultaneously (sometimes each member in a separate room) while often each track is recorded individually. By doubling tracks, recording the same performer multiple times, combining various sounds and effects, creative possibilities become endless and the production team can create something that would not be possible during a live performance.
-\n
-\n
+
 
 
 With the continuously expanding arsenal of articial reverberation including ultra-realistic convolution reverbs you might ask yourself why classical music is not just recorded dry and combined with artificial reverb during post-production. There is one significant difference between capturing the reverb of a concert hall during a natural recording and applying the same reverb on a studio recording during post production. This difference can be found in what is {/sent} into the reverb. While the natural performance space is fed with the sound of the instrument completely around the sound source. This is a very complicated situation because the different parts of the spectrum dissepate differently around the instrument. Some frequencies might only travel at a certain angle away from the instrument, while others might travel into all directions. This differs for each instrument which further complicates how the natural space is activated. In comparison, during a studio recording, there is a limited number of microphones capturing the sound of the instruments only at certain angles. The signal is thus only captured at these angles and the reverb is fed with the captured material only. This difference is shown in the diagram below.
 
 {insert diagram about artificial reverb and how it is different (if possible with recordings around one instrument to listen to how it sounds differently)}
-\n
-\n
+
 Understanding this difference is important but this does not mean that one way or the other is the only way to record. As always in art, it depends on what you are trying to create.
-\n
-\n
+
 
 ==== Production Steps
-\n
+
 Now that we are aware of the difference between natural recording (sometimes also called acoustic recording) and studio recording, let us take a look at all the different steps a music production might go through until the final medium is created.
-\n
-\n
+
 
 ==== The Production Team
 \n

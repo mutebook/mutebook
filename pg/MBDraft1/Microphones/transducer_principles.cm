@@ -1,6 +1,10 @@
+@chr b  *
+@chr em /
 = Transducer Principles
 
-\n
+*bold* /\/emphasised/ {~monospaced}
+
+
 Without going too much into detail about the electronics inside microphones in this section, let us look at how a microphone works. A microphone is a transducer, a device that transduces energy from one form into another. The microphone takes in air pressure changes and outputs voltage changes that are analogue to these pressure changes. This section describes how microphones do that.
 \n
 For professional audio applications, there are two main categories of microphones:
@@ -11,7 +15,7 @@ For professional audio applications, there are two main categories of microphone
 ---.indent
 Dynamic microphones can further be categorized into dynamic moving coil and dynamic ribbon microphones.
 ---
-{/Note: When people speak about moving coil microphones, they usually call them “dynamic microphones” and refer to dynamic ribbon microphones simply as “ribbon microphones".}
+{/Note: When {*people} speak about moving coil microphones, they usually call them “dynamic microphones” and refer to dynamic ribbon microphones simply as “ribbon microphones".}
 \n
 \n
 \n

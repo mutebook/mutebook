@@ -208,6 +208,12 @@ article .box {
 article .indent {
   margin-left: 1em;
 }
+article .diagram {
+  margin: 1em 2em;
+  padding: 1em;
+  border: thin solid gray;
+  border-radius: 5px;
+}
 article .math {
   background: #f8f8ff;
   padding: 0 4px;
@@ -269,6 +275,7 @@ article h3:before {
 }
 article h4 {
   font-size: 110%;
+  margin-bottom: .4em;
 }
 article h5 {
   font-size: 110%;

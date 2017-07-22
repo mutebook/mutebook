@@ -1,5 +1,5 @@
 <?php
-$isDevelopment = false; // (0 === strpos(@$_SERVER['DOCUMENT_ROOT'], '/Users/jan/'));
+$isDevelopment = false;
 
 // request;
 if (($pg = @$_REQUEST['pg'])) {
