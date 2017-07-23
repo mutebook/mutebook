@@ -205,9 +205,5 @@ echo "};\n";
 <?php endif; ?>
 }());
 </script>
-<?php if ($isDevelopment): ?>
-<script>_watch_files=['./index.php','assets/*','js/*','pg/*','pg/*/*','pg/*/*/*','pg/*/*/*/*']</script>
-<script src='/.dev/watch.js'></script>
-<?php endif; ?>
 </html>
 
