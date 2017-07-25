@@ -1,12 +1,24 @@
 = Acoustic Operating Principles
 
-In the previous section, we learnt how condenser and dynamic microphones transduce acoustic energy into electrical energy. We saw that the instantaneous output voltage depends on either the displacement (condenser microphones) or the velocity (dynamic microphones) of the membrane. This also means that if the membrane does not move at all, the microphone will not produce output. {text, improve description}
+In the previous section, we learned how condenser and dynamic microphones transduce acoustic energy into electrical energy. We saw that the instantaneous output voltage depends on either the displacement (condenser microphones) or the velocity (dynamic microphones) of the membrane. This also means that if the membrane does not move at all, the microphone will not produce output. {text, improve description}
 
 This section discusses acoustic operating principles of microphones and how the capsule design influences the microphone's directional sensitivity (polar pattern). We will look at \n
 * pressure transducers
 * pressure gradient transducers,
 
 understand general sensitivity equations and then combine pressure and pressure gradient components to create various polar patterns.
+
+
+==== Polar Patterns
+Before going into more detail about acoustic operating principles we should know what polar patterns are and why they are useful. Most microphones that you will use in the recording studio do not pick up sound waves from all directions with the same level. Some are actually designed to reject sound coming from the back, others will pick up sound from the front and the back but not from the sides, and then you have those that pick up sounds from all around the microphone. To make the situation even more complicated, usually the directional pick-up behavior is frequency dependent. This means that an omnidirectional microphone (see diagrams below) could actually pick up more high frequencies from the front than from the back and microphones that are designed to reject sound from the back might actually pick up a lot of the lower frequencies from all around the microphone. Frequency-dependent directional characteristics actually contribute greatly to the particular sound of a microphone.
+
+Polar patterns show the directional sensitivity for the microphone. The 0˚-axis is the front of the microphone and the sensitivity of any angle is referenced to it. This means that by looking at a polar pattern you should be able to predict from which direction the microphone will pick up the most sound (at least for certain frequencies) and which sounds will be rejected or reduced. Using polar patterns in a smart and effective way during recording sessions is essential to capture exactly what you need for your particular production. Some microphones give you the option to choose from various polar patterns or let you change microphone capsules.
+
+Click on the field below the polar diagram to view the most common polar patterns. Make sure to remember the shapes and names as they are important audio knowledge and they will help you during your practical work.
+
+---.diagram
+{diagram_interacive, switch with different polar patterns, omni, sub-cardioid, cardioid, supercardioid, hypercardioid, figure-8/bidirectional}
+---
 
 ==== Pressure Gradient Microphones
 
@@ -69,9 +81,9 @@ If we partly open the enclosure of a pressure microphone so that it is not compl
 Move the slider below the diagram above and look at how the polar pattern changes based on the ratio of pressure and pressure gradient components. Move the sound source around the microphone and watch the meter on the right which shows the output of the microphone for the selected angle of incidence.
 
 If we would like to express this behavior in an equation, we can use the following:
-
+---.equation
 {$ S_{P+G} = P + G * cos~\alpha$},
-
+---
 where {$ S_{P+G} $} is the general sensitivity for sounds arriving from angle {$ \alpha $}, {$P$} is the amount of pressure component and {$G$} the amount of pressure gradient component of the microphone. As we are always combining pressure and pressure gradient component to become a whole microphone, we can also state that
 
 {$ P + G = 1 $}
@@ -82,6 +94,8 @@ With this in mind we can freely combine various ratios of pressure and pressure 
 {insert table}
 ---
 
+# Add examples and practice calculations, either here or at the end of the chapter
+
 ==== General Sensitivity Calculator
 Provide an angle of incidence on the left and the calculator will output the general sensitivity at that angle.
 
@@ -89,7 +103,75 @@ Provide an angle of incidence on the left and the calculator will output the gen
 # maybe this could be removed from the basic version as for my own courses I expect students to calculate this with their own calculator.
 
 ==== Frequency Response
-==== Druckstau
+Just like the polar pattern shows the microphone's sensitivity related to the angle from which the sound wave arrives, the frequency response describes its sensitivity based on the frequency. There are more factors that play a role for the microphone's frequency response, but let us just look at the ones that are related to the acoustic operating principles in this section.
+
+{/Frequency Response of Pressure Gradient Microphones}
+You saw in the previous paragraphs of this section that the movement of the membrane of a pressure microphone depends on the pressure difference between two points - both sides of the membrane. Let us place two points in space, change the frequency (thus wavelength) of a sound and see what happens. The diagram below has two fixed points which we just call F and B (for front and back) for now. As most microphone are very unlikely to magically change their size, the distance between F and B remains constant. When you click {*ON} you see a sine wave over F and B and the meter on the right shows the difference. Then move the slider on the bottom to change the frequency and observe how the difference - and thus the output - of the microphone depends on the wavelength of the sound wave.
+
+---.diagram
+{diagram_interactive; see description in text above}
+---
+
+You should have noticed that the larger the wavelength, the lower the different between F and B. This means that pressure gradient microphones react less to lower frequencies. We will go more into detail about what microphone manufacturers do to improve the frequency response of pressure gradient microphones in a later section.
+
+{/Frequency Response of Pressure Microphones}
+Other than pressure gradient microphones, pressure microphones compare the pressure outside the membrane to the fixed pressure inside the capsule. This means that the effect on low frequencies that you saw for the pressure gradient microphone does not apply to the pressure microphone. The low frequency response therefore looks a quite linear.
+
+---.diagram
+{diagram, frequency response of pressure transducer, linear}
+---
+
+==== Druckstau (aka Pressure Build-Up)
+The plot for the frequency response of the pressure microphone above neglects a few aspects, and in reality it will most likely not look as linear for all frequencies at all angles. This is where your acoustic knowledge of reflection and diffraction comes into play. In the section on acoustics you saw that whether a sound wave bends around an obstacle or is reflected depends on the size of the obstacle in relation to the wavelength. Generally speaking, you could say that sounds with larger wavelengths are more likely to bend around an obstacle than sounds with shorter wavelengths. Higher frequencies are more likely to be reflected. When a sound wave hits a large enough obstacle perpendicular to the obstacle, it is reflected back into the direction it came from. This means that the incoming wave and the reflection are superimposed directly at the obstacle and - if there is no loss of energy at the obstacle - the pressure would be doubled. As a microphone's membrane can be considered an obstacle for incoming sound waves, the same happens at a microphone. This means that reflected sounds arriving on the 0˚-axis (perpendicular to the membrane) will double the pressure right in front of the membrane. This means that the microphone would produce a higher output at its main axis. However, whether sound waves will be reflected at the membrane depends on their wavelength and the size of the membrane. You can calculate the frequency above which all on-axis sounds will be combined with their reflection to raise the sound pressure level by {$ 6dB_{SPL} $} with the equation
+
+---.equation
+{$ f_c=c/d $}
+---
+
+where f is the critical frequency in Hz, d the diameter of the diaphragm in meters and c the speed of sound in meters per second.
+# add some information about free field
+
+---.diagram
+{diagram_interactive, Druckstau frequency caluclator}
+---
+
+
+All sounds above a certain frequency will be reflected and will duplicate the on-axis sensitivity of the microphone. The more you move the sound source away from the 0˚-axis towards the side of the microphone, the less the pressure build up will be. So there is a gradual decrease from the maximum raise in sound pressure level of {$ 6dB_{SPL} $} at 0˚ to {$ 0dB_{SPL} $} at 90˚.
+
+---.diagram
+{diagram_interactive, moving sound source displaying Druckstau}
+# http://www.sengpielaudio.com/DruckstauBeiMikrofonenMitKugelcharakteristik.pdf
+---
+
+
+The smaller the membrane the higher the frequency will be for which pressure build up occurs and the more likely it is that it will not be within our audible spectrum. This is why diaphragms of measurement microphones are usually very small. You could also say: the smaller the membrane the more omnidirectional the microphone.
+
+There are certain microphones that use two membranes to give you the option to switch polar patters. While these microphones might give you an omnidirectional polar pattern, they still behave quite differently than pure pressure microphones. Choosing the right microphone and placing it well should be a little easier after you have read and understood this section.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

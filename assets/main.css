@@ -219,6 +219,12 @@ article .diagram {
   border: thin solid gray;
   border-radius: 5px;
 }
+article .equation {
+  margin: 1em 2em;
+  padding: 1em;
+  border: thin solid red;
+  border-radius: 5px;
+}
 article .math:before {
   content: ' '; /* separate from inline text */
 }
