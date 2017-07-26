@@ -295,6 +295,10 @@ class CM_html_output extends CM_output {
     this.sec('em');
   }
 
+  u () {
+    this.sec('u');
+  }
+
   ul (cs = []) {
     this.sec('ul', cs);
   }
@@ -383,13 +387,14 @@ class CM_parser {
     this.chr =  {
       pgm: '@', cmt: '#', h: '=', hr: '-', p: '.', ul: '-', ol: '*',
       pre: '~', sec: '-', cls: '.', hook1: '{', hook2: '|', hook3: '}',
-      esc: '\\', b: '', em: '', // b: '*', em: '/',
+      esc: '\\', 
+      b: '', em: '', u:'', // b: '*', em: '/', u: '_'
     };
 
     this._inPre = this._inPar =
     this._inList = this._inListItem =
     this._inTable =
-    this._inB = this._inEm =
+    this._inB = this._inEm = this._inU =
     this.hasPre = this.hasMath = false;
 
     this._sects = this._hooks = 0;
@@ -494,6 +499,18 @@ class CM_parser {
     }
   }
 
+  u (on = null) {
+    if (null === on)
+      this.u(!this._inU);
+    else {
+      if (on)
+        this.out.u();
+      else if (this._inU)
+        this.out.secEnd();
+      this._inU = on;
+    }
+  }
+
   endFlow () {
     this.b(false); this.em(false);
     // par, list: mutually exclusive
@@ -588,6 +605,7 @@ class CM_parser {
       case 'esc': chr.esc = c; break;
       case 'b':   chr.b   = c; break;
       case 'em':  chr.em  = c; break;
+      case 'u':   chr.u   = c; break;
       default:
         break;
       }
@@ -755,7 +773,7 @@ class CM_parser {
 
     let simple = false, hooked = false, c = inp.peek();
     switch (c) {
-    case '*': case '/': case '~':
+    case '*': case '/': case '_': case '~':
       simple = inp.next();
       break;
     case ':':
@@ -789,6 +807,7 @@ class CM_parser {
       switch (simple) {
       case '*': out.b();    break;
       case '/': out.em();   break;
+      case '_': out.u();    break;
       case '~': out.code(); break;
       }
 
@@ -841,6 +860,8 @@ class CM_parser {
       this.b();
     else if (this.chr.em === c)
       this.em();
+    else if (this.chr.u === c)
+      this.u();
     else
       this.out.put(c);
   }
