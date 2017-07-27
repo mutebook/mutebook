@@ -299,6 +299,14 @@ class CM_html_output extends CM_output {
     this.sec('u');
   }
 
+  sup () {
+    this.sec('sup');
+  }
+
+  sub () {
+    this.sec('sub');
+  }
+
   ul (cs = []) {
     this.sec('ul', cs);
   }
@@ -388,13 +396,13 @@ class CM_parser {
       pgm: '@', cmt: '#', h: '=', hr: '-', p: '.', ul: '-', ol: '*',
       pre: '~', sec: '-', cls: '.', hook1: '{', hook2: '|', hook3: '}',
       esc: '\\', 
-      b: '', em: '', u:'', // b: '*', em: '/', u: '_'
+      b: '', em: '', u:'', sup:'', sub:'', // b: '*' ...
     };
 
     this._inPre = this._inPar =
     this._inList = this._inListItem =
     this._inTable =
-    this._inB = this._inEm = this._inU =
+    this._inB = this._inEm = this._inU = this._inSup = this._inSub =
     this.hasPre = this.hasMath = false;
 
     this._sects = this._hooks = 0;
@@ -511,6 +519,30 @@ class CM_parser {
     }
   }
 
+  sup (on = null) {
+    if (null === on)
+      this.sup(!this._inSup);
+    else {
+      if (on)
+        this.out.sup();
+      else if (this._inSup)
+        this.out.secEnd();
+      this._inSup = on;
+    }
+  }
+
+  sub (on = null) {
+    if (null === on)
+      this.sub(!this._inSub);
+    else {
+      if (on)
+        this.out.sub();
+      else if (this._inSub)
+        this.out.secEnd();
+      this._inSub = on;
+    }
+  }
+
   endFlow () {
     this.b(false); this.em(false);
     // par, list: mutually exclusive
@@ -606,6 +638,8 @@ class CM_parser {
       case 'b':   chr.b   = c; break;
       case 'em':  chr.em  = c; break;
       case 'u':   chr.u   = c; break;
+      case 'sup': chr.sup = c; break;
+      case 'sub': chr.sub = c; break;
       default:
         break;
       }
@@ -773,7 +807,7 @@ class CM_parser {
 
     let simple = false, hooked = false, c = inp.peek();
     switch (c) {
-    case '*': case '/': case '_': case '~':
+    case '*': case '/': case '_': case '~': case "'": case ',':
       simple = inp.next();
       break;
     case ':':
@@ -809,6 +843,8 @@ class CM_parser {
       case '/': out.em();   break;
       case '_': out.u();    break;
       case '~': out.code(); break;
+      case "'": out.sup();  break;
+      case ',': out.sub();  break;
       }
 
       while (cm.NUL !== (c = this.nextCont()))
@@ -862,6 +898,10 @@ class CM_parser {
       this.em();
     else if (this.chr.u === c)
       this.u();
+    else if (this.chr.sup === c)
+      this.sup();
+    else if (this.chr.sub === c)
+      this.sub();
     else
       this.out.put(c);
   }
