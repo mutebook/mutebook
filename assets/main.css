@@ -203,6 +203,9 @@ article .right {
 article .left {
   float: left;
 }
+article .u {
+  text-decoration: underline;
+}
 article .box {
   border: thin solid #ccc;
   border-radius: 5px;
@@ -221,6 +224,7 @@ article .diagram {
 }
 article .equation {
   margin: 1em 2em;
+  display: table;
   padding: 1em;
   border: thin solid red;
   border-radius: 5px;
