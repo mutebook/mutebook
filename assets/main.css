@@ -229,6 +229,24 @@ article .equation {
   border: thin solid red;
   border-radius: 5px;
 }
+article .btn {
+  padding: 0 .2em;
+  border: thin solid #000;
+  border-radius: 2px;
+  background: #eee;
+}
+article .btn.r {
+  border-color: #800;
+  background: #fdd;
+}
+article .btn.g {
+  border-color: #080;
+  background: #dfd;
+}
+article .btn.b {
+  border-color: #00f;
+  background: #ddf;
+}
 article .math:before {
   content: ' '; /* separate from inline text */
 }

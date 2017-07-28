@@ -821,6 +821,14 @@ class CM_parser {
       this.out.a(tx, link, cs);
       break;
     }
+    case 'btn': {
+      let [tx] = padParts(1);
+      cs.push('btn');
+      this.out.sec('span', cs);
+      this.out.put(tx);
+      this.out.secEnd();
+      break;
+    }
     default:
       const ps = parts.join('|');
       this.out.error(`{${hook} ${ps}}`);

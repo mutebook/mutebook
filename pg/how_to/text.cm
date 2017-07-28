@@ -313,6 +313,17 @@ produces:
 {$ 20 \times 10^{0.0002} $}
 ---
 
+=== In-text buttons
+
+They look as if buttons, but are no buttons.
+~~~.nohighlight
+In-text {btn button}, {btn.r red button}, {btn.g green button}, {btn.b blue button}.
+~~~
+makes:
+---.box
+In-text {btn button}, {btn.r red button}, {btn.g green button}, {btn.b blue button}.
+---
+
 == Tables
 
 The support of tables is in development ('experimental').
