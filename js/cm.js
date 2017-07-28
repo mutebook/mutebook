@@ -665,15 +665,16 @@ class CM_parser {
       default:
         break;
       }
+      this.inp.skipRest();
       break;
     case 'def':
       cm.macros[what] = inp.getRest().trim();
       break;
     default:
+      this.inp.skipRest();
       break;
     }
 
-    this.inp.skipRest();
     return true;
   }
 
@@ -949,10 +950,12 @@ class CM_parser {
       if (chr.esc === c)
         this.out.putEsc(this.inp.next());
       else if (chr.macro === c) {
-//        this.inp.push()
-        const m = cm.macros[this.ident()];
-        this.inp.push(undefined !== m ?
-          m : 'ERROR')
+        const ident = this.ident();
+        const m = cm.macros[ident];
+        if (undefined !== m)
+          this.inp.push(m);
+        else
+          this.out.error(`$${ident}`);  
       } else if (chr.hook1 === c) {
         if (this.match('$')) { // TODO hack
           this.out.sec('span', ['math']);

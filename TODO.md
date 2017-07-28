@@ -2,9 +2,12 @@
 
 * editor's notes (visible only in development mode)
 * footnotes (hook)
-* macros - in js for a whole book, in text for a page
 
 # Nice to have
+
+# Cosmetics
+
+* the first line if pre/code is a bit indented
 
 # Bugs
 
@@ -16,4 +19,5 @@ Replace ˚ with ° (https://unicode-table.com/en/02DA/ -> https://unicode-table.
 
 # Internal - code-related
 
-* in individual pages, limit `cm_book.toc = ` to prev/next; also limit js
+* in individual pages, limit `cm_book.toc = ` to prev/next; also limit generated js
+* make ~~~ nohighlight by default
