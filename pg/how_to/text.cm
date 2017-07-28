@@ -189,13 +189,18 @@ indicating character and a content. The format indicating character can be:
 - {~*} for bolded text
 - {~/} for emphasised text (italics)
 - {~#} for monospaced text (inline code snippet)
+- {~_} for underlined text
+- {~'} for superscript
+- {~,} for subscript
 
 ~~~.nohighlight
 This is {*bold}, this is {/emphasized}, and this is {~monospaced and {*bold}}.
+{_Underlined}, su{'per} and {,sub}script.
 ~~~
 produces:
 ---.box
 This is {*bold}, this is {/emphasized}, and this is {~monospaced and {*bold}}.
+{_Underlined}, su{'per} and {,sub}script.
 ---
 
 ==== Shortcuts:
