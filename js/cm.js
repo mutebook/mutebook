@@ -4,6 +4,7 @@
 const cm = {
   NUL : '\x00',   // also indicates line end
   LT  : '\x01',   // instead of html-special '<'
+  macros: {},
 };
 
 // for node.js
@@ -43,6 +44,12 @@ class CM_input {
     return !this._que[0].done;
   }
 
+  push (tx) {
+    const cs = tx.split('').reverse();
+    for (const c of cs)
+      this._que.unshift({done:false, value:c});
+  }
+    
   peek (ahead = 0) {
     while (this._que.length <= ahead)
       this._que.push(this._next());
@@ -79,9 +86,9 @@ class CM_input {
     return line;
   }
 
-  isLower (ahead = 0) {
+  isAlpha (ahead = 0) {
     const c = this.peek(ahead);
-    return 'a' <= c && c <= 'z';
+    return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z');
   }
 
   isDigit (ahead = 0) {
@@ -105,6 +112,13 @@ class CM_input {
   skipRest () {
     while (cm.NUL !== this.next())
       ;
+  }
+
+  getRest () {
+    let s = '', c;
+    while (cm.NUL !== (c = this.next()))
+      s += c;
+    return s;
   }
 
   isEndOfLine () {
@@ -397,6 +411,7 @@ class CM_parser {
       pre: '~', sec: '-', cls: '.', hook1: '{', hook2: '|', hook3: '}',
       esc: '\\', 
       b: '', em: '', u:'', sup:'', sub:'', // b: '*' ...
+      macro: '$',
     };
 
     this._inPre = this._inPar =
@@ -412,34 +427,40 @@ class CM_parser {
     this._init();
     this.inp = cmInput; this.out = cmOutput;
 
-    while (this.inp.hasMore())
-      if (this._inTable)
+    while (this.inp.hasMore()) {
+      if (this._inTable) {
         this.tableLine();
-      else {
-        const chr = this.chr, c = this.inp.peek();
-        if (this._inPre)
-          this.mayBePre();
-        else if (this._inList && this.mayBeContinuation())
-          ;
-        else if (c === chr.pgm && this.mayBePragma())
-          ;
-        else if (c === chr.cmt && this.mayBeComment())
-          ;
-        else if (c === chr.h   && this.mayBeHeader())
-          ;
-        else if ((c === chr.ul || c === chr.ol) && this.mayBeList())
-          ;
-        else if (c === chr.pre && this.mayBePre())
-          ;
-        else if (c === chr.sec && this.mayBeSec())
-          ;
-        else if (c === chr.hr  && this.mayBeHr())
-          ;
-        else if (this.mayBeEmptyLine())
-          ;
-        else this.doTopLine();
+        continue;
+      }
+        
+      if (this._inPre) {
+        this.mayBePre();
+        continue;
       }
 
+      if (this._inList && this.mayBeContinuation())
+        continue;
+
+      const chr = this.chr, c = this.inp.peek();
+
+      if (c === chr.pgm && this.mayBePragma())
+        ;
+      else if (c === chr.cmt && this.mayBeComment())
+        ;
+      else if (c === chr.h   && this.mayBeHeader())
+        ;
+      else if ((c === chr.ul || c === chr.ol) && this.mayBeList())
+        ;
+      else if (c === chr.pre && this.mayBePre())
+        ;
+      else if (c === chr.sec && this.mayBeSec())
+        ;
+      else if (c === chr.hr  && this.mayBeHr())
+        ;
+      else if (this.mayBeEmptyLine())
+        ;
+      else this.doTopLine();
+    }
     this.endAll();
   }
 
@@ -571,10 +592,10 @@ class CM_parser {
   }
 
   ident () {
-    if (!this.inp.isLower())
+    if (!this.inp.isAlpha())
       return '';
     let id = '';
-    while (this.inp.isLower() || this.inp.isDigit())
+    while (this.inp.isAlpha() || this.inp.isDigit())
       id += this.inp.next();
     return id;
   }
@@ -616,10 +637,10 @@ class CM_parser {
     const inp  = this.inp, chr = this.chr;
     const tag  = this.ident(); inp.skipWhite();
     const what = this.ident(); inp.skipWhite();
-    const c = inp.next();
 
     switch (tag) {
     case 'chr':
+      const c = inp.next();
       switch (what) {
       case 'pgm': chr.pgm = c;  break;
       case 'cmt': chr.cmt = c; break;
@@ -640,9 +661,13 @@ class CM_parser {
       case 'u':   chr.u   = c; break;
       case 'sup': chr.sup = c; break;
       case 'sub': chr.sub = c; break;
+      case 'macro': chr.macro = c; break;
       default:
         break;
       }
+      break;
+    case 'def':
+      cm.macros[what] = inp.getRest().trim();
       break;
     default:
       break;
@@ -923,7 +948,12 @@ class CM_parser {
     while (cm.NUL !== (c = this.nextCont()))
       if (chr.esc === c)
         this.out.putEsc(this.inp.next());
-      else if (chr.hook1 === c) {
+      else if (chr.macro === c) {
+//        this.inp.push()
+        const m = cm.macros[this.ident()];
+        this.inp.push(undefined !== m ?
+          m : 'ERROR')
+      } else if (chr.hook1 === c) {
         if (this.match('$')) { // TODO hack
           this.out.sec('span', ['math']);
           this.out.put(this.doJax());
