@@ -173,6 +173,17 @@ echo "};\n";
 
 <?php else: ?>
 <pre>
+<?php
+  $pos = -1;
+  for (;;) {
+    $pos = strpos($pagePath, '/', $pos+1);
+    if (false === $pos)
+      break;
+    $prolog = @file_get_contents($docRoot.substr($pagePath,0,$pos+1).'prolog');
+    if ($prolog)  
+      echo $prolog."\n";
+  }
+?>
 <?= htmlentities(@file_get_contents($docRoot.$pagePath.$pageFile)); ?>
 
 ----
