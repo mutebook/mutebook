@@ -648,6 +648,7 @@ class CM_parser {
       break;
     }
 
+    this.inp.skipRest();
     return true;
   }
 
