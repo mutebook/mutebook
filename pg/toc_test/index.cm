@@ -1,9 +1,0 @@
-= Test of table-of-content (TOC)
-
-TOC is dynamically generated from directory structure and content of files
-found in {~pg/}.
-
-This is a test of a three-level TOC.
-
-This is level 1.
-

@@ -1,8 +1,0 @@
-TOC test; toc_test
-page1.cm ; Page 1; page1
-page2.cm ; Page 2; page2
-sub1/
-page3.cm ; Page 3; page3
-sub2/
-page4.cm ; Page 4; page4
-
