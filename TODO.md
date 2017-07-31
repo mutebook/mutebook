@@ -9,6 +9,7 @@
 # Cosmetics
 
 * display img alt text better (if offline)
+* typographical quotes
 
 # Bugs
 
@@ -16,7 +17,8 @@
 
 # Text
 
-Replace ˚ with ° (https://unicode-table.com/en/02DA/ -> https://unicode-table.com/en/00B0/)
+* replace ˚ with ° (https://unicode-table.com/en/02DA/ -> https://unicode-table.com/en/00B0/)
+* remove \n
 
 # Internal - code-related
 

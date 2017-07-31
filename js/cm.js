@@ -952,7 +952,7 @@ class CM_parser {
       s += c;
     }
     this.hasMath = true;
-    return `(math((${s}))math)`;
+    return `(math((\\mathsf{${s}}))math)`; // TODO make conf.
   }
 
   doLine () {

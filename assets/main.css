@@ -356,6 +356,9 @@ article ul {
 article ol {
   list-style: decimal;
 }
+article p {
+  text-align: justify;
+}
 article pre {
   font-family: 'Noto Sans', Helvetica, sans-serif;
   border: thin solid #ccc;
