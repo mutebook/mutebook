@@ -21,11 +21,11 @@ An example. Define nacros:
 
 ~~~.nohighlight
 @def dB dB{,SPL}
-@def SG {$ \mathsf{S_{G}} $}
+@def SG {$\mathsf{S_{G}}$}
 ~~~
 
 @def dB dB{,SPL}
-@def SG {$ \mathsf{S_{G}} $}
+@def SG {$\mathsf{S_{G}}$}
 
 To use a macro, prepend the identifier with a {~$}:
 

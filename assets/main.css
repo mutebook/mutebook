@@ -102,15 +102,47 @@ nav#nav {
   }
 }
 nav#nav > menu {
-  padding: 6px; padding-right: 3px;
+  padding: 6px;
+  padding-right: 3px;
 }
 nav#nav > menu menuitem {
   display: block;
-}
-menuitem {
   padding: 3px 0;
   white-space: nowrap;
   font-size: 96%;
+}
+nav#nav > menu menuitem a {
+  color: #10147e;
+}
+nav#nav > menu menuitem a.arrow {
+  padding: 0 2px;
+}
+nav#nav > menu menuitem a.arrow:before {
+  content: url(theme/tri_blank.png);
+}
+nav#nav > menu menuitem.section {
+  font-weight: bold;
+}
+nav#nav > menu menuitem.section a.arrow:before {
+  content: url(theme/tri_right.png);
+}
+nav#nav > menu menuitem.section.open a.arrow:before {
+  content: url(theme/tri_down.png);
+}
+nav#nav > menu menuitem.activepath {
+  border-bottom: thin solid #c60;
+}
+nav#nav > menu menuitem.active {
+  background-color: #fff6ed;
+  border-bottom: thin solid #c60;
+  border-right: thin solid #c60;
+}
+nav#nav > menu div {
+  margin-left: 6px;
+  border-left: thin solid #c60;
+}
+nav#nav > menu div:not(.open) {
+  display: none;
 }
 #article {
   -webkit-box-flex: 1;
@@ -162,40 +194,8 @@ body > main > nav {
     transition: left .22s ease;
   }
 }
-nav#nav > menu div {
-  margin-left: 6px;
-  border-left: thin solid #c60;
-}
-nav#nav > menu div:not(.open) {
-  display: none;
-}
-/* nav#nav > menu a.arrow ... */
-/* nav#nav > menu menuitem ... */
-a.arrow {
-  padding: 0 2px;
-}
-a.arrow:before {
-  content: url(theme/tri_blank.png);
-}
-menuitem.section {
-  font-weight: bold;
-}
-menuitem.section > a.arrow:before {
-  content: url(theme/tri_right.png);
-}
-menuitem.section.open > a.arrow:before {
-  content: url(theme/tri_down.png);
-}
-menuitem.activepath {
-  border-bottom: thin solid #c60;
-}
-menuitem.active {
-  background-color: #fff6ed;
-  border-bottom: thin solid #c60;
-  border-right: thin solid #c60;
-}
-menuitem > a {
-  color: #10147e;
+article .error {
+  color: red;
 }
 article .right {
   float: right;
@@ -205,13 +205,6 @@ article .left {
 }
 article .u {
   text-decoration: underline;
-}
-article .box {
-  border: thin solid #ccc;
-  border-radius: 5px;
-  margin: 6px 0;
-  padding: 6px;
-  overflow-x: auto;
 }
 article .indent {
   margin-left: 1em;
@@ -247,11 +240,17 @@ article .btn.b {
   border-color: #00f;
   background: #ddf;
 }
-article .math:before {
-  content: ' '; /* separate from inline text */
-}
+article .math:before,
 article .math:after {
-  content: ' '; /* separate from inline text */
+  content: ' ';
+  /* separate from inline text */
+}
+article .box {
+  border: thin solid #ccc;
+  border-radius: 5px;
+  margin: 6px 0;
+  padding: 6px;
+  overflow-x: auto;
 }
 article .clrBanner {
   color: #10147e !important;
@@ -382,7 +381,10 @@ article table {
   border-collapse: collapse;
 }
 article table.border {
-  border-collapse: collapse;
+  border: 1px solid gray;
+}
+article table.border th,
+article table.border td {
   border: 1px solid gray;
 }
 article table thead {
@@ -392,19 +394,11 @@ article table td {
   vertical-align: top;
   padding: 6px;
 }
-article table.border th {
-  border: 1px solid gray;
-}
-article table.border td {
-  border: 1px solid gray;
-}
 article table td.label {
   text-align: right;
 }
 article table td.required:before {
   content: '• ';
-}
-article form > table {
 }
 @media (max-width: 768px) {
   article form > table {
@@ -498,8 +492,4 @@ a.wp:after {
 }
 body > pre {
   display: none;
-}
-
-span.error {
-  color: red;
 }

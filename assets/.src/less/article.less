@@ -1,9 +1,50 @@
 // main: main.less
 
 article {
+  .error {
+    color: red;
+  }
+
   .right { float: right;  }
   .left  { float: left;   }
-
+  .u     { text-decoration: underline;  }
+  .indent {
+    margin-left: 1em;
+  }
+  .diagram {
+    margin: 1em 2em;
+    padding: 1em;
+    border: thin solid gray;
+    border-radius: 5px;
+  }
+  .equation {
+    margin: 1em 2em;
+    display: table;
+    padding: 1em;
+    border: thin solid red;
+    border-radius: 5px;
+  }
+  .btn {
+    padding: 0 .2em;
+    border: thin solid #000;
+    border-radius: 2px;
+    background: #eee;
+  }
+  .btn.r {
+    border-color: #800;
+    background: #fdd;
+  }
+  .btn.g {
+    border-color: #080;
+    background: #dfd;
+  }
+  .btn.b {
+    border-color: #00f;
+    background: #ddf;
+  }
+  .math:before, .math:after {
+    content: ' '; /* separate from inline text */
+  }
   .box {
     border: thin solid @clrInkLight;
     border-radius: 5px;
@@ -40,7 +81,7 @@ article {
   h1 { font-size: 160%; font-weight: bold; }
   h2 { font-size: 130%; }
   h3 { font-size: 120%; &:before { content: '• '; }}
-  h4 { font-size: 110%; }
+  h4 { font-size: 110%; margin-bottom: .4em; }
   h5 { font-size: 110%; font-style: italic; }
   h6 { font-size: 100%; font-weight: bold;  }
 
@@ -82,6 +123,11 @@ article {
 
   pre, code {
     background: @clrWater;
+    padding: 0 4px;
+  }
+
+  code.inline {
+    color: @clrInkCode;
   }
 
   img {
@@ -90,15 +136,19 @@ article {
   }
 
   table {
+    border-collapse: collapse;
+    &.border {
+      border: 1px solid gray;
+      th, td {
+        border: 1px solid gray;
+      }
+    }
     thead {
       font-weight: bold;
     }
     td {
       vertical-align: top;
       padding: @pad;
-    }
-    td + td {
-      padding-left: 0;
     }
     td.label {
       text-align: right;
@@ -113,7 +163,6 @@ article {
       @media @narrow {
         width: 100%;
       }
-      border-collapse: collapse;
       tr {
         background:    @clrWater;
         border-bottom: thin solid @clrPaper;

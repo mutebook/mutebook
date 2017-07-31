@@ -8,6 +8,7 @@
 # Cosmetics
 
 * the first line if pre/code is a bit indented
+* display img alt text better (if offline)
 
 # Bugs
 

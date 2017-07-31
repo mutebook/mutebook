@@ -88,18 +88,49 @@ nav#nav {
   }
 
   > menu {
-    padding: @pad;
+    padding: @pad; padding-right: @pad/2;
     menuitem {
       display: block;
+      padding: @pad/2 0;
+      white-space: nowrap;
+      font-size: 96%;
+      a {
+        color: @clrBanner;
+      }
+      a.arrow {
+        padding: 0 2px;
+      }
+      a.arrow:before {
+        content: url(theme/tri_blank.png);
+      }
+    }
+    menuitem.section {
+      font-weight: bold;
+      a.arrow:before {
+        content: url(theme/tri_right.png);
+      }
+    }
+    menuitem.section.open {
+      a.arrow:before {
+        content: url(theme/tri_down.png);
+      }
+    }
+    menuitem.activepath {
+      border-bottom: thin solid @clrMenuLine;
+    }
+    menuitem.active {
+      background-color: @clrMenuBg;
+      border-bottom: thin solid @clrMenuLine;
+      border-right: thin solid @clrMenuLine;
+    }
+    div {
+      margin-left: @pad;
+      border-left: thin solid @clrMenuLine;
+    }
+    div:not(.open) {
+      display: none;
     }
   }
-}
-
-menuitem {
-  padding: @pad;
-  margin: @pad 0;
-  white-space: nowrap;
-  font-size: 96%;
 }
 
 #article {
