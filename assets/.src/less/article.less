@@ -1,0 +1,148 @@
+// main: main.less
+
+article {
+  .right { float: right;  }
+  .left  { float: left;   }
+
+  .box {
+    border: thin solid @clrInkLight;
+    border-radius: 5px;
+    margin: @pad 0;
+    padding: @pad;
+    overflow-x: auto;
+  }
+
+  .clrBanner    {  color: @clrBanner    !important; }
+  .clrBannerInk {  color: @clrBannerInk !important; }
+  .clrInk       {  color: @clrInk       !important; }
+  .clrInkLight  {  color: @clrInkLight  !important; }
+  .clrInkDark   {  color: @clrInkDark   !important; }
+  .clrMark      {  color: @clrMark      !important; }
+
+  .hr {
+    border-bottom: thin solid;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    .h_metrics;
+  }
+
+  h1, h2, h3 {
+    .font-serif;
+    color: @clrH;
+  }
+
+  h4, h5, h6 {
+    color: @clrInkDark;
+    font-weight: bold;
+  }
+
+  h1 { font-size: 160%; font-weight: bold; }
+  h2 { font-size: 130%; }
+  h3 { font-size: 120%; &:before { content: '• '; }}
+  h4 { font-size: 110%; }
+  h5 { font-size: 110%; font-style: italic; }
+  h6 { font-size: 100%; font-weight: bold;  }
+
+  menuitem {
+    @media @narrow {
+      display: inline-block;
+    }
+    @media @wide {
+      display: none;
+    }
+  }
+
+  header {
+    padding: @pad;
+    margin-bottom: .6em;
+    border-top:    thin solid @clrMark;
+    border-bottom: thin solid @clrMark;
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    background-color:@clrMark;
+    margin: .4em 0;
+  }
+
+  p, ul, ol {
+    margin-bottom: 2*@pad;
+  }
+
+  ul, ol { margin-left: 1.6em; }
+  ul { list-style: disc;   }
+  ol { list-style: decimal; }
+
+  pre {
+    .font-sans;
+    .box;
+  }
+
+  pre, code {
+    background: @clrWater;
+  }
+
+  img {
+    max-width:460px; max-height:320px; // TODO by actual device width
+    vertical-align: middle;
+  }
+
+  table {
+    thead {
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+      padding: @pad;
+    }
+    td + td {
+      padding-left: 0;
+    }
+    td.label {
+      text-align: right;
+    }
+    td.required:before {
+      content: '• ';
+    }
+  }
+
+  form {
+    > table {
+      @media @narrow {
+        width: 100%;
+      }
+      border-collapse: collapse;
+      tr {
+        background:    @clrWater;
+        border-bottom: thin solid @clrPaper;
+      }
+      input[type=text], textarea {
+        width: 100%;
+      }
+    }
+  }
+
+  .button {
+    white-space: nowrap;
+    border: thin solid @clrBanner;
+    background: @clrA;
+    color:      @clrPaper;
+    border-radius: 2px;
+    padding: 0 .3em;
+    margin: .2em;
+    font-size: 96%;
+  }
+
+  button.audio {
+    width:  22px;
+    height: 22px;
+  }
+
+  canvas.audio {
+    border: thin solid @clrInkLight;
+  }
+}
+
+// eof

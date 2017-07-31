@@ -1,0 +1,119 @@
+// main: main.less
+
+.flex-row() {
+  display: flex; flex-flow: row;
+}
+
+.flex-row-justify() {
+  .flex-row; justify-content: space-between;
+}
+
+.flex-col() {
+  display: flex; flex-flow: column;
+}
+
+.flex-1() {
+  flex: 1;
+}
+
+//--- reset --------------------------------------------------------------------
+
+*, *:before, *:after {
+  padding: 0; margin: 0;
+  box-sizing: border-box;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+//--- metrics ------------------------------------------------------------------
+
+@wide-width: (@narrow-width + 1px);
+
+@narrow: ~"(max-width: @{narrow-width})";
+@wide:   ~"(min-width: @{wide-width})";
+
+//--- layout -------------------------------------------------------------------
+
+html, body {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  .flex-col;
+}
+
+body > header {
+  .flex-row-justify;
+  height: @hdrHgt;
+  margin-bottom: 1px;
+  white-space: nowrap;
+  font-size:   @hdrHgt - 12px;
+  padding: 0 @pad;
+
+  a {
+    padding: 0 auto;
+  }
+}
+
+body > main {
+  .flex-row;
+  height: 100%;
+}
+
+a#nav {
+  width:  @hdrHgt - @pad;
+  height: @hdrHgt - @pad;
+  display: inline-block;
+  @media @wide {
+    display: none;
+  }
+}
+
+nav#nav {
+  width: @navWdt;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @media @narrow {
+    position: fixed;
+    z-index: +1;
+    top: 0; left: -@navWdt;
+
+    &.slideIn {
+      left: 0;
+    }
+  }
+
+  > menu {
+    padding: @pad;
+    menuitem {
+      display: block;
+    }
+  }
+}
+
+menuitem {
+  padding: @pad;
+  margin: @pad 0;
+  white-space: nowrap;
+  font-size: 96%;
+}
+
+#article {
+  .flex-1;
+  width: 100%;
+}
+
+iframe#article {
+  border: none;
+}
+
+article {
+  padding: 2*@pad;
+  padding-top: 0;
+}
+
+// eof

@@ -1,0 +1,66 @@
+// main: main.less
+
+body {
+  .font-body;
+  background: @clrPaper;
+  color:      @clrInk;
+}
+
+a {
+  color: @clrA;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:not(.button):hover {
+    text-decoration: underline;
+  }
+}
+
+body > header {
+  background: @clrBanner;
+  color:      @clrBannerInk;
+
+  a {
+    color: @clrBannerInk;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+  }
+
+  a#nav {
+    background-image: url(theme/menu.svg);
+    background-size:  contain;
+  }
+}
+
+body > main {
+  > nav {
+    border-right: thin solid @clrBanner;
+    @media @narrow {
+      background: @clrPaper;
+      transition: left .22s ease;
+    }
+  }
+}
+
+menuitem {
+  border-left:  thick solid transparent;
+  border-right: thick solid transparent;
+}
+
+menuitem.level0 {
+  background: @clrBanner;
+  color:      @clrBannerInk;
+}
+
+menuitem:not(.level0) {
+  color: @clrBanner;
+}
+
+menuitem.active {
+  border-left-color:  @clrA;
+  border-right-color: @clrA;
+}
+
+// eof
