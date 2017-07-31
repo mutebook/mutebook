@@ -49,7 +49,7 @@ class CM_input {
     for (const c of cs)
       this._que.unshift({done:false, value:c});
   }
-    
+
   peek (ahead = 0) {
     while (this._que.length <= ahead)
       this._que.push(this._next());
@@ -409,7 +409,7 @@ class CM_parser {
     this.chr =  {
       pgm: '@', cmt: '#', h: '=', hr: '-', p: '.', ul: '-', ol: '*',
       pre: '~', sec: '-', cls: '.', hook1: '{', hook2: '|', hook3: '}',
-      esc: '\\', 
+      esc: '\\',
       b: '', em: '', u:'', sup:'', sub:'', // b: '*' ...
       macro: '$',
     };
@@ -432,7 +432,7 @@ class CM_parser {
         this.tableLine();
         continue;
       }
-        
+
       if (this._inPre) {
         this.mayBePre();
         continue;
@@ -608,7 +608,10 @@ class CM_parser {
       else {
         this.endFlow();
         this.hasPre = this._inPre = true;
-        this.out.pre(this.cs());
+        let cs = this.cs();
+        if (!cs.length)
+          cs = ['nohighlight'];
+        this.out.pre(cs);
       }
       this.inp.skipRest();
       return true;
@@ -963,7 +966,7 @@ class CM_parser {
         if (undefined !== m)
           this.inp.push(m);
         else
-          this.out.error(`$${ident}`);  
+          this.out.error(`$${ident}`);
       } else if (chr.hook1 === c) {
         if (this.match('$')) { // TODO hack
           this.out.sec('span', ['math']);

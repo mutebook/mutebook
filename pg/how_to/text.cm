@@ -15,7 +15,7 @@ trigger a markup processing. It also has two other functions:
 * {~\\} as the last non-blank character allows the content to continue on the
   following line.
 
-~~~.nohighlight
+~~~
 \= this line is not a header and ends in a backslash: \\
 ====== This is a header that spreads \
 over two source lines, and has a line break\n in it.
@@ -29,7 +29,7 @@ over two source lines, and has a line break\n in it.
 
 == Comments
 A line that starts with {~#} in the *first* position is a comment and will be ignored.
-~~~.nohighlight
+~~~
 # a comment
 ~~~
 produces nothing:
@@ -38,7 +38,7 @@ produces nothing:
 
 == Headers
 Headers start with one or more (up to six) {~=} in the first position.
-~~~.nohighlight
+~~~
 = First-level header
 == Second level
 ==== Forth rulez
@@ -56,7 +56,7 @@ that line into an item of an unordered resp. ordered list. The text of a list
 item continues on the following line(s), if those begin with a whitespace.
 
 Lists cannot be nested.
-~~~.nohighlight
+~~~
 -.right floating right
 * one
 * two
@@ -88,7 +88,7 @@ elements|https://www.w3schools.com/html/html_blocks.asp}. Sections /may/ be nest
 if inside of a section; otherwise it indicates a section beginning and the tag
 {~div} is assumed (which is, very likely, the most common case).
 
-~~~.nohighlight
+~~~
 before floating boxes
 --- div
 ---.box.left
@@ -115,7 +115,7 @@ floating right
 == Boxes
 Boxes (see above) are sections of typ {~.box}.
 
-~~~.nohighlight
+~~~
 ---.box
 Text in a box.
 ---
@@ -127,7 +127,7 @@ Text in a box.
 
 == Horizontal line
 Four or more {~-} in the first position:
-~~~.nohighlight
+~~~
 text...
 -------
 text...
@@ -144,7 +144,7 @@ Paragraph detection is automatic: as text blocks separated by blank lines,
 headers, code blocks, sections, and horizontal lines. In addition,
 lines that begin with {~.} in the first position also start a new paragraph.
 
-~~~.nohighlight
+~~~
 Paragraph,
 still the same paragraph.
 
@@ -190,7 +190,7 @@ indicating character and a content. The format indicating character can be:
 - {~'} for superscript
 - {~,} for subscript
 
-~~~.nohighlight
+~~~
 This is {*bold}, this is {/emphasized}, and this is {~monospaced and {*bold}}.
 {_Underlined}, su{'per} and {,sub}script.
 ~~~
@@ -204,7 +204,7 @@ This is {*bold}, this is {/emphasized}, and this is {~monospaced and {*bold}}.
 Since marking text as bold or emphasised may be done frequently, it is possible
 to use a shortcut, by simply surrounding the text by a pair of {~*} resp. {~/}.
 This feature must be first enabled on a page by:
-~~~.nohighlight
+~~~
 @chr b  *
 @chr em /
 # put the above in the page text, only once, perhaps at the very top
@@ -220,7 +220,7 @@ This is *bold*, this is /emphasized/, and this /emphasised and *bold*/.
 == Typographical hooks
 Typographical hooks may be used to enter special characters into the output.
 Of course, they are not strictly needed, since CM supports utf-8.
-~~~.nohighlight
+~~~
 {=>} {<=} {->} {<-} {--} {---} 😱
 ~~~
 
@@ -244,7 +244,7 @@ provided, it is used for both the text and the link.
 
 Outside links contain the protocol ({~http://}):
 
-~~~.nohighlight
+~~~
 - {:https://github.com/mutebook}
 - {:mutebook|https://github.com/mutebook}
 ~~~
@@ -258,7 +258,7 @@ produces:
 
 So often used, that it has its own hook:
 
-~~~.nohighlight
+~~~
 {wp audio engineer} is a person who {wp records sound|Sound_recording_and_reproduction}.
 ~~~
 produces:
@@ -271,7 +271,7 @@ produces:
 Inside links refer to other pages, using page identifiers as defined in the
 {~TOC} files.
 
-~~~.nohighlight
+~~~
 - Each good technical book needs a {:glossary}, fully called {:glossary of terms|glossary}.
 - Mutebook has an automatic table of content, up to {:three levels|toc_test3/2:index} deep.
 ~~~
@@ -285,7 +285,7 @@ produces:
 An image hook has a tag {~img}, and two parts: the source link and an (optional)
 alternate text. Images can come from the outside or inside the book:
 
-~~~.nohighlight
+~~~
 outside:
 {img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from GitHub}
 inside:
@@ -305,7 +305,7 @@ Mathematical formulas can be entered using the TeX syntax and typeset by
 {:KaTeX|https://khan.github.io/KaTeX/function-support.html}. Surround the
 formulas by {~\{$} and {~$\}} (this is a special hook notation that does not
 allow nested hooks and insted passes curly braces on to TeX).
-~~~.nohighlight
+~~~
 {$ 20 \times 10^{0.0002} $}
 ~~~
 produces:
@@ -316,7 +316,7 @@ produces:
 === In-text buttons
 
 They look as if buttons, but are no buttons.
-~~~.nohighlight
+~~~
 In-text {btn button}, {btn.r red button}, {btn.g green button}, {btn.b blue button}.
 ~~~
 makes:
@@ -330,7 +330,7 @@ The support of tables is in development ('experimental').
 So far it is very basic: in a section 'table', {~[]} resp. {~()} delimit
 table header cells resp. data cells:
 
-~~~.nohighlight
+~~~
 Borderless:
 --- table
 [th1][th2][th3][th4]
