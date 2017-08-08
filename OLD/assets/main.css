@@ -319,6 +319,9 @@ article h6 {
   font-size: 100%;
   font-weight: bold;
 }
+article menuitem {
+  background: red;
+}
 @media (max-width: 768px) {
   article menuitem {
     display: inline-block;

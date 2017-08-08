@@ -1,22 +1,31 @@
 <?php
-$isLocal = 'localhost' == $_SERVER['SERVER_NAME'];
-$isDebug = $isLocal;
+$isDevelopment = false;
 
-// $pagePath: relative path from index.php
-// $pageFile: plain name
-
-if ($isFrame = !($pg = @$_REQUEST['pg'])) {
-  $pagePath = $pageFile = '';
+// request;
+if (($pg = @$_REQUEST['pg'])) {
+  $isIndex = false;
+  if (false === ($pos = strrpos($pg, '/'))) {
+    $pagePath = '';
+    $pageFile = $pg;
+  } else {
+    ++$pos;
+    $pagePath = substr($pg, 0, $pos);
+    $pageFile = substr($pg, $pos);
+  }
 } else {
-  // is page
-  if (false === ($pos = strrpos($pg, '/')))
-    $pos = -1;
-
-  ++$pos;
-  $pagePath = substr($pg, 0, $pos); // '' or path
-  $pageFile = substr($pg, $pos);    // plain name
+  $isIndex = true;
+  $pagePath = '';
+  $pageFile = '';
 }
 
+// conf
+$pagesPath  = 'pg/';
+
+// detected above
+// $pagePath: path from docRoot to current page ('' for index)
+// $pageFile: current page file basename
+
+$docRoot = dirname(__FILE__).'/';
 
 ?>
 <!DOCTYPE html><html lang="en">
@@ -26,16 +35,19 @@ if ($isFrame = !($pg = @$_REQUEST['pg'])) {
 <link rel="stylesheet" href="assets/main.css">
 <meta charset="utf-8">
 <script charset="utf-8">
-<?php require('conf.js') ?>
-<?php require('make_toc.php') ?>
-<?php require('$toc.js') ?>
+<?php // as in init.js
 
+$jsPagePath = addslashes($pagePath);
+$jsPageFile = addslashes($pageFile);
+
+echo <<<EOT
 var cm_book = {
-  conf: conf,
-  toc: toc,
-
-  pagePath: '<?=addslashes($pagePath)?>',
-  pageFile: '<?=addslashes($pageFile)?>',
+  conf: {
+    title:  'mutebook',
+    banner: 'mutebook',
+  },
+  pagePath: '$jsPagePath',
+  pageFile: '$jsPageFile',
 
   tocKey: function (indexOrKey) {
     if (Number.isInteger(indexOrKey))
@@ -43,7 +55,6 @@ var cm_book = {
     if (this.toc[indexOrKey])
       return indexOrKey;
   },
-
   resolveLink: function (ln) {
     if (0 <= ln.indexOf('://'))
       return ln;
@@ -55,12 +66,10 @@ var cm_book = {
 
     return ln;
   },
-
   resolveDirLink: function (ln) {
     ln = this.toc[ln][1];
     return ln.substr(0, ln.lastIndexOf('/'));
   },
-
   resolveSrc: function (key) {
     try {
       var src = '/index.php?pg=' + this.toc[key][1];
@@ -69,7 +78,6 @@ var cm_book = {
     }
     return src;
   },
-
   loadCSS: function (href) {
     var link = document.createElement('link');
     link.rel = 'stylesheet';
@@ -77,7 +85,6 @@ var cm_book = {
     document.head.appendChild(link);
     return link;
   },
-
   loadScript: function (src, onLoad) {
     var where = document.body || document.head;
     var script = document.createElement('script');
@@ -88,11 +95,9 @@ var cm_book = {
     where.appendChild(script);
     return script;
   },
-
   tocEntry: function (ln) {
     return cm_book.toc[ln];
   },
-
   tocTxLink: function (index) {
     try {
       var link = Object.keys(cm_book.toc)[index], tx = cm_book.toc[link][0];
@@ -102,11 +107,57 @@ var cm_book = {
     }
   },
 };
+
+
+EOT;
+
+// TOC
+echo "cm_book.toc = {\n";
+
+function split_line($l, $n) {
+  return array_pad(array_map('trim', explode(';', $l)), $n, '');
+}
+
+$checkHashes = [];
+function checkHash($path, $hash) {
+  global $checkHashes;
+  if (@$checkHashes[$hash])
+    error_log("in path [$path], hash already exists: [$hash]");
+  $checkHashes[$hash] = true;
+  return $hash;
+}
+
+function toc($path, $sectionHash) {
+  global $docRoot;
+  if (!($f = @fopen($docRoot.$path.'TOC', 'r')))
+    return;
+  list($title, $hashPrefix) = split_line(fgets($f), 2);
+  if ($hashPrefix)
+    $hashPrefix .= ':';
+  $indexHash = checkHash($path, $hashPrefix.'index');
+  echo "'$indexHash': ['$title', '${path}index.cm', '$sectionHash', '$indexHash'],\n";
+  while (!feof($f)) {
+    if ($l = trim(fgets($f))) {
+      list($file, $title, $hash) = split_line($l, 3);
+      if ('/' === substr($file, -1)) { // sub
+        toc($path.$file, $indexHash);
+      } else {
+        $pageHash = checkHash($path, $hashPrefix.$hash);
+        echo "'$pageHash': ['$title', '$path$file', '$indexHash', '$indexHash'],\n";
+      }
+    }
+  }
+  fclose($f);
+}
+
+toc($pagesPath, '');
+
+echo "};\n";
 ?>
 </script>
 </head>
 <body>
-<?php if ($isFrame) : ?>
+<?php if ($isIndex): ?>
   <header>
     <span id="header-left"></span>
     <span id="banner"></span>
@@ -128,12 +179,12 @@ var cm_book = {
     $pos = strpos($pagePath, '/', $pos+1);
     if (false === $pos)
       break;
-    $prolog = @file_get_contents(substr($pagePath,0,$pos+1).'prolog');
-    if ($prolog)
+    $prolog = @file_get_contents($docRoot.substr($pagePath,0,$pos+1).'prolog');
+    if ($prolog)  
       echo $prolog."\n";
   }
 ?>
-<?= htmlentities(@file_get_contents($pagePath.$pageFile)); ?>
+<?= htmlentities(@file_get_contents($docRoot.$pagePath.$pageFile)); ?>
 
 ----
 {prev.left Back: } {next.right Next: }
@@ -154,7 +205,7 @@ var cm_book = {
     cm_book.toc[ln].push(index);
   });
 
-<?php if ($isFrame): ?>
+<?php if ($isIndex): ?>
   var article = document.querySelector('article');
   var iframe = document.createElement('iframe'); iframe.id = 'article';
   article.parentElement.replaceChild(iframe, article);
