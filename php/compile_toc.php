@@ -61,11 +61,12 @@ class compileToc {
     $indNo = ++$this->i;
 
     $pf = $path.$file;
-    $this->lst .= "[$indexId,$pf,$title],";
-    $this->ids .= "'$indexId'=>$this->i,";
-    $this->ind .= "$this->i=>$indNo,";
-    $this->pnt .= "$this->i=>$pntNo,";
-    $this->fil .= "'$pf'=>$this->i,";
+    $this->lst .= "['$indexId','$pf','$title'],";
+    $this->ids .= "'$indexId':$this->i,";
+    $this->ind .= "$this->i:$indNo,";
+    if (null != $pntNo)
+      $this->pnt .= "$this->i:$pntNo,";
+    $this->fil .= "'$pf':$this->i,";
     $this->pfs []= $pf;
 
     while (!feof($f)) {
@@ -83,11 +84,12 @@ class compileToc {
           ++$this->i;
           $pageId = self::checkUniqueId($idPrefix.$idOrSub);
           $pf = $path.$file;
-          $this->lst .= "[$pageId,$pf,$title],";
-          $this->ids .= "'$pageId'=>$this->i,";
-          $this->ind .= "$this->i=>$indNo,";
-          $this->pnt .= "$this->i=>$pntNo,";
-          $this->fil .= "'$pf'=>$this->i,";
+          $this->lst .= "['$pageId','$pf','$title'],";
+          $this->ids .= "'$pageId':$this->i,";
+          $this->ind .= "$this->i:$indNo,";
+          if (null != $pntNo)
+            $this->pnt .= "$this->i:$pntNo,";
+          $this->fil .= "'$pf':$this->i,";
           $this->pfs []= $pf;
           continue;
         }
@@ -99,7 +101,7 @@ class compileToc {
   }
 
   public function compile () {
-    if (self::tocChangeTime(PAGES) <= @filectime(TOC.'$'))
+    if (self::tocChangeTime(PAGES) == @filectime(TOC.'$'))
       return; // it is current
 
     try {

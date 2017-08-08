@@ -104,7 +104,6 @@ var cm_book = {
     }
   },
 };
-?>
 </script>
 </head>
 <body>
@@ -152,10 +151,6 @@ var cm_book = {
       'Please use a modern web browser.</h2>';
     return;
   }
-  Object.keys(cm_book.toc).forEach(function (ln, index) {
-    cm_book.toc[ln].push(index);
-  });
-
 <?php if ($isFrame): ?>
   var article = document.querySelector('article');
   var iframe = document.createElement('iframe'); iframe.id = 'article';
