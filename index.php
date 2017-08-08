@@ -1,4 +1,6 @@
 <?php
+chdir(dirname(__FILE__));
+
 $isLocal = 'localhost' == $_SERVER['SERVER_NAME'];
 $isDebug = $isLocal;
 
@@ -17,7 +19,6 @@ if ($isFrame = !($pg = @$_REQUEST['pg'])) {
   $pageFile = substr($pg, $pos);    // plain name
 }
 
-
 ?>
 <!DOCTYPE html><html lang="en">
 <head>
@@ -27,8 +28,8 @@ if ($isFrame = !($pg = @$_REQUEST['pg'])) {
 <meta charset="utf-8">
 <script charset="utf-8">
 <?php require('conf.js') ?>
-<?php require('make_toc.php') ?>
-<?php require('$toc.js') ?>
+<?php require('php/compile_toc.php') ?>
+<?php @require('$toc.js') ?>
 
 var cm_book = {
   conf: conf,
