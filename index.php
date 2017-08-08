@@ -41,8 +41,8 @@ var cm_book = {
 
   tocKey: function (indexOrKey) {
     if (Number.isInteger(indexOrKey))
-      return Object.keys(this.toc)[indexOrKey];
-    if (this.toc[indexOrKey])
+      return this.toc.lst[indexOrKey][0];
+    if (this.toc.ids[indexOrKey])
       return indexOrKey;
   },
 
@@ -50,7 +50,7 @@ var cm_book = {
     if (0 <= ln.indexOf('://'))
       return ln;
     try {
-      ln = '?pg=' + this.toc[ln][1]; // TODO hack
+      ln = '?pg=' + this.toc.lst[this.toc.ids[ln]][1]; // TODO hack
     } catch (err) {
       ln = ln.startsWith('/') ? ln : cm_book.pagePath + ln;
     }
@@ -59,13 +59,13 @@ var cm_book = {
   },
 
   resolveDirLink: function (ln) {
-    ln = this.toc[ln][1];
+    ln = this.toc.lst[this.toc.ids[ln]][1];
     return ln.substr(0, ln.lastIndexOf('/'));
   },
 
   resolveSrc: function (key) {
     try {
-      var src = '/index.php?pg=' + this.toc[key][1];
+      var src = '/index.php?pg=' + this.toc.lst[this.toc.ids[key]][1];
     } catch (err) {
       return '';
     }
@@ -92,12 +92,12 @@ var cm_book = {
   },
 
   tocEntry: function (ln) {
-    return cm_book.toc[ln];
+    return this.toc.lst[this.toc.ids[ln]];
   },
 
   tocTxLink: function (index) {
     try {
-      var link = Object.keys(cm_book.toc)[index], tx = cm_book.toc[link][0];
+      var link = this.toc.lst[index][0], tx = this.toc.lst[index][2];
       return [tx, link];
     } catch (err) {
       return ['', ''];

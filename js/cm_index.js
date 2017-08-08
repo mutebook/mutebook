@@ -3,7 +3,8 @@
 (function () {
   /* global cm_book:false */
   const book = cm_book;
-
+console.log(book)
+console.log(book.toc.lst[1])
   // complete the document
   document.title = book.conf.title;
   document.querySelector('#banner').innerHTML = book.conf.banner;
