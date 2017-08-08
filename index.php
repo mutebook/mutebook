@@ -1,5 +1,6 @@
 <?php
 chdir(dirname(__FILE__));
+require('php/conf.php');
 
 $isLocal = 'localhost' == $_SERVER['SERVER_NAME'];
 $isDebug = $isLocal;
@@ -29,7 +30,7 @@ if ($isFrame = !($pg = @$_REQUEST['pg'])) {
 <script charset="utf-8">
 <?php require('conf.js') ?>
 <?php require('php/compile_toc.php') ?>
-<?php @require('$toc.js') ?>
+<?php @require(TOC.'$') ?>
 
 var cm_book = {
   conf: conf,

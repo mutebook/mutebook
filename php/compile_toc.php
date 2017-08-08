@@ -42,7 +42,8 @@ class compileToc {
   */
 
   private $lst = '', $ids = '', $ind = '', $pnt = '', $fil = '';
-  private $i = -1;  // count'em
+  private $i = -1;    // count'em
+  private $pfs = [];  // to generate prev / next
 
   public function traverse ($pntNo, $path) {
     if (!($f = @fopen($path.TOC, 'r')))
@@ -59,11 +60,13 @@ class compileToc {
 
     $indNo = ++$this->i;
 
-    $this->lst .= "[$indexId,$path$file,$title],";
+    $pf = $path.$file;
+    $this->lst .= "[$indexId,$pf,$title],";
     $this->ids .= "'$indexId'=>$this->i,";
     $this->ind .= "$this->i=>$indNo,";
     $this->pnt .= "$this->i=>$pntNo,";
-    $this->fil .= "'$path$file'=>$this->i,";
+    $this->fil .= "'$pf'=>$this->i,";
+    $this->pfs []= $pf;
 
     while (!feof($f)) {
       if ($l = trim(fgets($f))) {
@@ -79,11 +82,13 @@ class compileToc {
         } else if ($idOrSub && $file && $title) {
           ++$this->i;
           $pageId = self::checkUniqueId($idPrefix.$idOrSub);
-          $this->lst .= "[$pageId,$path$file,$title],";
+          $pf = $path.$file;
+          $this->lst .= "[$pageId,$pf,$title],";
           $this->ids .= "'$pageId'=>$this->i,";
           $this->ind .= "$this->i=>$indNo,";
           $this->pnt .= "$this->i=>$pntNo,";
-          $this->fil .= "'$path$file'=>$this->i,";
+          $this->fil .= "'$pf'=>$this->i,";
+          $this->pfs []= $pf;
           continue;
         }
 
@@ -94,14 +99,21 @@ class compileToc {
   }
 
   public function compile () {
-    if (self::tocChangeTime(PAGES) <= @filectime(TOC_JS))
+    if (self::tocChangeTime(PAGES) <= @filectime(TOC.'$'))
       return; // it is current
 
     try {
       $this->traverse(null, PAGES);
-      file_put_contents(TOC_JS,
+      file_put_contents(TOC.'$',
         "var toc={lst:[$this->lst],ids:{{$this->ids}},ind:{{$this->ind}},pnt:{{$this->pnt}},fil:{{$this->fil}}};",
         LOCK_EX);
+
+      foreach ($this->pfs as $i => $pf) {
+        $prev = @$this->pfs[$i-1]; $next = @$this->pfs[$i+1];
+        file_put_contents($pf.'$',
+        "var prevNext={prev:'$prev',next:'$next'}",
+        LOCK_EX);
+      }
     } catch (Exception $e) {
       error_log(' ** ' . $e->getMessage() . ' **');
     }
