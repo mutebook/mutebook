@@ -50,7 +50,7 @@ var cm_book = {
     if (0 <= ln.indexOf('://'))
       return ln;
     try {
-      ln = '?pg=' + this.toc.lst[this.toc.ids[ln]][1]; // TODO hack
+      ln = '?pg=' + this.toc.lst[this.toc.ids[ln]][1]; // TODO hack // TOC
     } catch (err) {
       ln = ln.startsWith('/') ? ln : cm_book.pagePath + ln;
     }
@@ -59,13 +59,13 @@ var cm_book = {
   },
 
   resolveDirLink: function (ln) {
-    ln = this.toc.lst[this.toc.ids[ln]][1];
+    ln = this.toc.lst[this.toc.ids[ln]][1]; // TOC
     return ln.substr(0, ln.lastIndexOf('/'));
   },
 
   resolveSrc: function (key) {
     try {
-      var src = '/index.php?pg=' + this.toc.lst[this.toc.ids[key]][1];
+      var src = '/index.php?pg=' + this.toc.lst[this.toc.ids[key]][1]; // TOC
     } catch (err) {
       return '';
     }
@@ -97,7 +97,7 @@ var cm_book = {
 
   tocTxLink: function (index) {
     try {
-      var link = this.toc.lst[index][0], tx = this.toc.lst[index][2];
+      var link = this.toc.lst[index][0], tx = this.toc.lst[index][2]; // TOC
       return [tx, link];
     } catch (err) {
       return ['', ''];

@@ -12,13 +12,13 @@ class BookAdapter extends cm.Adapter {
     const toc = this.book.toc;
     this.tocKeyPath = {};
     for (const key of Object.keys(toc))
-      this.tocKeyPath[toc[key][1]] = key;
+      this.tocKeyPath[toc[key][1]] = key; //TOC
 
     this.thisTocKey =
       this.tocKeyPath[this.book.pagePath + this.book.pageFile];
   }
 
-  tocTxLink (off = 0) {
+  tocTxLink (off = 0) { // TOC
     const entry = this.book.tocEntry(this.thisTocKey);
     return entry ? this.book.tocTxLink(entry[4] + off)
                  : super.tocTxLink(off);

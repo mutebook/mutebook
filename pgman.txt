@@ -8,7 +8,7 @@ The structure of TOC files:
 
 The toc js data structure, full toc in frame: (file - relative path+file)
 ----------------------------------------------
-list: # -> [id, file, title]
+lst: # -> [id, file, title]
 ids: id -> #
 ind: # -> # to its index.cm, index.cm-self
 parent: # -> # to index.cm of parent, top -> null
@@ -24,7 +24,7 @@ toc was
 -------
 0
 1
-2
+2 parent
 3
 4
 5 menuitem

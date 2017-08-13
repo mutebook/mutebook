@@ -39,6 +39,9 @@ class compileToc {
     ind:  #   -> # (to its index.cm; index.cm to itself)
     pnt:  #   -> # (to index.cm of parent dir, top -> null)
     fil:  file-> #
+    ... dynamically added ...
+    mi: # -> menuitem
+    div: # -> div
   */
 
   private $lst = '', $ids = '', $ind = '', $pnt = '', $fil = '';
@@ -64,8 +67,8 @@ class compileToc {
     $this->lst .= "['$indexId','$pf','$title'],";
     $this->ids .= "'$indexId':$this->i,";
     $this->ind .= "$this->i:$indNo,";
-    if (null != $pntNo)
-      $this->pnt .= "$this->i:$pntNo,";
+    $this->pnt .= null !== $pntNo
+      ? "$this->i:$pntNo," : "$this->i:null,";
     $this->fil .= "'$pf':$this->i,";
     $this->pfs []= $pf;
 
@@ -87,8 +90,8 @@ class compileToc {
           $this->lst .= "['$pageId','$pf','$title'],";
           $this->ids .= "'$pageId':$this->i,";
           $this->ind .= "$this->i:$indNo,";
-          if (null != $pntNo)
-            $this->pnt .= "$this->i:$pntNo,";
+          $this->pnt .= null !== $pntNo
+            ? "$this->i:$pntNo," : "$this->i:null,";
           $this->fil .= "'$pf':$this->i,";
           $this->pfs []= $pf;
           continue;

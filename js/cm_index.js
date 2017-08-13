@@ -3,8 +3,6 @@
 (function () {
   /* global cm_book:false */
   const book = cm_book;
-console.log(book)
-console.log(book.toc.lst[1])
   // complete the document
   document.title = book.conf.title;
   document.querySelector('#banner').innerHTML = book.conf.banner;
@@ -23,7 +21,7 @@ console.log(book.toc.lst[1])
   const iframe = document.querySelector('iframe#article');
 
   // select menu item and fetch the article
-  const selTocItem = function (indexOrKey, anchor = '') {
+  const selTocItem = function (indexOrKey, anchor = '') { // TOC
     navCs.remove(clsIn);
     const key = book.tocKey(indexOrKey);
     if (!key)
@@ -39,20 +37,22 @@ console.log(book.toc.lst[1])
         miCls.remove(clsActive);
         miCls.remove(clsActivePath);
         miCls.remove(clsOpen);
-        t = book.toc[t[2]];
+        t = book.toc[t[2]]; // TOC
       }
     }
 
     activeMenuKey = key;
     // open
-    let t = book.toc[activeMenuKey];
-    t[5].classList.add(clsActive);
-    while (t) {
-      let div = t[6];
+    let toc = book.toc;
+    let idx = toc.ids[activeMenuKey];
+    toc.mi[idx].classList.add(clsActive);
+    while (null !== idx) {
+      let div = toc.div[idx];
       if (div) div.classList.add(clsOpen);
-      t[5].classList.add(clsOpen);
-      t = book.toc[t[2]];
-      if (t && t[2]) t[5].classList.add(clsActivePath);
+      toc.mi[idx].classList.add(clsOpen);
+      idx = toc.pnt[idx];
+      if (null!==idx && null!==toc.pnt[idx])
+        toc.mi[idx].classList.add(clsActivePath);
     }
 
     iframe.src = book.resolveSrc(key) + anchor;
@@ -68,33 +68,37 @@ console.log(book.toc.lst[1])
   };
 
   // construct menu
-  let menuKeys = Object.keys(book.toc);
-  let menuIndex = 0;
-  const constructMenu = function (parentElem, currentSection) {
+  let toc = book.toc;
+  toc.mi = {};
+  toc.div = {};
+  let menuIndex = 0, menuKeys = Object.keys(toc.ids);
+  const constructMenu = function (parentElem, currentIndex) {
     while (menuIndex < menuKeys.length) {
-      const key = menuKeys[menuIndex];
-      const t = book.toc[key];
-      const [title, file, parentSection, thisSection] = t;
+      const id = menuKeys[menuIndex];
+      const index = toc.ids[id];
+      const [id_, file, title] = toc.lst[index];
+      const thisSection = toc.ind[index];
+      const parentSection = toc.pnt[index];
 
-      if (thisSection != currentSection && parentSection != currentSection)
+      if (thisSection != currentIndex && parentSection != currentIndex)
         break;
 
       ++menuIndex;
       const arrow = document.createElement('a');
       arrow.classList.add('arrow');
       const a = document.createElement('a');
-      a.href = '?pg=' + t[1];
+      a.href = '?pg=' + id;
 //      a.addEventListener('click', () => selTocItem(key));
-      a.onclick = () => { return gotogoto(t[4], ''); };
+      a.onclick = () => { return gotogoto(id, ''); };
       const mi = document.createElement('menuitem');
       a.innerHTML = title;
       const miElem = parentElem.appendChild(mi);
       miElem.appendChild(arrow);
       miElem.appendChild(a);
-      t.push(mi);
+      toc.mi[index] = mi;
 
-      if (thisSection === currentSection) {
-        t.push(null);
+      if (thisSection === currentIndex) {
+        toc.div[index] = null;
         continue;
       }
 
@@ -106,12 +110,12 @@ console.log(book.toc.lst[1])
         div.classList.toggle('open');
       });
 
-      t.push(div);
+      toc.div[index] = div;
       constructMenu(div, thisSection);
     }
   };
 
-  constructMenu(menu, 'index');
+  constructMenu(menu, 0);
 
   // communication from the article frame
   window.onmessage = (msg) => {
