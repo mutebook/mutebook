@@ -13,7 +13,7 @@ lst: # -> [id, file, title]
 ids: id -> #
 ind: # -> # to its index.cm, index.cm-self
 parent: # -> # to parent (index.cm od section or above), top -> null
-file: file -> #
+fil: file -> #
 mi: # -> menuitem
 div: # -> div
 

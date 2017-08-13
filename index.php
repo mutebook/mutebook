@@ -82,10 +82,10 @@ var book = {
   for (;;) {
     if (false === ($pos = strpos($pagePath, '/', $pos+1)))
       break;
-    if (($prolog = @file_get_contents(substr($pagePath,0,$pos+1).'prolog')))
+    if (($prolog = @file_get_contents(substr(PAGES.$pagePath,0,$pos+1).'prolog')))
       echo htmlentities($prolog)."\n";
   }
-  echo htmlentities(@file_get_contents($pagePath.$pageFile));
+  echo htmlentities(@file_get_contents(PAGES.$pagePath.$pageFile));
 ?>
 
 ----

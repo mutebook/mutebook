@@ -175,25 +175,26 @@ class CM_html_adapter extends CM_adapter {
   }
 
   link (ln) {
+    let idx = book.toc.ids[ln];
+    if (undefined !== idx)
+      return 'index.php?pg=' + book.toc.lst[idx][1];
+
     if (ln.startsWith('/') || 0 <= ln.indexOf('://'))
       return ln;
 
-    let head, tail;
-    const pos = ln.indexOf('/');
-    if (pos < 0) {
-      head = ln; tail = '';
-    } else {
-      head = ln.substr(0, pos); tail = ln.substr(pos);
-    }
+    let pos = ln.indexOf(':');
+    if (pos < 0)
+      return ln;
 
-    let idx = book.toc.ids[head];
-    if (undefined !== idx) {
-      const file = book.toc.lst[idx][1];
-      head = file.substr(0, file.lastIndexOf('/')); // dir
-    }
+    ++pos;
+    const head = ln.substr(0, pos), tail = ln.substr(pos);
+    idx = book.toc.ids[head + 'index'];
+    if (undefined === idx)
+      return ln;
 
-    return head + tail;
-// TODO ?       return '?pg=' + ln;
+    const fil = book.toc.lst[idx][1];
+    const dir = fil.substr(0, fil.lastIndexOf('/'));
+    return 'pg/' + dir + '/' + tail; // TODO PAGES
   }
 
   gotoLink (ln, anchor) {

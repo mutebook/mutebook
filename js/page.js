@@ -6,11 +6,12 @@
 class BookAdapter extends cm.Adapter {
   constructor () {
     super();
-    this.book = book;
+    this.idx = book.toc.fil[book.pagePath + book.pageFile];
+    document.title = book.conf.title + ' - ' + book.toc.lst[this.idx][2];
   }
 
   tocTxLink (off = 0) {
-    return book.tocTxLink(book.toc.fil[book.pagePath + book.pageFile] + off);
+    return book.tocTxLink(this.idx + off);
   }
 }
 
