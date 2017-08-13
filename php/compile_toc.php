@@ -12,14 +12,14 @@ class compileToc {
 
   private static function tocChangeTime ($path) {
     $time = 0;
-    if ($d = @opendir($path)) {
+    if ($d = @opendir(PAGES.$path)) {
       while (false !== ($f = readdir($d))) {
         if ('.' === $f[0])  // '.', '..''
           continue;
-        if (is_dir(($pf = $path.$f)))
+        if (is_dir(PAGES.($pf = $path.$f)))
           $time = max($time, self::tocChangeTime($pf.'/'));
         else if(TOC === $f)
-          $time = max($time, filectime($pf));
+          $time = max($time, filectime(PAGES.$pf));
       }
     }
     return $time;
@@ -49,8 +49,8 @@ class compileToc {
   private $pfs = [];  // to generate prev / next
 
   public function traverse ($pntNo, $path) {
-    if (!($f = @fopen($path.TOC, 'r')))
-      self::error('bad toc path: ' . $path);
+    if (!($f = @fopen(PAGES.$path.TOC, 'r')))
+      self::error('bad toc path: ' . PAGES.$path);
 
     // index toc entry
     list($idPrefix, $title) = self::splitLine(($l = fgets($f)), 2);
@@ -90,8 +90,7 @@ class compileToc {
           $this->lst .= "['$pageId','$pf','$title'],";
           $this->ids .= "'$pageId':$this->i,";
           $this->ind .= "$this->i:$indNo,";
-          $this->pnt .= null !== $pntNo
-            ? "$this->i:$pntNo," : "$this->i:null,";
+          $this->pnt .= "$this->i:$indNo,";
           $this->fil .= "'$pf':$this->i,";
           $this->pfs []= $pf;
           continue;
@@ -104,21 +103,22 @@ class compileToc {
   }
 
   public function compile () {
-    if (self::tocChangeTime(PAGES) == @filectime(TOC.'$'))
+    if (self::tocChangeTime('') == @filectime(TOC.'$'))
       return; // it is current
 
     try {
-      $this->traverse(null, PAGES);
+      $this->traverse(null, '');
       file_put_contents(TOC.'$',
         "{lst:[$this->lst],ids:{{$this->ids}},ind:{{$this->ind}},pnt:{{$this->pnt}},fil:{{$this->fil}}}",
         LOCK_EX);
 
-      foreach ($this->pfs as $i => $pf) {
-        $prev = @$this->pfs[$i-1]; $next = @$this->pfs[$i+1];
-        file_put_contents($pf.'$',
-        "var prevNext={prev:'$prev',next:'$next'}",
-        LOCK_EX);
-      }
+      // precompile for individual pages ?
+      // foreach ($this->pfs as $i => $pf) {
+      //   $prev = @$this->pfs[$i-1]; $next = @$this->pfs[$i+1];
+      //   file_put_contents(PAGES.$pf.'$',
+      //   "var prevNext={prev:'$prev',next:'$next'}",
+      //   LOCK_EX);
+      // }
     } catch (Exception $e) {
       error_log(' ** ' . $e->getMessage() . ' **');
     }

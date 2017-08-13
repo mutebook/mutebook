@@ -40,40 +40,18 @@ var book = {
   pagePath: '<?=addslashes($pagePath)?>',
   pageFile: '<?=addslashes($pageFile)?>',
 
-  resolveLink: function (ln) { // TOC move to cm.js
-    if (0 <= ln.indexOf('://'))
-      return ln;
+  goto: function (ln, anchor) {
+    const ev = window.event;
+    if (ev.ctrlKey || ev.metaKey)
+      return true; // follow href in another tab
+    top.postMessage(['goto', ln, anchor], '*');
+    return false;
+  },
+
+  tocTxLink: function (idx) { // TOC move to somewhere
     try {
-      ln = '?pg=' + this.toc.lst[this.toc.ids[ln]][1]; // TODO hack // TOC
-    } catch (err) {
-      ln = ln.startsWith('/') ? ln : book.pagePath + ln;
-    }
-
-    return ln;
-  },
-
-  resolveDirLink: function (ln) { // TOC move to cm.js
-    ln = this.toc.lst[this.toc.ids[ln]][1]; // TOC
-    return ln.substr(0, ln.lastIndexOf('/'));
-  },
-
-  resolveSrc: function (key) { // TOC move to cm_index.js
-    try {
-      var src = '/index.php?pg=' + this.toc.lst[this.toc.ids[key]][1]; // TOC
-    } catch (err) {
-      return '';
-    }
-    return src;
-  },
-
-  tocEntry: function (ln) { // TOC move to page.js
-    return this.toc.lst[this.toc.ids[ln]];
-  },
-
-  tocTxLink: function (index) { // TOC move to somewhere
-    try {
-      var link = this.toc.lst[index][0], tx = this.toc.lst[index][2]; // TOC
-      return [tx, link];
+      var lst = this.toc.lst[idx];
+      return [lst[2], lst[0]];
     } catch (err) {
       return ['', ''];
     }
@@ -132,14 +110,14 @@ var book = {
   loadScript('js/cm_index.js');
 <?php else: // is page ?>
   loadScripts(['js/cm.js', 'js/page.js']);
-  <?php if (defined('SC_PROJECT')): ?>
-var sc_project = <?=SC_PROJECT?>, sc_invisible = 1, sc_security = <?=SC_SECURITY?>;
-loadScript(
-  ('https:' == document.location.protocol ? 'https://secure.' : 'http://www.') +
-  'statcounter.com/counter/counter.js');
-  <?php endif; ?>
-<?php endif; ?>
+<?php endif ?>
 }());
 </script>
+<?php if (!$isFrame && !$isDebug && defined('SC_PROJECT')): ?>
+<script>
+var sc_project = <?=SC_PROJECT?>, sc_invisible = 1, sc_security = '<?=SC_SECURITY?>';
+</script>
+<script src="<?= (HTTPS ? 'https://secure.' : 'http://www.') . 'statcounter.com/counter/counter.js' ?>"></script>
+<?php endif ?>
 </html>
 

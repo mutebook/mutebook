@@ -175,24 +175,31 @@ class CM_html_adapter extends CM_adapter {
   }
 
   link (ln) {
-    return this.book.resolveLink(ln);
-  }
+    if (ln.startsWith('/') || 0 <= ln.indexOf('://'))
+      return ln;
 
-  fileLink (ln) {
-    if (0 <= ln.indexOf('://'))
-      return this.book.resolveLink(ln);
+    let head, tail;
     const pos = ln.indexOf('/');
-    if (0 < pos) {
-      var fl = this.book.resolveDirLink(ln.substr(0, pos) + ':index');
-      return fl + ln.substr(pos);
+    if (pos < 0) {
+      head = ln; tail = '';
+    } else {
+      head = ln.substr(0, pos); tail = ln.substr(pos);
     }
-    // TODO else return site root +
+
+    let idx = book.toc.ids[head];
+    if (undefined !== idx) {
+      const file = book.toc.lst[idx][1];
+      head = file.substr(0, file.lastIndexOf('/')); // dir
+    }
+
+    return head + tail;
+// TODO ?       return '?pg=' + ln;
   }
 
   gotoLink (ln, anchor) {
     if (window === top) // not in a frame
       return '';
-    return ` onclick=${JSON.stringify(`return cm.goto('${ln}','${anchor}')`)}`;
+    return ` onclick=${JSON.stringify(`return book.goto('${ln}','${anchor}')`)}`;
   }
 }
 
@@ -371,7 +378,7 @@ class CM_html_output extends CM_output {
 
   img (src, alt, cs = []) {
     this.putTag('img', cs,
-      this._attr('src', this.adapter.fileLink(src)) + this._attr('alt', alt));
+      this._attr('src', this.adapter.link(src)) + this._attr('alt', alt));
   }
 
   anchor (ln) {

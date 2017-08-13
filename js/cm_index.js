@@ -14,32 +14,36 @@
 
   // menu
   const menu = nav.querySelector('menu');
-  let activeMenuKey = null;
+  let activeMenuId = null;
 
   // article frame
   const iframe = document.querySelector('iframe#article');
 
+  const indexSrc = function (id) {
+    return 'index.php?pg=' + book.toc.lst[book.toc.ids[id]][1]; // TOC
+  };
+
   // select menu item and fetch the article
-  const selTocItem = function (id, anchor = '') { // TOC
+  const selTocItem = function (id, anchor = '') {
     navCs.remove(clsIn);
     const clsActive = 'active', clsActivePath = 'activepath', clsOpen = 'open';
-    if (activeMenuKey) { // close
-      let t = book.toc[activeMenuKey];
-      while (t) {
-        let div = t[6];
+    if (activeMenuId) { // close
+      let idx = book.toc.ids[activeMenuId];
+      while (null !== idx) {
+        let div = book.toc.div[idx];
         if (div) div.classList.remove(clsOpen);
-        const miCls = t[5].classList;
+        const miCls = book.toc.mi[idx].classList;
         miCls.remove(clsActive);
         miCls.remove(clsActivePath);
         miCls.remove(clsOpen);
-        t = book.toc[t[2]]; // TOC
+        idx = book.toc.pnt[idx];
       }
     }
 
-    activeMenuKey = id;
+    activeMenuId = id;
     // open
     let toc = book.toc;
-    let idx = toc.ids[activeMenuKey];
+    let idx = toc.ids[activeMenuId];
     toc.mi[idx].classList.add(clsActive);
     while (null !== idx) {
       let div = toc.div[idx];
@@ -50,16 +54,8 @@
         toc.mi[idx].classList.add(clsActivePath);
     }
 
-    iframe.src = book.resolveSrc(id) + anchor;
+    iframe.src = indexSrc(id) + anchor;
     return true;
-  };
-
-  const gotogoto /*TODO consolidate with cm.goto */ = (ln, anchor) => {
-    const ev = window.event;
-    if (ev.ctrlKey || ev.metaKey)
-      return true; // follow href in another tab
-    top.postMessage(['goto', ln, anchor], '*');
-    return false;
   };
 
   // construct menu
@@ -82,9 +78,8 @@
       const arrow = document.createElement('a');
       arrow.classList.add('arrow');
       const a = document.createElement('a');
-      a.href = '?pg=' + id;
-      a.addEventListener('click', () => selTocItem(id));
-      a.onclick = () => { return gotogoto(id, ''); };
+      a.href = indexSrc(id);
+      a.onclick = () => { return book.goto(id, ''); };
       const mi = document.createElement('menuitem');
       a.innerHTML = title;
       const miElem = parentElem.appendChild(mi);

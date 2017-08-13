@@ -12,7 +12,7 @@ The toc js data structure, full toc in frame: (file - relative path+file)
 lst: # -> [id, file, title]
 ids: id -> #
 ind: # -> # to its index.cm, index.cm-self
-parent: # -> # to index.cm of parent, top -> null
+parent: # -> # to parent (index.cm od section or above), top -> null
 file: file -> #
 mi: # -> menuitem
 div: # -> div

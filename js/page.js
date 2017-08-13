@@ -7,33 +7,14 @@ class BookAdapter extends cm.Adapter {
   constructor () {
     super();
     this.book = book;
-
-    // reverse-lookup in toc
-    const toc = this.book.toc;
-    this.tocKeyPath = {};
-    for (const key of Object.keys(toc))
-      this.tocKeyPath[toc[key][1]] = key; //TOC
-
-    this.thisTocKey =
-      this.tocKeyPath[this.book.pagePath + this.book.pageFile];
   }
 
-  tocTxLink (off = 0) { // TOC
-    const entry = this.book.tocEntry(this.thisTocKey);
-    return entry ? this.book.tocTxLink(entry[4] + off)
-                 : super.tocTxLink(off);
+  tocTxLink (off = 0) {
+    return book.tocTxLink(book.toc.fil[book.pagePath + book.pageFile] + off);
   }
 }
 
 cm.Adapter = BookAdapter;
-
-cm.goto = (ln, anchor) => {
-  const ev = window.event;
-  if (ev.ctrlKey || ev.metaKey)
-    return true; // follow href in another tab
-  top.postMessage(['goto', ln, anchor], '*');
-  return false;
-};
 
 const setDocumentBody = function (tx) {
   const html = cm.process(tx);
