@@ -2,23 +2,24 @@
 chdir(dirname(__FILE__));
 require('php/conf.php');
 
-$isLocal = 'localhost' == $_SERVER['SERVER_NAME'];
-$isDebug = $isLocal;
-
 // $pagePath: relative path from index.php
 // $pageFile: plain name
 
 if ($isFrame = !($pg = @$_REQUEST['pg'])) {
+  // no 'pg' request, this is the navigation frame
   $pagePath = $pageFile = '';
 } else {
-  // is page
+  // this is a single page
   if (false === ($pos = strrpos($pg, '/')))
     $pos = -1;
-
   ++$pos;
   $pagePath = substr($pg, 0, $pos); // '' or path
   $pageFile = substr($pg, $pos);    // plain name
 }
+
+// precompile toc (if _toc sources modified)
+if ($isFrame)
+  require('php/compile_toc.php');
 
 ?>
 <!DOCTYPE html><html lang="en">
@@ -28,25 +29,40 @@ if ($isFrame = !($pg = @$_REQUEST['pg'])) {
 <link rel="stylesheet" href="assets/main.css">
 <meta charset="utf-8">
 <script charset="utf-8">
-<?php require('conf.js') ?>
-<?php require('php/compile_toc.php') ?>
-<?php @require(TOC.'$') ?>
+function loadScript (src, onLoad) {
+  var script = document.createElement('script');
+  if (onLoad)
+    script.onload = onLoad;
+  script.src = src;
+  script.charset = 'utf-8';
+  (document.body || document.head).appendChild(script);
+  return script;
+};
+
+function loadScripts (srcs) {
+  if (srcs.length)
+    loadScript(srcs.shift(),
+      function() { loadScripts(srcs); });
+};
 
 var cm_book = {
-  conf: conf,
-  toc: toc,
+  conf: {
+    title:  '<?=addslashes(TITLE)?>',
+    banner: '<?=addslashes(BANNER)?>',
+  },
+  toc: <?php @require(TOC.'$'); // precompiled ?>,
 
   pagePath: '<?=addslashes($pagePath)?>',
   pageFile: '<?=addslashes($pageFile)?>',
 
-  tocKey: function (indexOrKey) {
-    if (Number.isInteger(indexOrKey))
-      return this.toc.lst[indexOrKey][0];
-    if (this.toc.ids[indexOrKey])
-      return indexOrKey;
+  tocId: function (idxOrId) { // TOC move to cm_index.js
+    if (Number.isInteger(idxOrId))
+      return this.toc.lst[idxOrId][0];
+    if (undefined !== this.toc.ids[idxOrId])
+      return idxOrId;
   },
 
-  resolveLink: function (ln) {
+  resolveLink: function (ln) { // TOC move to cm.js
     if (0 <= ln.indexOf('://'))
       return ln;
     try {
@@ -58,12 +74,12 @@ var cm_book = {
     return ln;
   },
 
-  resolveDirLink: function (ln) {
+  resolveDirLink: function (ln) { // TOC move to cm.js
     ln = this.toc.lst[this.toc.ids[ln]][1]; // TOC
     return ln.substr(0, ln.lastIndexOf('/'));
   },
 
-  resolveSrc: function (key) {
+  resolveSrc: function (key) { // TOC move to cm_index.js
     try {
       var src = '/index.php?pg=' + this.toc.lst[this.toc.ids[key]][1]; // TOC
     } catch (err) {
@@ -72,7 +88,7 @@ var cm_book = {
     return src;
   },
 
-  loadCSS: function (href) {
+  loadCSS: function (href) { // TOC move to page.js
     var link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = href;
@@ -80,22 +96,11 @@ var cm_book = {
     return link;
   },
 
-  loadScript: function (src, onLoad) {
-    var where = document.body || document.head;
-    var script = document.createElement('script');
-    if (onLoad)
-      script.onload = onLoad;
-    script.src = src;
-    script.charset = 'utf-8';
-    where.appendChild(script);
-    return script;
-  },
-
-  tocEntry: function (ln) {
+  tocEntry: function (ln) { // TOC move to page.js
     return this.toc.lst[this.toc.ids[ln]];
   },
 
-  tocTxLink: function (index) {
+  tocTxLink: function (index) { // TOC move to somewhere
     try {
       var link = this.toc.lst[index][0], tx = this.toc.lst[index][2]; // TOC
       return [tx, link];
@@ -121,25 +126,24 @@ var cm_book = {
     <article></article>
   </main>
 
-<?php else: ?>
+<?php else: // is page ?>
 <pre>
 <?php
+  // fetch prologs + page text
   $pos = -1;
   for (;;) {
-    $pos = strpos($pagePath, '/', $pos+1);
-    if (false === $pos)
+    if (false === ($pos = strpos($pagePath, '/', $pos+1)))
       break;
-    $prolog = @file_get_contents(substr($pagePath,0,$pos+1).'prolog');
-    if ($prolog)
-      echo $prolog."\n";
+    if (($prolog = @file_get_contents(substr($pagePath,0,$pos+1).'prolog')))
+      echo htmlentities($prolog)."\n";
   }
+  echo htmlentities(@file_get_contents($pagePath.$pageFile));
 ?>
-<?= htmlentities(@file_get_contents($pagePath.$pageFile)); ?>
 
 ----
 {prev.left Back: } {next.right Next: }
 </pre>
-<?php endif; ?>
+<?php endif ?>
 </body>
 <script charset="utf-8">
 (function () {
@@ -155,10 +159,15 @@ var cm_book = {
   var article = document.querySelector('article');
   var iframe = document.createElement('iframe'); iframe.id = 'article';
   article.parentElement.replaceChild(iframe, article);
-  cm_book.loadScript('js/cm_index.js');
-<?php else: ?>
-  cm_book.loadScript('js/cm.js',
-    function() { cm_book.loadScript('js/page.js'); });
+  loadScript('js/cm_index.js');
+<?php else: // is page ?>
+  loadScripts(['js/cm.js', 'js/page.js']);
+  <?php if (defined('SC_PROJECT')): ?>
+var sc_project = <?=SC_PROJECT?>, sc_invisible = 1, sc_security = <?=SC_SECURITY?>;
+loadScript(
+  ('https:' == document.location.protocol ? 'https://secure.' : 'http://www.') +
+  'statcounter.com/counter/counter.js');
+  <?php endif; ?>
 <?php endif; ?>
 }());
 </script>

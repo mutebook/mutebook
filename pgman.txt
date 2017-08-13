@@ -8,6 +8,7 @@ The structure of TOC files:
 
 The toc js data structure, full toc in frame: (file - relative path+file)
 ----------------------------------------------
+# = "idx"
 lst: # -> [id, file, title]
 ids: id -> #
 ind: # -> # to its index.cm, index.cm-self

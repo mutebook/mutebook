@@ -110,7 +110,7 @@ class compileToc {
     try {
       $this->traverse(null, PAGES);
       file_put_contents(TOC.'$',
-        "var toc={lst:[$this->lst],ids:{{$this->ids}},ind:{{$this->ind}},pnt:{{$this->pnt}},fil:{{$this->fil}}};",
+        "{lst:[$this->lst],ids:{{$this->ids}},ind:{{$this->ind}},pnt:{{$this->pnt}},fil:{{$this->fil}}}",
         LOCK_EX);
 
       foreach ($this->pfs as $i => $pf) {

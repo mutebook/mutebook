@@ -21,9 +21,9 @@
   const iframe = document.querySelector('iframe#article');
 
   // select menu item and fetch the article
-  const selTocItem = function (indexOrKey, anchor = '') { // TOC
+  const selTocItem = function (idxOrId, anchor = '') { // TOC
     navCs.remove(clsIn);
-    const key = book.tocKey(indexOrKey);
+    const key = book.tocId(idxOrId);
     if (!key)
       return false;
 

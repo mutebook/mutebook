@@ -46,18 +46,16 @@ const setDocumentBody = function (tx) {
 
   // highlight code, if any
   if (cm.parser.hasPre)
-    cm_book.loadScript('js/3rd/highlight.pack.js').onload = () => {
+    loadScript('js/3rd/highlight.pack.js', () => {
       document.querySelectorAll('pre code').forEach(
         /* global hljs:false */
         (block) => hljs.highlightBlock(block));
-    };
+    });
 
   // mathjax, if any
   if (cm.parser.hasMath) {
     cm_book.loadCSS('js/3rd/katex.min.css');
-    cm_book.loadScript('js/3rd/katex.min.js').onload = () => {
-      cm_book.loadScript('js/3rd/katex-render.min.js');
-    };
+    loadScripts(['js/3rd/katex.min.js', 'js/3rd/katex-render.min.js']);
   }
 };
 
@@ -70,9 +68,6 @@ if ('undefined' !== typeof document) {
       src = '';
   setDocumentBody(src);
 }
-
-if (cm_book.conf.statcounter)
-  cm_book.loadScript('../statcounter.js');
 
 }());
 // eof
