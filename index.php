@@ -28,39 +28,17 @@ if ($isFrame)
 <link rel="icon" href="assets/icon.ico">
 <link rel="stylesheet" href="assets/main.css">
 <meta charset="utf-8">
+<script charset="utf-8" src ="js/common.js"></script>
 <script charset="utf-8">
-function loadScript (src, onLoad) {
-  var script = document.createElement('script');
-  if (onLoad)
-    script.onload = onLoad;
-  script.src = src;
-  script.charset = 'utf-8';
-  (document.body || document.head).appendChild(script);
-  return script;
-};
-
-function loadScripts (srcs) {
-  if (srcs.length)
-    loadScript(srcs.shift(),
-      function() { loadScripts(srcs); });
-};
-
-var cm_book = {
+var book = {
   conf: {
     title:  '<?=addslashes(TITLE)?>',
     banner: '<?=addslashes(BANNER)?>',
   },
-  toc: <?php @require(TOC.'$'); // precompiled ?>,
+  toc: <?php @require(TOC.'$'); // precompiled toc ?>,
 
   pagePath: '<?=addslashes($pagePath)?>',
   pageFile: '<?=addslashes($pageFile)?>',
-
-  tocId: function (idxOrId) { // TOC move to cm_index.js
-    if (Number.isInteger(idxOrId))
-      return this.toc.lst[idxOrId][0];
-    if (undefined !== this.toc.ids[idxOrId])
-      return idxOrId;
-  },
 
   resolveLink: function (ln) { // TOC move to cm.js
     if (0 <= ln.indexOf('://'))
@@ -68,7 +46,7 @@ var cm_book = {
     try {
       ln = '?pg=' + this.toc.lst[this.toc.ids[ln]][1]; // TODO hack // TOC
     } catch (err) {
-      ln = ln.startsWith('/') ? ln : cm_book.pagePath + ln;
+      ln = ln.startsWith('/') ? ln : book.pagePath + ln;
     }
 
     return ln;
@@ -86,14 +64,6 @@ var cm_book = {
       return '';
     }
     return src;
-  },
-
-  loadCSS: function (href) { // TOC move to page.js
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = href;
-    document.head.appendChild(link);
-    return link;
   },
 
   tocEntry: function (ln) { // TOC move to page.js

@@ -31,7 +31,7 @@ toc was
 5 menuitem
 6 div
 
-cm_book
+book
 -------
   conf
     title

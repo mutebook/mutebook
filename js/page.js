@@ -1,12 +1,12 @@
 // load and parse page content
-/* global cm:false cm_book:false */
+/* global cm:false book:false */
 
 (function () {
 
 class BookAdapter extends cm.Adapter {
   constructor () {
     super();
-    this.book = cm_book;
+    this.book = book;
 
     // reverse-lookup in toc
     const toc = this.book.toc;
@@ -54,13 +54,13 @@ const setDocumentBody = function (tx) {
 
   // mathjax, if any
   if (cm.parser.hasMath) {
-    cm_book.loadCSS('js/3rd/katex.min.css');
+    loadCSS('js/3rd/katex.min.css');
     loadScripts(['js/3rd/katex.min.js', 'js/3rd/katex-render.min.js']);
   }
 };
 
 if ('undefined' !== typeof document) {
-  let src = cm_book.source;
+  let src = book.source;
   if (!src)
     if ((src = document.querySelector('body > pre')))
       src = src.innerText;

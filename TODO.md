@@ -22,4 +22,4 @@
 
 # Internal - code-related
 
-* in individual pages, limit `cm_book.toc = ` to prev/next; also limit generated js
+* in individual pages, limit `book.toc = ` to prev/next; also limit generated js

@@ -1,8 +1,7 @@
 // to be used in index.html (book template)
 
 (function () {
-  /* global cm_book:false */
-  const book = cm_book;
+  /* global book:false */
   // complete the document
   document.title = book.conf.title;
   document.querySelector('#banner').innerHTML = book.conf.banner;
@@ -21,12 +20,8 @@
   const iframe = document.querySelector('iframe#article');
 
   // select menu item and fetch the article
-  const selTocItem = function (idxOrId, anchor = '') { // TOC
+  const selTocItem = function (id, anchor = '') { // TOC
     navCs.remove(clsIn);
-    const key = book.tocId(idxOrId);
-    if (!key)
-      return false;
-
     const clsActive = 'active', clsActivePath = 'activepath', clsOpen = 'open';
     if (activeMenuKey) { // close
       let t = book.toc[activeMenuKey];
@@ -41,7 +36,7 @@
       }
     }
 
-    activeMenuKey = key;
+    activeMenuKey = id;
     // open
     let toc = book.toc;
     let idx = toc.ids[activeMenuKey];
@@ -55,7 +50,7 @@
         toc.mi[idx].classList.add(clsActivePath);
     }
 
-    iframe.src = book.resolveSrc(key) + anchor;
+    iframe.src = book.resolveSrc(id) + anchor;
     return true;
   };
 
@@ -88,7 +83,7 @@
       arrow.classList.add('arrow');
       const a = document.createElement('a');
       a.href = '?pg=' + id;
-//      a.addEventListener('click', () => selTocItem(key));
+      a.addEventListener('click', () => selTocItem(id));
       a.onclick = () => { return gotogoto(id, ''); };
       const mi = document.createElement('menuitem');
       a.innerHTML = title;
@@ -129,7 +124,7 @@
   };
 
   // and initialize
-  selTocItem(0);
+  selTocItem(book.toc.lst[0][0]);
 }());
 
 // eof
