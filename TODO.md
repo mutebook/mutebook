@@ -17,9 +17,9 @@
 
 # Text
 
-* replace ˚ with ° (https://unicode-table.com/en/02DA/ -> https://unicode-table.com/en/00B0/)
+* replace ° with ° (https://unicode-table.com/en/02DA/ -> https://unicode-table.com/en/00B0/)
 * remove \n
 
 # Internal - code-related
 
-* in individual pages, limit `cm_book.toc = ` to prev/next; also limit generated js
+* in individual pages, limit `book.toc = ` to prev/next; also limit generated js

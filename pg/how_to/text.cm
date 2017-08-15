@@ -273,12 +273,10 @@ Inside links refer to other pages, using page identifiers as defined in the
 
 ~~~
 - Each good technical book needs a {:glossary}, fully called {:glossary of terms|glossary}.
-- Mutebook has an automatic table of content, up to {:three levels|toc_test3/2:index} deep.
 ~~~
 produces:
 ---.box
 - Each good technical book needs a {:glossary}, fully called {:glossary of terms|glossary}.
-- Mutebook has an automatic table of content, up to {:three levels|toc_test3/2:index} deep.
 ---
 
 === Images
@@ -289,14 +287,14 @@ alternate text. Images can come from the outside or inside the book:
 outside:
 {img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from GitHub}
 inside:
-{img ht/images/mb.png|image relative to identifier prefix 'ht'}
+{img how:images/mb.png|image relative to identifier prefix 'how'}
 ~~~
 produces:
 ---.box
 outside:
 {img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from GitHub}
 inside:
-{img ht/images/mb.png|image relative to identifier prefix 'ht'}
+{img how:images/mb.png|image relative to identifier prefix 'how'}
 ---
 
 === Formulas
