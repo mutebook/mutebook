@@ -1,0 +1,82 @@
+# Set up PHP 7
+
+In order to use a local (on your computer) installation of mutebook and to creat
+e or modify mutebook content you need [PHP 7](http://php.net).
+
+## On Mac OSX (Sierra):
+### 1. Install (or update) [Xcode](https://en.wikipedia.org/wiki/Xcode)
+Xcode is needed for Homebrew. Install it from the [Mac App Store](https://itunes
+.apple.com/us/app/xcode/id497799835?mt=12).
+
+### 2. Install (or update) [Homebrew](https://en.wikipedia.org/wiki/Homebrew_(pa
+ckage_management_software))
+
+[Homebrew](https://brew.sh/) provides an easy way to install and manage software
+ packages. To install Homebrew, run in the Terminal:
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/instal
+l/master/install)"
+```
+To update Homebrew:
+```
+brew update
+brew upgrade
+```
+
+### 3. Use Homebrew to install [PHP version 7.1](https://en.wikipedia.org/wiki/P
+HP)
+"Tap" a php repository:
+```
+brew tap homebrew/homebrew-php
+```
+Install PHP:
+```
+brew install php71
+```
+Verify the PHP version:
+```
+php -v
+```
+The reply ought to start with: `PHP 7.1.6` ...
+
+#### For PHP debugging (advanced)
+*Needed only if you will be developing the php code.*
+
+Install xdebug:
+```
+brew install php71-xdebug
+```
+Verify the installation success:
+```
+php -i | grep 'xdebug support'
+```
+The reply ought to be ➪ `xdebug support => enabled`
+
+Find out the location of the active `php.ini` file:
+```
+php -i | grep php.ini
+```
+ ➪ `Loaded Configuration File => /usr/local/etc/php/7.1/php.ini`
+
+Edit the `php.ini` file (`sudo nano /usr/local/etc/php/7.1/php.ini`).
+Add the following:
+```
+[XDebug]
+xdebug.remote_enable = 1
+xdebug.remote_autostart = 1
+```
+Verify:
+```
+php -i | grep xdebug.remote_enable
+```
+ ➪ `xdebug.remote_enable => On => On`
+```
+php -i | grep xdebug.remote_autostart
+```
+ ➪ `xdebug.remote_autostart => On => On`
+
+## On Linux:
+You know what to do.
+
+## On Windows:
+You are on your own.

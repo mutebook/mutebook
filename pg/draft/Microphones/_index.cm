@@ -1,3 +1,8 @@
+@toc mics;   Microphones
+@toc trans;  transducer_principles.cm  ; Transducer Principles
+@toc oper;   operating_principles.cm   ; Acoustic Operating Principles
+@toc mics;   mic_specifications.cm     ; Microphone Specifications
+
 = Microphones
 
 \n

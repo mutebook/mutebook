@@ -1,0 +1,16 @@
+@toc how; How to
+@toc github;   github.cm;    GitHub
+@toc php7;     php7.cm;      PHP 7
+@toc brackets; brackets.cm;  Brackets
+@toc folders;  folders.cm;   Folder structure
+@toc locMB;    localMB.cm;   Local MB
+
+@toc text;     text.cm;      Text formating
+@toc prolog ;  prolog.cm;    Prolog and macros
+
+= How to create mutebook pages
+
+This section describes how to:
+- create a {:hierarchy of folders|how:folders} and pages and a corresponding
+  table of content (TOC)
+- write and format the {:page text|how:text}

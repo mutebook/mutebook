@@ -1,0 +1,14 @@
+<svg width="112" height="112" xmlns="http://www.w3.org/2000/svg">
+<g transform="" stroke-linecap="round">
+<path transform="translate(56,56) rotate(135)" stroke="#999" stroke-width="12" fill="none" d="M0,-50 a 50 50 1 1 0 +50 50"/>
+<g transform="translate(56,50)" stroke="#c30" stroke-width="9">
+<line x1="-22" y1="-20" x2="-22" y2="20"/>
+<line x1="+22" y1="-20" x2="+22" y2="20"/>
+<line x1="-22" y1="-20" x2="0" y2="0"/>
+<line x1="+22" y1="-20" x2="0" y2="0"/>
+</g>
+<g transform="translate(56,84)" stroke="#03c" stroke-width="9">
+<line x1="-22" y1="0" x2="+22" y2="0"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,36 @@
+# Brackets
+
+The content of mutebook is stored in so-called [plain-text](https://en.wikipedia
+.org/wiki/Plain_text) files. For editing plain text files it is best to use a so
+urce code (programmer's) [editor](https://en.wikipedia.org/wiki/Source_code_edit
+or). We recommend *Brackets*:
+
+## 1. Download an install [Brackets](http://brackets.io/)
+
+## 2. Preferences ...
+Change `Brackets / Preferences...` to your liking. We recommend to switch the di
+splay of line numbers off:
+```
+{
+    "showLineNumbers": false,
+}
+```
+
+## 3. LiveReload
+* Install the LiveReload extension in Brackets: `File / Extension Manager...`, `
+Available`, search 'LiveReload', install.
+* Install the LiveReload plugin in your browser: follow the [respective link](ht
+tps://github.com/pwalczyszyn/brackets-livereload) here ("Install plugin for your
+ browser").
+
+## 4. Live-edit mutebook text
+Start the built-in PHP web server in the terminal and open the mutebook web page
+s in a browser, as described [here](mutebook_local.md).
+
+Open the mutebook content (the `pg/` folder) in Brackets (`File / Open Folder...
+`).
+
+Enable LiveReload in Brackets (![](img/LiveReloadBrackets.png)) and in the brows
+er (![](img/LiveReloadBrowser.png)). When a file is saved in Brackets, the brows
+er will automatically refresh.
+

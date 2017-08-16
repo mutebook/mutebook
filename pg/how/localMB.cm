@@ -1,0 +1,92 @@
+# Create mutebook content
+
+These instructions describe how to work with `git` in the terminal. You can also
+ use one of various graphical interfaces to `git` and `GitHub`, such as [GitHub
+Desktop (https://desktop.github.com/).
+
+## 1. Clone the mutebook repository
+Choose (and create) a place for the local working copy of mutebook, for example:
+```
+cd
+mkdir MutebookPlace
+cd MuteBookPlace
+```
+Verify the location:
+```
+pwd
+```
+Clone the repository:
+```
+git clone git@github.com:mutebook/mutebook.git
+```
+Use your GitHub credentials. If you do not have a GitHub account and will not up
+load (push) your changes, you may clone the repository so:
+```
+git clone https://github.com/mutebook/mutebook.git
+```
+(Alternatively, you may fork the repository on GitHub, clone your forked copy, a
+nd later submit your changes as pull requests.)
+
+## 2. Run the local web server and mutebook pages
+```
+cd mutebook   # 'mutebook' was created by the git clone
+```
+Start the development web server that is included in php (ver. 7):
+```
+php -S localhost:8053
+# or 'php -e -S localhost:8053' if you will be debugging the code
+```
+*8053* is the web server port number; you may choose another.
+
+Open the local mutebook web site [http://localhost:8053](localhost:8053) in a we
+b browser.
+
+## 3. Read the 'How to' section of mutebook
+
+*More instructions are there.*
+
+*Namely: **how to create and edit mutebook pages**.*
+
+## 4. See what changes you have made
+
+(Kill the php web server by `Ctrl+c`.)
+
+[GitHub Desktop](https://desktop.github.com/) or similar come really handy. Or,
+work in the terminal:
+
+See what files were changed:
+```
+git status
+git diff
+```
+
+Stage the changes:
+```
+git add --all # only if *all* changes are to be staged
+```
+
+Commit the staged files:
+```
+git commit -m '<a reasonable message>'
+```
+
+It is also possible to stage all changed files (but not new or deleted files) an
+d commit them in one step:
+```
+git commit -a -m '<a reasonable message>'
+```
+
+To update (amend) the last commit (that has not been yet pushed):
+```
+git commit --amend
+```
+
+Push to GitHub:
+```
+git push
+```
+
+Next time, update:
+```
+git pull
+```
