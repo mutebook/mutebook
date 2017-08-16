@@ -7,9 +7,6 @@ const BANNER = 'Mutebook';        // the book banner
 
 const PAGES = 'pg/';              // where pages are
 
-// server
-const HTTPS = false;              // set to true if running as https://
-
 // debugging
 $isDebug = 'localhost' == @$_SERVER['SERVER_NAME'];
 
