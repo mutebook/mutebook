@@ -1,8 +1,4 @@
 mb; Mutebook
-
-# top-level toc
-
-outline; outline.cm; Outline  
-MBDraft1/
-how_to/
-glossary; glossary.cm ; Glossary
+how/    # tutorials for authors
+draft/  # Mutebook in making
+gl; glossary.cm ; Glossary

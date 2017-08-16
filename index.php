@@ -2,8 +2,8 @@
 chdir(dirname(__FILE__));
 
 // configuration
-const TITLE  = 'MuTeBook';        // the book title
-const BANNER = 'MuTeBook';        // the book banner
+const TITLE  = 'Mutebook';        // the book title
+const BANNER = 'Mutebook';        // the book banner
 
 const PAGES = 'pg/';              // where pages are
 
