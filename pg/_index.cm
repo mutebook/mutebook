@@ -1,10 +1,14 @@
-@toc mb; Mutebook
-@toc how/    # tutorials for authors
-@toc draft/  # Mutebook in making
-@toc gl; glossary.cm ; Glossary
+@toc mb_index; Mutebook
 
-= Welcome to MUTEBOOK
+= Welcome to MUTEBOOK (MB)
 
-MUTEBOOK is an online interactive textbook created to learn and teach music technology and the art of music production. Originally having grown out of lecture notes for our own courses, we hope that it is becoming a continuously growing resource for students and teachers to endeavor on the endless adventure of exploring music technology and related disciplines. Interactive audio and visuals will help you on your way in understanding scientific concepts and developing your listening skills. Your ears and your imagination are the most valuable assets when working in audio.
+MUTEBOOK is an online interactive textbook created to learn and teach music technology and the art of music production. Originally having grown out of lecture notes for our own courses, we{ed: Have {/we} grown out of lecture notes?} hope that it is becoming a continuously growing resource for students and teachers to endeavor on the endless adventure of exploring music technology and related disciplines. Interactive audio and visuals help you on your way in understanding scientific concepts and developing your listening skills. Your ears and your imagination are the most valuable assets when working in audio.
 
 As MUTEBOOK will be under constant development for quite some time, please send us feedback, comments and suggestions or point out any errors that you find. Please also register at our {:bulletin board|https://mutebook.me/bb/} so that we can keep you updated on additions and revisions of MUTEBOOK. We promise that we will not spam.
+
+# tutorials for authors
+@toc how/                                 
+# Mutebook in making
+@toc draft/
+# Appendices
+@toc mb_glossary; glossary.cm ; Glossary

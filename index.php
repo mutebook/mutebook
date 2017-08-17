@@ -1,11 +1,9 @@
 <?php
-chdir(dirname(__FILE__));
-
 // configuration
 const TITLE  = 'Mutebook';        // the book title
 const BANNER = 'Mutebook';        // the book banner
 
-const PAGES = 'pg/';              // where pages are
+const PAGES  = './pg/';             // where pages are
 
 // debugging
 $isDebug = 'localhost' == @$_SERVER['SERVER_NAME'];
@@ -15,10 +13,12 @@ $isDebug = 'localhost' == @$_SERVER['SERVER_NAME'];
 //   return 'Ä';
 // };
 
+chdir($dir = dirname(__FILE__).'/');
+
 // statcounter.com
-@include(dirname(__FILE__).'/statcounter.php');
+@include($dir.'statcounter.php');
 
 // the rest of code
-require('CM/php/_include_index_.php');
+require($dir.'CM/php/_include_index_.php');
 
 // eof
