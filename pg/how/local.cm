@@ -4,41 +4,43 @@
 
 * Create your personal {:https://github.com} account.
 * Learn to {:create a repository|https://help.github.com/articles/create-a-repo/}, and {:edit files|https://help.github.com/articles/managing-files-on-github/} directly on $GH.
-* Learn to {:clone|https://help.github.com/articles/cloning-a-repository/} a git repository.
+* Learn to {:clone|https://help.github.com/articles/cloning-a-repository/} a repository.
+* Learn how to use ~git pull~, ~git commit~, and ~git push~.
 
-1. Learn git pull, commit, push. Perhaps with the [$GH Desktop](https://deskt
-op.github.com/).
+== Local copy of $Mb
 
+==== Clone the repository
 
-
-# Create mutebook content
-
-These instructions describe how to work with {~git` in the terminal. You can also
- use one of various graphical interfaces to {~git` and {~$GH`, such as [$GH
-Desktop (https://desktop.github.com/).
-
-## 1. Clone the mutebook repository
-Choose (and create) a place for the local working copy of mutebook, for example:
+Make a local clone of the $Mb repository. First, choose (and create) a place for the local working copy of mutebook, for example:
 ~~~
 cd
-mkdir MutebookPlace
-cd MuteBookPlace
+mkdir LocalMutebook
+cd LocalMutebook
 ~~~
 Verify the location:
 ~~~
 pwd
 ~~~
+{>>} ~\/Users\/...\/LocalMutebook~
+
 Clone the repository:
 ~~~
 git clone git@github.com:mutebook/mutebook.git
 ~~~
-Use your $GH credentials. If you do not have a $GH account and will not up
-load (push) your changes, you may clone the repository so:
+Use your $GH credentials. If you do not have a $GH account and will not upload (push) your changes, you may also clone the repository so:
 ~~~
 git clone https://github.com/mutebook/mutebook.git
 ~~~
-(Alternatively, you may fork the repository on $GH, clone your forked copy, a
-nd later submit your changes as pull requests.)
+$Mb uses a {:Compact Markup|https://github.com/CompactMarkup} engine as a submodule. Initialize the submodule:
+~~~
+cd mutebook
+git submodule init
+git submodule update
+~~~
+
+==== Update the local repository clone
+
+== W
 
 {#web server}
 ## 2. Run the local web server and mutebook pages

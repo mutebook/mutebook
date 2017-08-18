@@ -3,7 +3,7 @@ Page content is written using {:Compact Markup|https://github.com/CompactMarkup}
 a simple, lightweight, extensible, and configurable document {wp markup language}.
 
 The full documentation of CM is (will be, once finished) available at
-{:GitHub Pages|https://compactmarkup.github.io/cm.docs/}.
+{:$GH Pages|https://compactmarkup.github.io/cm.docs/}.
 
 = Formatting
 This is only a very brief overview of CM:
@@ -286,14 +286,14 @@ alternate text. Images can come from the outside or inside the book:
 
 ~~~
 outside:
-{img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from GitHub}
+{img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from $GH}
 inside:
 {img how:images/mb.png|image relative to identifier prefix 'how'}
 ~~~
 produces:
 ---.box
 outside:
-{img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from GitHub}
+{img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from $GH}
 inside:
 {img how:images/mb.png|image relative to identifier prefix 'how'}
 ---
