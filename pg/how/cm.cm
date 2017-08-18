@@ -1,148 +1,185 @@
-= Compact Markup (CM)
-Page content is written using {:Compact Markup|https://github.com/CompactMarkup},
-a simple, lightweight, extensible, and configurable document {wp markup language}.
+= $CM (CM)
 
-The full documentation of CM is (will be, once finished) available at
-{:$GH Pages|https://compactmarkup.github.io/cm.docs/}.
+Page content is written using {:{$CM}|https://github.com/CompactMarkup}, a simple, lightweight, extensible, and configurable document {wp: markup language}. This is only a very brief overview of CM features for beginning authors of $Mb.
 
-= Formatting
-This is only a very brief overview of CM:
+CM is parsed line-by-line. A number of features are recognized by what character appears at the very beginning of a line (without any preceding blank space). This is referred to as the /first position/.
 
-== Escape
-{~\\} can be used to "escape" the following character, if it would otherwise
-trigger a markup processing. It also has two other functions:
-* {~\\n} forces a line break
-* {~\\} as the last non-blank character allows the content to continue on the
-  following line.
-
+#-------------------------------------------------------------------------------
+== Headers
+Headers start with one or more, up to six, {~=} in the first position.
 ~~~
-\= this line is not a header and ends in a backslash: \\
-====== This is a header that spreads \
-over two source lines, and has a line break\n in it.
+= First-level header
+=== Third level
+==== Forth rulez
 ~~~
-produces:
+makes:
 ---.box
-\= this line is not a header and ends in a backslash: \\
-====== This is a header that spreads \
-over two source lines, and has a line break\n in it.
+= First-level header
+=== Third level
+==== Forth rulez
 ---
 
+The first-level header should be used only once, at the beginning of a page. The second-level headers, if used, will appear in the local page navigation menu.
+
+#-------------------------------------------------------------------------------
+== Escape character
+~\\~ can be used to "escape" the character that follows it, if it would otherwise trigger a markup processing. That allows to include such a character in the text.
+
+~~~
+==== This is a fourth-level header
+\==== This is not a header
+~~~
+makes:
+---.box
+==== This is a fourth-level header
+\==== This is not a header
+---
+
+It also has two other functions:
+* ~\\~ as the last non-blank character forces the content to continue on the following line, in a situation when only one source line is expected.
+* ~\\n~ forces a line break in the output
+
+~~~
+==== This is a header that spreads \
+over two source lines, and the result has a line\nbreak in it.
+This line has the literal '\\n' in it and ends in a backslash: \\
+~~~
+makes:
+---.box
+==== This is a header that spreads \
+over two source lines, and the result has a line\nbreak in it.
+This line has the literal '\\n' in it and ends in a backslash: \\
+---
+
+#-------------------------------------------------------------------------------
 == Comments
-A line that starts with {~#} in the *first* position is a comment and will be ignored.
+A line that starts with ~#~ in the first position is a comment and will be ignored.
 ~~~
 # a comment
 ~~~
-produces nothing:
+makes nothing:
 ---.box
+# a comment
 ---
 
-== Headers
-Headers start with one or more (up to six) {~=} in the first position.
-~~~
-= First-level header
-== Second level
-==== Forth rulez
-~~~
-produces:
----.box
-= First-level header
-== Second level
-==== Forth rulez
----
+#-------------------------------------------------------------------------------
+== Class attributes
 
+In certain situations, ~.~ followed by a class name is a "class attribute" that modifes the look of the element it is applied to. Several class attributes can be used where a class attribute is expected.
+
+#-------------------------------------------------------------------------------
 == Lists
-{~-} resp. {~*} in the first position, followed by a space and then text, turns
-that line into an item of an unordered resp. ordered list. The text of a list
-item continues on the following line(s), if those begin with a whitespace.
+
+~-~ resp. ~*~ in the first position, followed by blank space and then text, turns that line into an item of an unordered resp. ordered list. The text of a list item continues on the following line(s) (without the need to use a trailing ~\/~), as long as those lines begin with blank space.
 
 Lists cannot be nested.
 ~~~
--.right floating right
+-.right floating right one
+- and two
+
 * one
 * two
 * three,
   continued
+
 - a
 - b
 - c
 ~~~
-produces:
+makes:
 ---.box
--.right floating right
+-.right floating right one
+- and two
+
 * one
 * two
 * three,
   continued
+
 - a
 - b
 - c
 ---
+Notice the ~.right~ class attribute applied to the first list item.
 
+#-------------------------------------------------------------------------------
 == Sections
-Three {~-} in the first position on a line indicate the beginning or ending of
-a "fenced" section block. The {~---} may be followed by a section tag, and then
-by class attributes. Used section tags should correspond to {:HTML block-level
-elements|https://www.w3schools.com/html/html_blocks.asp}. Sections /may/ be nested.
+Exactly three ~-~ in the first position indicate the beginning or ending of
+a "fenced" section block. The ~---~ may be followed by a section tag and by class attributes. The choice of section tags should correspond to {:HTML block-level elements|https://www.w3schools.com/html/html_blocks.asp}. Sections /may/ be nested.
 
-{~---} that is not followed by a section tag indicates a section ending,
+~---~ that is not followed by a section tag indicates a section ending,
 if inside of a section; otherwise it indicates a section beginning and the tag
-{~div} is assumed (which is, very likely, the most common case).
+~div~ is assumed (which is, very likely, the most common case).
 
 ~~~
 before floating boxes
---- div
----.box.left
+--- 
+--- .box.left
 floating left
 ---
----.box.right
+--- .box.right
 floating right
 ---
 ---
 ~~~
-produces:
+is the same as:
+~~~
+before floating boxes
+--- div
+--- div.box.left
+floating left
+---
+--- div.box.right
+floating right
+---
+---
+~~~
+and makes:
 ---.box
 before floating boxes
 --- div
----.box.left
+--- .box.left
 floating left
 ---
----.box.right
+--- .box.right
 floating right
 ---
 ---
 ---
 
+#-------------------------------------------------------------------------------
 == Boxes
-Boxes (see above) are sections of typ {~.box}.
+Boxes are ~div~ sections with class attribute ~.box~.
 
 ~~~
 ---.box
 Text in a box.
 ---
 ~~~
-produces:
+makes:
 ---.box
 Text in a box.
 ---
 
+#-------------------------------------------------------------------------------
 == Horizontal line
-Four or more {~-} in the first position:
+Four or more ~-+ in the first position:
 ~~~
 text...
 -------
 text...
 ~~~
-produce a horizonal line:
+make a horizonal line:
 ---.box
 text...
 -------
 text...
 ---
 
+#-------------------------------------------------------------------------------
 == Paragraphs
-Paragraph detection is automatic: as text blocks separated by blank lines,
-headers, code blocks, sections, and horizontal lines. In addition,
-lines that begin with {~.} in the first position also start a new paragraph.
+Paragraph detection is automatic. Paragraphs are blocks of text separated by blank lines, headers, code blocks, sections, and horizontal lines. In addition,
+lines that begin with ~.~ in the first position also mark a beginning of a new paragraph.
 
 ~~~
 Paragraph,
@@ -154,7 +191,7 @@ On two source lines.
 -----
 Another one, after a horizontal line.
 ~~~
-produces:
+makes:
 ---.box
 Paragraph,
 still the same paragraph.
@@ -165,6 +202,81 @@ On two source lines.
 -----
 Another one, after a horizontal line.
 ---
+
+
+
+
+
+
+
+
+
+
+==== Outside links
+
+Outside links contain the protocol ({~http://}):
+
+~~~
+- {:https://github.com/mutebook}
+- {:mutebook|https://github.com/mutebook}
+~~~
+makes:
+---.box
+- {:https://github.com/mutebook}
+- {:mutebook|https://github.com/mutebook}
+---
+
+==== Wikipedia:
+
+So often used, that it has its own hook:
+
+~~~
+{wp audio engineer} is a person who {wp records sound|Sound_recording_and_reproduction}.
+~~~
+makes:
+---.box
+{wp audio engineer} is a person who {wp records sound|Sound_recording_and_reproduction}.
+---
+
+==== Inside links
+
+Inside links refer to other pages, using page identifiers as defined in the
+{~TOC} files.
+
+~~~
+- Each good technical book needs a {:glossary}, fully called {:glossary of terms|glossary}.
+~~~
+makes:
+---.box
+- Each good technical book needs a {:glossary}, fully called {:glossary of terms|glossary}.
+---
+
+=== Images
+An image hook has a tag {~img}, and two parts: the source link and an (optional)
+alternate text. Images can come from the outside or inside the book:
+- in Brackets: {img:img/liveReload_Brackets.png}  {img:how_software:img/liveReload_Brackets.png}
+
+~~~
+outside:
+{img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from $GH}
+inside:
+{img how:images/mb.png|image relative to identifier prefix 'how'}
+~~~
+makes:
+---.box
+outside:
+{img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from $GH}
+inside:
+{img how:images/mb.png|image relative to identifier prefix 'how'}
+---
+
+
+
+
+
+
+
+
 
 = Hooks
 Hooks are a powerful mechanism of CM. Hooks implement some built-in features and
@@ -194,7 +306,7 @@ indicating character and a content. The format indicating character can be:
 This is {*bold}, this is {/emphasized}, and this is {~monospaced and {*bold}}.
 {_Underlined}, su{'per} and {,sub}script.
 ~~~
-produces:
+makes:
 ---.box
 This is {*bold}, this is {/emphasized}, and this is {~monospaced and {*bold}}.
 {_Underlined}, su{'per} and {,sub}script.
@@ -211,7 +323,7 @@ This feature must be first enabled on a page by:
 
 This is *bold*, this is /emphasized/, and this /emphasised and *bold*/.
 ~~~
-produces:
+makes:
 ---.box
 # put the above in the page text, only once, perhaps at the very top
 This is *bold*, this is /emphasized/, and this /emphasised and *bold*/.
@@ -223,8 +335,7 @@ Of course, they are not strictly needed, since CM supports utf-8.
 ~~~
 {=>} {<=} {->} {<-} {--} {---} 😱
 ~~~
-
-produces
+makes:
 ---.box
 {=>} {<=} {->} {<-} {--} {---} 😱
 ---
@@ -240,64 +351,6 @@ Three kinds of hooks are built-in in into the CM parser:
 The link ({~:}) hook has two parts: the text and the link. If only one part is
 provided, it is used for both the text and the link.
 
-==== Outside links
-
-Outside links contain the protocol ({~http://}):
-
-~~~
-- {:https://github.com/mutebook}
-- {:mutebook|https://github.com/mutebook}
-~~~
-produces:
----.box
-- {:https://github.com/mutebook}
-- {:mutebook|https://github.com/mutebook}
----
-
-==== Wikipedia:
-
-So often used, that it has its own hook:
-
-~~~
-{wp audio engineer} is a person who {wp records sound|Sound_recording_and_reproduction}.
-~~~
-produces:
----.box
-{wp audio engineer} is a person who {wp records sound|Sound_recording_and_reproduction}.
----
-
-==== Inside links
-
-Inside links refer to other pages, using page identifiers as defined in the
-{~TOC} files.
-
-~~~
-- Each good technical book needs a {:glossary}, fully called {:glossary of terms|glossary}.
-~~~
-produces:
----.box
-- Each good technical book needs a {:glossary}, fully called {:glossary of terms|glossary}.
----
-
-=== Images
-An image hook has a tag {~img}, and two parts: the source link and an (optional)
-alternate text. Images can come from the outside or inside the book:
-- in Brackets: {img:img/liveReload_Brackets.png}  {img:how_software:img/liveReload_Brackets.png}
-
-~~~
-outside:
-{img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from $GH}
-inside:
-{img how:images/mb.png|image relative to identifier prefix 'how'}
-~~~
-produces:
----.box
-outside:
-{img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from $GH}
-inside:
-{img how:images/mb.png|image relative to identifier prefix 'how'}
----
-
 === Formulas
 
 Mathematical formulas can be entered using the TeX syntax and typeset by
@@ -307,7 +360,7 @@ allow nested hooks and insted passes curly braces on to TeX).
 ~~~
 {$ 20 \times 10^{0.0002} $}
 ~~~
-produces:
+makes:
 ---.box
 {$ 20 \times 10^{0.0002} $}
 ---
@@ -344,7 +397,7 @@ With borders:
 (td1)(td2)(td3)(td4)
 (td1)(td2)(td3)(td4)
 ~~~
-produces:
+makes:
 ---.box
 Borderless:
 --- table
@@ -376,6 +429,8 @@ For example, if an author prefers the shortcut notations {~\*bold\*} and {~\/emp
 the above can be put only once once into the prolog file.
 
 = Macros
+
+{#macros}
 
 Macros allow a simple identifier to represent a longer, arbitrary sequence of characters.
 

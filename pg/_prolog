@@ -5,3 +5,4 @@
 @def MbMe {:mutebook.me}
 
 @def GH   GitHub
+@def CM   Compact Markup

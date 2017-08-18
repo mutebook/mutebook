@@ -31,31 +31,41 @@ Use your $GH credentials. If you do not have a $GH account and will not upload (
 ~~~
 git clone https://github.com/mutebook/mutebook.git
 ~~~
-$Mb uses a {:Compact Markup|https://github.com/CompactMarkup} engine as a submodule. Initialize the submodule:
+This will create a new directory ~mutebook~ and download the $Mb content.
+
+$Mb uses a {:{$CM}|https://github.com/CompactMarkup} engine as a submodule. Initialize the submodule:
 ~~~
 cd mutebook
 git submodule init
 git submodule update
 ~~~
 
-==== Update the local repository clone
+==== Update the local repository
 
-== W
+To update your local repository (to fetch changes that may have been made since the time the local repository was created or last updated):
+~~~
+# (in 'mutebook')
+git pull --recurse-submodules
+git submodule update
+~~~
 
-{#web server}
-## 2. Run the local web server and mutebook pages
+== Running $Mb locally
+
+$Mb is a web-based book and must be served by a web server. PHP has a built-in development server that can be used to that purpose:
 ~~~
-cd mutebook   # 'mutebook' was created by the git clone
-~~~
-Start the development web server that is included in php (ver. 7):
-~~~
+# (in 'mutebook')
 php -S localhost:8053
-# or 'php -e -S localhost:8053' if you will be debugging the code
 ~~~
-*8053* is the web server port number; you may choose another.
 
-Open the local mutebook web site [http://localhost:8053](localhost:8053) in a we
-b browser.
+{wp:{~localhost}|localhost} means 'this computer'. ~8053~ is the web server port number; the port must be available. You may choose another number, if you wish.
+
+Open the local {:mutebook web site|http://localhost:8053} in a web browser.
+
+The web server can be terminated ("killed") by ~Ctrl+c~.
+
+== Write $Mb text
+
+Follow the instructions in "{:how_pages}".
 
 ## 3. Read the 'How to' section of mutebook
 
@@ -65,34 +75,33 @@ b browser.
 
 ## 4. See what changes you have made
 
-(Kill the php web server by {~Ctrl+c`.)
+== Upload changes to $GH
 
-[$GH Desktop](https://desktop.github.com/) or similar come really handy. Or,
-work in the terminal:
-
-See what files were changed:
+See what files were changed and what were the changes:
 ~~~
+# (in 'mutebook')
 git status
 git diff
 ~~~
 
-Stage the changes:
+Stage the changes (only if /all/ changes are to be staged):
 ~~~
-git add --all # only if *all* changes are to be staged
+git add --all
 ~~~
+You can also use ~git add <file ...>~ to stage only selected files.
+
 
 Commit the staged files:
 ~~~
 git commit -m '<a reasonable message>'
 ~~~
 
-It is also possible to stage all changed files (but not new or deleted files) an
-d commit them in one step:
+It is also possible to stage all /changed/ files (not new or deleted files) and commit them in one step:
 ~~~
-git commit -a -m '<a reasonable message>'
+git commit -am '<a reasonable message>'
 ~~~
 
-To update (amend) the last commit (that has not been yet pushed):
+To update (amend) the last commit (if it has not yet been pushed):
 ~~~
 git commit --amend
 ~~~
@@ -102,7 +111,4 @@ Push to $GH:
 git push
 ~~~
 
-Next time, update:
-~~~
-git pull
-~~~
+If there were meanwhile changes made to the $GH repository (by other contributors), you may first need to update (pull) the local repository and merge the changes before push can succeed.
