@@ -6,14 +6,8 @@
     "type": "chrome",
     "request": "launch",
     "name": "Chrome",
-    "url": "http://localhost:8053",
+    "url": "http://localhost:8053/index.php?pg=how/software.cm",
     "webRoot": "${workspaceRoot}"
-  },
-    {
-      "name": "XDebug",
-      "type": "php",
-      "request": "launch",
-      "port": 9000
-    },
+  }
   ]
 }

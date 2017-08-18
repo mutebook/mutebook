@@ -1,17 +1,16 @@
 @toc how; How to write MB
 
-= How to create mutebook pages
+= How to contribute to $MB
+
+$Mb is an open project: both the source code and the text are freely available on GitHub. This section explains what authors need to know to contribute to $Mb.
 
 This section describes how to:
-- create a {:hierarchy of folders|how:folders} and pages and a corresponding
-  table of content (TOC)
-- write and format the {:page text|how:text}
+- install required {:software|how_software}
+- use {:GitHub|how_software}
+- create a {:hierarchy of folders and pages|how_folders} and the corresponding table of content
+- write and format the {:page text|how_text}
 
-@toc github;   github.cm;    GitHub
-@toc php7;     php7.cm;      PHP 7
-@toc brackets; brackets.cm;  Brackets
-@toc folders;  folders.cm;   Folder structure
-@toc locMB;    localMB.cm;   Local MB
-
-@toc text;     text.cm;      Text formating
-@toc prolog ;  prolog.cm;    Prolog and macros
+@toc how_software;  software.cm;  Install software
+@toc how_github;    github.cm;    Use GitHub
+@toc how_folders;   pages.cm;     Folders and pages
+@toc how_text;      text.cm;      Format text

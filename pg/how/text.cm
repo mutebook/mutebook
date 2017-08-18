@@ -360,3 +360,58 @@ With borders:
 (td1)(td2)(td3)(td4)
 ---
 ---
+
+= Prolog
+
+If there is a special file named {~prolog} in a folder, the contents of the file is inserted before the contents of any {~.cm} file in that folder and all nested folders. If there are more prolog files on the path from {~pg/} to a {~.cm} file, the contents of the prolog files is combined.
+
+The prolog files is a convenient way of setting CM properties to apply to all text files in a book, in a book section, etc.
+
+For example, if an author prefers the shortcut notations {~\*bold\*} and {~\/emphasised\/}, instead of opening each text file with:
+~~~
+@chr b *
+@chr em /
+~~~
+the above can be put only once once into the prolog file.
+
+= Macros
+
+Macros allow a simple identifier to represent a longer, arbitrary sequence of characters.
+
+A macro is defined as: {~@def identifier text}. The macro definition must be on a separate line. The identifier is a sequence of letters and numbers, starting with a letter. The text can be anything, including spaces and other special characters. The spaces at the beginning and end will be trimmed, but spaces inside the text will be retained.
+
+An example. Define nacros:
+
+~~~
+@def dB dB{,SPL}
+@def SG {$\mathsf{S_{G}}$}
+~~~
+
+@def dB dB{,SPL}
+@def SG {$\mathsf{S_{G}}$}
+
+To use a macro, prepend the identifier with a {~$}:
+
+~~~
+$dB $SG $BAD \$NotAMacro
+~~~
+gives:
+---.box
+$dB $SG $BAD \$NotAMacro
+---
+
+It is possible to switch to another character for macro exansion, instead of {~$}, for example to {~%}:
+
+~~~
+@chr macro %
+$dB $SG $BAD \$NotAMacro
+
+%dB %SG %BAD \%NotAMacro
+~~~
+gives:
+---.box
+@chr macro %
+$dB $SG $BAD \$NotAMacro
+
+%dB %SG %BAD \%NotAMacro
+---

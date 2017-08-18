@@ -1,2 +1,3 @@
-@chr b  *
-@chr em /
+@def MB   MUTEBOOK
+@def Mb   Mutebook
+@def MbMe {:mutebook.me}
