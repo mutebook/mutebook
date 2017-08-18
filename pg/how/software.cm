@@ -1,8 +1,10 @@
+@chr em /
+
 = Set up software for local $Mb
 
-$Mb is a web-based book and is hosted online at $MbMe. You may choose to install a local (running directly on your computer) copy of $Mb. A local copy allows you to:
+$Mb is a web-based book and is hosted online at $MbMe. You may choose to install a local copy of $Mb (running directly on your computer). A local copy allows you to:
 - use $Mb without an Internet connection,
-- run $Mb on a local network, and, namely
+- run (serve) $Mb on a local network, and, namely
 - further develop $Mb.
 
 #-------------------------------------------------------------------------------
@@ -12,12 +14,14 @@ In order to use a local  installation of mutebook and to create or modify mutebo
 
 === On Mac OSX (Sierra):
 
-1. Install (or update) {:Xcode|https://en.wikipedia.org/wiki/Xcode} from the {:Mac App Store|https://itunes.apple.com/us/app/xcode/id497799835?mt=12}.
+==== 1. Xcode
+Install (or update) {:Xcode|https://en.wikipedia.org/wiki/Xcode} from the {:Mac App Store|https://itunes.apple.com/us/app/xcode/id497799835?mt=12}.
 Xcode is needed for Homebrew.
 
-2. Install (or update) {:Homebrew|https://brew.sh}. Homebrew provides an easy way to install and manage software packages.
+==== 2. Homebrew
+Install (or update) {:Homebrew|https://brew.sh}. Homebrew provides an easy way to install and manage software packages.
 
-(TL;DR) To install Homebrew, run in the Terminal:
+/TL;DR/: To install Homebrew, run in the Terminal:
 ~~~
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ~~~
@@ -27,7 +31,9 @@ brew update
 brew upgrade
 ~~~
 
-3. Use Homebrew to install PHP version 7.1:
+==== 3. PHP 7
+Use Homebrew to install PHP version 7.1.
+
 "Tap" a php repository:
 ~~~
 brew tap homebrew/homebrew-php
@@ -42,7 +48,8 @@ php -v
 ~~~
 The reply ought to start with {>>} {~PHP 7.1...}
 
-4. For PHP debugging (advanced use; needed only if you will be developing the php code):
+==== 4. Optionally: xdebug
+For PHP debugging (advanced use; needed only if you will be developing the php code):
 
 Install xdebug:
 ~~~
@@ -86,37 +93,25 @@ You are on your own.
 #-------------------------------------------------------------------------------
 == Brackets
 
-The content of mutebook is stored in so-called [plain-text](https://en.wikipedia
-.org/wiki/Plain_text) files. For editing plain text files it is best to use a so
-urce code (programmer's) [editor](https://en.wikipedia.org/wiki/Source_code_edit
-or). We recommend *Brackets*:
+The content of mutebook is stored in so-called {wp:plain text} files. For editing plain text files it is best to use a so-called {wp:source code editor}. There are many possibilities; we recommend {:Brackets|http://brackets.io}.
 
-## 1. Download an install [Brackets](http://brackets.io/)
+==== Preferences
 
-## 2. Preferences ...
-Change {~Brackets / Preferences...} to your liking. We recommend to switch the di
-splay of line numbers off:
-~~~
-{
-    "showLineNumbers": false,
-}
-~~~
+Change the preferences to your liking (on Mac: /Brackets\/Preferences.../, on Linux: /Debug\/Open Preferences File/). We recommend to switch the display of line numbers off ({~"showLineNumbers": false}).
 
-## 3. LiveReload
-* Install the LiveReload extension in Brackets: {~File / Extension Manager...}, {~Available}, search 'LiveReload', install.
-* Install the LiveReload plugin in your browser: follow the [respective link](ht
-tps://github.com/pwalczyszyn/brackets-livereload) here ("Install plugin for your
+==== LiveReload
+
+Brackets can instantly update $Mb shown in a browser whenever a source file is changed and saved in Brackets.
+- Install the LiveReload extension in Brackets: /File\/Extension Manager.../, /Available/, search 'LiveReload', install.
+- Install the LiveReload plugin in your browser: follow the {:respective link here|https://github.com/pwalczyszyn/brackets-livereload} ("Install plugin for your
  browser").
 
-## 4. Live-edit mutebook text
-Start the built-in PHP web server in the terminal and open the mutebook web page
-s in a browser, as described [here](mutebook_local.md).
+==== Live-edit $Mb text
 
-Open the mutebook content (the {~pg/} folder) in Brackets ({~File / Open Folder...
-}).
+Start the PHP built-in web server in the terminal and open the mutebook web pages in a browser, as described {:here|how_local}. Open the mutebook content (the {~pg/} folder) in Brackets (/File\/Open Folder.../).
 
-Enable LiveReload in Brackets (![](img/LiveReloadBrackets.png)) and in the brows
-er (![](img/LiveReloadBrowser.png)). When a file is saved in Brackets, the brows
-er will automatically refresh.
+Enable LiveReload:
+- in Brackets: {img:img/liveReload_Brackets.png}, and
+- in the browser: {img:img/liveReload_browser.png}.
 
-
+When a file is saved in Brackets, the browser will automatically refresh.

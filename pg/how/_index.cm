@@ -2,15 +2,15 @@
 
 = How to contribute to $MB
 
-$Mb is an open project: both the source code and the text are freely available on GitHub. This section explains what authors need to know to contribute to $Mb.
+$Mb is an open project: both the source code and the text are freely available on $GH. This section explains what authors need to know to contribute to $Mb.
 
 This section describes how to:
 - install required {:software|how_software}
-- use {:GitHub|how_software}
+- work with a {:local copy of {$Mb}|how_local}
 - create a {:hierarchy of folders and pages|how_folders} and the corresponding table of content
 - write and format the {:page text|how_text}
 
 @toc how_software;  software.cm;  Install software
-@toc how_github;    github.cm;    Use GitHub
+@toc how_local;     local.cm;     Local MB
 @toc how_folders;   pages.cm;     Folders and pages
 @toc how_text;      text.cm;      Format text

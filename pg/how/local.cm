@@ -1,19 +1,12 @@
-# Learn GitHub basics
+= Work with a local copy of $Mb
 
-1. Create your personal https://github.com account.
+== $GH basics
 
-1. Learn to [create a repository](https://help.github.com/articles/create-a-repo
-/), and [edit files](https://help.github.com/articles/managing-files-on-github/)
- directly on GitHub.
+* Create your personal {:https://github.com} account.
+* Learn to {:create a repository|https://help.github.com/articles/create-a-repo/}, and {:edit files|https://help.github.com/articles/managing-files-on-github/} directly on $GH.
+* Learn to {:clone|https://help.github.com/articles/cloning-a-repository/} a git repository.
 
-1. Learn to [write on GitHub](https://help.github.com/categories/writing-on-gith
-ub/); mainly to use GitHub-flavoured [Markdown](https://guides.github.com/featur
-es/mastering-markdown/) in *.md files.
-
-1. Learn to [clone](https://help.github.com/articles/cloning-a-repository/) a gi
-thub repository.
-
-1. Learn git pull, commit, push. Perhaps with the [GitHub Desktop](https://deskt
+1. Learn git pull, commit, push. Perhaps with the [$GH Desktop](https://deskt
 op.github.com/).
 
 
@@ -21,7 +14,7 @@ op.github.com/).
 # Create mutebook content
 
 These instructions describe how to work with {~git` in the terminal. You can also
- use one of various graphical interfaces to {~git` and {~GitHub`, such as [GitHub
+ use one of various graphical interfaces to {~git` and {~$GH`, such as [$GH
 Desktop (https://desktop.github.com/).
 
 ## 1. Clone the mutebook repository
@@ -39,14 +32,15 @@ Clone the repository:
 ~~~
 git clone git@github.com:mutebook/mutebook.git
 ~~~
-Use your GitHub credentials. If you do not have a GitHub account and will not up
+Use your $GH credentials. If you do not have a $GH account and will not up
 load (push) your changes, you may clone the repository so:
 ~~~
 git clone https://github.com/mutebook/mutebook.git
 ~~~
-(Alternatively, you may fork the repository on GitHub, clone your forked copy, a
+(Alternatively, you may fork the repository on $GH, clone your forked copy, a
 nd later submit your changes as pull requests.)
 
+{#web server}
 ## 2. Run the local web server and mutebook pages
 ~~~
 cd mutebook   # 'mutebook' was created by the git clone
@@ -71,7 +65,7 @@ b browser.
 
 (Kill the php web server by {~Ctrl+c`.)
 
-[GitHub Desktop](https://desktop.github.com/) or similar come really handy. Or,
+[$GH Desktop](https://desktop.github.com/) or similar come really handy. Or,
 work in the terminal:
 
 See what files were changed:
@@ -101,7 +95,7 @@ To update (amend) the last commit (that has not been yet pushed):
 git commit --amend
 ~~~
 
-Push to GitHub:
+Push to $GH:
 ~~~
 git push
 ~~~

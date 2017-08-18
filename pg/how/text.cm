@@ -282,6 +282,7 @@ produces:
 === Images
 An image hook has a tag {~img}, and two parts: the source link and an (optional)
 alternate text. Images can come from the outside or inside the book:
+- in Brackets: {img:img/liveReload_Brackets.png}  {img:how_software:img/liveReload_Brackets.png}
 
 ~~~
 outside:
