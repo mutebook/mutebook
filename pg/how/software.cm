@@ -1,6 +1,6 @@
 = Set up software for local $Mb
 
-$Mb is a web-based book and is hosted online at $MbMe. You may choose to install a local copy of $Mb (running directly on your computer). A local copy allows you to:
+$Mb is a web-based book and is hosted online at {:{$MbMe}}. You may choose to install a local copy of $Mb (running directly on your computer). A local copy allows you to:
 - use $Mb without an Internet connection,
 - run (serve) $Mb on a local network, and, namely
 - further develop $Mb.
@@ -44,7 +44,7 @@ Verify the PHP version:
 ~~~
 php -v
 ~~~
-The reply ought to start with {>>} ~PHP 7.1...~
+The reply ought to start with {=>} ~PHP 7.1...~
 
 ==== 4. Optionally: xdebug
 For PHP debugging (advanced use; needed only if you will be developing the php code):
@@ -57,13 +57,13 @@ Verify the installation success:
 ~~~
 php -i | grep 'xdebug support'
 ~~~
-The reply ought to be {>>} ~xdebug support => enabled~
+The reply ought to be {=>} ~xdebug support => enabled~
 
 Look up the location of the active ~php.ini~ file:
 ~~~
 php -i | grep php.ini
 ~~~
- {>>} ~Loaded Configuration File => /usr/local/etc/php/7.1/php.ini~
+ {=>} ~Loaded Configuration File => /usr/local/etc/php/7.1/php.ini~
 
 Edit the ~php.ini~ file (~sudo nano /usr/local/etc/php/7.1/php.ini~).
 Add the following:
@@ -76,11 +76,11 @@ Verify:
 ~~~
 php -i | grep xdebug.remote_enable
 ~~~
-{>>} ~xdebug.remote_enable => On => On~
+{=>} ~xdebug.remote_enable => On => On~
 ~~~
 php -i | grep xdebug.remote_autostart
 ~~~
-{>>} ~xdebug.remote_autostart => On => On~
+{=>} ~xdebug.remote_autostart => On => On~
 
 === On Linux:
 You know what to do.

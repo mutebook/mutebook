@@ -2,7 +2,7 @@
 
 @def MB   MUTEBOOK
 @def Mb   Mutebook
-@def MbMe {:mutebook.me}
+@def MbMe mutebook.me
 
 @def GH   GitHub
 @def CM   Compact Markup

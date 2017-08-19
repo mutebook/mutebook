@@ -1,5 +1,6 @@
 = Work with a local copy of $Mb
 
+#-------------------------------------------------------------------------------
 == $GH basics
 
 * Create your personal {:https://github.com} account.
@@ -7,6 +8,7 @@
 * Learn to {:clone|https://help.github.com/articles/cloning-a-repository/} a repository.
 * Learn how to use ~git pull~, ~git commit~, and ~git push~.
 
+#-------------------------------------------------------------------------------
 == Local copy of $Mb
 
 ==== Clone the repository
@@ -21,7 +23,7 @@ Verify the location:
 ~~~
 pwd
 ~~~
-{>>} ~\/Users\/...\/LocalMutebook~
+{=>} ~\/Users\/...\/LocalMutebook~
 
 Clone the repository:
 ~~~
@@ -49,6 +51,7 @@ git pull --recurse-submodules
 git submodule update
 ~~~
 
+#-------------------------------------------------------------------------------
 == Running $Mb locally
 
 $Mb is a web-based book and must be served by a web server. PHP has a built-in development server that can be used to that purpose:
@@ -63,6 +66,7 @@ Open the local {:mutebook web site|http://localhost:8053} in a web browser.
 
 The web server can be terminated ("killed") by ~Ctrl+c~.
 
+#-------------------------------------------------------------------------------
 == Write $Mb text
 
 Follow the instructions in "{:how_pages}".
@@ -75,6 +79,7 @@ Follow the instructions in "{:how_pages}".
 
 ## 4. See what changes you have made
 
+#-------------------------------------------------------------------------------
 == Upload changes to $GH
 
 See what files were changed and what were the changes:
@@ -89,7 +94,6 @@ Stage the changes (only if /all/ changes are to be staged):
 git add --all
 ~~~
 You can also use ~git add <file ...>~ to stage only selected files.
-
 
 Commit the staged files:
 ~~~
@@ -112,3 +116,8 @@ git push
 ~~~
 
 If there were meanwhile changes made to the $GH repository (by other contributors), you may first need to update (pull) the local repository and merge the changes before push can succeed.
+
+#-------------------------------------------------------------------------------
+== Update $MbMe
+
+If you are certain that the latest pushed version of $Mb works, you may update the public {:{$Mb} website|https://{$MbMe}} by opening a special link {:https://{$MbMe}/pull.php?key=...} in a web browser. You must know the correct key, of course :)
