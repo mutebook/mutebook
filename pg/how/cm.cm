@@ -6,7 +6,7 @@ CM is parsed line-by-line. A number of features are recognized by what character
 
 #-------------------------------------------------------------------------------
 == Headers
-Headers start with one or more, up to six, {~=} in the first position.
+Headers start with one or more, up to six, ~=~ in the first position.
 ~~~
 = First-level header
 === Third level
@@ -163,7 +163,7 @@ Text in a box.
 
 #-------------------------------------------------------------------------------
 == Horizontal line
-Four or more ~-+ in the first position:
+Four or more ~-~ in the first position:
 ~~~
 text...
 -------
@@ -203,54 +203,105 @@ On two source lines.
 Another one, after a horizontal line.
 ---
 
+#-------------------------------------------------------------------------------
+== Outside links
 
-
-
-
-
-
-
-
-
-==== Outside links
-
-Outside links contain the protocol ({~http://}):
+The links to web resources that are outside of $Mb do typically begin with the /protocol identifier/ ~http:\/\/~ or ~https:\/\/~. To include an outside link in the text, put it between ~\{:~ and ~\}~: 
 
 ~~~
 - {:https://github.com/mutebook}
-- {:mutebook|https://github.com/mutebook}
+- {:http://live-electronic-music.com}
 ~~~
 makes:
 ---.box
 - {:https://github.com/mutebook}
-- {:mutebook|https://github.com/mutebook}
+- {:http://live-electronic-music.com}
+---
+
+If a text other than the link itself should be shown, put the text after ~\{:~, then a ~|~, the link, and ~\}~: 
+
+~~~
+- {:Mutebook on GitHub|https://github.com/mutebook}
+- {:Live-electronic music|http://live-electronic-music.com}
+~~~
+makes:
+---.box
+- {:Mutebook on GitHub|https://github.com/mutebook}
+- {:Live-electronic music|http://live-electronic-music.com}
+---
+
+As a shortcut, if the protocol is not known or is not important, begin the link with a ~\/\/~:
+
+~~~
+- {://github.com/mutebook} 
+- {://live-electronic-music.com}
+- {:Mutebook on GitHub|//github.com/mutebook}
+- {:Live-electronic music|//live-electronic-music.com}
+~~~
+makes:
+---.box
+- {://github.com/mutebook} 
+- {://live-electronic-music.com}
+- {:Mutebook on GitHub|//github.com/mutebook}
+- {:Live-electronic music|//live-electronic-music.com}
 ---
 
 ==== Wikipedia:
 
-So often used, that it has its own hook:
+Love it or hate it, Wikipedia is here and is often linked to. There is a shortcut that simplifies making links to it. Spaces in the text or the link reference are automatically replaced by ~_~:
 
 ~~~
-{wp audio engineer} is a person who {wp records sound|Sound_recording_and_reproduction}.
+An {wp: audio engineer} is a person who {wp: records sound|Sound_recording_and_reproduction}.
+The recodings may be {wp:analogue|analog recording} or {wp:digital|digital recording}.
 ~~~
 makes:
 ---.box
-{wp audio engineer} is a person who {wp records sound|Sound_recording_and_reproduction}.
+An {wp: audio engineer} is a person who {wp: records sound|Sound_recording_and_reproduction}. The recodings may be {wp:analogue|analog recording} or {wp:digital|digital recording}.
 ---
 
-==== Inside links
+#-------------------------------------------------------------------------------
+== Inside links and anchors
 
 Inside links refer to other pages, using page identifiers as defined in the
-{~TOC} files.
+ index files.
 
 ~~~
-- Each good technical book needs a {:glossary}, fully called {:glossary of terms|glossary}.
+{:mb_glossary} ({:glossary of terms|mb_glossary}) is a necessary part of good technical books.
 ~~~
 makes:
 ---.box
-- Each good technical book needs a {:glossary}, fully called {:glossary of terms|glossary}.
+{:mb_glossary} ({:glossary of terms|mb_glossary}) is a necessary part of good technical books.
 ---
 
+An inside link can link to a specific location on a page, that is marked by an anchor:
+
+~~~
+{#example_anchor} The anchor is invisible.
+~~~
+makes:
+---.box
+{#example_anchor} The anchor is invisible.
+---
+
+~~~
+And this is a {:link to the anchor|#example_anchor}.
+~~~
+makes:
+---.box
+And this is a {:link to the anchor|#example_anchor}.
+---
+
+~~~
+And this is a {:link to the anchor|#example_anchor}.
+Another to a {:term definition|mb_glossary#term1}.
+~~~
+makes:
+---.box
+And this is a {:link to the anchor|#example_anchor}.
+Another to a {:term definition|mb_glossary#term1}.
+---
+
+#-------------------------------------------------------------------------------
 === Images
 An image hook has a tag {~img}, and two parts: the source link and an (optional)
 alternate text. Images can come from the outside or inside the book:

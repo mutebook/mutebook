@@ -71,14 +71,6 @@ The web server can be terminated ("killed") by ~Ctrl+c~.
 
 Follow the instructions in "{:how_pages}".
 
-## 3. Read the 'How to' section of mutebook
-
-*More instructions are there.*
-
-*Namely: **how to create and edit mutebook pages**.*
-
-## 4. See what changes you have made
-
 #-------------------------------------------------------------------------------
 == Upload changes to $GH
 
