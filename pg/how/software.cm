@@ -106,7 +106,7 @@ Brackets can instantly update $Mb shown in a browser whenever a source file is c
 
 ==== Live-edit $Mb text
 
-Start the PHP built-in web server in the terminal and open the mutebook web pages in a browser, as described {:here|how_local}. Open the mutebook content (the ~pg/~ folder) in Brackets (/File\/Open Folder.../).
+Start the PHP built-in web server in the terminal and open the mutebook web pages in a browser, as described {:here|how_local}. Open the mutebook content (the ~pg\/~ folder) in Brackets (/File\/Open Folder.../).
 
 Enable LiveReload:
 - in Brackets: {img:img/liveReload_Brackets.png}, and
