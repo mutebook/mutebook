@@ -284,25 +284,17 @@ makes:
 ---
 
 ~~~
-And this is a {:link to the anchor|#example_anchor}.
+And this is a {:link to the anchor|#example_anchor} on this page.
+Another to a {:term definition|mb_glossary#term1} {---} an anchor on another page.
 ~~~
 makes:
 ---.box
-And this is a {:link to the anchor|#example_anchor}.
----
-
-~~~
-And this is a {:link to the anchor|#example_anchor}.
-Another to a {:term definition|mb_glossary#term1}.
-~~~
-makes:
----.box
-And this is a {:link to the anchor|#example_anchor}.
-Another to a {:term definition|mb_glossary#term1}.
+And this is a {:link to the anchor|#example_anchor} on this page.
+Another to a {:term definition|mb_glossary#term1} {---} an anchor on another page.
 ---
 
 #-------------------------------------------------------------------------------
-=== Images
+== Images
 An image hook has a tag {~img}, and two parts: the source link and an (optional)
 alternate text. Images can come from the outside or inside the book:
 - in Brackets: {img:img/liveReload_Brackets.png}  {img:how_software:img/liveReload_Brackets.png}
