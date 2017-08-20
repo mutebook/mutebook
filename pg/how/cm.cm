@@ -304,7 +304,7 @@ The width and height of an image (in pixels) are two numbers, separated by 'x'.
 
 ==== Outside images
 
-As with links, the url of an image begins with ~http:\/\/~, ~https:\/\/~, or ~//~.
+As with links, the url of an image begins with ~http:\/\/~, ~https:\/\/~, or ~\/\/~.
 
 ~~~
 Mutebook {img: http://raw.githubusercontent.com/mutebook/mutebook/master/assets/icon32.png} is hosted by GitHub {img://github.com/favicon.ico|This is a cat octicon}
@@ -316,7 +316,7 @@ Mutebook {img: http://raw.githubusercontent.com/mutebook/mutebook/master/assets/
 
 ==== Inside images
 
-The location of an inside image may be relative to the $Mb root, or to a page.
+The location of an inside image may be relative to the $Mb root, to a named page, or to the current page.
 - root-relative image: begins with a single ~\/~
 ~~~
 root-relative: {img:/assets/icon32.png}
@@ -326,19 +326,29 @@ makes:
 root-relative: {img:/assets/icon32.png}
 ---
 
-- page-relative: begins with a page identifier and ~:~
+- named-page-relative: begins with a page identifier and ~:~
 ~~~
-page-relative, with size:
-- width:  {img:how:img/mic.png|16} or {img:how:img/mic.png|16x}
-- height: {img:how:img/mic.png|x24}
-- width and height: {img:how:img/mic.png|24x16}
+named-page-relative, with size:
+- width:  {img:how:images/mic.png|16} or {img:how:images/mic.png|16x}
+- height: {img:how:images/mic.png|x24}
+- width and height: {img:how:images/mic.png|24x16}
 ~~~
 makes:
 ---.box
-page-relative, with size:
-- width:  {img:how:img/mic.png|16} or {img:how:img/mic.png|16x}
-- height: {img:how:img/mic.png|x24}
-- width and height: {img:how:img/mic.png|24x16}
+named-page-relative, with size:
+- width:  {img:how:images/mic.png|16} or {img:how:images/mic.png|16x}
+- height: {img:how:images/mic.png|x24}
+- width and height: {img:how:images/mic.png|24x16}
+---
+
+- current-page-relative: contains the image file name with an optional relative path.
+~~~
+current-page-relative: {img:images/mic.png|18}
+~~~
+makes:
+---.box
+current-page-relative: {img:images/mic.png|18}
+#TODO {img:./images/mic.png|x24} does not work (generator eats . ?)
 ---
 
 #-------------------------------------------------------------------------------
