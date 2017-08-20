@@ -1,12 +1,7 @@
-@chr b  *
-@chr em /
 = Transducer Principles
 
-*bold* /\/emphasised/ {~monospaced}
-
-
 Without going too much into detail about the electronics inside microphones in this section, let us look at how a microphone works. A microphone is a transducer, a device that transduces energy from one form into another. The microphone takes in air pressure changes and outputs voltage changes that are analogue to these pressure changes. This section describes how microphones do that.
-\n
+
 For professional audio applications, there are two main categories of microphones:
 ---.indent
 * Condenser microphones
@@ -16,53 +11,44 @@ For professional audio applications, there are two main categories of microphone
 Dynamic microphones can further be categorized into dynamic moving coil and dynamic ribbon microphones.
 ---
 {/Note: When {*people} speak about moving coil microphones, they usually call them “dynamic microphones” and refer to dynamic ribbon microphones simply as “ribbon microphones".}
-\n
-\n
-\n
 
 ==== Condenser (capacitor) Microphones
-\n
-Condenser microphones use a {capacitor:link} (an older word is condenser) for transducing acoustic energy into electrical energy. A capacitor consists of two plates with an insulator in between them. The capacitance of a capacitor depends on the size of the plates and the distance between them.
 
-{diagram, capacitor}
-{diagram, capacitor microphone}
+Condenser microphones use a {todo: capacitor:link} (an older word is condenser) for transducing acoustic energy into electrical energy. A capacitor consists of two plates with an insulator in between them. The capacitance of a capacitor depends on the size of the plates and the distance between them.
 
-The schematic above shows that a condenser microphone has two plates, one of which is the membrane and the other one the so-called back-plate. If we measured the capacitance of a fully charged capacitor it would remain constant unless we change the distance between the plates or their sizes. As of now, microphones do not yet magically change in size it is unlikely that the size of the plates will change, so we can assume that they remain constant. When sound waves reach the membrane (which is very thin and light), the membrane starts to move back and forth following the changes in air pressure. We will take a closer look at how it moves in the section on {link_acoustic operating principles}. When the membrane moves and the fixed back-plate does not, the distance between the plates changes. Thus, the capacitance changes.
+{todo: diagram, capacitor}
+{todo: diagram, capacitor microphone}
 
-{text, describe how voltage changes are created from the changes in capacitance}
-\n
-{diagram, electronic scheme of capacitor microphones}
-\n
-The microphone's voltage is the highest when the membrane's displacement is at its maximum. We speak of a displacement-controlled system {text, check if this is the correct terminology}.
-\n
-\n
+The schematic above shows that a condenser microphone has two plates, one of which is the membrane and the other one the so-called back-plate. If we measured the capacitance of a fully charged capacitor it would remain constant unless we change the distance between the plates or their sizes. As of now, microphones do not yet magically change in size it is unlikely that the size of the plates will change, so we can assume that they remain constant. When sound waves reach the membrane (which is very thin and light), the membrane starts to move back and forth following the changes in air pressure. We will take a closer look at how it moves in the section on {todo: link_acoustic operating principles}. When the membrane moves and the fixed back-plate does not, the distance between the plates changes. Thus, the capacitance changes.
 
+{todo: text, describe how voltage changes are created from the changes in capacitance}
+
+{todo: diagram, electronic scheme of capacitor microphones}
+
+The microphone's voltage is the highest when the membrane's displacement is at its maximum. We speak of a displacement-controlled system {todo: text, check if this is the correct terminology}.
 
 ==== Phantom Power
-\n
-{change, move section below dynamic microphones}
+
+{todo:change, move section below dynamic microphones}
+
 The capacitor needs to be charged before the microphone can operate, which is usually done with so-called {/phantom power}. This power is provided by the device the microphone is connected to (e.g., mixing console or interface) and the most common voltage that is in use is 48V. However, there are other voltages out there as well. When using phantom power always make sure to apply the amount of voltage the microphone is expecting and only give it to those microphones that need it. In addition, do not connect or disconnect microphones while it is supplied with phantom power. Connect the microphones first then give it phantom power or turn off the power and then un-plug the microphone. You should also not cross-patch microphones on a patchbay while
 
-
 ==== Dynamic Microphones
-\n
+
 {*Moving Coil Microphone}
-\n
-When you move a conductor through a magnetic field a current starts flowing through the conductor ({link, induction}). The amount of current depends on the strength of the magnetic field, the length of the conductor inside the magnetic field and the velocity of its movement. This behaviour can be used to transduce air pressure changes into voltage changes. To do so we attach a membrane to a coil so that the coil starts moving when the membrane moves. Then we place the coil inside a magnetic field of a strong magnet. A coil is used to have as much length of wire inside the magnetic field as possible which gives you the most output. When air pressure changes move the membrane it moves the coil inside the magnetic field which induces a current that is proportional to the pressure changes of the incoming sound wave.
 
-{diagram, schematic of dynamic microphone}
-\n
-{text, explain how voltage changes are measured}
-\n
-{diagram, electronic circuit and explain how the voltage is measured}
-\n
+When you move a conductor through a magnetic field a current starts flowing through the conductor ({todo: link, induction}). The amount of current depends on the strength of the magnetic field, the length of the conductor inside the magnetic field and the velocity of its movement. This behaviour can be used to transduce air pressure changes into voltage changes. To do so we attach a membrane to a coil so that the coil starts moving when the membrane moves. Then we place the coil inside a magnetic field of a strong magnet. A coil is used to have as much length of wire inside the magnetic field as possible which gives you the most output. When air pressure changes move the membrane it moves the coil inside the magnetic field which induces a current that is proportional to the pressure changes of the incoming sound wave.
 
+{todo: diagram, schematic of dynamic microphone}
+
+{todo: text, explain how voltage changes are measured}
+
+{todo: diagram, electronic circuit and explain how the voltage is measured}
 
 {*Ribbon Microphone}
-\n
+
 A ribbon microphone works very similar to the moving coil microphone, just that the membrane and the coil are replaced by a thin ribbon that is placed directly inside the magnetic field. Because the ribbon is a lot lighter than the coil, ribbon microphones can react very quickly and thus usually have an excellent transient response.
-\n
-{diagram, show difference in transient response between moving coil and ribbon microphone, would it be possible to give the user the option to change the mass and investigate how that would influence the transient?}
-\n
+
+{todo: diagram, show difference in transient response between moving coil and ribbon microphone, would it be possible to give the user the option to change the mass and investigate how that would influence the transient?}
+
 However because of the thin ribbon they are also a lot more fragile than moving coil microphones. Especially some vintage ribbons can easily break or be damaged when exposed to high sound pressure levels or when supplied with phantom power. So always keep in mind that dynamic microphones do not need phantom power because there is no capacitor that needs to be charged and the magnet that is used for the transduction is charged permanently. While most moving coil dynamic microphones probably do not mind the phantom power, ribbon microphones could be damanged as soon as you feed them with 48V, so be very careful when working with dynamic and condenser microphones within the same session. As always, there are some exceptions to this. For example, the Royer R122 actually needs phantom power to operate. Just like cross patching with active phantom power can damage your condenser microphones, it is also likely going to damage those ribbon microphones that have not yet been destroyed by the phantom power itself. If in doubt, read the manual of the microphones you are intending to use.
- 

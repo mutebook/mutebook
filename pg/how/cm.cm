@@ -113,7 +113,7 @@ if inside of a section; otherwise it indicates a section beginning and the tag
 
 ~~~
 before floating boxes
---- 
+---
 --- .box.left
 floating left
 ---
@@ -206,7 +206,7 @@ Another one, after a horizontal line.
 #-------------------------------------------------------------------------------
 == Outside links
 
-The links to web resources that are outside of $Mb do typically begin with the /protocol identifier/ ~http:\/\/~ or ~https:\/\/~. To include an outside link in the text, put it between ~\{:~ and ~\}~: 
+The links to web resources that are outside of $Mb do typically begin with the /protocol identifier/ ~http:\/\/~ or ~https:\/\/~. To include an outside link in the text, put it between ~\{:~ and ~\}~:
 
 ~~~
 - {:https://github.com/mutebook}
@@ -218,7 +218,7 @@ makes:
 - {:http://live-electronic-music.com}
 ---
 
-If a text other than the link itself should be shown, put the text after ~\{:~, then a ~|~, the link, and ~\}~: 
+If a text other than the link itself should be shown, put the text after ~\{:~, then a ~|~, the link, and ~\}~:
 
 ~~~
 - {:Mutebook on GitHub|https://github.com/mutebook}
@@ -233,14 +233,14 @@ makes:
 As a shortcut, if the protocol is not known or is not important, begin the link with a ~\/\/~:
 
 ~~~
-- {://github.com/mutebook} 
+- {://github.com/mutebook}
 - {://live-electronic-music.com}
 - {:Mutebook on GitHub|//github.com/mutebook}
 - {:Live-electronic music|//live-electronic-music.com}
 ~~~
 makes:
 ---.box
-- {://github.com/mutebook} 
+- {://github.com/mutebook}
 - {://live-electronic-music.com}
 - {:Mutebook on GitHub|//github.com/mutebook}
 - {:Live-electronic music|//live-electronic-music.com}
@@ -295,208 +295,211 @@ Another to a {:term definition|mb_glossary#term1} {---} an anchor on another pag
 
 #-------------------------------------------------------------------------------
 == Images
-An image hook has a tag {~img}, and two parts: the source link and an (optional)
-alternate text. Images can come from the outside or inside the book:
-- in Brackets: {img:img/liveReload_Brackets.png}  {img:how_software:img/liveReload_Brackets.png}
+
+Image files included in the text may come from the outside or inside of $Mb. An image may also a specified size (width, height, or both), and an alternate text.
+
+The size and alternate text follow (optional) ~|~. If an alternate text is specified, but not image size, the text follows ~||~.
+
+The width and height of an image (in pixels) are two numbers, separated by 'x'.
+
+==== Outside images
+
+As with links, the url of an image begins with ~http:\/\/~, ~https:\/\/~, or ~//~.
 
 ~~~
-outside:
-{img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from $GH}
-inside:
-{img how:images/mb.png|image relative to identifier prefix 'how'}
-~~~
-makes:
----.box
-outside:
-{img https://raw.githubusercontent.com/mutebook/docs/master/assets/icon32.png|image from $GH}
-inside:
-{img how:images/mb.png|image relative to identifier prefix 'how'}
----
-
-
-
-
-
-
-
-
-
-= Hooks
-Hooks are a powerful mechanism of CM. Hooks implement some built-in features and
-also can be used to extend CM.
-
-A hook starts with {~\{} and ends with {~\}}. Within a hook, {~\|} may separate
-its arguments (called /parts/ in the following text).
-
-Hooks are of three kinds:
-* simple formatting hooks,
-* typographical hooks, and
-* processing hooks.
-
-Hooks can be nested (hooks can occur within hooks).
-
-== Simple formatting hooks
-A simple formatting hook begins with {~\{}, followed by a single format
-indicating character and a content. The format indicating character can be:
-- {~*} for bolded text
-- {~/} for emphasised text (italics)
-- {~#} for monospaced text (inline code snippet)
-- {~_} for underlined text
-- {~'} for superscript
-- {~,} for subscript
-
-~~~
-This is {*bold}, this is {/emphasized}, and this is {~monospaced and {*bold}}.
-{_Underlined}, su{'per} and {,sub}script.
+Mutebook {img: http://raw.githubusercontent.com/mutebook/mutebook/master/assets/icon32.png} is hosted by GitHub {img://github.com/favicon.ico|This is a cat octicon}
 ~~~
 makes:
 ---.box
-This is {*bold}, this is {/emphasized}, and this is {~monospaced and {*bold}}.
-{_Underlined}, su{'per} and {,sub}script.
+Mutebook {img: http://raw.githubusercontent.com/mutebook/mutebook/master/assets/icon32.png} is hosted by GitHub {img://github.com/favicon.ico||This is a cat octicon}
 ---
 
-==== Shortcuts:
-Since marking text as bold or emphasised may be done frequently, it is possible
-to use a shortcut, by simply surrounding the text by a pair of {~*} resp. {~/}.
-This feature must be first enabled on a page by:
+==== Inside images
+
+The location of an inside image may be relative to the $Mb root, or to a page.
+- root-relative image: begins with a single ~\/~
 ~~~
-@chr b  *
+root-relative: {img:/assets/icon32.png}
+~~~
+makes:
+---.box
+root-relative: {img:/assets/icon32.png}
+---
+
+- page-relative: begins with a page identifier and ~:~
+~~~
+page-relative, with size:
+- width:  {img:how:img/mic.png|16} or {img:how:img/mic.png|16x}
+- height: {img:how:img/mic.png|x24}
+- width and height: {img:how:img/mic.png|24x16}
+~~~
+makes:
+---.box
+page-relative, with size:
+- width:  {img:how:img/mic.png|16} or {img:how:img/mic.png|16x}
+- height: {img:how:img/mic.png|x24}
+- width and height: {img:how:img/mic.png|24x16}
+---
+
+#-------------------------------------------------------------------------------
+== Text formatting
+
+Portions of text may be marked for text formatting:
+
+~~~
+Text can be {/emphasized}, {*bold},
+{_underlined}, {~monospaced (code)},
+{'superscript}or{,subscript}.
+~~~
+makes:
+---.box
+Text can be {/emphasized}, {*bold},
+{_underlined}, {~monospaced (code)},
+{'superscript}or{,subscript}.
+---
+
+Formatting can be also combined:
+~~~
+This text is {/emphasised and {_underlined{'superscript}}}.
+~~~
+makes:
+---.box
+This text is {/emphasised and {_underlined{'superscript}}}.
+---
+
+==== Shortcuts
+
+Since marking text as emphasised, bolded, etc. may be done frequently, it is possible to use formatting shortcuts: simply surrounding the text by a pair of ~\/~, ~*~, etc. The shortcuts must be first enabled, by including these lines (only select what is needed):
+~~~
 @chr em /
-# put the above in the page text, only once, perhaps at the very top
+@chr b *
+@chr u _
+@chr code ~
+@chr sup '
+@chr sub ,
 
 This is *bold*, this is /emphasized/, and this /emphasised and *bold*/.
 ~~~
 makes:
 ---.box
-# put the above in the page text, only once, perhaps at the very top
 This is *bold*, this is /emphasized/, and this /emphasised and *bold*/.
 ---
 
-== Typographical hooks
-Typographical hooks may be used to enter special characters into the output.
-Of course, they are not strictly needed, since CM supports utf-8.
+Hint: put the lines that enable formatting shortcuts in a {:prolog file|how_pages#prolog}.
+
+#-------------------------------------------------------------------------------
+== Typography
+
+$Mb text may contain Unicode (UTF8) characters. A few selected, often used special characters can be also entered as:
+
 ~~~
-{=>} {<=} {->} {<-} {--} {---} 😱
-~~~
-makes:
----.box
-{=>} {<=} {->} {<-} {--} {---} 😱
----
-
-== Processing hooks
-A processing hook has, immediately after the opening {~\{}, a specific /tag/.
-If the hook has parts (arguments), the first one is separated from the tag by
-a blank space; the second and following parts are separated by {~\|}.
-
-Three kinds of hooks are built-in in into the CM parser:
-
-=== Links and anchors
-The link ({~:}) hook has two parts: the text and the link. If only one part is
-provided, it is used for both the text and the link.
-
-=== Formulas
-
-Mathematical formulas can be entered using the TeX syntax and typeset by
-{:KaTeX|https://khan.github.io/KaTeX/function-support.html}. Surround the
-formulas by {~\{$} and {~$\}} (this is a special hook notation that does not
-allow nested hooks and insted passes curly braces on to TeX).
-~~~
-{$ 20 \times 10^{0.0002} $}
+{=>} {<=} {->} {<-} {--} {---}
 ~~~
 makes:
 ---.box
-{$ 20 \times 10^{0.0002} $}
+{=>} {<=} {->} {<-} {--} {---}
 ---
 
-=== In-text buttons
+#== Hooks
+#A processing hook has, immediately after the opening {~\{}, a specific /tag/.
+#If the hook has parts (arguments), the first one is separated from the tag by
+#a blank space; the second and following parts are separated by {~\|}.
+#Three kinds of hooks are built-in into CM: format, typography, processing
+
+#-------------------------------------------------------------------------------
+== Formulas
+
+Mathematical formulas can be entered using the TeX syntax and are typeset by {:KaTeX|https://khan.github.io/KaTeX/function-support.html}. Surround the formulas by ~\{\$\$~ and ~\$\$\}~:
+
+~~~
+{$$ 20 \times 10^{0.0002} $$}
+~~~
+makes:
+---.box
+{$$ 20 \times 10^{0.0002} $$}
+---
+
+#-------------------------------------------------------------------------------
+== Notes
+
+$Mb text may contain three kinds of notes:
+- footnotes
+- editorial notes
+- todo placeholders
+
+Footnotes are of the usual kind:
+~~~
+This text has an attached footnote.{fn: This is a example footnote.}
+~~~
+makes:
+---.box
+This text has an attached footnote.{fn: This is a example footnote.}
+---
+
+Editorial notes are visible only if $Mb is run locally (not in the version hosted at $MbMe):
+~~~
+An editor marked a {ed:mizzpelling|Please korrekt this.}.
+~~~
+makes:
+---.box
+An editor marked a {ed:mizzpelling|Please korrekt this.}.
+---
+
+Todo placeholders:
+~~~
+This feature {todo: does not yet exist}.
+~~~
+makes:
+---.box
+This feature {todo: does not yet exist}.
+---
+
+#-------------------------------------------------------------------------------
+== In-text buttons
 
 They look as if buttons, but are no buttons.
 ~~~
-In-text {btn button}, {btn.r red button}, {btn.g green button}, {btn.b blue button}.
+In-text {btn: button}, {btn:.r red button}, {btn:.g green button}, {btn:.b blue button}.
 ~~~
 makes:
 ---.box
-In-text {btn button}, {btn.r red button}, {btn.g green button}, {btn.b blue button}.
+In-text {btn: button}, {btn:.r red button}, {btn:.g green button}, {btn:.b blue button}.
 ---
 
-== Tables
-
-The support of tables is in development ('experimental').
-So far it is very basic: in a section 'table', {~[]} resp. {~()} delimit
-table header cells resp. data cells:
-
-~~~
-Borderless:
---- table
-[th1][th2][th3][th4]
-(td1)(td2)(td3)(td4)
-(td1)(td2)(td3)(td4)
-(td1)(td2)(td3)(td4)
----
-With borders:
---- table.border
-[th1][th2][th3][th4]
-(td1)(td2)(td3)(td4)
-(td1)(td2)(td3)(td4)
-(td1)(td2)(td3)(td4)
-~~~
-makes:
----.box
-Borderless:
---- table
-[th1][th2][th3][th4]
-(td1)(td2)(td3)(td4)
-(td1)(td2)(td3)(td4)
-(td1)(td2)(td3)(td4)
----
-With borders:
---- table.border
-[th1][th2][th3][th4]
-(td1)(td2)(td3)(td4)
-(td1)(td2)(td3)(td4)
-(td1)(td2)(td3)(td4)
----
----
-
-= Prolog
-
-If there is a special file named {~prolog} in a folder, the contents of the file is inserted before the contents of any {~.cm} file in that folder and all nested folders. If there are more prolog files on the path from {~pg/} to a {~.cm} file, the contents of the prolog files is combined.
-
-The prolog files is a convenient way of setting CM properties to apply to all text files in a book, in a book section, etc.
-
-For example, if an author prefers the shortcut notations {~\*bold\*} and {~\/emphasised\/}, instead of opening each text file with:
-~~~
-@chr b *
-@chr em /
-~~~
-the above can be put only once once into the prolog file.
-
-= Macros
+#-------------------------------------------------------------------------------
+== Macros
 
 {#macros}
 
 Macros allow a simple identifier to represent a longer, arbitrary sequence of characters.
 
-A macro is defined as: {~@def identifier text}. The macro definition must be on a separate line. The identifier is a sequence of letters and numbers, starting with a letter. The text can be anything, including spaces and other special characters. The spaces at the beginning and end will be trimmed, but spaces inside the text will be retained.
+A macro is defined as: {~@def identifier text...}. The identifier is a sequence of letters and numbers. The text can be anything, including spaces and other special characters. The spaces at the beginning and end will be trimmed, but spaces inside the text will be retained.
 
-An example. Define nacros:
-
+Define macros:
 ~~~
 @def dB dB{,SPL}
-@def SG {$\mathsf{S_{G}}$}
+@def SG {$$\mathsf{S_{G}}$$}
 ~~~
 
 @def dB dB{,SPL}
-@def SG {$\mathsf{S_{G}}$}
+@def SG {$$\mathsf{S_{G}}$$}
 
-To use a macro, prepend the identifier with a {~$}:
-
+To use a macro, put ~\$~ before the macro identifier:
 ~~~
-$dB $SG $BAD \$NotAMacro
+$dB $SG
 ~~~
 gives:
 ---.box
-$dB $SG $BAD \$NotAMacro
+$dB $SG
+---
+
+To prevent macro expansion, escape the ~\$~:
+~~~
+$BAD \$NotAMacro
+~~~
+gives:
+---.box
+$BAD \$NotAMacro
 ---
 
 It is possible to switch to another character for macro exansion, instead of {~$}, for example to {~%}:
@@ -509,8 +512,48 @@ $dB $SG $BAD \$NotAMacro
 ~~~
 gives:
 ---.box
+@push
 @chr macro %
 $dB $SG $BAD \$NotAMacro
 
 %dB %SG %BAD \%NotAMacro
+@pop
+---
+
+#-------------------------------------------------------------------------------
+== Tables
+
+The support of tables is in development. So far it is very basic: in a section 'table', ~[~ and ~]~, resp. ~(~ and ~)~ delimit table header cells resp. data cells:
+
+~~~
+Borderless:
+--- table
+[th1][th2][th3][th4]
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+---
+With borders:
+--- table.border
+[th1][th2][th3][th4]
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+~~~
+makes:
+---.box
+Borderless:
+--- table
+[th1][th2][th3][th4]
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+---
+With borders:
+--- table.border
+[th1][th2][th3][th4]
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+(td1)(td2)(td3)(td4)
+---
 ---

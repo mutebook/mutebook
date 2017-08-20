@@ -4,28 +4,26 @@
 
 # add some information on sound intensity in later version
 
-
-
 ====.u Sound Pressure
 
-There is always a lot of confusion between sound pressure and sound pressure level. Some of this confusion might be grounded in the fact that the sound pressure level (SPL) is a logarithm of the ratio of the effective sound pressure to the threshold of hearing at 1kHz. So if you are struggling with logarithms it might be a good idea to review {link} them before continuing with this section.
+There is always a lot of confusion between sound pressure and sound pressure level. Some of this confusion might be grounded in the fact that the sound pressure level (SPL) is a logarithm of the ratio of the effective sound pressure to the threshold of hearing at 1kHz. So if you are struggling with logarithms it might be a good idea to review {todo: link} them before continuing with this section.
 
-We already know that the acoustic pressure is the instantaneous pressure minus the barometric pressure. The effective acoustic pressure ({$ p_{eff}$}) can be determined by taking an RMS {link} value of the acoustic pressure. {# create link to perception} The effective acoustic or sound pressure is what we will use from here on as it is more relevant for our work. Very roughly speaking, for now we could say that the higher the effective sound pressure the louder the sound. The chapter on loudness will show that this simplification is not quite accurate.
+We already know that the acoustic pressure is the instantaneous pressure minus the barometric pressure. The effective acoustic pressure ($pEff) can be determined by taking an RMS {todo: link} value of the acoustic pressure. {todo: create link to perception} The effective acoustic or sound pressure is what we will use from here on as it is more relevant for our work. Very roughly speaking, for now we could say that the higher the effective sound pressure the louder the sound. The chapter on loudness will show that this simplification is not quite accurate.
 
 ====.u Sound Pressure Level
 
-As humans we can perceive sounds with sound pressures between 0.00002 Pa and 200 Pa. 0.00002 is the quietest sound we can perceive (threshold of hearing {link}) while 200 Pa and anything above causes physical pain to the listener (threshold of pain).  This is a very large range of numbers, which led to the introduction of the sound pressure level (SPL). In addition to just this very practical reason, it was believed that the human ear perceives sound pressures logarithmically, which means that going from 2 Pa to 4 Pa would sound as the same increase in loudness than going from 4 Pa to 8 Pa (not from 4 Pa to 6 Pa). Again, this is a simplification of audible perception, but it should suffice for the material that is covered in this section. In order to express this logarithmic way of listening and to get a more manageable range of numbers the following equation is used to get the SPL from the sound pressure:
+As humans we can perceive sounds with sound pressures between 0.00002 Pa and 200 Pa. 0.00002 is the quietest sound we can perceive (threshold of hearing {todo: link}) while 200 Pa and anything above causes physical pain to the listener (threshold of pain).  This is a very large range of numbers, which led to the introduction of the sound pressure level (SPL). In addition to just this very practical reason, it was believed that the human ear perceives sound pressures logarithmically, which means that going from 2 Pa to 4 Pa would sound as the same increase in loudness than going from 4 Pa to 8 Pa (not from 4 Pa to 6 Pa). Again, this is a simplification of audible perception, but it should suffice for the material that is covered in this section. In order to express this logarithmic way of listening and to get a more manageable range of numbers the following equation is used to get the SPL from the sound pressure:
 
 ---.equation
-{$ SPL = 20 * \log (\dfrac {p_{eff}} {0.00002 Pa}) $}
+{$$ SPL = 20 * \log (\dfrac {p_{eff}} {0.00002 Pa}) $$}
 ---
 
-where {$p_{eff}$} is the effective sound pressure in Pa and {$SPL$} the sound pressure level in {$dB_{SPL}$}. 0.00002 is the lowest sound pressure at 1000Hz that humans can perceive. It is the threshold of hearing at 1kHz. By referencing any sound pressure to the fixed threshold of hearing we can express sound levels in dB. If you have studied the section on the decibel, you should remember that the decibel is a logarithmic value of the ratio of two values and that you always need a reference in order to "decode" a dB value. When working with sound pressure level, this reference is always 0.00002 Pa. In order to clearly specify that this reference has been used, you add the {$_{SPL}$} behind the dB and it becomes {$dB_{SPL}$}. So as soon as you see {$dB_{SPL}$} you know which reference level to work with.
+where $pEff is the effective sound pressure in Pa and {$$SPL$$} the sound pressure level in $dBSPL. 0.00002 is the lowest sound pressure at 1000Hz that humans can perceive. It is the threshold of hearing at 1kHz. By referencing any sound pressure to the fixed threshold of hearing we can express sound levels in dB. If you have studied the section on the decibel, you should remember that the decibel is a logarithmic value of the ratio of two values and that you always need a reference in order to "decode" a dB value. When working with sound pressure level, this reference is always 0.00002 Pa. In order to clearly specify that this reference has been used, you add the {$$_{SPL}$$} behind the dB and it becomes $dBSPL. So as soon as you see $dBSPL you know which reference level to work with.
 
-Let us calculate the sound pressure level for the threshold of hearing, which is 0.00002 Pa. We just use 0.00002 Pa as value for {$p_{eff}$} and solve the equation:
+Let us calculate the sound pressure level for the threshold of hearing, which is 0.00002 Pa. We just use 0.00002 Pa as value for $pEff and solve the equation:
 
 ---.equation
-{$ SPL = 20 * \log (\dfrac {0.00002 Pa} {0.00002 Pa}) $}
+{$$ SPL = 20 * \log (\dfrac {0.00002 Pa} {0.00002 Pa}) $$}
 ---
 
 ---.equation
@@ -34,20 +32,20 @@ the logarithm of 1 equals 0 \n
 20 times 0 equals 0
 ---
 
-So the lowest sound pressure level we can hear at 1kHz is {$0dB_{SPL}$}, which is quite convenient.
+So the lowest sound pressure level we can hear at 1kHz is 0 $dBSPL, which is quite convenient.
 
-Let us calculate the sound pressure level for the threshold of pain, which has a sound pressure of 200 Pa. So we do the same as for the threshold of hearing, just that we use 200 Pa as {$p_{eff}$} now. The equation becomes:
+Let us calculate the sound pressure level for the threshold of pain, which has a sound pressure of 200 Pa. So we do the same as for the threshold of hearing, just that we use 200 Pa as $pEff now. The equation becomes:
 
 ---.equation
-{$ SPL = 20 * \log (\dfrac {200 Pa} {0.00002 Pa}) $}
+{$$ SPL = 20 * \log (\dfrac {200 Pa} {0.00002 Pa}) $$}
 ---
 
-Solving this equation gives us a sound pressure level of {$140dB_{SPL}$}. This gives us a dynamic range of 140 dB between the lowest sound we can perceive and the sound pressure level at which the sound starts hurting us. The exact value for the threshold of pain is hard to determine as pain is very subjective and listening tests are difficult to do without risking permanent hearing damage to the participant. This is why you will find different numbers (usually between {$120dB_{SPL}$} and {$140dB_{SPL}$}. Be aware that just because a loud sound does not hurt you does not mean that it cannot damage your ears. Long exposure to sounds with sound pressure levels exceeding {$85dB_{SPL}$} can potentially be harming your ears, impact your ability to listen and possibly lead to the end of your audio career. As musicians, sound engineers, and composers, we work with sound all the time so taking some measures to make sure that your work is not damaging your ears permanently is essential.
+Solving this equation gives us a sound pressure level of 140 $dBSPL. This gives us a dynamic range of 140 dB between the lowest sound we can perceive and the sound pressure level at which the sound starts hurting us. The exact value for the threshold of pain is hard to determine as pain is very subjective and listening tests are difficult to do without risking permanent hearing damage to the participant. This is why you will find different numbers (usually between 120 $dBSPL and 140 $dBSPL. Be aware that just because a loud sound does not hurt you does not mean that it cannot damage your ears. Long exposure to sounds with sound pressure levels exceeding 85 $dBSPL can potentially be harming your ears, impact your ability to listen and possibly lead to the end of your audio career. As musicians, sound engineers, and composers, we work with sound all the time so taking some measures to make sure that your work is not damaging your ears permanently is essential.
 
 The following calculator helps you verifying whether the SPL calculations you do by hand are correct:
 
 ---.diagram
-{interactive_equation, fill in sound pressure, get sound pressure level}
+{todo: interactive_equation, fill in sound pressure, get sound pressure level}
 ---
 
 # add table with sound pressure levels of common sounds
@@ -55,40 +53,17 @@ The following calculator helps you verifying whether the SPL calculations you do
 
 ====.u Calculating Sound Pressure from Sound Pressure Level
 
-Similarly, we can also calculate the effective sound pressure from a given sound pressure level. We just have to solve the equation for {$p_{eff}$}. If you do not remember how to do this, please review the section on logarithms {link}. After re-arranging the equation in its general form looks like this:
+Similarly, we can also calculate the effective sound pressure from a given sound pressure level. We just have to solve the equation for $pEff. If you do not remember how to do this, please review the section on logarithms {todo: link}. After re-arranging the equation in its general form looks like this:
 
 ---.equation
-{$p_{eff} = 10^{\dfrac {SPL} {20}} * 0.00002 Pa $}
+{$$ p_{eff} = 10^{\dfrac {SPL} {20}} * 0.00002 Pa $$}
 ---
-
-Solving this equation with any given sound pressure level in {$dB_{SPL}$} will give you the effective sound pressure in Pa.
+          
+Solving this equation with any given sound pressure level in $dBSPL will give you the effective sound pressure in Pa.
 
 ---.diagram
-{interactive_equation, fill in sound pressure level, get sound pressure}
+{todo: interactive_equation, fill in sound pressure level, get sound pressure}
 ---
 
 # add some example calculations
 # add how sound pressure level is relevant. E.g., calibrating speakers, playback levels and hearing damage, max SPL for microphones, etc.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -6,7 +6,9 @@ Every folder in the hierarchy contain an "index" file, ~_index.cm~{fn:The names 
 
 Each folder then contains one file for each additional page in the section. Since the  text is written in {:{$CM}|https://github.com/CompactMarkup}, the name of each such file ends in ~.cm~.
 
+{#prolog}
 @def prolog ~_prolog~
+
 Optionally, each folder may contain a special file $prolog. If present, the contents of the file, and also of all $prolog files above the current folder, are added before the text in a file. The $prolog files are a convenient place for {:macro definitions|how_cm#macros} and other configuration options that should apply to a number of pages.
 
 === Table of contents (TOC)

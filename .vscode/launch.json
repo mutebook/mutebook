@@ -6,7 +6,8 @@
     "type": "chrome",
     "request": "launch",
     "name": "Chrome",
-    "url": "http://localhost:8053/index.php?pg=how/cm.cm",
+//    "url": "http://localhost:8053/index.php?pg=how/cm.cm",
+    "url": "http://localhost:8053/index.php",
     "webRoot": "${workspaceRoot}"
   }
   ]

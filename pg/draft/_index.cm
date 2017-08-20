@@ -1,5 +1,10 @@
-@toc dr;   Draft
-@toc mupr; mupr_introduction.cm ; Introduction to Music Production
+@toc mb_draft;   Draft
+
+= $MB Draft
+
+This is $Mb in the making.
+
+@toc mb_mupr; mupr_introduction.cm ; Introduction to Music Production
 @toc Acoustics/
 @toc Perception of Sound/
 @toc Microphones/
