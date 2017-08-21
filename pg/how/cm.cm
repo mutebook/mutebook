@@ -300,7 +300,12 @@ Image files included in the text may come from the outside or inside of $Mb. An 
 
 The size and alternate text follow (optional) ~|~. If an alternate text is specified, but not image size, the text follows ~||~.
 
-The width and height of an image (in pixels) are two numbers, separated by 'x'.
+The width and height of an image (in pixels) are two numbers, separated by 'x'. Either or both numbers maybe omitted:
+- ~100~ {---} width
+- ~100x~ {---} width
+- ~x60~ {---} height
+- ~100x60~ {---} width and height
+- ~x~ {---} none (but size is still specified)
 
 ==== Outside images
 
