@@ -1,12 +1,8 @@
 <?php
 // configuration
-const TITLE  = 'Mutebook';        // the book title
-const BANNER = 'Mutebook';        // the book banner
-
 const PAGES  = './pg/';             // where pages are
 
-// debugging
-$isDebug = 'localhost' == @$_SERVER['SERVER_NAME'];
+const SC_PROJECT = 11395717, SC_SECURITY = '03ed7177';
 
 // php hooks
 // $phpHook = function () {
@@ -19,6 +15,6 @@ chdir($dir = dirname(__FILE__).'/');
 @include($dir.'statcounter.php');
 
 // the rest of code
-require($dir.'CM/php/_include_index_.php');
+require($dir.'CM/_include_index_.php');
 
 // eof
