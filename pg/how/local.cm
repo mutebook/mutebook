@@ -3,7 +3,7 @@
 #-------------------------------------------------------------------------------
 == $GH basics
 
-* Create your personal {:https://github.com} account.
+* Create your personal {:GitHub|https://github.com} account.
 * Learn to {:create a repository|https://help.github.com/articles/create-a-repo/}, and {:edit files|https://help.github.com/articles/managing-files-on-github/} directly on $GH.
 * Learn to {:clone|https://help.github.com/articles/cloning-a-repository/} a repository.
 * Learn how to use ~git pull~, ~git commit~, and ~git push~.
