@@ -2,6 +2,26 @@
 
 The simplest wave is a sine wave and as you will see in the section on Acoustics {todo:add link} any periodic wave can be broken down into individual sine waves, so it is essential that you know what a sine wave is and how you can describe one with a function.
 
-Take a look a the diagram below. It shows a circle with the a radius of 1. On the circle we have a fixed point. For now we are just placing that point all the way to the right and connect it with a straight line to the center of the circle. As the radius is 1, we know that this connection is 1 as well, because it is the radius. Let us also define this horizontal and its endless extension {#Jan, need your help to describe this} as our zero-axis of an x-y coordinate system. Grab the yellow dot and move it counter-clockwise. What you see to the right of our circle is the height of dot while you turn it. If you turn it one complete cycle, this value will rise from 0 to 1 during the first quarter of the cycle, because that is when you have reached the maximum and it is equal to the radius. In the next quarter it will go back to 0 before entering the third quarter, where it moves from 0 to -1. The last quarter completes the cycle and the height of the dot goes from -1 to 0. This will repeat over and over again with each turn of the cycle. The graph you see appearing on the right side is called a sine wave.
+Take a look a the diagram below. It shows a circle with a radius of 1. On the circle we have a fixed point that is marked with a yellow dot. For now we are just placing that dot all the way to the right and connect it with a straight line to the center of the circle. As the radius is 1, we know that this connection is 1 as well, because it is the radius. Let us also define this horizontal and its endless extension as our zero-axis of an x-y coordinate system. Grab the yellow dot and move it counter-clockwise. What you see to the right of our circle is the height of the dot while you turn it. If you turn it one complete cycle, this value will rise from 0 to 1 during the first quarter of the cycle, because that is when you have reached the maximum and it is equal to the radius. In the next quarter it will go back to 0 before entering the third quarter, where it moves from 0 to -1. The last quarter completes the cycle and the height of the dot goes from -1 to 0. This will repeat over and over again with each turn of the cycle. The graph you see appearing on the right side is called a sine wave which is described in the function:
 
-We can do the same experiment with measuring the length of the remaining side of the triangle or the vertical offset of the dot compared to the center of the circle while we turn it. When we start at the most right point again, we have a maximum offset that equals the radius, thus 1. When we turn counter-clockwise, the vertical offset will reduce to 0 with the first quarter turn, then go to -1 in the next quarter, to 0 again in the third quarter, and back to 1 in the last.
+---.equation
+{$$y = \sin{\alpha}$$}
+---
+
+in which {$$\alpha$$} is the angle between the starting point and how far you have turned. Thus for each angle this function gives us a unique value.
+
+We can do the same experiment with measuring the length of the vertical offset of the dot compared to the center of the circle (the y-axis) while we turn it. When we start at the most right point again, we have a maximum offset that equals the radius, thus 1. When we turn counter-clockwise, the vertical offset will reduce to 0 with the first quarter turn, then go to -1 in the next quarter, to 0 again in the third quarter, and back to 1 in the last. We can describe this in the function:
+
+---.equation
+{$$y = \cos{\alpha}$$}
+---
+
+As we are dealing with a right triangle, we can use our knowledge of the Pythagorean Theorem and come to the conclusion that:
+
+---.equation
+{$$ (\sin{\alpha})^2 + (\cos{\alpha})^2 = 1 $$}
+---
+
+# add things to calculate sides of triangle for calculating the expansion angle
+
+We will use more of sine and cosine in the Acoustics section.

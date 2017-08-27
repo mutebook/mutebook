@@ -1,6 +1,6 @@
 = Introduction to Music Production
 
-==== What is Music Production?
+== What is Music Production?
 
 Without becoming too philosophical, let us start with a brief description of what happens in music production and recording so that we know what we have to learn in order to prepare for creative work in the music industry. Recording is a relatively young art (just over 100 years old),
 #{todo: add link to history resources}
@@ -24,13 +24,13 @@ Many contemporary music productions are even created with the listeners at home 
 So generally speaking one could say that the music production process is the process of capturing a musical performance or idea so that an audience can enjoy it at a different time and a different place than the original performance. This is certainly true for traditional music genres in which the music was created with the performance in mind (e.g., classical music). The rise of recording and the development of technology have provided us with creative possibilities that go far beyond capturing a traditional live performance. In some situations the music might have never been performed as heard by the listener coming from the final medium. Techniques (overdubs, editing, etc.) and tools might have been used that create a listening experience that does not have much to do with how the music was performed inside the studio. The following paragraphs will differentiate between {/natural recording} (even though this is a terrible term and there is nothing unnatural about recording in a studio) and {/studio recording}, so let us first discuss these two approaches.
 #{todo: section needs to be extended}
 
-==== Natural Recording
+== Natural Recording
 Most classical music is recorded in acoustic environments where classical music is usually performed, such as concert halls or churches.
 # add links to acoustics
 The space in which the performance takes place and its acoustic properties play an important role for the audience’s experience. As most of the people who listen to classical music at home have experienced classical music performed live in a concert hall there are certain expectations (concerning spatial impression, stereo image, timbre, etc.) the recording has to meet in order to appeal to them. Therefore, oftentimes when recording classical music the entire ensemble plays within the same space and the direct sound and the reflections are all captured simultaneously. The final result tries to create the sensation of a live performance. This is sometimes called {/natural recording}. While there are some audiophiles out there who refuse to use anything else than microphones (some of them never more than two), working in classical music does not mean that you should rule out any other tools right away. If an equalizer, compressor, or an alternative way of recording improves the final result, there is no reason not to use it. After all, we have to keep in mind that trying to mimic a live performance is destined to fail so we have to do more in order to create an impressive sounding production. Just keep in mind that the listener might expect a {/natural} sounding result.
 # Classical music production will be discussed in greater detail in another {todo: section\link}.
 
-==== Studio Recording
+== Studio Recording
 
 In most of the other music genres, artificial reverb is used during the live performance that is not linked to the concert venue. In fact, the recording might have been created this way and the live performance is trying to recreate what is heard on the record. As such, artificial acoustics are applied to tracks that are recorded dry (without reverb). While in natural recording it is usually expected that the entire ensemble is placed within the same acoustic space, in other genres it is not uncommon to hear many different reverbs with various acoustic properties on different tracks or groups of tracks.
 
@@ -47,7 +47,7 @@ With the continuously expanding arsenal of artificial reverberation including ul
 
 Understanding this difference is important but this does not mean that one way or the other is the only way to record. As always in art, it depends on what you are trying to create.
 
-==== Production Steps
+== Production Steps
 
 Now that we are aware of the difference between natural recording (sometimes also called acoustic recording) and studio recording, let us take a look at the various different steps a music production can go through until the final product is created.
 
@@ -58,7 +58,7 @@ In natural music production you typically go through the following steps:
 * Mixing
 * Mastering
 
-{_1. Recording}
+=== {_1. Recording}
 
 During the recording days you will have to
 - Set up the equipment
@@ -67,38 +67,61 @@ During the recording days you will have to
 - Record Overdubs (this is not a very common step for classical recording, but it does happen)
 - Take down and pack the equipment
 
-{_2. Editing}
+=== {_2. Editing}
 
 During editing you combine various sections of different takes in order to assemble the music according to the score.
 # add link to classical music production
 
-{_3. Mixing}
+=== {_3. Mixing}
 
 In the mixing stage of a natural music production, all recorded tracks are combined into 2-channel stereo, multi-channel surround, or whatever other format is used. Sometimes the recorded signals of all the microphones are just summed for the mix. Other times, the signals might be altered with signal processors
 # add link}
 and/or artificial reverb is added in order to create the final mixdown.
 
 
-{_4. Mastering}
+=== {_4. Mastering}
 
 The 2-channel or multi-channel mix is forwarded to mastering where additional sonic changes and loudness corrections are made, silence between tracks is added and the final disk image (as long as disks still exist) is created and forwarded for manufacturing.
 
 
-{_Pre Production}
+=== {_Pre Production}
 
 Before the first note is recorded a lot of planning and preparation is required. This includes score preparation, studio booking, designing the microphone set-up and a patch list, travel arrangements, etc. Do not underestimate the time it takes to prepare for a production. You expect the musicians to have practiced the music, so as producer/engineer you have to be just as well prepared in order to guarantee a smooth production work-flow. When booking the recording space, make sure to allow sufficient time for set-up, line-checks, sound-check and tear down. If you are flying or driving for a long time before you have to record, plan in some time for your ears to rest so that they are fully functional when the sound-check starts. If you are recording on location (e.g., a church or school auditorium) keep in mind that you will need additional time to set-up the control room, something you do not have to do when recording in a studio.
 
 
-==== The Production Team
+== The Production Team
 
 Various people can contribute to a music production. The number of people who work on the production depends very much on the kind of production and the production budget. Generally speaking one could say that the larger the budget, the more specialized people apply their unique skills to create the final result. While for a low-budget classical string quartet recording, only a sound engineer and a producer (sometimes one and the same person) will take care of the recording, the editing, the mixing, and the mastering, a larger production might involve a recording engineer (sometimes an assistant engineer and/or tape operator), a recording producer, a mixing engineer, and a mastering engineer. Sometimes you might also find musicians, composers and conductors in the control room during any stage of the production. With fast internet connections that are available today, the members of the team might be spread all across the world and might have never met in person. An album recorded in Europe might be mixed in America or vice versa.
 
-# ==== Tools and Equipment
-# {todo: add diagram with links to equipment descriptions}
-# \n
-# \n
 
-==== What You Need to Know?
+== The Tools
+
+Her is a list of equipment that you will most likely have to use at some point during your work in audio production:
+
+- microphones
+- microphone stands
+- cables
+- microphone pre-amplifiers
+- mixing consoles (analogue or digital)
+- D/A converters
+- A/D converters
+- audio interfaces
+- analogue and digital signal processors
+- digital Audio Workstations (DAW)
+- direct injection (DI) boxes
+- headphones
+- studio monitors (loudspeakers)
+- amplifiers
+- SPL meters
+- hardware and software synthesizers
+- MIDI controllers
+- computers
+- scores and pencil
+- etc.
+
+This list is just a very rough overview. Each of the items listed could in itself be a whole list of options. For example, there are hundreds of microphones available and each one will yield a different result. The arsenal of signal processors is expanding constantly, especially in the digital domain and the range of DAWs you can choose from is growing, too. With all these tools available to us, it is sometimes easy to forget what music production is all about. In the end all that matters is what you create with the tools and not the tools themselves. Understanding what the equipment does is essential, but experimentation (which is also quite safe if you understand the equipment) and using the tools in creative ways is just as important. When you are overwhelmed with the endless possibilities of your equipment, thinking about what you are trying to create will guide you along the way. If you are just using tools for the sake of using them (while it can be a lot of fun) the risk of getting lost and never reaching the finish line is very high.
+
+== What You Need to Know?
 
 When you read through the previous paragraphs, you realize that all this means that you need to be as proficient and knowledgeable as possible in quite a few areas. Because you work in a team and collaborate with musicians, you need to have social skills and know how to work with artists and help them to achieve their best performance right when you need it. You also need to understand the music, so that you can communicate with everyone and contribute to improve the final product. Next, you need to understand some of the science of sound. Room acoustics, acoustics of sound sources, psychoacoustics, electronics, electro-acoustics are all significant when working in audio. Depending on your particular discipline, you might get away with not being an expert in all of them, but the more you know the better. Knowing the possibilities in mastering will help you making important decisions in the mix. Understanding the editing process will significantly influence how you work during the recording sessions. Understanding how the tools work and what you can achieve with them will help you in creating what you want to create and when trouble-shooting. While there are brilliant and successful sound engineers out there who do not care about inner workings of analogue pieces of equipment or algorithms of plug-ins, there are also those who build their own gear or write their own plug-ins for signal processing. In addition to providing you with more tools to do your job, this could potentially be another area of employment or an additional source of income.
 
