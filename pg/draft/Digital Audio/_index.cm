@@ -1,0 +1,10 @@
+@toc mb_diau ; Digital Audio
+
+= Digital Audio
+
+This section introduces the basics of digital audio. We will look at how an analogue signal is made digital and vice versa and learn sampling and quantization and how it relates to what we hear. Before we go into more detail
+
+
+@toc sampling;  pythagoras.cm  ; Sample Frequency
+@toc quantization; quantization.cm ; Quantization and Bit Depth
+

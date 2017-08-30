@@ -17,3 +17,4 @@ Microphones can be classified based on two major principles:
 @toc mic_trans;  transducer_principles.cm  ; Transducer Principles
 @toc mic_oper;   operating_principles.cm   ; Acoustic Operating Principles
 @toc mic_spec;   mic_specifications.cm     ; Microphone Specifications
+@toc mic_stereo; mic_stereo.cm     ; Stereo Recording Techniques
