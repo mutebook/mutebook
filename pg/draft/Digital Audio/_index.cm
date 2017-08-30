@@ -2,7 +2,11 @@
 
 = Digital Audio
 
-This section introduces the basics of digital audio. We will look at how an analogue signal is made digital and vice versa and learn sampling and quantization and how it relates to what we hear. Before we go into more detail
+This section introduces the basics of digital audio. We will look at how an analogue signal is made digital and vice versa and learn sampling and quantization and how it relates to what we hear. Before we go into more detail about digital audio, we have to understand the difference between analogue and digital audio signals. If you look at any wave in the acoustic domain or as an analogue electric signal, you will find that at any moment in time the signal has a specific value. Despite the obvious limitations in time we can feel and measure and the limitations defined by the maximum amplitude of the analogue system, there is an infinite number of points in time and an infinite number of values. This is why an analogue audio signal is also referred to as time-continuous.
+
+Digital systems use two states (on/off or 1/0), which means that there is a limited amount of numbers available. This also means that in order to work with an audio signal inside a computer, we have to represent the analogue signal in a way that limits the number of values and points in time. In other words, we have to make the signal time-discrete. This is done sampling and quantization and is described in this section.
+
+
 
 
 @toc sampling;  pythagoras.cm  ; Sample Frequency
