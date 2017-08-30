@@ -2,11 +2,12 @@
 
 A right triangle is a triangle that has one angle of 90˚ and looks like what you see below.
 
+
 ---.diagram
-{right triangle}
+{img:.pop diagrams/MB_math_d_01.jpg}
 ---
 
-As we all know, a triangle consists of three sides and three angles. The larger the angle between adjacent sides, the longer the side that is opposite to that angle. All angles within a triangle add up to 180˚, so if we look at the right triangle above we can conclude that the longest side is opposite to the right angle. The triangle consists of three points where the sides meet and we call them A, B and C, as you see in the diagram. Let us call the right angle at point A {$$\alpha$$}, the one to its right {$$\beta$$}, and the remaining one {$$\gamma$$}. The sides we name according to whichever point it is opposite from; so a, b and c respectively.
+As we all know, a triangle consists of three sides and three angles. The larger the angle between adjacent sides, the longer the side that is opposite to that angle. All angles within a triangle add up to 180˚, so if we look at the right triangle above we can conclude that the longest side is opposite to the right angle. This side is called the hypotenuse. The triangle consists of three points where the sides meet and we call them A, B and C, as you see in the diagram. Let us call the right angle at point A {$$\alpha$$}, the one to its right {$$\beta$$}, and the remaining one {$$\gamma$$}. The sides we name according to whichever point it is opposite from; so a, b and c respectively.
 
 Pythagoras once found out that if we know either two lengths of the sides in a right triangle, we can calculate the length of the missing one by using the equation:
 
