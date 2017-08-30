@@ -25,7 +25,7 @@ We all know that {$$ c - c = 0 $$}, so instead of writing {$$ b + c - c $$}, we 
 {$$ a - c = b $$}
 ---
 
-Whoever asked us for {$$ b $$} will now be happy to hear the answer "b equals a minus c".
+Whoever asked us for {$$ b $$} will now be happy to hear the answer "{$$b$$} equals {$$a$$} minus {$$c$$}".
 
 ----
 We can do the same with
@@ -51,13 +51,13 @@ Let us take a quick look at how this works for multiplication and division befor
 If we know that
 
 ---.equation
-{$$ a = b * c $$}
+{$$ a = b \times c $$}
 ---
 
 and we want to solve for {$$ b $$}, we divide both sides by c, which would result in
 
 ---.equation
-{$$ \dfrac {a} {c} = \dfrac {b * c} {c} $$}
+{$$ \dfrac {a} {c} = \dfrac {b \times c} {c} $$}
 ---
 
 {$$ \dfrac {c} {c} = 1 $$} and anything multiplied by {$$ 1 $$} is the same as anything, so we can neglect the {$$ \dfrac {c} {c} $$} and conclude that
@@ -76,13 +76,13 @@ If we know that
 and we want to solve for {$$ b $$}, we multiply both sides by {$$ c $$} and get
 
 ---.equation
-{$$ a * c = \dfrac {b * c} {c} $$}
+{$$ a * c = \dfrac {b \times c} {c} $$}
 ---
 
 which is
 
 ---.equation
-{$$ a * c = b $$}
+{$$ a \times c = b $$}
 ---
 ----
 
@@ -92,7 +92,7 @@ Now let us make it a little more difficult and try to solve again for {$$ b $$},
 {$$ a = c^b $$}
 ---
 
-{$$ c^b $$}, as you might already know, means that we multiply {$$ c $$} by itself, exactly {$$ b $$} times. For example if {$$ b $$} was {$$ 3 $$} ({$$c^3$$}), we knew that this could also be written as {$$ c * c * c $$}. Now the crazy person walks in again and asks us "what is b?" he is basically asking "How often do I have to multiply {$$c$$} by itself in order to get {$$a$$}?". This is when the logarithm comes into play. If we know that
+{$$ c^b $$}, as you might already know, means that we multiply {$$ c $$} by itself, exactly {$$ b $$} times. For example if {$$ b $$} was {$$ 3 $$} ({$$c^3$$}), we knew that this could also be written as {$$ c \times c \times c $$}. Now the crazy person walks in again and asks us "what is b?" he is basically asking "How often do I have to multiply {$$c$$} by itself in order to get {$$a$$}?". This is when the logarithm comes into play. If we know that
 
 ---.equation
 {$$ a = c^b $$}
@@ -103,7 +103,7 @@ we also know that
 {$$ \log_c a = b $$}
 ---
 
-{$$ b $$} now tells us how often we have to multiply {$$ c $$} by itself in order to get {$$ a $$}.
+{$$ b $$} now tells us how often we have to multiply {$$c$$} by itself in order to get {$$a$$}.
 
 If you look for {btn: log} on your calculator or phone you might find {btn:log{,10}} instead. This indicates that your calculator assumes that you are working with a base of 10 for your logarithms. When calculating decibels, for example, this is exactly what we need, so we will not work with any other bases for now. What does a base of 10 mean? Let us write it in an equation:
 
@@ -125,7 +125,7 @@ Doing the same with {$$ x = 100,000 $$} should result in {$$5$$}. This is easy t
 
 Here another example to calculate:
 ---.equation
-{$$ 20 * \log_{10} 40 = x $$}
+{$$ 20 \times \log_{10} 40 = x $$}
 ---
 
 If you solve this for {$$x$$} you should get {$$32.04119982655925$$}. If you get a different value than this, it probably has to do with how you input it in your calculator. Most calculators on phones take the logarithm of whatever is displayed at the moment as soon as you hit {btn: log{,10}}. So if you start inputting the equation from the beginning you would actually calculate the logarithm of {$$20$$} instead of {$$40$$}. Knowing this you should be able to first calculate {$$\log_{10}40$$} and then multiply the result by {$$20$$}. Here is how you do that:
@@ -140,7 +140,7 @@ Alternatively you can use a more advanced calculator that let's you input the eq
 
 As last exercise of this section, let us try to solve the following equation:
 ---.equation
-{$$ 20 * \log_{10} x = 40 $$}
+{$$ 20 \times \log_{10} x = 40 $$}
 ---
 
 We have seen that if
@@ -157,10 +157,10 @@ we also know that
 so if we manage to get our equation into this form, we can re-arrange it in order to isolate {$$x$$}. What is different in our equation is that the {$$ \log_{10} x $$} is multiplied by {$$20$$}, so let us start by getting rid of that multiplication. We divide both sides by {$$20$$}, which results in
 
 ---.equation
-{$$ \dfrac {20 * \log_{10} x} {20} = \dfrac {40} {20} $$}
+{$$ \dfrac {20 \times \log_{10} x} {20} = \dfrac {40} {20} $$}
 ---
 
-{$$ \dfrac {20 * \log_{10} x} {20} $$} is the same as {$$ \log_{10}x $$} and {$$\dfrac {40} {20}$$} equals {$$2$$}, so we get
+{$$ \dfrac {20 \times \log_{10} x} {20} $$} is the same as {$$ \log_{10}x $$} and {$$\dfrac {40} {20}$$} equals {$$2$$}, so we get
 
 ---.equation
 {$$ \log_{10}x = 2 $$}
@@ -168,6 +168,7 @@ so if we manage to get our equation into this form, we can re-arrange it in orde
 
 Now we can use our logarithm knowledge to further isolate x. Once again take a look at the following two equations.
 
+If
 ---.equation
 {$$ a = c^b $$}
 ---
