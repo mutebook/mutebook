@@ -132,7 +132,7 @@ If you solve this for {$$x$$} you should get {$$32.04119982655925$$}. If you get
 
 * input {btn: 40}
 * hit {btn:log{,10}}
-* hit {btn: *}
+* hit {btn:×}
 * input {btn: 20}
 * hit {btn: =}
 
