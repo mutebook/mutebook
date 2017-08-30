@@ -1,10 +1,8 @@
 # Features
 
-* editor's notes (visible only in development mode)
-* error messages (visible only in development mode)
-* footnotes (hook)
-
 # Nice to have
+
+* SVG box/text diagrams, clickable as links
 
 # Cosmetics
 
@@ -13,7 +11,8 @@
 
 # Bugs
 
-* site refresh or browser back/forth buttons should work
+* site refresh or browser back/forth buttons should refresh menu
+* {btn: {$$\times$$}} should work
 
 # Text
 
@@ -22,4 +21,3 @@
 
 # Internal - code-related
 
-* in individual pages, limit `book.toc = ` to prev/next; also limit generated js
