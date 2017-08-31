@@ -19,13 +19,13 @@ in which {$$a$$} is the longest side. Thus, if we know b and c, we can calculate
 # add square root to logarithm section
 
 ---.equation
-{$$ a = \sqrt {b^2 = c^2} $$}
+{$$ a = \sqrt {b^2 + c^2} $$}
 ---
 
 For example, if {$$b = 3$$} and {$$c = 4$$}, we can calculate {$$a$$} as follows:
 
 ---.equation
-{$$ a = \sqrt {3^2 = 4^2} = \sqrt {9+16} = \sqrt {25} = 5 $$}
+{$$ a = \sqrt {3^2 + 4^2} = \sqrt {9+16} = \sqrt {25} = 5 $$}
 ---
 
 If we know {$$a$$} and {$$b$$}, we can calculate {$$c$$} by re-arranging the equation.
@@ -40,4 +40,4 @@ so
 {$$ \sqrt {a^2 - b^2} = c $$}
 ---
 
-Since Pythagoras was the one who discovered this, it is called the {_Pythagorean Theorem}.
+Since Pythagoras {ed: was the one who discovered this|The theorem is {:attributed to Pythagoras|https://www.britannica.com/topic/Pythagorean-theorem}.}, it is called the {_Pythagorean Theorem}.
