@@ -1,0 +1,291 @@
+.flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.inline-flex {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+.flex-row {
+  -webkit-flex-flow: row;
+  -ms-flex-flow: row;
+  flex-flow: row;
+}
+.flex-row-reverse {
+  -webkit-flex-flow: row-reverse;
+  -ms-flex-flow: row-reverse;
+  flex-flow: row-reverse;
+}
+.flex-row-wrap {
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+.flex-col {
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+}
+.flex-0 {
+  -webkit-flex: 0.1;
+  -ms-flex: 0.1;
+  flex: 0.1;
+}
+.flex-1 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.flex-justify-end {
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+}
+.flex-justify-start {
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+.flex-justify-end {
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+}
+.select-none {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.vert-text {
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+@font-face {
+  font-family: FontAwesome;
+  src: url('/assets/fonts/fontawesome-webfont.woff2') format('woff2'), url('/assets/fonts/fontawesome-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+.font-fa {
+  font-family: FontAwesome;
+  font-style: normal;
+}
+.quint {
+  border: thin solid dodgerblue;
+  border-radius: 2px;
+  background: transparent;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 240px;
+  height: 240px;
+  font-family: sans-serif;
+  font-size: small;
+}
+.quint_panel .hidden {
+  display: none !important;
+}
+.quint_panel {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  text-align: left;
+}
+.quint_panel div.tg {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+}
+.quint_panel.top {
+  top: 0;
+}
+.quint_panel.left {
+  -webkit-flex-flow: row;
+  -ms-flex-flow: row;
+  flex-flow: row;
+  left: 0;
+}
+.quint_panel.bottom {
+  bottom: 0;
+}
+.quint_panel.bottom div.tg {
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+}
+.quint_panel.right {
+  -webkit-flex-flow: row-reverse;
+  -ms-flex-flow: row-reverse;
+  flex-flow: row-reverse;
+  right: 0;
+}
+.quint_panel.center {
+  display: table;
+  height: 100%;
+  margin: 0 auto;
+}
+.quint_panel {
+  font-family: sans-serif;
+  font-size: small;
+  color: black;
+}
+.quint_panel button {
+  margin: 2px;
+  padding: 0;
+  font-weight: bold;
+  text-align: center;
+  width: 38px;
+  height: 24px;
+  background-color: #fcfcfc;
+  box-shadow: 1px 1px 0 0 #ddd;
+  border: thin solid #aaa;
+  border-radius: 3px;
+}
+.quint_panel button:focus {
+  outline: none;
+}
+.quint_panel button:active,
+.quint_panel button.down {
+  position: relative;
+  left: 0.5px;
+  top: 0.5px;
+  box-shadow: none;
+  background-color: #eee;
+}
+.quint_panel button.down {
+  color: orangered;
+}
+.quint_panel button.small {
+  width: 30.4px;
+  height: 19.2px;
+}
+.quint_panel button.large {
+  width: 60.8px;
+  height: 38.4px;
+}
+.quint_panel button.square {
+  width: 24px;
+}
+.quint_panel .small.square {
+  width: 19.2px;
+}
+.quint_panel button.round {
+  width: 24px;
+  border-radius: 12px;
+}
+.quint_panel button.system {
+  border-color: dodgerblue;
+  color: dodgerblue;
+  background: rgba(255, 240, 216, 0.4);
+}
+.quint_panel .row {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row;
+  -ms-flex-flow: row;
+  flex-flow: row;
+}
+.quint_panel .col {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+}
+.quint_panel .box {
+  border: thin solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  margin: 2px;
+  line-height: 1.6em;
+}
+.quint_panel .box.face {
+  border-color: dodgerblue;
+  background: rgba(255, 240, 216, 0.4);
+}
+.quint_panel .box.padH {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.quint_panel .box.padV {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.quint_panel .box.padA {
+  padding: 4px;
+}
+.quint_panel .caption {
+  color: #005db7;
+  border-bottom: thin solid dodgerblue;
+  text-align: center;
+}
+.quint_panel span.col {
+  text-align: center;
+}
+.quint_panel input {
+  vertical-align: middle;
+  margin: 4px;
+}
+.quint_panel input button:focus {
+  outline: none;
+}
+.quint_panel input:focus {
+  outline: none;
+}
+.quint_panel input[type='range'] {
+  width: 130px;
+}
+.quint_panel input[type=range][orient=vertical] {
+  width: 1.4em;
+  height: 130px;
+  -webkit-appearance: slider-vertical;
+}
+.quint_panel.touch input[type=checkbox],
+.quint_panel.touch input[type=radio] {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+}
+.quint_panel.touch input[type=checkbox] {
+  background: url('check_off.png');
+}
+.quint_panel.touch input[type=radio] {
+  background: url('radio_off.png');
+}
+.quint_panel.touch input[type=checkbox]:checked {
+  background: url('check_on.png');
+}
+.quint_panel.touch input[type='radio']:checked {
+  background: url('radio_on.png');
+}
+.quint_panel.touch input[type=range] {
+  zoom: 1.4;
+}
+.quint_panel.touch #load_check_on {
+  background: url('check_on.png');
+}
+.quint_panel.touch #load_check_off {
+  background: url('check_off.png');
+}
+.quint_panel.touch #load_radio_on {
+  background: url('radio_on.png');
+}
+.quint_panel.touch #load_radio_off {
+  background: url('check_off.png');
+}
