@@ -1,20 +1,16 @@
 <?php
-// configuration
-const PAGES  = './pg/';             // where pages are
 
-const SC_PROJECT = 11395717, SC_SECURITY = '03ed7177';
+$book = [
+  'title'   => 'Mutebook',
+  'banner'  => 'Mutebook',
+  'pages'   => 'pg/',
 
-// php hooks
-// $phpHook = function () {
-//   return 'Ä';
-// };
+  'sc_project'  => 11395717,
+  'sc_security' => '03ed7177',
 
-chdir($dir = dirname(__FILE__).'/');
+  'hooks' => function () {}
+];
 
-// statcounter.com
-@include($dir.'statcounter.php');
-
-// the rest of code
-require($dir.'CM/_include_index_.php');
+require(dirname(__FILE__).'/CM/cm_index.php');
 
 // eof
