@@ -112,4 +112,4 @@ If there were meanwhile changes made to the $GH repository (by other contributor
 #-------------------------------------------------------------------------------
 == Update $MbMe
 
-If you are certain that the latest pushed version of $Mb works, you may update the public {:{$Mb} website|https://{$MbMe}} by opening a special link {:https://{$MbMe}/pull.php?key=...} in a web browser. You must know the correct key, of course :)
+If you are certain that the latest pushed version of $Mb works, you may update the public {:{$Mb} website|{$MbMeUrl}} by opening a special link {:{$MbMeUrl}/pull.php?key=...} in a web browser. You must know the correct key, of course :)

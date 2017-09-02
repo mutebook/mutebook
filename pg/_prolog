@@ -3,6 +3,7 @@
 @def MB   MUTEBOOK
 @def Mb   Mutebook
 @def MbMe mutebook.me
+@def MbMeUrl https://{$MbMe}
 
 @def GH   GitHub
 @def CM   Compact Markup
