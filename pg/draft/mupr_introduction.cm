@@ -10,7 +10,7 @@ but technological developments have been introduced constantly and have changed 
 ---.diagram
 {img:.pop diagrams/MB_mupr_d_01.jpg}
 
-{todo: MB_mupr_d_01}
+# {todo: MB_mupr_d_01}
 ---
 
 The diagram above shows the simplified signal flow of the artistic message from the creator (the composer) to the receiver (the audience). The composition is interpreted by the performer and played in front of a live audience. The audience is present in the same room at the same time as the performer. The musicians' voices or instruments can be considered tools the performers use to deliver the composer's message to the audience. Once the music has been transduced into acoustic form it travels through the concert hall to the audience.
@@ -22,7 +22,7 @@ Many contemporary music productions are even created with the listeners at home 
 ---.diagram
 {img:.pop diagrams/MB_mupr_d_02.jpg}
 
-{todo: MB_mupro_D_02}
+# {todo: MB_mupro_D_02}
 ---
 
 So generally speaking one could say that the music production process is the process of capturing a musical performance or idea so that an audience can enjoy it at a different time and a different place than the original performance. This is certainly true for traditional music genres in which the music was created with the performance in mind (e.g., classical music). The rise of recording and the development of technology have provided us with creative possibilities that go far beyond capturing a traditional live performance. In some situations the music might have never been performed as heard by the listener coming from the final medium. Techniques (overdubs, editing, etc.) and tools might have been used that create a listening experience that does not have much to do with how the music was performed inside the studio. The following paragraphs will differentiate between {/natural recording} (even though this is a terrible term and there is nothing unnatural about recording in a studio) and {/studio recording}, so let us first discuss these two approaches.
@@ -45,7 +45,7 @@ With the continuously expanding arsenal of artificial reverberation including ul
 ---.diagram
 {img:.pop diagrams/Artificial Reverb and Natural Recording.png|600}
 
-{todo: MB_mupr_d_03}
+# {todo: MB_mupr_d_03}
 {ed: Artificial Reverb|Insert diagram about artificial reverb and how it is different (if possible with recordings around one instrument to listen to how it sounds differently.)}
 ---
 

@@ -7,6 +7,6 @@ When working in any audio discipline it is obviously crucial to understand the u
 This section will explain how sounds waves are created, how they propagate through air, and ...
 
 @toc ac_sound;  sound_sources_and_waves.cm  ; Sound Sources and Sound Waves
-@toc ac_waves;  wave_attributes.cm          ; Wave Attributes
+@toc ac_waves;  wave_attributes.cm          ; Amplitude, Frequency and Wavelength
 @toc ac_spl;    soundpressure_spl.cm        ; Sound Pressure and Sound Pressure Level
 @toc ac_room;   room_acoustics.cm           ; Room Acoustics
