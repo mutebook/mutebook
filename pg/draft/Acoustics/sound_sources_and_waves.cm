@@ -6,7 +6,7 @@ Let us imagine a completely silent endless space filled with air particles (thou
 # {todo: diagram; somehow displaying what is described above}
 ---
 
-If the movement of the loudspeaker is following the simple motion {todo: link} described below and we measure the pressure at a fixed point in our space we get the following:
+If the movement of the loudspeaker is following the {:simple harmonic motion|#shm} described below and we measure the pressure at a fixed point in our space we get the following:
 
 ---.diagram
 # {todo: diagram_interactive, sine wave around barometric pressure, move across wave and display a pressure value}
@@ -26,7 +26,7 @@ where {$$ p $$} is the acoustic pressure in Pascal, {$$ p_{total} $$} is the ove
 
 For most of our work, the effective acoustic pressure is more relevant than the instantaneous pressure. The effective acoustic pressure ({$$ p_{eff} $$}) can be determined by taking an RMS {todo: link} value of the acoustic pressure{todo: create link to perception}. From here on we will use the effective acoustic pressure and {---} unless otherwise indicated {---} the terms acoustic pressure or sound pressure are used to refer to effective sound pressure.
 
-==.u Simple Harmonic Motion
+==.u {#shm} Simple Harmonic Motion
 
 What kind of sound wave the loudspeaker creates and what it sounds like to our ears depends on the movement of the loudspeaker. The simplest wave that can be generated is created by simple harmonic motion. It is usually and very effectively explained and visualized with help of a spring and a weight (or mass). The weight is attached to the ceiling and the weight is attached to the spring (see diagram below). If you leave it alone for a while the spring which is pulling the weight upwards and the gravity that is pulling the weight down will have found a compromise where the weight should rest so that they both get their share of it. This position is called equilibrium position. If you now pull the weight down a bit (which you can do in the diagram by clicking and dragging) and let it go the spring will work to pull it back up and because once mass is moving it takes energy to stop it, the weight will move through the equilibrium position. This is when the gravity takes over and reduces the movement of the weight trying to pull it back down. The weight slows down until it changes direction and moves downwards. First slowly, picking up speed until it has passed through the equilibrium position again. This is when the pulling of the spring is greater than that of the gravity again and the weight is slowed down, until it stops and moves upwards again. This movement would repeat endlessly without any friction or other loss of energy and is called simple harmonic motion. If we sketch the position of the weight over time, we get a sine wave (which you see on the right side of the diagram below).
 

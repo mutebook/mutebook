@@ -15,7 +15,7 @@ Optionally, each folder may contain a special file $prolog. If present, the cont
 
 As an example that shows how to define table-of-contents entries, let us look at the main index file of $Mb:
 
-~~~
+~~~.bash
 @toc mb_index; Mutebook
 
 = Welcome to $MB

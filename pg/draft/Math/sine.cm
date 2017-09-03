@@ -78,7 +78,7 @@ If you compare the sine wave with the cosine wave, you should notice that they l
 {$$ y(t) = \sin (\alpha + \phi) $$}
 ---
 
-Let us calculate a few values with {$$\phi = 90°$$}, so the equation looks like this:
+Let us calculate a few values with {$$\phi$$} = 90°, so the equation looks like this:
 
 ---.equation
 {$$ y(t) = \sin (\alpha + 90) $$}

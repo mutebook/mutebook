@@ -1,8 +1,8 @@
 = Set up software for local $Mb
 
-$Mb is a web-based book and is hosted online at {:{$MbMeUrl}}. You may choose to install a local copy of $Mb (running directly on your computer). A local copy allows you to:
+$Mb is a web-based book and is hosted online at {:{$MbMeUrl}}. You may choose to install a local copy of $Mb, running directly on your computer. A local copy allows you to:
 - use $Mb without an Internet connection,
-- run (serve) $Mb on a local network, and, namely
+- serve $Mb on a local network, and, namely
 - further develop $Mb.
 
 #-------------------------------------------------------------------------------
@@ -19,12 +19,12 @@ Xcode is needed for Homebrew.
 ==== 2. Homebrew
 Install (or update) {:Homebrew|https://brew.sh}. Homebrew provides an easy way to install and manage software packages.
 
-/TL;DR/: To install Homebrew, run in the Terminal:
-~~~
+To install Homebrew, run in the Terminal:
+~~~.bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ~~~
 To update Homebrew:
-~~~
+~~~.bash
 brew update
 brew upgrade
 ~~~
@@ -33,15 +33,15 @@ brew upgrade
 Use Homebrew to install PHP version 7.1.
 
 "Tap" a php repository:
-~~~
+~~~.bash
 brew tap homebrew/homebrew-php
 ~~~
 Install PHP:
-~~~
+~~~.bash
 brew install php71
 ~~~
 Verify the PHP version:
-~~~
+~~~.bash
 php -v
 ~~~
 The reply ought to start with {=>} ~PHP 7.1...~
@@ -50,24 +50,24 @@ The reply ought to start with {=>} ~PHP 7.1...~
 For PHP debugging (advanced use; needed only if you will be developing the php code):
 
 Install xdebug:
-~~~
+~~~.bash
 brew install php71-xdebug
 ~~~
 Verify the installation success:
-~~~
+~~~.bash
 php -i | grep 'xdebug support'
 ~~~
 The reply ought to be {=>} ~xdebug support => enabled~
 
 Look up the location of the active ~php.ini~ file:
-~~~
+~~~.bash
 php -i | grep php.ini
 ~~~
- {=>} ~Loaded Configuration File => /usr/local/etc/php/7.1/php.ini~
+ {=>} {~Loaded Configuration File => /usr/local/etc/php/7.1/php.ini}
 
-Edit the ~php.ini~ file (~sudo nano /usr/local/etc/php/7.1/php.ini~).
+Edit the ~php.ini~ file ({~sudo nano /usr/local/etc/php/7.1/php.ini}).
 Add the following:
-~~~
+~~~.ini
 [XDebug]
 xdebug.remote_enable = 1
 xdebug.remote_autostart = 1
