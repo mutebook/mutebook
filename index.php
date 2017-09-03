@@ -11,6 +11,6 @@ $book = [
   'hooks' => function () {}
 ];
 
-require(dirname(__FILE__).'/CM/cm_index.php');
+require(dirname(__FILE__).'/CM/_index.php');
 
 // eof
