@@ -59,26 +59,40 @@ The omnidirectional loudspeaker in our situation is called a {/point sound sourc
 # {todo: diagram_interactive, show how 10 is distributed across a larger surface area the further away you move from the sound source, see text # above}
 # ---
 
-For a point sound source which creates a spherical wave the sound pressure level drops by about 6dB per doubling of the distance.
+For a point sound source {---} which creates a spherical wave {---} the sound pressure level drops by about 6dB per doubling of the distance.
 
 
-==== Point Sources and Line Sources
+== Point Sources and Line Sources
 
 The previous example used a so-called point source which dissipates a spherical sound wave uniformly into all directions. Another form of source is a line source which in theory could be created by placing very many (in theory an infinite number) infinitely small point sources next to each-other and have them all work uniformly.
 
-{: Wave Field Synthesis | http://recherche.ircam.fr/equipes/salles/WFS_WEBSITE/Index_wfs_site.htm} works with this principle. For our purpose let us say that with an infinite number of infinitely small omnidirectional loudspeakers we created an infinitely long line. Now when that line expands and contracts the sound pressure does not equalize over three dimensions, but only over two, so when the sound wave travels away from the source it reduces less than a point source would.
+{: Wave Field Synthesis | http://recherche.ircam.fr/equipes/salles/WFS_WEBSITE/Index_wfs_site.htm} works with this principle. For our purpose let us say that with an infinite number of infinitely small omnidirectional loudspeakers we created an infinitely long line. Now when that line expands and contracts the sound pressure does not equalize over three dimensions, but only over two, so with increasing distance from the source, the sound pressure level drops less than it does for a point source would.
 
 
----.diagram
-{todo: diagram, line sound source, possible one where you can switch from line source to point source and investigate how they are different}
+# ---.diagram
+# {todo: diagram, line sound source, possible one where you can switch from line source to point source and investigate how they are different}
+# ---
+
+# {todo: add equations and section on sound intensity}
+
+For a line sound sources {---} which creates a cylindrical wave {---} the sound pressure level drops by about 3 dB per doubling of the distance.
+
+
+Whether a sound source is considered a point source or line source actually depends on the wavelength in relation to the size of the source. For example, a sound with an infinitely long wavelength (which would not be very audible) would not care much about a "line" of 2 meters and just dissipate around it as if it was a point sound source. An infinitely short wavelength (which would also not be very audible) on the other hand would probably think of the 2 meter line source as a pretty endless long line source and behave accordingly. The important thing to remember is that because of this behavior musical instruments can be considered a mix of point sources and line sources depending on the frequency. For higher frequencies they are more likely line sources, while for lower frequencies they are more likely point sources. This means that on average they are neither behaving like pure line sources nor like pure point sources and the sound pressure level will drop by something in between 3dB and 6dB per doubling of the distance.
+
+== Doubling the Distance
+
+We saw in the previous section that doubling the distance to the sound source decreases the sound pressure level. This further means that there is no specific drop of the sound pressure level per distance unit (e.g., meters or feet). When you change the distance between a microphone and a sound source from 20cm to 40cm, the difference in SPL will be considerably larger than when you change the distance from 200cm to 220cm. In order to achieve the same drop as for the closer distance, we would actually have to double the distance again, so increasing it by 200cm to a total distance of 400cm.
+
+# {todo: insert diagram}
+
+To calculate the difference in dB of the sound pressure level at two distances from a point sound source you can use the following equation:
+
+---.equation
+{$$ {difference \space in \space dB} = 20 \times \log(\dfrac {r1} {r2})$$}
 ---
 
-{todo: add equations and section on sound intensity}
 
-For line sound sources which creates planar waves the sound pressure level drops by about dB per doubling of the distance.
-
-
-Whether a sound source is considered a point source or line source actually depends on the wavelength in relation to the size of the source. For example, a sound with an infinitely long wavelength (which would not be very audible) would not care much about a line sound source of 2 meters and just dissipate around it as if it was a point sound source. An infinitely short wavelength (which would also not be very audible) on the other hand would probably think of the 2 meter line source as a pretty endlessly long line source and behave accordingly. The important thing to remember is that because of this behavior musical instruments can be considered a mix of point sources and line sources depending on the frequency. For higher frequencies they are more likely line sources, while for lower frequencies they are more likely point sources. This means that on average they are neither behaving like line sources nor like point sources and the sound pressure level will drop by something in between 3dB and 6dB per doubling of the distance.
 
 # include that every spherical wave becomes a planar wave at some point. It is all relative. Maybe include an image with zoom settings
 
