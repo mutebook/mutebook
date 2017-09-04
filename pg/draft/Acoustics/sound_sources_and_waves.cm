@@ -9,9 +9,9 @@ Let us imagine a completely silent endless space filled with air particles (thou
 
 If the movement of the loudspeaker is following the {:simple harmonic motion|#shm} described below and we measure the pressure at a fixed point in our space we get the following wave:
 
----.diagram
+
 {todo: {img:.pop  diagrams/MB_ac_d_01.jpg} }
----
+
 
 The diagram above shows the {/acoustic pressure} at any moment in time. You see that the pressure changes that were created by the loudspeaker alternate around the barometric pressure, sometimes being just a bit higher, sometimes just a bit lower. The acoustic pressure is given in Pascal (Pa) and is defined by the equation
 
