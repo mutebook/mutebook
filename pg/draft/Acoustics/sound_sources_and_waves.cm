@@ -3,17 +3,16 @@
 Let us imagine a completely silent endless space filled with air particles (though this might be difficult to do with all the noise that is constantly around us). The air particles are peacefully resting in their position and each particle has the same amount of space to enjoy its existence. This means that per square meter, square foot, square centimeter or anything else we find the same number of particles. Becoming a bit more scientific, we could conclude that the pressure on each particle is the same and that the density per volume unit is the same for all areas of our endless space as well. Let us decide that the endless space is somewhere on the surface of a planet where the barometric pressure remains forever constant at 100,000 Pa (Pascal) so that each area within the space has exactly that pressure. Even though we would love to remain in this very peaceful quiet place for a little while, we now place an omnidirectional loudspeaker somewhere in that space. You can imagine our loudspeaker looking like a soft billiard ball of which the entire surface serves as speaker cone. We then turn on the loudspeaker and it starts expanding and contracting pushing the air particles around it outwards and pulling them inwards. Air particles love their own space, so when the loudspeakers pushes the first row of particles outwards and they are getting closer to their outer neighbors, those neighbors want to get out of their way to equalize the pressure again, moving outwards where they find their outer neighbors and so on. The high pressure is moving outwards. While that high pressure is moving outwards, the loudspeaker contracts and opens up space around it where there are no particles, yet, and the pressure is very low. The particles that were just tortured by being pushed outwards, are being rewarded with more space now and they naturally move inwards in order to make use of the additional space they get, trying to equalize the pressure. The outer neighbors {---} jealous of course {---} want to get their part of that additional space as well and follow their inner neighbors inside and so on. If the loudspeaker keeps expanding and contracting, the same thing happens over and over again creating alternating moments of high pressure and low pressure. The high pressure and low pressure parts of the wave follow the movement of the loudspeaker.
 
 @def ISVR http://resource.isvr.soton.ac.uk/spcg/tutorial/tutorial/Tutorial_files
-@def ISVR_SOURCE Source: {:{$ISVR}/Web-basics-pointsources.htm}
+@def ISVR_SOURCE (source: {:isvr|{$ISVR}/Web-basics-pointsources.htm})
 
 ---.diagram
-{img:.pop {$ISVR}/monopolfinalptpt.gif ||(a tooltip)|{$ISVR_SOURCE}}
+{img: diagrams/monopole.png ||(a tooltip)|{*Acoustic monopole}\n
+  See {:animation|{$ISVR}/monopolfinalptpt.gif} {$ISVR_SOURCE}}
 ---
 
 If the movement of the loudspeaker is following the {:simple harmonic motion|#shm} described below and we measure the pressure at a fixed point in our space we get the following wave:
 
-
 {todo: {img:.pop  diagrams/MB_ac_d_01.jpg} }
-
 
 The diagram above shows the {/acoustic pressure} at any moment in time. You see that the pressure changes caused by the loudspeaker alternate around the barometric pressure, sometimes being just a bit higher, sometimes just a bit lower. The acoustic pressure is given in Pascal (Pa) and is defined by the equation
 
