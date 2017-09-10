@@ -1,0 +1,13 @@
+h1 {
+  font-size: 1.4em;
+}
+
+td {
+  padding: .1em .4em;
+}
+
+.fig {
+  border: thin solid lightblue;
+  border-radius: 2px;
+  padding:0; margin:6px;
+}

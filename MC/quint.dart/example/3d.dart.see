@@ -1,0 +1,77 @@
+import 'package:quint/quint.dart';
+
+main() {
+  polygon('#app');
+}
+
+Shape3 spaceLine(GroupNode g,XYZ p1,XYZ p2,M4 mat) {
+  var l = new Line3(p1,p2,mat);
+  g.add(l.shape);
+  return l;
+}
+
+PolyShape3 oct;
+Spline3    circ;
+
+makeShapes(GroupNode g,M4 mat) {
+  const p = 1, n = -1;
+  var
+    p1 = xyz(p,0,0),
+    p2 = xyz(0,p,0),
+    p3 = xyz(n,0,0),
+    p4 = xyz(0,n,0),
+    p5 = xyz(0,0,p),
+    p6 = xyz(0,0,n);
+
+  oct = new PolyShape3()
+    ..add(spaceLine(g,p1,p2,mat))
+    ..add(spaceLine(g,p2,p3,mat))
+    ..add(spaceLine(g,p3,p4,mat))
+    ..add(spaceLine(g,p4,p1,mat))
+    ..add(spaceLine(g,p1,p5,mat))
+    ..add(spaceLine(g,p2,p5,mat))
+    ..add(spaceLine(g,p3,p5,mat))
+    ..add(spaceLine(g,p4,p5,mat))
+    ..add(spaceLine(g,p1,p6,mat))
+    ..add(spaceLine(g,p2,p6,mat))
+    ..add(spaceLine(g,p3,p6,mat))
+    ..add(spaceLine(g,p4,p6,mat));
+
+  int st = 60; List<XY> ps = [];
+  for (int i = -1; i < st+2; ++i) {
+    XY  p2 = ra(1,Math.PIPI * i / st).toXY();
+    XYZ p3 = xyz(p2.x,p2.y,0);
+    ps.add(p3);
+  }
+
+  circ = new Spline3(true,mat)
+    ..ps = ps;
+  g.add(circ.shape);
+}
+
+const int sz = 400;
+var mat = new M4.identity();
+var quat = new Quat.identity();
+
+//double rotX = 0.0, rotY = 0.0; const double CXY = 1/30;
+
+updateShapes(XY xy) {
+  // TODO
+  quat = quat.mul(new Rot(xy.y/60,xyz(1,0,0)).toQuat());
+  quat = quat.mul(new Rot(xy.x/60,xyz(0,1,0)).toQuat());
+
+  mat.set(new M4.fromTransQuat(xyz(sz/2,sz/2,0),quat));
+  mat.scale(xyz1(sz/2.2));
+  oct.update();
+  circ.updateShape();
+}
+
+polygon(el_sel) {
+  var q = new QuintMachine(el_sel,xy1(sz));
+  q.setMouseRotate(updateShapes);
+  var fg = q.fg;
+  makeShapes(fg,mat);
+  updateShapes(xy0());
+}
+
+// eof

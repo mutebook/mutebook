@@ -7,7 +7,8 @@
     "request": "launch",
     "name": "Chrome",
     // "url": "http://localhost:8053/index.php",
-    "url": "http://localhost:8053/index.php?pg=draft/Acoustics/sound_sources_and_waves.cm",
+    // "url": "http://localhost:8053/index.php?pg=draft/Acoustics/sound_sources_and_waves.cm",
+    "url": "http://localhost:8053/index.php?pg=sandbox.cm",
     "webRoot": "${workspaceRoot}"
   }
   ]

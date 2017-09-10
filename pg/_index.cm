@@ -8,5 +8,7 @@ As $Mb will be under constant development for quite some time, please send us fe
 
 @toc how/     # tutorials for authors
 @toc draft/   # Mutebook in making
+
 # Appendices
 @toc mb_glossary; glossary.cm ; Glossary
+@toc mb_sandbox;  sandbox.cm ;  (Sandbox)

@@ -1,0 +1,23 @@
+@load audio
+
+= Sandbox
+
+Try things out:
+
+== Audio
+
+These look like buttons, but are not:
+{btn:.r 440}
+{btn:.g 528}
+{btn:.b 660}
+{btn: 1000}
+
+The play sine waves:
+{btn-sine:.r.toggle 440}
+{btn-sine:.g 528}
+{btn-sine:.b 660}
+
+With text:
+{btn-sine:.r.toggle a|440}
+{btn-sine:.g.toggle c|528}
+{btn-sine:.b.toggle e|660}

@@ -1,0 +1,65 @@
+/* quint.js - a JavaScript library to build simple machines
+ * Copyright © 2013-5 Ian George Burleigh
+ * http://quinta.audio/Quint
+ */
+
+svg rect.ugen {
+	stroke:			#888;
+	fill:			#eee;
+	background-color: #123;
+}
+
+svg rect.ugen.movable {
+	cursor: 		move;
+}
+
+svg text.tag {
+	font-family: monospace;
+}
+
+svg path.con {
+	stroke:			#aaa;
+}
+
+svg path.con.over {
+	stroke:			#08f;
+}
+
+svg path.con.sig {
+	stroke:			#aaa;
+}
+
+svg path.con.sig.over {
+	stroke:			#c47208;
+}
+
+svg circle.inot {
+ 	stroke:			#000;
+ 	stroke-width:	1;
+}
+
+svg circle.in {
+ 	fill:	#bdd;
+}
+
+svg circle.in.sig {
+ 	fill:	orange;
+}
+
+svg circle.in.over {
+ 	fill:	#8f0;
+}
+
+svg circle.ot {
+ 	fill:	#08f;
+}
+
+svg circle.ot.sig {
+ 	fill:	red;
+}
+
+svg circle.ot.down {
+ 	fill:	#8f0;
+}
+
+/* eof */

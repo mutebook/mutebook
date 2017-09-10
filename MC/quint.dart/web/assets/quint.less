@@ -1,0 +1,247 @@
+@import "inc/all";
+
+// theme
+
+@clr1:  dodgerblue; // main color: frame ...
+@clr2:  orangered;  // secondary color
+@clr0:  #fff0d8;    // easy background
+
+@defSize: 240px;
+@borderR: 3px;
+@def_margin: 2px;
+
+@box_pad:   4px;
+@box_face:  fade(@clr0,40%);
+
+// SVG
+.quint {
+  .frame(@clr1,@borderR);
+  .select-none;
+
+  width: @defSize; height: @defSize;
+  font-family: sans-serif;
+  font-size:   small;
+}
+
+// HTML overlay
+@btn_width: 38px; @btn_height: 24px;
+@btn_off_w: 1px;  @btn_off_h:  1px;
+
+@btn_face: #fcfcfc; @btn_active: #eee;
+@btn_border: #aaa; @btn_shadow: #ddd;
+
+@clrBox: @clr1;
+
+.quint_panel .hidden {
+  display: none !important;
+}
+
+// panel layout
+.quint_panel {
+  .select-none;
+
+  .flex;
+  position: absolute;
+
+  div.tg {
+    .flex; .flex-col;
+  }
+
+  text-align: left;
+}
+
+.quint_panel.top {
+  top: 0;
+}
+
+.quint_panel.left {
+  .flex-row;
+  left: 0;
+}
+
+.quint_panel.bottom {
+  bottom: 0;
+  div.tg {
+    .flex-justify-end;
+  }
+}
+
+.quint_panel.right {
+  .flex-row-reverse;
+  right: 0;
+}
+
+.quint_panel.center {
+  display: table; height: 100%; margin: 0 auto;
+}
+
+// panel properties
+.quint_panel {
+  font-family: sans-serif;
+  font-size:   small;
+  color:       black;
+
+  button {
+    margin: @def_margin; padding: 0;
+    font-weight: bold; text-align: center;
+    width: @btn_width; height: @btn_height;
+    background-color: @btn_face;
+    box-shadow: @btn_off_w @btn_off_h 0 0 @btn_shadow;
+    border: thin solid @btn_border;
+    border-radius: @borderR;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  button:active, button.down {
+    position: relative; left: @btn_off_w/2; top: @btn_off_h/2;
+    box-shadow: none;
+    background-color: @btn_active;
+  }
+
+  button.down {
+    color: @clr2;
+  }
+
+  button.small {
+    width:  @btn_width  * .8;
+    height: @btn_height * .8;
+  }
+
+  button.large {
+    width:  @btn_width  * 1.6;
+    height: @btn_height * 1.6;
+  }
+
+  button.square {
+    width:  @btn_height;
+  }
+
+  .small.square {
+    width:  @btn_height  * .8;
+  }
+
+  button.round {
+    width: @btn_height;
+    border-radius: @btn_height/2;
+  }
+
+  button.system {
+    border-color: @clr1; color: @clr1;
+    background: @box_face;
+  }
+
+  .row {
+    .flex; .flex-row;
+  }
+
+  .col {
+    .flex; .flex-col;
+  }
+
+  .box {
+    .frame(transparent,3px);
+    margin: @def_margin;
+    line-height: 1.6em;
+  }
+
+  .box.face {
+    border-color: @clrBox;
+    background: @box_face;
+  }
+
+  .box.padH {
+    padding-left: @box_pad;
+    padding-right: @box_pad;
+  }
+
+  .box.padV {
+    padding-top: @box_pad;
+    padding-bottom: @box_pad;
+  }
+
+  .box.padA {
+    padding: @box_pad;
+  }
+
+  .caption {
+    color: darken(@clrBox,20%);
+    border-bottom: thin solid @clrBox;
+    text-align: center;
+  }
+
+  span.col {
+    text-align: center;
+  }
+
+  input {
+    //height: 2.4em;
+    vertical-align: middle;
+    margin: 4px;
+    button:focus {
+      outline: none;
+    }
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  input[type='range'] {
+    width: 130px;
+  }
+
+  input[type=range][orient=vertical] {
+    width: 1.4em; height: 130px;
+    // TODO IE writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+  }
+}
+
+@input-size: 18px;
+//@clr0d: darken(@clr0,5%);
+//@clr0dd: darken(@clr0,25%);
+.quint_panel.touch {
+  input[type=checkbox], input[type=radio] {
+    -webkit-appearance: none;
+    width: @input-size; height: @input-size;
+    //background: @clr0d;
+    //border: thin solid grey;
+  }
+
+  input[type=checkbox] {
+    background: url('check_off.png');
+    //border-radius: 2px;
+  }
+
+  input[type=radio] {
+    background: url('radio_off.png');
+    //border-radius: @input-size;
+  }
+
+  input[type=checkbox]:checked {
+    background: url('check_on.png');
+    //border: 3px solid @clr0dd;
+    //background: grey;
+  }
+
+  input[type='radio']:checked {
+    background: url('radio_on.png');
+    //border: 4px solid @clr0d;
+    //background: #777;
+  }
+
+  input[type=range] {
+    zoom: 1.4;
+  }
+
+  #load_check_on  { background: url('check_on.png');   }
+  #load_check_off { background: url('check_off.png');  }
+  #load_radio_on  { background: url('radio_on.png');   }
+  #load_radio_off { background: url('check_off.png');  }
+}
+
+
+// eof
