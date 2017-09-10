@@ -12,10 +12,13 @@ These look like buttons, but are not:
 {btn:.b 660}
 {btn: 1000}
 
-The play sine waves:
+This plays 1kHz:
+{btn-sine: 1000}
+
+These play a minor triad:
 {btn-sine:.r.toggle 440}
-{btn-sine:.g 528}
-{btn-sine:.b 660}
+{btn-sine:.g.toggle 528}
+{btn-sine:.b.toggle 660}
 
 With text:
 {btn-sine:.r.toggle a|440}
