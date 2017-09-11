@@ -24,3 +24,9 @@ With text:
 {btn-sine:.r.toggle a|440}
 {btn-sine:.g.toggle c|528}
 {btn-sine:.b.toggle e|660}
+
+Waveforms:
+{btn-sine:.toggle   sine     |442}
+{btn-square:.toggle square   |442}
+{btn-saw:.toggle    sawtooth |442}
+{btn-tri:.toggle    triangle |442}

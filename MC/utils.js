@@ -1,10 +1,10 @@
 var MC = MC || {};
 
 MC.Utils = class {
-  static tone (owner, cps) {
+  static tone (owner, cps, type = 'sine') {
     let time = MC.Audio.now;
     if (!owner.osc) {
-      const og = new MC.OscGain(); og.sendToDest();
+      const og = new MC.OscGain(type); og.sendToDest();
       owner.osc = og;
       og.osc.cps = cps;
       // TODO
