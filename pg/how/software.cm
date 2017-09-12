@@ -1,5 +1,4 @@
 = Set up software for local $Mb
-{btn: {$$\times$$}}
 
 $Mb is a web-based book and is hosted online at {:{$MbMeUrl}}. You may choose to install a local copy of $Mb, running directly on your computer. A local copy allows you to:
 - use $Mb without an Internet connection,

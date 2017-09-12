@@ -64,6 +64,16 @@ MC.AuStartStop = (Base) => class extends Base { // mixin
       this._state = 2;
     }
   }
+
+  _start (when) {
+    if (this.node)
+      this.node.start(when);
+  }
+
+  _stop (when) {
+    if (this.node)
+      this.node.stop(when);
+  }
 };
 
 MC.Osc = class extends MC.AuStartStop(MC.AuNode) {
@@ -103,16 +113,6 @@ MC.Osc = class extends MC.AuStartStop(MC.AuNode) {
     this.node.setPeriodicWave(
       MC.Audio.ctx.createPeriodicWave(
         new Float32Array([0, ri.x]), new Float32Array([0, ri.y])));
-  }
-
-  _start (when) {
-    if (this.node)
-      this.node.start(when);
-  }
-
-  _stop (when) {
-    if (this.node)
-      this.node.stop(when);
   }
 };
 
@@ -173,7 +173,7 @@ MC.Audio = class {
     this.ctx  = new AudioContext();
     (this.dest = new MC.Gain(1)).node.connect(this.ctx.destination);
     window.addEventListener('beforeunload', () => this.mute());
-    this.testBeep();
+    // this.testBeep();
   }
 
   static get hasCtx () {
@@ -181,7 +181,7 @@ MC.Audio = class {
   }
 
   static get sr () {
-    return this.hasCtx ? this.ctx.sampleRate.round() : 0;
+    return this.hasCtx ? this.ctx.sampleRate : 0;
   }
 
   static get now () {
@@ -234,7 +234,7 @@ MC.Audio = class {
   }
 
   static testBeep () {
-    this.beep(880, .3, .2);
+    this.beep(880, .3, .12);
   }
 };
 
@@ -254,23 +254,21 @@ MC.Audio.init();
 
 // typedef void OnFileRead();
 
-// class AudioBufferSource extends AuNode with AuStartStopMixin {
-//   AudioBufferSource(): super(_make());
-//   AudioBufferSourceNode get node => _node;
+MC.AudioBufferSource = class extends MC.AuStartStop(MC.AuNode) {
+  constructor () {
+    super(MC.Audio.hasCtx ? MC.Audio.ctx.createBufferSource() : null);
+  }
 
-//   static AudioNode _make()
-//     => Audio.hasCtx ? Audio.ctx.createBufferSource() : null;
-
-//   void _start(num when) => node.start(when);
-//   void _stop(num when)  => node.stop(when);
-
-//   void createBuffer(int lgt, double f(int)) {
-//     if (null==node) return;
-//     var buf = Audio.ctx.createBuffer(1,lgt,Audio.sr);
-//     var dta = buf.getChannelData(0);
-//     for (var i=0; i<lgt; ++i) dta[i] = f(i);
-//     node ..buffer = buf ..loop = true;
-//   }
+  createBuffer (/* int */ lgt, /* double f(int) */ f) {
+    if (!this.node)
+      return;
+    const buf = MC.Audio.ctx.createBuffer(1, lgt, MC.Audio.sr);
+    const dta = buf.getChannelData(0);
+    for (let i = 0; i < lgt; ++i)
+      dta[i] = f(i);
+    this.node.buffer = buf;
+    this.node.loop = true;
+  }
 
 //   void readFile(File file, [OnFileRead f]) {
 //     if (null==node) return;
@@ -299,7 +297,45 @@ MC.Audio.init();
 //       }, onError: (e)=> System.alert('Cannot load this audio file.'));
 //     }) ..send();
 //   }
-// }
+};
+
+MC.WhiteNoise = class extends MC.AudioBufferSource {
+  constructor () {
+    super();
+    this.createBuffer(8 * MC.Audio.sr, () => Math.rand(-1, 2));
+  }
+};
+
+MC.PinkNoiseGenerator = class {  // filtered white noise
+  constructor () {
+    this._b0 = .0; this._b1 = .0; this._b2 = .0; this._b3 = .0;
+    this._b4 = .0; this._b5 = .0; this._b6 = .0;
+  }
+
+  nextSample () {
+    const white = Math.rand(-1, 2);
+    this._b0 = (0.99886 * this._b0) + (white * 0.0555179);
+    this._b1 = (0.99332 * this._b1) + (white * 0.0750759);
+    this._b2 = (0.96900 * this._b2) + (white * 0.1538520);
+    this._b3 = (0.86650 * this._b3) + (white * 0.3104856);
+    this._b4 = (0.55000 * this._b4) + (white * 0.5329522);
+    this._b5 = (-0.7616 * this._b5) - (white * 0.0168980);
+
+    // (roughly) compensate for gain
+    const pink = (this._b0 + this._b1 + this._b2 + this._b3 + this._b4 +
+                  this._b5 + this._b6 + (white * 0.5362)) * 0.22;
+    this._b6 = white * 0.115926;
+    return pink;
+  }
+};
+
+MC.PinkNoise = class extends MC.AudioBufferSource {
+  constructor () {
+    super();
+    const gen = new MC.PinkNoiseGenerator();
+    this.createBuffer(8 * MC.Audio.sr, () => gen.nextSample());
+  }
+};
 
 // class Filter extends AuNode {
 //   Filter(String type): super(_make()) {

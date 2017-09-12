@@ -9,8 +9,9 @@ Math.normPIPI = (a) => (
 Math.normPI = (a) =>
   ((a = this.normPIPI(a)) <= this.PI ? a : a - this.PIPI);
 
-
 Math.PIPI = 2 * Math.PI;
 Math.PI2  = Math.PI / 2;
+
+Math.rand = (low, range) => low + (Math.random() * range);
 
 // eof
