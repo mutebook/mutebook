@@ -1,6 +1,7 @@
+@load audio
 = Sound Sources and Sound Waves
 
-Let us imagine a completely silent endless space filled with air particles (though this might be difficult to do with all the noise that is constantly around us). The air particles are peacefully resting in their position and each particle has the same amount of space to enjoy its existence. This means that per square meter, square foot, square centimeter or any other volume unit, we find the same number of particles. Becoming a bit more scientific, we can conclude that the pressure on each particle is the same and that the density per volume unit is the same for all areas of our endless space. Let us decide that the endless space is somewhere on the surface of a planet where the barometric pressure remains forever constant at 100,000 Pa (Pascal) so that each area within the space has exactly that pressure. Even though we would love to remain in this very peaceful quiet place for a little while, we now place an omnidirectional loudspeaker somewhere in that space. You can imagine our loudspeaker looking like a soft billiard ball of which the entire surface serves as speaker cone. We then send a sine wave into the loudspeaker and it starts expanding and contracting pushing the air particles around it outwards and pulling them inwards. Air particles love their own space, so when the loudspeakers pushes the first row of particles outwards and they are getting closer to their outer neighbors, those neighbors want to get out of their way to equalize the pressure again, moving outwards where they find their outer neighbors, and so on. The high pressure is moving outwards. While that high pressure is moving away, the loudspeaker contracts and opens up space around itself where there are no particles, yet, and the pressure is very low. The particles that were just tortured by being pushed outwards, are being rewarded with more space now and they naturally move inwards in order to make use of the additional space they get, trying to equalize the pressure. The outer neighbors {---} jealous of course {---} want to get their part of that additional space as well and follow their inner neighbors inside and so on. If the loudspeaker keeps expanding and contracting, the same thing happens over and over again creating alternating moments of high pressure and low pressure. The high pressure and low pressure parts of the wave follow the movement of the loudspeaker.
+Let us imagine a completely silent endless space filled with air particles (though this might be difficult to do with all the noise that is constantly around us). The air particles are peacefully resting in their position and each particle has the same amount of space to enjoy its existence. This means that per square meter, square foot, square centimeter or any other volume unit, we find the same number of particles. Becoming a bit more scientific, we can conclude that the pressure on each particle is the same and that the density per volume unit is the same for all areas of our endless space. Let us decide that the endless space is somewhere on the surface of a planet where the barometric pressure remains forever constant at 100,000 Pa (Pascal) so that each area within the space has exactly that pressure. Even though we would love to remain in this very peaceful quiet place for a little while, we now place an omnidirectional loudspeaker somewhere in that space. You can imagine our loudspeaker looking like a soft billiard ball of which the entire surface serves as speaker cone. We then send a sine wave into the loudspeaker and it starts expanding and contracting pushing the air particles around it outwards and pulling them inwards. Air particles love their own space, so when the loudspeaker pushes the first row of particles outwards and they are getting closer to their outer neighbors, those neighbors want to get out of their way to equalize the pressure again, moving outwards where they find their outer neighbors, and so on. The high pressure is moving outwards. While that high pressure is moving away, the loudspeaker contracts and opens up space around itself where there are no particles, yet, and the pressure is very low. The particles that were just tortured by being pushed outwards, are being rewarded with more space now and they naturally move inwards in order to make use of the additional space they get, trying to equalize the pressure. The outer neighbors {---} jealous of course {---} want to get their part of that additional space as well and follow their inner neighbors inside and so on. If the loudspeaker keeps expanding and contracting, the same thing happens over and over again creating alternating moments of high pressure and low pressure. The high pressure and low pressure parts of the wave follow the movement of the loudspeaker.
 
 @def ISVR http://resource.isvr.soton.ac.uk/spcg/tutorial/tutorial/Tutorial_files
 @def ISVR_SOURCE (source: {:isvr|{$ISVR}/Web-basics-pointsources.htm})
@@ -12,7 +13,7 @@ Let us imagine a completely silent endless space filled with air particles (thou
 
 If the movement of the loudspeaker is following the {:simple harmonic motion|#shm} described below and we measure the pressure at a fixed point in our space we get the following wave:
 
-{todo: {img:.pop  diagrams/MB_ac_d_01.jpg} }
+todo: {img:.pop  diagrams/MB_ac_d_01.jpg}
 
 The diagram above shows the {/acoustic pressure} at any moment in time. You see that the pressure changes caused by the loudspeaker alternate around the barometric pressure, sometimes being just a bit higher, sometimes just a bit lower. The acoustic pressure is given in Pascal (Pa) and is defined by the equation
 
@@ -39,7 +40,10 @@ If you now pull the weight down a bit
 #(which you can do in the diagram by clicking and dragging)
 and let it go, the spring will work to pull it back up and {---} because once mass is moving it takes energy to stop it {---} the weight will move through the equilibrium position. This is when the gravity takes over and reduces the movement of the weight trying to pull it back down. The weight slows down until it changes direction and moves downwards. First slowly, picking up speed until it has passed through the equilibrium position again. This is when the pulling of the spring is greater than that of the gravity and the weight is slowed down, until it stops and moves upwards again. This movement would repeat endlessly without any friction or other loss of energy and is called simple harmonic motion. If we sketch the position of the weight over time, we get a sine wave.
 
-{todo: Click the button below to hear a sine wave with a frequency of 1000Hz.}
+
+Click the buttons to hear a sine waves with frequencies of 100Hz, 200Hz, 300Hz, 400Hz, 500Hz, 1000Hz, 2000Hz, 4000Hz, 8000Hz and 16000Hz. Make sure to stop each wave (clicking again) before you start the next one.
+
+{btn-sine: 100} {btn-sine: 200} {btn-sine: 300} {btn-sine: 400} {btn-sine: 500} {btn-sine: 1000} {btn-sine: 2000} {btn-sine: 4000} {btn-sine: 8000} {btn-sine: 16000}
 
 
 
@@ -66,6 +70,8 @@ The omnidirectional loudspeaker in our situation is called a {/point sound sourc
 # ---
 
 For a point sound source {---} which creates a spherical wave {---} the sound pressure level drops by about 6dB per doubling of the distance.
+
+{todo: interactive diagram where you can move a "listener" away and closer from a point sound source, reducing by 6dB per doubling of the distance}
 
 
 == Point Sources and Line Sources

@@ -1,3 +1,5 @@
+@load audio
+
 = Amplitude, Frequency and Wavelength
 
 ---.diagram
@@ -34,9 +36,14 @@ Listen to the following two sound waves:
 # {todo: diagram_interactive , two play buttons, one playing a sine wave another one playing a square wave with the same peak amplitude (not    # displaying what is going on to the listener)}
 ---
 
+{btn-sine: 1000}
+{btn-square:.toggle square   |1000}
+
 One of them should sound louder to you, so we might be inclined to conclude that the louder one has a higher peak amplitude. Click on "reveal waveform" and take a look at the peak amplitudes of the waves. They are the same for both of them, so why does one of them sound louder to us? In order to answer this question, we need to investigate both waves a bit more. The one on the left is a sine wave, the one on the right is called a square wave. We already noticed that the peak amplitude is the same for both, but also the zero crossings are at the same positions, so the answer to our question must lie somewhere in between. If you remember the section on RMS {todo: link}, you might already have a vague idea about what is going on here. Let us investigate the RMS value for both waves. Let us start with finding the RMS value for the square wave. Remember that the RMS value is the root of the mean of the square. Our amplitude is 1 (without unit) and if we follow the shape of the wave we notice that it stays the instantaneous amplitude of the first 179° is +1, then it jumps down to -1 where it stays until 359° before it jumps back to +1. So it is constantly either at +1 or at -1. If we take the square root of +1 or -1 we always get +1, So the squared value for all angles equals 1. If we take the mean of the value of all angles (adding them all together and then dividing them by the number of values) we get 1. Taking the square root of 1 equals 1, which is the RMS value of a square wave with the peak value of 1.
 
 If we do the same exercise for the sine wave, we notice right away that there are a few other values than 1 we have to deal with. Taking the RMS value of a sine wave would result in something that is lower than the peak value of 1, because we take the root of the mean of the square of values between +1 and 0 (negative values become positive when squared, so we do not have to worry about values below 0). Doing all the mathematical work would result in a RMS value that is 0.707 times the peak value. When going from RMS value to peak value for a sine wave you can multiply the RMS value by 1.414. Keep in mind that this only works for sine waves. Comparing the RMS values of square wave and sine wave (and what you saw in the section the RMS) shows that the RMS value is dependent on the shape of the wave itself. To check if our calculations were true, change the peak value of the square wave to 0.707 in the diagram above and listen. Despite having different peak amplitudes now, both waves should sound more or less equally loud.
+
+
 
 # we might be able to add a diagram to show the samples I am describing in the previous paragraphs
 # this section could be subdivided into chapters for amplitude, frequency, etc.
