@@ -1,99 +1,138 @@
-/* global MC:true */
-var MC = MC || {};
+// @flow
+/*:: var MC = {}; */ /* global MC:true */
+var MC = MC || {}; // eslint-disable-line
+(function () {
 
-MC.AuModule = class { // abstract
-  get inlet () { // AudioNode
-    return null;
-  }
+/*:: type time = number; */
+/*:: type val  = number; */
 
-  get outlet () { // AudioNode
-    return null;
-  }
+const Audio = {};
+Audio.ctx = new AudioContext();
+Audio.sr  = Audio.ctx.sampleRate;
+Audio.now = () => Audio.ctx.currentTime;
 
-  // TODO right now allows only single connection; redo like in patcher
-  // keep track of connections; inquiries then possible
-  /* void */ sendTo (/* AuNode */ to = null) {
-    if (this.outlet) {
-      this.outlet.disconnect(0);
-      if (to && to.inlet)
-        this.outlet.connect(to.inlet);
-    }
-  }
+Audio.dest = (null/*:?Gain*/);
 
-  /* void */ sendToDest () {
-    this.sendTo(MC.Audio.dest);
+Audio.mute = () => {
+  if (Audio.dest)
+    Audio.dest.node.gain.value = 0;
+};
+
+Audio.ramp = (par/*:AudioParam*/, from/*:val*/, to/*:val*/, dt/*:time*/ = .12) /*:void*/ => {
+  let time = Audio.now();
+  par.cancelScheduledValues(time);
+  time += .001;
+  par.setValueAtTime(from, time);
+  if (from < to)
+    par.linearRampToValueAtTime(to, time + dt);
+  else {
+    const is0 = 0 === to;
+    par.exponentialRampToValueAtTime(is0 ? .0001 : to, time + dt);
+    if (is0)
+      par.setValueAtTime(to, time + dt);
   }
 };
 
-MC.AuNode = class extends MC.AuModule { // abstract
-  get node () {
+const Seq = {
+  after (delay, fun) {
+    setTimeout(() => {
+      fun();
+    }, 1000 * delay);
+  },
+
+  sequence (...steps) {
+    const step = () => {
+      if (steps.length) {
+        const [tout, fun] = steps.shift();
+        setTimeout(() => {
+          fun(); step();
+        }, 1000 * tout);
+      }
+    };
+    step();
+  }
+};
+
+// eof
+
+
+window.addEventListener(
+  'beforeunload',
+  () => Audio.mute()
+);
+
+class ANode {
+  inlet ()  /*: ?AudioNode */ { return null; } // eslint-disable-line
+  outlet () /*: ?AudioNode */ { return null; } // eslint-disable-line
+
+  // TODO allows only a single connection
+  // redo like in patcher
+  // keep track of connections; inquiries then possible
+  sendTo (to/*:?ANode */ = null) /*:void*/ {
+    const out = this.outlet();
+    if (out) {
+      out.disconnect();
+      if (to) {
+        const inl = to.inlet();
+        if (inl)
+          out.connect(inl);
+      }
+    }
+  }
+
+  sendToDest () /*:void*/ {
+    this.sendTo(Audio.dest);
+  }
+}
+
+class AuNode extends ANode {
+  /*:: _node: * */
+  constructor (node/*:AudioNode*/) {
+    super();
+    this._node = node;
+  }
+
+  inlet () {
     return this._node;
   }
 
-  constructor (node) {
-    super(); this._node = node;
+  outlet () {
+    return this._node;
+  }
+}
+
+const mixStartStop = (cls) => class extends cls {
+  start (when/*:time*/ = 0) /*:void*/ {
+    const node = this._node;
+    if (node.start)
+      ((node.start/*:any*/)/*:(time)=>void*/)(when);
   }
 
-  get inlet () {
-    return this.node;
-  }
-
-  get outlet () {
-    return this.node;
-  }
-};
-
-MC.AuStartStop = (Base) => class extends Base { // mixin
-  constructor (...args) {
-    super(...args);
-    this._state = 0; // 0: new, 1: started, 2: stopped
-  }
-
-  safeStart (when) {
-    if (0 === this._state) {
-      if (this.node)
-        this._start(when || 0);
-      this._state = 1;
-    }
-  }
-
-  safeStop (when) {
-    if (1 === this._state) {
-      if (this.node)
-        this._stop(when || 0);
-      this._state = 2;
-    }
-  }
-
-  _start (when) {
-    if (this.node)
-      this.node.start(when);
-  }
-
-  _stop (when) {
-    if (this.node)
-      this.node.stop(when);
+  stop (when/*:time*/ = 0) /*:void*/ {
+    const node = this._node;
+    if (node.stop)
+      ((node.stop/*:any*/)/*:(time)=>void*/)(when);
   }
 };
 
-MC.Osc = class extends MC.AuStartStop(MC.AuNode) {
+class Osc extends mixStartStop(AuNode) {
+  /*:: _phs: val; */
   constructor (type = 'sine') {
-    super(MC.Audio.hasCtx ? MC.Audio.ctx.createOscillator() : null);
-    this._setWave(this._cps = 0, this._phs = 0);
-    if (this.node) {
-      this.node.type = type;
-      this.node.frequency.value = this._cps;
-    }
+    super(Audio.ctx.createOscillator());
+    this.node.type = type;
+    this.cps = 0; this.phs = 0;
+  }
+
+  get node () {
+    return ((this._node/*:any*/)/*:OscillatorNode*/);
   }
 
   get cps () {
-    return this._cps;
+    return this.node.frequency.value;
   }
 
   set cps (cps) {
-    this._cps = cps;
-    if (this.node)
-      this.node.frequency.value = this._cps;
+    this.node.frequency.value = cps;
   }
 
   get phs () {
@@ -101,36 +140,37 @@ MC.Osc = class extends MC.AuStartStop(MC.AuNode) {
   }
 
   set phs (phs) {
-    this._setWave(phs);
-  }
-
-  _setWave (cps, phs) {
-    this._cps = cps; this._phs = phs;
-    if (!this.node)
-      return;
+    this._phs = phs;
     // TODO phase changes better with delay; setPeriodicWave clicks
-    const ri = MC.ra(1, phs).toXY();
-    this.node.setPeriodicWave(
-      MC.Audio.ctx.createPeriodicWave(
-        new Float32Array([0, ri.x]), new Float32Array([0, ri.y])));
+    const node = this.node;
+    if (node) {
+      const ri = MC.ra(1, phs).toXY();
+      const wave = Audio.ctx.createPeriodicWave(
+        new Float32Array([0, ri.x]),
+        new Float32Array([0, ri.y])
+      );
+      node.setPeriodicWave(wave);
+    }
   }
-};
+}
 
-MC.Gain = class extends MC.AuNode {
+class Gain extends AuNode {
+  /*:: static soft: val; static loud: val; static full: val; */
   constructor (gain = 0) {
-    super(MC.Audio.hasCtx ? MC.Audio.ctx.createGain() : null);
-    if (this.node)
-      this.node.gain.value = gain;
-    this._amp = 0;
+    super(Audio.ctx.createGain());
+    this.node.gain.value = gain;
+  }
+
+  get node () {
+    return ((this._node/*:any*/)/*:GainNode*/);
   }
 
   get amp () {
-    return this._amp;
+    return this.node.gain.value;
   }
 
-  set amp (a) {
-    if (this.node)
-      MC.Audio.ramp(this.node.gain, this._amp, this._amp = a);
+  set amp (amp) {
+    Audio.ramp(this.node.gain, this.amp, amp);
   }
 
   // square better than linear; could be exp.
@@ -141,128 +181,74 @@ MC.Gain = class extends MC.AuNode {
   set amp2 (a2) {
     this.amp = a2 * a2;
   }
-};
+}
 
-MC.Gain.soft = 0.3; MC.Gain.loud = 0.7; MC.Gain.full = 1.0;
+Gain.soft = 0.3; Gain.loud = 0.7; Gain.full = 1.0;
 
-MC.OscGain = class extends MC.AuModule {
+class OscGain extends ANode {
+  /*:: osc: *; gai: *; */
   constructor (type = 'sine', gain = 0) {
     super();
-    this.osc = new MC.Osc(type);
-    this.gai = new MC.Gain(gain);
+    this.osc = new Osc(type);
+    this.gai = new Gain(gain);
     this.osc.sendTo(this.gai);
   }
 
-  get outlet () {
+  inlet () {
+    return this.osc.node;
+  }
+
+  outlet () {
     return this.gai.node;
   }
 
-  safeStart (when) {
-    this.osc.safeStart(when);
+  start (when = 0) {
+    this.osc.start(when);
   }
 
-  safeStop (when) {
-    this.osc.safeStop(when);
+  stop (when = 0) {
+    this.osc.stop(when);
   }
-};
+}
 
-MC.Audio = class {
-  static init () {
-    if (this.hasCtx)
-      return;
-    this.ctx  = new AudioContext();
-    (this.dest = new MC.Gain(1)).node.connect(this.ctx.destination);
-    window.addEventListener('beforeunload', () => this.mute());
-    // this.testBeep();
+class Delay extends AuNode {
+  constructor (delay = 0) {
+    super(Audio.ctx.createDelay());
+    this.delay = delay;
   }
 
-  static get hasCtx () {
-    return undefined !== this.ctx;
+  get node () {
+    return ((this._node/*:any*/)/*:DelayNode*/);
   }
 
-  static get sr () {
-    return this.hasCtx ? this.ctx.sampleRate : 0;
+  get delay () {
+    return this.node.delayTime;
   }
 
-  static get now () {
-    return this.hasCtx ? this.ctx.currentTime : 0.0;
+  set delay (delay) {
+    this.node.delayTime = delay;
   }
+}
 
-  static mute () {
-    if (this.hasCtx)
-      this.dest.node.gain.value = 0;
-  }
-
-  static ramp (par, from, to, dt = .12) {
-    let time = this.now;
-    par.cancelScheduledValues(time);
-    time += .001;
-    par.setValueAtTime(from, time);
-    if (from < to)
-      par.linearRampToValueAtTime(to, time + dt);
-    else {
-      const is0 = 0 === to;
-      par.exponentialRampToValueAtTime(is0 ? .0001 : to, time + dt);
-      if (is0)
-        par.setValueAtTime(to, time + dt);
-    }
-    // fout .12
-    // par.setTargetAtTime(val, time, dt);
-  }
-
-  static beep (cps, amp, sec) {
-    const og = new MC.OscGain();
-    og.osc.cps = cps; og.sendToDest(); og.safeStart();
-
-    let time = this.now;
-    // TODO
-    const par = og.gai._node.gain;
-    par.setValueAtTime(0, time);
-    par.linearRampToValueAtTime(.3, time += sec / 3 * 2);
-    par.exponentialRampToValueAtTime(.0001, time += sec / 3);
-    par.setValueAtTime(0, time += .1);
-
-    MC.Async.after(sec + 1, () => {
-      og.safeStop(); og.sendTo();
-    });
-
-    // MC.Async.sequence(
-    //   [0, () => (og.gai.amp = amp)],
-    //   [sec, () => (og.gai.amp = 0)],
-    //   [4, () => og.safeStop()]
-    // );
-  }
-
-  static testBeep () {
-    this.beep(880, .3, .12);
-  }
-};
-
-MC.Audio.init();
-
-// class Delay extends AuNode {
-//   Delay(): super(_make());
-//   DelayNode get node => _node;
-
-//   static AudioNode _make()
-//     => Audio.hasCtx ? Audio.ctx.createDelay() : null;
-
-//   num _del = 0;
-//   num get del       => _del;
-//   set del(num del)  { _del = del; if (null!=node) node.delayTime.value = _del; }
-// }
-
-// typedef void OnFileRead();
-
-MC.AudioBufferSource = class extends MC.AuStartStop(MC.AuNode) {
+class AudioBufferSource extends mixStartStop(AuNode) {
   constructor () {
-    super(MC.Audio.hasCtx ? MC.Audio.ctx.createBufferSource() : null);
+    super(Audio.ctx.createBufferSource());
   }
 
-  createBuffer (/* int */ lgt, /* double f(int) */ f) {
-    if (!this.node)
-      return;
-    const buf = MC.Audio.ctx.createBuffer(1, lgt, MC.Audio.sr);
+  get node () {
+    return ((this._node/*:any*/)/*:AudioBufferSourceNode*/);
+  }
+
+  start (when = 0) {
+    this.node.start(when);
+  }
+
+  stop (when = 0) {
+    this.node.stop(when);
+  }
+
+  createBuffer (lgt/*:number*/, f/*: (index:number) => number */) {
+    const buf = Audio.ctx.createBuffer(1, lgt, Audio.sr);
     const dta = buf.getChannelData(0);
     for (let i = 0; i < lgt; ++i)
       dta[i] = f(i);
@@ -297,23 +283,25 @@ MC.AudioBufferSource = class extends MC.AuStartStop(MC.AuNode) {
 //       }, onError: (e)=> System.alert('Cannot load this audio file.'));
 //     }) ..send();
 //   }
-};
+}
 
-MC.WhiteNoise = class extends MC.AudioBufferSource {
+class WhiteNoise extends AudioBufferSource {
   constructor () {
     super();
-    this.createBuffer(8 * MC.Audio.sr, () => Math.rand(-1, 2));
+    this.createBuffer(8 * Audio.sr, () => (Math.random() * 2) - 1);
   }
-};
+}
 
-MC.PinkNoiseGenerator = class {  // filtered white noise
+// http://noisehack.com/generate-noise-web-audio-api
+class PinkNoiseGenerator {  // filtered white noise
+  /*:: _b0:*; _b1:*; _b2:*; _b3:*; _b4:*; _b5:*; _b6:*; */
   constructor () {
     this._b0 = .0; this._b1 = .0; this._b2 = .0; this._b3 = .0;
     this._b4 = .0; this._b5 = .0; this._b6 = .0;
   }
 
   nextSample () {
-    const white = Math.rand(-1, 2);
+    const white = (Math.random() * 2) - 1;
     this._b0 = (0.99886 * this._b0) + (white * 0.0555179);
     this._b1 = (0.99332 * this._b1) + (white * 0.0750759);
     this._b2 = (0.96900 * this._b2) + (white * 0.1538520);
@@ -327,37 +315,85 @@ MC.PinkNoiseGenerator = class {  // filtered white noise
     this._b6 = white * 0.115926;
     return pink;
   }
-};
+}
 
-MC.PinkNoise = class extends MC.AudioBufferSource {
+class PinkNoise extends AudioBufferSource {
   constructor () {
     super();
-    const gen = new MC.PinkNoiseGenerator();
+    const gen = new PinkNoiseGenerator();
     this.createBuffer(8 * MC.Audio.sr, () => gen.nextSample());
   }
+}
+
+class Filter extends AuNode {
+  constructor (type = 'peaking') {
+    super(Audio.ctx.createBiquadFilter());
+    const node = this.node;
+    node.type = type;
+    node.frequency.value = 0;
+    node.Q.value = 0;
+    node.gain.value = 0;
+  }
+
+  get node () {
+    return ((this._node/*:any*/)/*:BiquadFilterNode*/);
+  }
+
+  get Q () {
+    return this.node.Q.value;
+  }
+
+  set Q (Q) {
+    this.node.Q.value = Q;
+  }
+
+  get gain () {
+    return this.node.gain.value;
+  }
+
+  set gain (gain) {
+    this.node.gain.value = gain;
+  }
+
+  get cps () {
+    return this.node.frequency.value;
+  }
+
+  set cps (cps) {
+    this.node.frequency.value = cps;
+  }
+}
+
+(Audio.dest = new Gain(1)).node.connect(Audio.ctx.destination);
+Audio.beep  = (cps/*:val*/, amp/*:val*/, sec/*:time*/) /*:void*/ => {
+  const og = new OscGain();
+  og.osc.cps = cps; og.sendToDest(); og.start();
+
+  let now = Audio.now();
+  const par = og.gai.node.gain;
+  par.setValueAtTime(0, now);
+  par.linearRampToValueAtTime(.3, now += sec / 3 * 2);
+  par.exponentialRampToValueAtTime(.0001, now += sec / 3);
+  par.setValueAtTime(0, now += .1);
+
+  Seq.after(sec + 1, () => {
+    og.stop(); og.sendTo();
+  });
 };
 
-// class Filter extends AuNode {
-//   Filter(String type): super(_make()) {
-//     if (null!=node) node ..type = type ..frequency.value = 0 ..Q.value = 0 ..gain.value = 0;
-//   }
-//   BiquadFilterNode get node => _node;
+Audio.testBeep = () /*:void*/ => {
+  Audio.beep(880, .3, .12);
+};
 
-//   static AudioNode _make() => Audio.hasCtx
-//     ? Audio.ctx.createBiquadFilter()
-//     : null;
+MC.Osc        = Osc;
+MC.Gain       = Gain;
+MC.OscGain    = OscGain;
+MC.Delay      = Delay;
+MC.WhiteNoise = WhiteNoise;
+MC.PinkNoise  = PinkNoise;
+MC.Filter     = Filter;
+MC.Audio      = Audio;
 
-//   set Q(num Q)       { if (null!=_node) node.Q.value = Q;            }
-//   set gain(num gain) { if (null!=_node) node.gain.value = gain;      }
-//   set cps(num cps)   { if (null!=_node) node.frequency.value = cps;  }
-// }
-
-// class ScriptProcessor extends AuNode {
-//   ScriptProcessor(int size, int inChans, int outChans): super(_make(size,inChans,outChans));
-//   ScriptProcessorNode get node => _node;
-
-//   static AudioNode _make(int size, int inChans, int outChans)
-//     => Audio.hasCtx ? Audio.ctx.createScriptProcessor(size,inChans,outChans) : null;
-// }
+}());
 
 // eof

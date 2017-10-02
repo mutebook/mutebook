@@ -1,0 +1,11 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[lints]
+sketchy-null=warn
+
+[options]
+unsafe.enable_getters_and_setters=true

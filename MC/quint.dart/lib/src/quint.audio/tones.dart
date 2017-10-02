@@ -1,6 +1,6 @@
 part of quint.audio;
 
-class Tone extends AuModule {
+class Tone extends AuNode {
   final int numParts; List<OscGain> parts;
   Gain adj, mix;
   int audibleParts = 0;

@@ -1,170 +1,207 @@
-/* global MC:true */
-var MC = MC || {};
+// @flow
+/*:: var MC = {}; */ /* global MC:true */
+var MC = MC || {}; // eslint-disable-line
+(function () {
 
-MC.XY = class {
-  constructor (x, y) {
-    if (undefined === x)
-      x = y = 0;
-    else if (undefined === y)
-      y = x;
+MC.PI2  = Math.PI / 2;
+MC.PIPI = 2 * Math.PI;
+
+// normalize to <0,2pi)
+MC.normPIPI = function (a/*:number*/) /*:number*/ {
+  return a < 0 || MC.PIPI <= a
+    ? a - (Math.floor(a / MC.PIPI) * MC.PIPI) : a;
+};
+
+// normalize to (-pi,pi>
+MC.normPI = function (a/*:number */) /*:number */ {
+  return (a = this.normPIPI(a)) <= Math.PI
+    ? a : a - MC.PIPI;
+};
+
+class XY {
+  /*:: x: *; y: *; */
+  constructor (x/*:number*/, y/*:number*/) {
     this.x = x; this.y = y;
   }
 
   toString () {
-    return `[${this.x}:${this.y}]`;
+    return `(${this.x}:${this.y})`;
   }
 
-  clone () {
-    return MC.xy(this.x, this.y);
+  static make (x/*:number*/, y/*:number*/) /*:XY*/ {
+    return new this(x, y);
   }
 
-  is0 () {
+  make (x/*:number*/, y/*:number*/) /*:XY*/ {
+    return this.constructor.make(x, y);
+  }
+
+  clone () /*:XY*/ {
+    return this.make(this.x, this.y);
+  }
+
+  is0 () /*:boolean*/ {
     return 0 === this.x && 0 === this.y;
   }
 
-  eq (xy) {
+  eq (xy/*:XY*/) /*:boolean*/ {
     return this.x === xy.x && this.y === xy.y;
   }
 
-  plus (xy) {
-    return MC.xy(this.x + xy.x, this.y + xy.y);
+  plus (xy/*:XY*/) /*:XY*/ {
+    return this.make(this.x + xy.x, this.y + xy.y);
   }
 
-  minus (xy) {
-    return MC.xy(this.x - xy.x, this.y - xy.y);
+  minus (xy/*:XY*/) /*:XY*/ {
+    return this.make(this.x - xy.x, this.y - xy.y);
   }
 
-  times (xyn) {
+  times (xyn/*:XY | number*/) /*:XY*/ {
+    return xyn instanceof XY
+      ? this.make(this.x * xyn.x, this.y * xyn.y)
+      : this.make(this.x * xyn,   this.y * xyn);
+  }
+
+  div (xyn/*:XY | number*/) /*:XY*/ {
     return xyn instanceof this.constructor
-      ? MC.xy(this.x * xyn.x, this.y * xyn.y)
-      : MC.xy(this.x * xyn, this.y * xyn);
+      ? this.make(this.x / xyn.x, this.y / xyn.y)
+      : this.make(this.x / xyn,   this.y / xyn);
   }
 
-  div (xyn) {
-    return xyn instanceof this.constructor
-      ? MC.xy(this.x / xyn.x, this.y / xyn.y)
-      : MC.xy(this.x / xyn, this.y / xyn);
-}
-
-  neg () {
-    return MC.xy(-this.x, -this.y);
+  neg () /*:XY*/ {
+    return this.make(-this.x, -this.y);
   }
 
-  mag () {
-    return MC.xy(this.x * this.x, this.y * this.y);
+  mag () /*:number*/ {
+    return (this.x * this.x) + (this.y * this.y);
   }
 
-  lgt () {
+  lgt () /*:number*/ {
     return Math.sqrt(this.mag());
   }
 
-  dot (xy) {
+  dot (xy/*:XY*/) /*:number*/ {
     return (this.x * xy.x) + (this.y * xy.y);
   }
 
-  cross (xy) {
+  cross (xy/*:XY*/) /*:number*/ {
     return (this.x * xy.y) - (this.y * xy.x);
   }
 
-  unit () {
+  unit () /*:XY*/ {
     const lgt = this.lgt();
-    return 0 < lgt ? this.div(lgt) : MC.xy(1, 0);
+    return 0 < lgt ? this.div(lgt) : this.make(1, 0);
   }
 
-  _a () {
+  angle () /*:number*/ {
     if (0 === this.x)
       return 0 === this.y
-        ? 0 : (0 < this.y ? 1 : 3) * Math.PI2;
+        ? 0 : (0 < this.y ? 1 : 3) * MC.PI2;
     const a = Math.atan(this.y / this.x);
     return 0 < this.x ? a + Math.PI : a;
   }
 
-  toRA () {
+  static fromXY (p/*:{x: number, y: number} */) /*:XY*/ {
+    return this.make(p.x, p.y);
+  }
+
+  static fromWH (wh/*:{w: number, h: number} */) /*:XY*/ {
+    return this.make(wh.w, wh.h);
+  }
+
+  toRA () /*:RA*/ {
     const r = this.lgt();
-    return 0 < r ? MC.ra(r, this._a()) : MC.ra();
+    return 0 < r
+      ? RA.make(r, this.angle()) : RA.make(0, 0); // eslint-disable-line
   }
+}
 
-  static fromXY (p) {
-    return MC.xy(p.x, p.y);
-  }
-
-  static fromWH (wh) {
-    return MC.xy(wh.w, wh.h);
-  }
-};
-
-MC.xy = (x, y) => new MC.XY(x, y);
-
-MC.RA = class { // polar: r , (a)ngle; always normalized
-  constructor (r, a) {
-    if (undefined === r)
-      r = a = 0;
-    else if (undefined === a)
-      a = 0;
+class RA {
+  /*:: r: *; a: *; */ // polar: r , (a)ngle; always normalized
+  constructor (r/*:number*/, a/*:number*/) {
     this.r = r; this.a = a; this._norm();
   }
 
   toString () {
-    return `[${this.r}\\${this.a}]`;
+    return `(${this.r}/${this.a})`;
   }
 
-  clone () {
-    return MC.ra(this.r, this.a);
+  static make (r/*:number*/, a/*:number*/) /*:RA*/ {
+    return new this(r, a);
   }
 
-  is0 () {
+  make (r/*:number*/, a/*:number*/) /*:RA*/ {
+    return this.constructor.make(r, a);
+  }
+
+  clone () /*:RA*/ {
+    return this.make(this.r, this.a);
+  }
+
+  is0 () /*:boolean*/ {
     return 0 === this.r;
   }
 
-  eq (ra) {
+  eq (ra) /*:boolean*/ {
     return this.r === ra.r && (this.is0() || this.a === ra.a);
   }
 
-  _norm () {
+  _norm () /*:void*/ {
     if (0 > this.r) {
       this.r = -this.r; this.a += Math.PI;
     }
-    this.a = Math.normPIPI(this.a);
+    this.a = MC.normPIPI(this.a);
   }
 
-  toXY () {
+  toXY () /*:XY*/ {
     return MC.xy(this.r * Math.cos(this.a), this.r * Math.sin(this.a));
   }
-};
+}
 
-MC.ra = (r, a) => new MC.RA(r, a);
-
-// Transform
-MC.Trf = class {
-  constructor (xy) {
-    this.xy = undefined === xy ? MC.xy() : xy;
+class Trf { // transform
+  /*:: xy: * */
+  constructor (xy/*:XY*/) {
+    this.xy = xy;
   }
 
   toString () {
-    return `[(${this.xy})]`;
+    const xy = this.xy.toString();
+    return `[${xy}]`;
   }
 
   svgString () {
-    return this.is0() ? '' : `translate(${this.xy.x} ${this.xy.y}) `;
+    return this.is0()
+      ? '' : `translate(${this.xy.x} ${this.xy.y}) `;
   }
 
-  is0 () {
+  is0 () /*:boolean*/ {
     return this.xy.is0();
   }
 
-  get dx () {
+  get dx () /*:number*/ {
     return this.xy.x;
   }
 
-  get dy () {
+  get dy () /*:number*/ {
     return this.xy.y;
   }
 
-  plus (xy) {
+  plus (xy/*:XY*/) /*:Trf*/ {
     return new this.constructor(this.xy.plus(xy));
   }
-};
+}
 
+MC.XY  = XY;
+MC.RA  = RA;
+MC.Trf = Trf;
+
+MC.xy  = (x, y) => new XY(x, y);
+MC.ra  = (r, a) => new RA(r, a);
 MC.trf = (xy) => new MC.Trf(xy);
+
+MC.xy0 = () => MC.xy(0, 0);
+MC.ra0 = () => MC.ra(0, 0);
+
+}());
 
 // eof
