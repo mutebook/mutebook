@@ -1,4 +1,6 @@
-part of quint.core;
+// @flow
+/*:: var MC = {}; */ /* global MC:true */
+var MC = MC || {}; // eslint-disable-line
 
 // scene graph
 
@@ -219,5 +221,7 @@ class Scene extends GroupNode {
 abstract class LeafNode extends SceneNode {
   LeafNode();
 }
+
+}());
 
 // eof

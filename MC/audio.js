@@ -1,6 +1,7 @@
 // @flow
 /*:: var MC = {}; */ /* global MC:true */
 var MC = MC || {}; // eslint-disable-line
+
 (function () {
 
 /*:: type time = number; */
@@ -52,9 +53,6 @@ const Seq = {
     step();
   }
 };
-
-// eof
-
 
 window.addEventListener(
   'beforeunload',

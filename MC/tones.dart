@@ -1,6 +1,20 @@
-part of quint.audio;
+// @flow
+/*:: var MC = {}; */ /* global MC:true */
+var MC = MC || {}; // eslint-disable-line
+/*::
+import type { MCAuNode } from './audio';
+*/
+(function () {
 
-class Tone extends AuNode {
+class Tone extends MC.AuNode {
+  /*:: numParts: *; mix: *; adj: *; parts: *; */
+  constructor (numParts/*:number*/) {
+    this.numParts = numParts;
+    adj = new MC.Gain(); mix = new MC.Gain(); adj.sendTo(mix);
+    parts = listN(numParts,(i) => new OscGain() ..sendTo(adj) ..safeStart());
+    setMulAmp(numParts);
+  }
+
   final int numParts; List<OscGain> parts;
   Gain adj, mix;
   int audibleParts = 0;
@@ -8,12 +22,6 @@ class Tone extends AuNode {
   AudioNode get outlet => mix.outlet;
 
   static num MUL = .6;
-  Tone(this.numParts) {
-    assert(numParts>0);
-    mix = new Gain(); adj = new Gain() ..sendTo(mix);
-    parts = listN(numParts,(i) => new OscGain() ..sendTo(adj) ..safeStart());
-    setMulAmp(numParts);
-  }
 
   num  get cps      => parts.first.osc.cps;
   set cps(num cps)  { forList(parts, (part,i) => part.osc.cps = cps * (i+1)); }
@@ -35,5 +43,7 @@ class Tone extends AuNode {
     adj.amp = sum>0 ? 1/sum : 0;
   }
 }
+
+}());
 
 // eof
