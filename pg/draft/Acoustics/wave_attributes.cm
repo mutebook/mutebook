@@ -86,3 +86,39 @@ If you understood what the frequency is and if you remember that instead of one 
 {$$ \omega = 2\pi\times f$$}
 ---
 #{todo: add sonograms with all different kinds of sounds to get used to frequencies, either here or in another chapter}
+
+====.u Speed of Sound
+While the speed of sound slightly changes depending on certain parameters, such as barometric pressure and humidity, we will use a speed of sound of 344 meters per second for now.
+
+---.equation
+{$$ c = 344 m/s $$}
+---
+
+====.u Wavelength
+Now that we have defined the speed of sound as 344 m/s and that we know that the frequency is the amount of cycles per second, we can also determine how far the wave travels while it completes one full cycle. This is known as the wavelegth and can be calculated with the following equation:
+
+---.equation
+{$$ \lambda = \dfrac {c}{f} $$}
+---
+
+in which {$$\lambda$$} is the wavelength in meters, {$$c$$} the speed of sound (344m/s), and {$$f$$} the frequency in Hz. The wavelength is a very important parameter for room acoustics, so it is a good idea to know some wavelengths of the corresponding frequencies.
+
+20Hz - 17.2m
+
+1000Hz - 0.334m
+
+2000Hz - 0.172m
+
+4000Hz - 0.086m
+
+8000Hz - 0.043m
+
+16000Hz - 0.0215m
+
+20000Hz - 0.0172m
+
+These values show that in the audible frequency spectrum we encounter wavelengths between 17.2 meters and 1.72 centimeters.
+
+
+
+
