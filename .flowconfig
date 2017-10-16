@@ -5,7 +5,8 @@
 [libs]
 
 [lints]
-sketchy-null=warn
+all=warn
 
 [options]
 unsafe.enable_getters_and_setters=true
+include_warnings=true

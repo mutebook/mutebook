@@ -8,11 +8,12 @@
         "sourceType": "script"
     },
     "rules": {
+        "function-paren-newline" : "off",
         // "no-const-assign": "error",
         // "no-this-before-super": "warn",
         // "no-undef": "warn",
         // "no-unreachable": "warn",
-        "no-unused-vars": ["error", { "varsIgnorePattern": "_" }],
+        "no-unused-vars": ["warn", { "varsIgnorePattern": "_" }],
         // "constructor-super": "warn",
         // "valid-typeof": "warn"
         // "accessor-pairs": "error",
@@ -169,7 +170,7 @@
         // "no-undef": "warn",
         // "no-undef-init": "error",
         "no-undefined": "off",
-        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "no-underscore-dangle": "off", // ["error", { "allowAfterThis": true }],
         "no-unmodified-loop-condition": "warn",
         // "no-unneeded-ternary": "error",
         // "no-unused-expressions": "warn",
