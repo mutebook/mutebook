@@ -181,24 +181,24 @@ With this in mind we can freely combine various ratios of pressure and pressure 
 #Just like the polar pattern shows the microphone's sensitivity related to the angle from which the sound wave arrives, the frequency response describes its sensitivity based on the frequency. There are more factors that play a role for the microphone's frequency response, but let us just look at the ones that are related to the acoustic operating principles in this section.
 
 
-{/Frequency Response of Pressure Gradient Microphones}
+#{/Frequency Response of Pressure Gradient Microphones}
 
-You saw in the previous paragraphs of this section that the movement of the membrane of a pressure microphone depends on the pressure difference between two points {---} both sides of the membrane. Let us place two points in space, change the frequency (thus wavelength) of a sound and see what happens. The diagram below has two fixed points which we just call F and B (for front and back) for now. As most microphone are very unlikely to magically change their size, the distance between F and B remains constant. When you click {*ON} you see a sine wave over F and B and the meter on the right shows the difference. Then move the slider on the bottom to change the frequency and observe how the difference {---} and thus the output {---} of the microphone depends on the wavelength of the sound wave.
+#You saw in the previous paragraphs of this section that the movement of the membrane of a pressure microphone depends on the pressure difference between two points {---} both sides of the membrane. Let us place two points in space, change the frequency (thus wavelength) of a sound and see what happens. The diagram below has two fixed points which we just call F and B (for front and back) for now. As most microphone are very unlikely to magically change their size, the distance between F and B remains constant. When you click {*ON} you see a sine wave over F and B and the meter on the right shows the difference. Then move the slider on the bottom to change the frequency and observe how the difference {---} and thus the output {---} of the microphone depends on the wavelength of the sound wave.
 
----.diagram
-{todo: diagram_interactive; see description in text above}
----
+#---.diagram
+#{todo: diagram_interactive; see description in text above}
+#---
 
-You should have noticed that the larger the wavelength, the lower the different between F and B. This means that pressure gradient microphones react less to lower frequencies. We will go more into detail about what microphone manufacturers do to improve the frequency response of pressure gradient microphones in a later section.
+#You should have noticed that the larger the wavelength, the lower the different between F and B. This means that pressure gradient microphones react less to lower frequencies. We will go more into detail about what microphone manufacturers do to improve the frequency response of pressure gradient microphones in a later section.
 
-{/Frequency Response of Pressure Microphones}
-Other than pressure gradient microphones, pressure microphones compare the pressure outside the membrane to the fixed pressure inside the capsule. This means that the effect on low frequencies that you saw for the pressure gradient microphone does not apply to the pressure microphone. The low frequency response therefore looks a quite linear.
+#{/Frequency Response of Pressure Microphones}
+#Other than pressure gradient microphones, pressure microphones compare the pressure outside the membrane to the fixed pressure inside the capsule. This means that the effect on low frequencies that you saw for the pressure gradient microphone does not apply to the pressure microphone. The low frequency response therefore looks a quite linear.
 
----.diagram
-{todo: diagram, frequency response of pressure transducer, linear}
----
+#---.diagram
+#{todo: diagram, frequency response of pressure transducer, linear}
+#---
 
-==== Druckstau (aka Pressure Build-Up)
+== Druckstau (aka Pressure Build-Up)
 The plot for the frequency response of the pressure microphone above neglects a few aspects, and in reality it will most likely not look as linear for all frequencies at all angles. This is where your acoustic knowledge of reflection and diffraction comes into play. In the section on acoustics you saw that whether a sound wave bends around an obstacle or is reflected depends on the size of the obstacle in relation to the wavelength. Generally speaking, you could say that sounds with larger wavelengths are more likely to bend around an obstacle than sounds with shorter wavelengths. Higher frequencies are more likely to be reflected. When a sound wave hits a large enough obstacle perpendicular to the obstacle, it is reflected back into the direction it came from. This means that the incoming wave and the reflection are superimposed directly at the obstacle and {---} if there is no loss of energy at the obstacle {---} the pressure would be doubled. As a microphone's membrane can be considered an obstacle for incoming sound waves, the same happens at a microphone. This means that reflected sounds arriving on the 0°-axis (perpendicular to the membrane) will double the pressure right in front of the membrane. This means that the microphone would produce a higher output at its main axis. However, whether sound waves will be reflected at the membrane depends on their wavelength and the size of the membrane. You can calculate the frequency above which all on-axis sounds will be combined with their reflection to raise the sound pressure level by 6 $dBSPL with the equation
 
 ---.equation
@@ -214,7 +214,7 @@ where f is the critical frequency in Hz, d the diameter of the diaphragm in mete
 
 All sounds above a certain frequency will be reflected and will duplicate the on-axis sensitivity of the microphone. The more you move the sound source away from the 0°-axis towards the side of the microphone, the less the pressure build up will be. So there is a gradual decrease from the maximum raise in sound pressure level of 6 $dBSPL at 0° to 0 $dBSPL at 90°.
 
----.diagram
+#---.diagram
 {todo: diagram_interactive, moving sound source displaying Druckstau}
 # http://www.sengpielaudio.com/DruckstauBeiMikrofonenMitKugelcharakteristik.pdf
 ---
