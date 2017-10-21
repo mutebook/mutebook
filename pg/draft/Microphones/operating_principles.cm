@@ -103,68 +103,83 @@ If we moved the sound source from 0 degrees to 90 degrees the out put of the mic
 
 where S{,G} is the general sensitivity for a sound wave arriving from angle {$$\alpha$$}. This equation is called the {/General Sensitivity Equation} and describes the microphone's sensitivity at any angle. If you visualize all this in a polar pattern you will see that it looks like a figure 8, which is why a {*pure} pressure gradient transducer is always bidirectional (or figure-8).
 
-==== Pressure Microphones
+== Pressure Microphones
 
 Now, let us use an enclosure to seal one side of the membrane while leaving some space between the enclosure and the membrane. This space is completely isolated from its environment by the enclosure on one side and the membrane on the other (see the diagram below)
 
 ---.diagram
-{todo: diagram, pressure microphone, including hole for pressure equalization}
+{img: diagrams/MB_mic_d_14_pressure_mic.jpg}
 ---
 
-This also means that there is a fixed pressure inside. Let us say that the pressure inside is the same as the atmospheric pressure outside. The membrane would thus not move into any direction (neither inwards nor outwards). If the pressure outside the enclosure increases the membrane would be pushed inwards because the pressure inside the enclosure remains unchanged. If the pressure outside the enclosure is lower than inside, the membrane would be pulled outwards. Any pressure outside the system is compared to the fixed pressure inside and the membrane reacts. This is why such a microphone is called pressure microphone. Let us do the same experiment and move a sound source around the microphone to investigate when the membrane starts moving. To keep is simple for now, let us assume that the microphone is infinitely small and it does not act as an obstacle for sound waves with any frequency.
+This also means that there is a fixed pressure inside. Let us say that the pressure inside is the same as the atmospheric pressure outside. The membrane would thus not move into any direction (neither inwards nor outwards). When the pressure outside the enclosure increases, the membrane is pushed inwards because the pressure inside the enclosure remains unchanged. If the pressure outside the enclosure is lower than inside, the membrane is pulled outwards. Any pressure outside the system is compared to the fixed pressure inside and the membrane reacts. This is why such a microphone is called pressure microphone. Let us do the same experiment and move a sound source around the microphone to investigate when the membrane starts moving. To keep it simple for now, let us assume that the microphone is infinitely small and it does not act as an obstacle for sound waves with any frequency.
 
 ---.diagram
-{todo: diagram_interactive, moving sound source around a pressure microphone}
+{img: diagrams/MB_mic_d_15_pressure_mic_0degrees.jpg}
 ---
 
-You see that the system does not care about the direction of the sound wave. No matter where the sound wave is coming from the membrane just moves as soon as the pressure outside is different than inside the capsule. Therefore, pure pressure microphones have omnidirectional polar patterns. The directionality of a pure pressure microphone can thus be described with the equation
+---.diagram
+{img: diagrams/MB_mic_d_16_pressure_mic_90degrees.jpg}
+---
+
+You see that the system does not care about the direction of the sound wave. No matter where the sound is coming from the membrane just moves as soon as the pressure outside is different than inside the capsule. Therefore, a pure pressure microphone has an omnidirectional pick-up. It picks up sound from all around. The directionality of a pure pressure microphone can thus be described with the equation
 
 ---.indent
 {$$ S_{P} = 1 $$}
 ---
 
-There is a tiny hole (see diagram above) in the enclosure so that the pressure behind the membrane can adjust to changes in the barometric pressure. Without this hole for pressure equalization a condenser pressure microphone would give constant output as soon as the barometric pressure is not the same as the pressure inside.
+With a fixed pressure inside the enclosure, there is the danger that the microphone would output a constant value as soon as the barometric pressure changes. Therefore, there is a tiny hole in the enclosure so that the pressure behind the membrane can adjust to pressure changes outside the microphone. It is small enough that it will have no effect on sound waves.
 
-==== Combining Pressure and Pressure Gradient Components
+== Combining Pressure and Pressure Gradient Components
 
 If we partly open the enclosure of a pressure microphone so that it is not completely isolated from the environment, we create a mix of pressure and pressure gradient microphone. The more we open the backside the closer the behavior of the microphone and its polar pattern will be to a pure pressure gradient transducer.
 
 ---.diagram
-{todo: diagram, static cardioid microphone capsule, half pressure, half pressure gradient}
+{img: diagrams/MB_mic_d_17_pressure_and_pressure_grad.jpg}
 ---
 
----.diagram
-{todo: diagram_interactive, changing opening on backside and moving source around microphone, also displaying polar pattern, similar to what Ian and George created a few years ago in grapher}
+#---.diagram
+#{todo: diagram_interactive, changing opening on backside and moving source around microphone, also displaying polar pattern, similar to what Ian and George created a few years ago in grapher}
 ---
 
-Move the slider below the diagram above and look at how the polar pattern changes based on the ratio of pressure and pressure gradient components. Move the sound source around the microphone and watch the meter on the right which shows the output of the microphone for the selected angle of incidence.
+#Move the slider below the diagram above and look at how the polar pattern changes based on the ratio of pressure and pressure gradient components. Move the sound source around the microphone and watch the meter on the right which shows the output of the microphone for the selected angle of incidence.
 
 If we would like to express this behavior in an equation, we can use the following:
+
 ---.equation
 {$$ S_{P+G} = P + G * cos~\alpha$$},
 ---
 where {*S{,P+G}} is the general sensitivity for sounds arriving from angle {$$\alpha$$}, {*P} is the amount of pressure component and {*G} the amount of pressure gradient component of the microphone. As we are always combining pressure and pressure gradient component to become a whole microphone, we can also state that
 
+---.equation
 {$$ P + G = 1 $$}
+---
 
 With this in mind we can freely combine various ratios of pressure and pressure gradient to form all sorts of polar patterns. The table below shows the ratios for the common polar patterns:
 
----.diagram
-{todo: insert table}
+--- table.border
+[ pressure component ] [ pressure gradient component ] [ polar pattern ]
+(1) (0) (omnidirectional)
+(0.66) (0.33) (subcardioid)
+(0.5) (0.5) (cardioid)
+(0.33) (0.66) (supercardioid)
+(0.25) (0.75) (hypercardioid)
+(0) (1) (bidirectional)
+
 ---
 
 # Add examples and practice calculations, either here or at the end of the chapter
 
-==== General Sensitivity Calculator
+#==== General Sensitivity Calculator
 
-Provide an angle of incidence on the left and the calculator will output the general sensitivity at that angle.
+#Provide an angle of incidence on the left and the calculator will output the general sensitivity at that angle.
 
-{todo: interactive, input field on left, outputs cos(input)}
+#{todo: interactive, input field on left, outputs cos(input)}
 # maybe this could be removed from the basic version as for my own courses I expect students to calculate this with their own calculator.
 
-==== Frequency Response
+#==== Frequency Response
 
-Just like the polar pattern shows the microphone's sensitivity related to the angle from which the sound wave arrives, the frequency response describes its sensitivity based on the frequency. There are more factors that play a role for the microphone's frequency response, but let us just look at the ones that are related to the acoustic operating principles in this section.
+#Just like the polar pattern shows the microphone's sensitivity related to the angle from which the sound wave arrives, the frequency response describes its sensitivity based on the frequency. There are more factors that play a role for the microphone's frequency response, but let us just look at the ones that are related to the acoustic operating principles in this section.
+
 
 {/Frequency Response of Pressure Gradient Microphones}
 
