@@ -1,28 +1,73 @@
 = Acoustic Operating Principles
 
-In the previous section, we learned how condenser and dynamic microphones transduce acoustic energy into electrical energy. We saw that the instantaneous output voltage depends on either the displacement (condenser microphones) or the velocity (dynamic microphones) of the membrane. This also means that if the membrane does not move at all, the microphone will not produce output. {todo: text, improve description}
+In the previous section, we learned how condenser and dynamic microphones transduce acoustic energy into electrical energy. We saw that the instantaneous output voltage depends on either the displacement (condenser microphones) or the velocity (dynamic microphones) of the diaphragm (or membrane). This also means that if the membrane does not move at all, the microphone will not produce output. The design of the microphone capsule determines under which circumstances the diaphragm moves and how much it moves.
 
-This section discusses acoustic operating principles of microphones and how the capsule design influences the microphone's directional sensitivity (polar pattern). We will look at \n
+This section discusses acoustic operating principles of microphones and how the capsule design influences the microphone's directional sensitivity (polar pattern). We will look at
+
 * pressure transducers
 * pressure gradient transducers,
 
 understand general sensitivity equations and then combine pressure and pressure gradient components to create various polar patterns.
 
-==== Polar Patterns
+== Polar Patterns
 
-Before going into more detail about acoustic operating principles we should know what polar patterns are and why they are useful. Most microphones that you will use in the recording studio do not pick up sound waves from all directions with the same level. Some are actually designed to reject sound coming from the back, others will pick up sound from the front and the back but not from the sides, and then you have those that pick up sounds from all around the microphone. To make the situation even more complicated, usually the directional pick-up behavior is frequency dependent. This means that an omnidirectional microphone (see diagrams below) could actually pick up more high frequencies from the front than from the back and microphones that are designed to reject sound from the back might actually pick up a lot of the lower frequencies from all around the microphone. Frequency-dependent directional characteristics actually contribute greatly to the particular sound of a microphone.
+Before going into more detail about acoustic operating principles we should know what polar patterns of microphones are and why they they can be helpful in selecting and placing a microphone. Most microphones that you will use in the recording studio do not pick up sound evenly from all directions. Some are actually designed to reject sound coming from the back, others will pick up sound from the front and the back but not from the sides, and then you have those that pick up sounds from all around the microphone. To make the situation even more complicated, usually the directional pick-up behavior is frequency dependent. This means that an omni-directional microphone (see diagrams below) could actually give you more output for high frequencies arriving from the front than those from the back. A microphone designed to reject sound from the back might actually pick up a lot of the low-frequency components from all around it. Frequency-dependent directional characteristics actually contribute greatly to the particular sound of a microphone.
 
-Polar patterns show the directional sensitivity for the microphone. The 0°-axis is the front of the microphone and the sensitivity of any angle is referenced to it. This means that by looking at a polar pattern you should be able to predict from which direction the microphone will pick up the most sound (at least for certain frequencies) and which sounds will be rejected or reduced. Using polar patterns in a smart and effective way during recording sessions is essential to capture exactly what you need for your particular production. Some microphones give you the option to choose from various polar patterns or let you change microphone capsules.
-
-Click on the field below the polar diagram to view the most common polar patterns. Make sure to remember the shapes and names as they are important audio knowledge and they will help you during your practical work.
+Polar patterns show the directional sensitivity for the microphone. The 0°-axis is the front of the microphone and the sensitivity of any angle is referenced to it. This means that by looking at a polar pattern you should be able to predict into which direction the microphone is more sensitive (at least for certain frequencies). Below you see the most common polar patterns.
 
 ---.diagram
-{todo: diagram_interacive, switch with different polar patterns, omni, sub-cardioid, cardioid, supercardioid, hypercardioid, figure-8/bidirectional}
+{img: diagrams/MB_mic_d_03_omni.jpg}
+
+Omni-directional
 ---
 
-==== Pressure Gradient Microphones
+---.diagram
+{img: diagrams/MB_mic_d_04_subcardioid.jpg}
 
-For simplicity's sake while looking at microphone capsule design let us investigate the membrane's movement without taking the microphone's body into account. Imagine a circular membrane freely hanging in space or take a look at the diagram below.
+Subcardioid (wide cardioid)
+---
+
+---.diagram
+{img: diagrams/MB_mic_d_05_cardioid.jpg}
+
+Cardioid
+---
+
+---.diagram
+{img: diagrams/MB_mic_d_06_supercardioid.jpg}
+
+Supercardioid
+---
+
+---.diagram
+{img: diagrams/MB_mic_d_07_hypercardioid.jpg}
+
+Hypercardioid
+---
+
+---.diagram
+{img: diagrams/MB_mic_d_08_bidirectional.jpg}
+
+Bidirectional (Figure-8)
+---
+
+Polar patterns show you where to place a sound source to either record it or reduce it as much as possible. For example, by looking at the bidirectional polar pattern you can tell that sound sources directly in front and behind the microphone will be recorded the most. Sound sources that you wish to not be recorded by this microphone should be placed either at 90 degrees or 270 degrees off-axis so that the sound arrives from directions the microphone does not respond to. Using polar patterns in a smart and effective way during recording sessions is essential to capture exactly what you need for your particular production and reduce cross-talk and comb filtering when recording with multiple microphones simultaneously. Some microphones give you the option to choose from various polar patterns or let you change the microphones' capsules.
+
+
+== Frequency Response
+
+In addition to choosing a microphone based on its polar pattern, a microphone's frequency response can guide you when trying to find the right microphone for your application. A graph of the frequency response shows you the microphone's output in relation to the frequency of the incoming sound. Imagine that you use an oscillator to create a sine wave with a frequency of 20Hz. You send the signal into a loudspeaker which you place directly in front of the microphone. You then raise the frequency without changing the amplitude of the wave all the way up to 20,000Hz or higher and sketch the microphone's output level for each frequency on a graph. What you measure is called the {_frequency response} or - to be more precise - the {_on-axis frequency response}. This might look like this:
+
+---.diagram
+{img: diagrams/MB_mic_d_09_linear_frequency_resp.jpg}
+---
+
+The frequency response you see here is called a linear frequency response (or flat frequency response). This means that the microphone outputs the same voltage for waves with the same amplitude, regardless of the frequency of the incoming sound wave. Most microphones do not behave as "perfect", which is good, as differing frequency responses give microphones their unique sonic characteristics. The graph only shows the frequency response for on-axis sound. This can vary greatly for sound reaching the microphone at other angles, so just looking at the on-axis response does not tell you much about the actual sound of the microphone. Especially in situations where sounds arrive from all around the microphone (e.g., inside a grand piano, in classical recording, or when you record with multiple microphones at the same time), the off-axis frequency response is just as - or even more - important than the on-axis frequency response. Even if two microphones have very similar on-axis responses, they might sound completely different because of the off-axis response.
+
+
+== Pressure Gradient Microphones
+
+In the section on transducer principles we have seen that in order for a microphone to produce any output, the microphone's diaphragm has to move. Now we will investigate under what circumstances a sound wave will cause movement of the diaphragm. For simplicity's sake - while looking at microphone capsule design - let us focus on the membrane's movement without taking the microphone's body into account. Imagine a circular membrane freely hanging in space or take a look at the diagram below.
 
 ---.diagram
 {diagram, pressure gradient microphone}
@@ -36,7 +81,7 @@ Whether an incoming sound wave creates a pressure difference depends on its angl
 {diagram_interactive, moving sound source and displaying the difference in sound pressure in front and behind the membrane}
 ---
 
-Grab the sound source and move it around the microphone. The meter on the right shows the pressure difference between both sides of the membrane. If we make the front of the microphone the 0°-axis, you should notice that the pressure difference is the highest when the sound source is placed at 0° or 180° and is zero at 90° and 270°, gradually increasing and decreasing in between these points. If we stretch this out over a coordinate system with increasing angle from left to right (0°-360°) and decide that the maximum displacement is 1, we get a curve that is going from 1 at 0° to 0 at 90°, to -1 at 180°, to 0 at 270°, and back to 1 at 360°. We use the -1 for 180° as it has opposite polarity compared to what happens at 0°. A curve like this can be described with the equation
+# Grab the sound source and move it around the microphone. The meter on the right shows the pressure difference between both sides of the membrane. If we make the front of the microphone the 0°-axis, you should notice that the pressure difference is the highest when the sound source is placed at 0° or 180° and is zero at 90° and 270°, gradually increasing and decreasing in between these points. If we stretch this out over a coordinate system with increasing angle from left to right (0°-360°) and decide that the maximum displacement is 1, we get a curve that is going from 1 at 0° to 0 at 90°, to -1 at 180°, to 0 at 270°, and back to 1 at 360°. We use the -1 for 180° as it has opposite polarity compared to what happens at 0°. A curve like this can be described with the equation
 
 ---.indent
 {$$ S_{G} = cos~\alpha $$}
