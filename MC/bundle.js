@@ -902,8 +902,8 @@ MC.WrappedElement = WrappedElement;
 MC.wrapElement    = (elSel) => new WrappedElement(elSel);
 
 class Container extends WrappedElement {
-  /*:: innerElem: HTMLElement; scene: Scene; */
-  constructor (elSel/*:ElSel*/, innerElem/*:HTMLElement*/, sz/*:?XY*/) {
+  /*:: innerElem: SVGElement; scene: Scene; */
+  constructor (elSel/*:ElSel*/, innerElem/*:SVGElement*/, sz/*:?XY*/) {
     super(elSel, sz);
     this.innerElem = innerElem;
     this.el.style.position = 'relative';
@@ -952,9 +952,9 @@ declare class SVGSVGElement extends SVGGraphicsElement {}
 */
 // (function () {
 class SceneNode {
-  /*:: parent: ?GroupNode; scene: Scene; el: SVGElement; */
-  constructor (parent/*:?GroupNode*/, scene/*:Scene*/, el/*:SVGElement*/) {
-    this.parent = parent; this.scene = scene; this.el = el;
+  /*:: parent: ?GroupNode; el: SVGElement; */
+  constructor (parent/*:?GroupNode*/, el/*:SVGElement*/) {
+    this.parent = parent; this.el = el;
   }
 
   setElem (idx/*:idx*/, el/*SVGElement*/) {
@@ -1046,9 +1046,8 @@ class SceneNode {
 
 class GroupNode extends SceneNode {
   /*:: nodes: Array<SceneNode>; trf: Trf; */
-  // TODO remove scene
-  constructor (parent/*:?GroupNode*/, scene/*:Scene*/) {
-    super(parent, scene, new SVGGElement());
+  constructor (parent/*:?GroupNode*/, el/*:?SVGElement*/) {
+    super(parent, el ? el : new SVGGElement());
     this.nodes = []; this.trf = MC.trf0();
     this._attrs();
   }
@@ -1092,7 +1091,7 @@ class GroupNode extends SceneNode {
   }
 
   group () {
-    return this.add(new GroupNode(this, this.scene));
+    return this.add(new GroupNode(this));
   }
 
   // nested bg - fg
@@ -1100,26 +1099,25 @@ class GroupNode extends SceneNode {
 
   get bg () /*:GroupNode*/ {
     return this._bg ?
-      this._bg : this.back(this._bg = new GroupNode(this, this.scene));
+      this._bg : this.back(this._bg = new GroupNode(this));
   }
 
   get fg () /*:GroupNode*/ {
     return this._fg ?
-      this._fg : this.front(this._fg = new GroupNode(this, this.scene));
+      this._fg : this.front(this._fg = new GroupNode(this));
   }
 
-  insert/*::<T>*/ (idx/*:idx*/, nt/*:T*/) /*:T*/ {
+  add/*::<T>*/ (nt/*:T*/, back/*:boolean*/ = true) /*:T*/ {
     const n = ((nt/*:any*/)/*:SceneNode*/);
     if (null != n.parent)
       n.parent.rem(n);
-    n.parent = this; n._setScene(scene);
-    index = Math.min(index, nodes.length);
-    nodes.insert(index,n); n.setElem(index,n.el);
+    n.parent = this;
+    if (back)
+      this.nodes.push(n);
+    else
+      this.nodes.unshift(n);
+    n.setElem(back ? this.nodes.length - 1 : 0, n.el);
     return nt;
-  }
-
-  add (n/*:SceneNode*/) /*:SceneNode*/ {
-    return this.insert(this.nodes.length, n);
   }
 
   // void addAll(List<SceneNode> ns) {
@@ -1127,12 +1125,12 @@ class GroupNode extends SceneNode {
   //   for (var n in ns_) add(n);
   // }
 
-  front (n/*:SceneNode*/) /*:SceneNode*/ {
-    return this.add(n);
+  front/*::<T>*/ (n/*:T*/) /*:T*/ {
+    return this.add(n, false);
   }
 
   back/*::<T>*/ (n/*:T*/) /*:T*/ {
-    return this.insert(0, n);
+    return this.add(n, true);
   }
 
   rem (n/*:SceneNode*/) {
@@ -1150,108 +1148,509 @@ class GroupNode extends SceneNode {
   //   while (nodes.length>0)
   //     rem(nodes.first);
   // }
-
-  // void noSuchMethod(Invocation inv) {
-  //   try {
-  //     return ExtraMethods.apply(this, GroupNode, inv);
-  //   } catch(e) {
-  //     return super.noSuchMethod(inv);
-  //   }
-  // }
 }
-/*
-typedef void MoveEvent(XY); */
+
+/*:: type MoveFun = (XY) => void; */
 class Scene extends GroupNode {
-  /*:: container: Container;*/
+  /*:: container: Container; cursor: string;
+       _lastPointerPos: XY; off: XY;
+       _onMove: MoveFun; _onEnd: MoveFun;
+       _onPointerMove: MoveFun; _onPointerUp: MoveFun;
+  */
   constructor (container/*:Container*/) {
-  }
-}
-/*
-class Scene extends GroupNode {
-
-  Scene(this.container) {
-    scene = this; el = container.innerElem;
-    _attrs();
+    super(null, container.innerElem);
+    this._attrs();
+    this._lastPointerPos = XY._0(); this.off = XY._0();
   }
 
-  void _attrs() {
+  _attrs() {
     super._attrs();
-    stroke = 'black'; width = 1; fill = 'none';
-    lineCap = 'round';
+    this.stroke = 'black'; this.width = 1; this.fill = 'none';
+    this.lineCap = 'round';
   }
 
-  // hooks
-  String cursor;
-
-  // moving
-  XY _lastPointerPos = xy0(); int offX = 0, offY = 0;
-
-  XY pointerPos(UIEvent e, bool first) {
+  pointerPos (e/*:UIEvent*/, first/*:boolean*/) /*:XY*/ {
     /* FIXME
         FF does not have offsetLeft/offsetTop
         FF jerky when moving mouse - sometimes reporting wrong pointer coordinates
-     * /
+     */
     if (first) {
-      var dof = System.isFF() ? xy0() : el.documentOffset;
-      offX = window.scrollX - dof.x;
-      offY = window.scrollY - dof.y;
+      const dof = /*System.isFF() ? xy0() :*/ XY._0(); // TODO this.el.documentOffset;
+      this.off = XY.make(window.scrollX - dof.x, window.scrollY - dof.y);
     }
 
-    var cl;
-    if (e is MouseEvent) {
-      cl = e.client;
+    let cl;
+    if (e.prototype === MouseEvent) { // TODO
+      cl = XY.make(((e/*:any*/)/*:MouseEvent*/).clientX, ((e/*:any*/)/*:MouseEvent*/).clientY);
     } else {
-      var ts = (e as TouchEvent).targetTouches;
-      if (ts.isEmpty) return _lastPointerPos;
-      cl = ts.first.client;
+      var ts = ((e/*:any*/)/*:TouchEvent*/).targetTouches;
+      if (!ts || !ts.length)
+        return this._lastPointerPos;
+      cl = XY.make(ts[0].clientX, ts[0].clientY);
     }
 
-    _lastPointerPos = xy(cl.x+offX,cl.y+offY);
-    return _lastPointerPos;
+    return this._lastPointerPos = this.off.plus(cl);
   }
 
-  Object onBeginEvent(f(XY)) =>
-    System.oneStream(el.onMouseDown,el.onTouchStart).listen((e) {
-      e.preventDefault(); f(pointerPos(e,true));
-    });
+  oneStream(mouse/*:string*/, touch/*:string*/, f) {
+    (this.el/*:any*/).addEventListener(mouse, f);
+    (this.el/*:any*/).addEventListener(touch, f);
+  }
 
-  MoveEvent _onMove, _onEnd;
-  var _onPointerMove, _onPointerUp;
-
-  void onMoveBegin(XY p, MoveEvent onBegin, MoveEvent onMove, [MoveEvent onEnd]) {
-    if (null!=onBegin) onBegin(p);
-
-    _onMove = onMove;
-    _onPointerMove = System.oneStream(document.onMouseMove,document.onTouchMove).listen((e) {
+  onBeginEvent (f/*:MoveFun*/) {
+    this.oneStream('mousedown', 'touchstart', function (e/*:MouseEvent*/) {
       e.preventDefault();
-      onMoveMove(pointerPos(e,false));
-    });
-
-    _onEnd = onEnd;
-    _onPointerUp = System.oneStream(document.onMouseUp,document.onTouchEnd).listen((e) {
-      e.preventDefault();
-      onMoveEnd(pointerPos(e,false));
+      f(this.pointerPos(e, true));
     });
   }
 
-  void onMoveMove(XY p) {
-    if (null!=_onMove) _onMove(p);
+  onMoveBegin(p/*:XY*/, onBegin/*:?MoveFun*/, onMove/*:?MoveFun*/, onEnd/*:?MoveFun*/) {
+    if (onBegin)
+      onBegin(p);
+
+    if (onMove)
+      this._onMove = onMove;
+      // TODO look up oneSTream
+      // TODO rest
+    // this._onPointerMove = this.oneStream(document.onMouseMove,document.onTouchMove).listen((e) {
+    //   e.preventDefault();
+    //   onMoveMove(pointerPos(e,false));
+    // });
+
+    // _onEnd = onEnd;
+    // _onPointerUp = System.oneStream(document.onMouseUp,document.onTouchEnd).listen((e) {
+    //   e.preventDefault();
+    //   onMoveEnd(pointerPos(e,false));
+    // });
   }
 
-  void onMoveEnd(XY p) {
-    _onPointerMove.cancel(); _onPointerUp.cancel();
-    if (null!=_onEnd) _onEnd(p);
-    _onMove = _onEnd = null;
+  onMoveMove(p/*:XY*/) {
+    // if (this._onMove)
+    //   this._onMove(p);
+  }
+
+  onMoveEnd(p/*:XY*/) {
+    // _onPointerMove.cancel(); _onPointerUp.cancel();
+    // if (null!=_onEnd) _onEnd(p);
+    // _onMove = _onEnd = null;
   }
 }
 
-abstract class LeafNode extends SceneNode {
+/*abstract class LeafNode extends SceneNode {
   LeafNode();
 }
 */
 // }());
 
+//****** shapes.js
+// @flow
+/*:: var MC = {}; */ /* global MC:true */
+var MC = MC || {}; // eslint-disable-line
+
+// typedef XY OnMoveShape(XY,Shape,bool); // TODO remove bool, split off OnMoveBegin, rename -> Begin/Move/End, as touches
+// typedef void OnUserBeginMoveShape(XY,Shape);
+
+class Shape extends SceneNode {
+  constructor (parent/*:?GroupNode*/, el/*:SVGElement*/) {
+    super(parent, el);
+  }
+
+  // get p () /*:XY*/ {
+  //   return XY._0();
+  // }
+  // set p (_/*:XY*/) {}
+
+  // get sz () /*:XY*/ {
+  //   return XY._0();
+  // }
+
+  get cursor () {
+    return this.getAttr('cursor');
+  }
+
+  set cursor (c/*:string*/) {
+    this.setAttr('cursor',c);
+  }
+
+/*
+  var _moveStream, _onUserBeginMoveShape, _onMoveShape;
+
+  Object setupMove([MoveFun onBegin, MoveFun onMove, MoveFun onEnd]) {
+    return System.oneStream(el.onMouseDown,el.onTouchStart).listen((e) {
+      e.preventDefault();
+      scene.onMoveBegin(scene.pointerPos(e,true),onBegin,onMove,onEnd);
+    });
+  }
+*/ /*
+  void fixed() { // not movable
+    if (null!=_moveStream) _moveStream.cancel();
+    cursor = null;
+    _onUserBeginMoveShape = _onMoveShape = _moveStream = null;
+  }
+
+  void movable([OnMoveShape f, OnUserBeginMoveShape b]) {
+    cursor = 'pointer';
+    _onUserBeginMoveShape = b; _onMoveShape = f;
+
+    var off;
+    _moveStream = setupMove(
+      (XY xy) {
+        off = p - xy;
+        if (null!=_onUserBeginMoveShape) _onUserBeginMoveShape(p,this);
+      },
+      (XY xy) {
+        moveTo(xy + off, true);
+      }
+    );
+  }
+
+  bool _isMoving = false; // prevents recursion
+  void moveTo(XY to,[bool byUser=false]) {
+    if (!_isMoving) {
+      _isMoving = true;
+      if (null != _onMoveShape) {
+        XY to_ = _onMoveShape(to,this,byUser);
+        if (null != to_) to = to_;
+      }
+      p = to;
+      _isMoving = false;
+    }
+  }*/
+}
+
+/*
+abstract class ShapeP0 extends Shape {
+  XY _p;
+  ShapeP0(this._p);
+
+  void _attrP();
+
+  void _attrs() {
+    super._attrs();
+    _attrP();
+  }
+
+  XY get p    => _p;
+  set p(XY p) { _p = p; _attrP(); }
+}
+
+abstract class ShapePR extends ShapeP0 {
+  num _r;
+  ShapePR(XY p0, this._r): super(p0);
+
+  void _attrR();
+
+  void _attrs() {
+    super._attrs();
+    _attrR();
+  }
+
+  num get r     => _r;
+  set r(num r)  { _r = r; _attrR(); }
+}
+
+abstract class ShapeP12 extends Shape {
+  XY _p1, _p2;
+  ShapeP12(this._p1,this._p2);
+
+  void _attrP1();
+  void _attrP2();
+
+  void _attrs() {
+    super._attrs();
+    _attrP1(); _attrP2();
+  }
+
+  XY get p      => _p1;
+  set p(XY p)   { _p2 += p-_p1; _p1 = p; _attrP1(); _attrP2(); }
+
+  XY get p1     => _p1;
+  set p1(XY p)  { _p1 = p; _attrP1(); }
+
+  XY get p2     => _p2;
+  set p2(XY p)  { _p2 = p; _attrP2(); }
+
+  XY get sz     => _p2 - _p1;
+  set sz(XY xy) { p2 = p1 + xy; _attrP2(); }
+
+  void set(XY p1, XY p2) { _p1 = p1; _p2 = p2; _attrP1(); _attrP2(); }
+
+  XY  ctr() => (_p1 + _p2) / 2;
+  num lgt() => (_p2 - _p1).lgt();
+}
+
+abstract class ShapePS extends Shape {
+  List<XY> _ps; XY _sc, _tr;
+  ShapePS(this._ps);
+
+  void _attrD();
+
+  void _attrs() {
+    super._attrs();
+    _attrD();
+  }
+
+  XY get p => _ps.isEmpty ? xy0() : _ps.first;
+
+  set p(XY p)  {
+    if (_ps.isEmpty) return;
+    var off = p - _ps.first;
+    _ps = _ps.map((p) => p+off); _attrD();
+  }
+
+  List<XY> get ps     => _ps;
+  set ps(List<XY> ps) { _ps = ps; _attrD(); }
+
+  XY get sc           => _sc;
+  set sc(XY sc)       { _sc = sc; _attrD(); }
+
+  XY get tr           => _tr;
+  set tr(XY tr)       { _tr = tr; _attrD(); }
+
+  void set(List<XY> ps, XY sc, XY tr) {
+    _ps = ps; _sc = sc; _tr = tr; _attrD();
+  }
+
+  List<XY> get trans {
+    var ps = _ps;
+    if (null!=_sc) ps = ps.map((p) => p.mul(_sc));
+    if (null!=_tr) ps = ps.map((p) => p + _tr);
+    return ps.toList();
+  }
+}
+
+class Line extends ShapeP12 {
+  Line(XY p1, XY p2): super(p1,p2) {
+    el = new LineElement();
+    _attrs();
+  }
+
+  void _attrP1() {
+    setAttr('x1',_p1.x); setAttr('y1',_p1.y);
+  }
+
+  void _attrP2() {
+    setAttr('x2',_p2.x); setAttr('y2',_p2.y);
+  }
+
+  // the point closest to p
+  XY closeTo(XY p) {
+    XY d = _p2 - _p1, e = p - _p1;
+    num f = d.dot(e), t = (f/d.mag()).clamp(0,1);
+    return _p1 + d*t;
+  }
+}
+
+Line line(GroupNode g, XY p1, XY p2, [stroke, fill])
+  => g.add(new Line(p1,p2) ..stroke=stroke ..fill=fill);
+
+class Rect extends ShapeP12 {
+  num _r; // r - round corners
+  Rect(XY p1, XY p2): super(p1,p2) {
+    el = new RectElement();
+    _attrs();
+  }
+
+  void _attrP1() {
+    setAttr('x',_p1.x); setAttr('y',_p1.y);
+    setAttr('width',sz.x); setAttr('height',sz.y);
+  }
+
+  void _attrP2() {
+    setAttr('width',sz.x); setAttr('height',sz.y);
+  }
+
+  void _attrR() {
+    setAttr('rx',_r); setAttr('ry',_r);
+  }
+
+  void _attrs() {
+    super._attrs();
+    _attrR();
+  }
+
+  XY get tl => _p1;
+  XY get tr => xy(_p2.x, _p1.y);
+  XY get bl => xy(_p1.x, _p2.y);
+  XY get br => _p2;
+}
+
+Rect rect(GroupNode g, XY p1, XY p2, [stroke, fill])
+  => g.add(new Rect(p1,p2) ..stroke=stroke ..fill=fill);
+
+class Ellipse extends ShapeP0 {
+  XY _r;
+  Ellipse(XY p0, this._r): super(p0) {
+    el = new EllipseElement();
+    _attrs();
+  }
+
+  XY get sz => _r * 2;
+
+  void _attrP() {
+    setAttr('cx',_p.x); setAttr('cy',_p.y);
+  }
+
+  void _attrR() {
+    setAttr('rx',_r.x); setAttr('ry',_r.y);
+  }
+
+  void _attrs() {
+    super._attrs();
+    _attrR();
+  }
+}
+
+Ellipse ellipse(GroupNode g, XY p, XY r, [stroke, fill])
+  => g.add(new Ellipse(p,r) ..stroke=stroke ..fill=fill);
+
+class Circle extends ShapePR {
+  Circle(XY p, num r): super(p,r) {
+    el = new CircleElement();
+    _attrs();
+  }
+
+  XY get sz => xy1(_r * 2);
+
+  void _attrP() {
+    setAttr('cx',_p.x); setAttr('cy',_p.y);
+  }
+
+  void _attrR() {
+    setAttr('r',_r);
+  }
+
+  // the point on the perimeter closest to xy
+  XY closeTo(XY p) => _p + (p -= _p).unit() * _r;
+
+  // the point on the perimeter at angle a (rad)
+  XY atr(a) => xy(_p.x + _r * math.cos(a),_p.y - _r * math.sin(a));
+
+  // the angle (rad) from centre to xy
+  num atp(XY p) {
+    p = (closeTo(p) - _p) / _r; // unit vector
+    var rad = -math.asin(p.y);
+    if (p.x<0) rad =  Math.PI-rad; if (rad<0) rad += Math.PIPI;
+    return rad;
+  }
+}
+
+Circle circle(GroupNode g, XY p, num r, [stroke, fill])
+  => g.add(new Circle(p,r) ..stroke=stroke ..fill=fill);
+
+var _handleR = System.isTouch() ? 9 : 6, _handleFill = 'yellow';
+
+Circle handle(GroupNode g, XY p, [color])
+  => circle(g, p, _handleR, null, null!=color ? color : _handleFill);
+
+class Label extends ShapeP0 {
+  String _s, _font; num _size;
+  Label(XY p0, this._s, [num size, String family]): super(p0) {
+    el = new TextElement();
+    _attrs();
+  }
+
+  String get s          => _s;
+  set s(String s)       { _s = s; _attrText(); }
+
+  String get font       => _font;
+  set font(String font) { _font = font; _attrFont(); }
+
+  num get size          => _size;
+  set size(num size)    { _size = size; _attrSize(); }
+
+  void _attrP()         { setAttr('x',_p.x); setAttr('y',_p.y); }
+  void _attrFont()      { setAttr('font-family',_font); }
+  void _attrSize()      { setAttr('font-size',_size);   }
+  void _attrText()      { el.text = _s;                 }
+
+  void _attrs() {
+    super._attrs();
+    _attrP();
+    _attrFont(); _attrSize(); _attrText();
+  }
+}
+
+Label label(GroupNode g, XY p, String s, [fill='black', stroke='none'])
+  => g.add(new Label(p,s) ..fill=fill ..stroke=stroke);
+
+class Path extends ShapePS {
+  Path([List<XY> ps]): super(null==ps ? [] : ps) {
+    el = new PathElement();
+    _attrs();
+  }
+
+  String _seg(XY p) => p.x.toStringAsFixed(1) + ',' + p.y.toStringAsFixed(1) + ' ';
+
+  String _d() {
+    String d = '';
+    if (_ps.length > 0) {
+      var ps = trans;
+      d += 'M' + _seg(ps.first);
+      for (var p in ps.skip(1)) d += 'L' + _seg(p);
+    }
+    return d;
+  }
+
+  void _attrD() {
+    setAttr('d',_d());
+  }
+
+  void _attrs() {
+    super._attrs();
+    _attrD();
+  }
+}
+
+Path path(GroupNode g, List<XY> ps, [stroke, fill])
+  => g.add(new Path(ps) ..stroke=stroke ..fill=fill);
+
+class Spline extends Path {
+  bool _stripEnds;
+  Spline(this._stripEnds,[List<XY> ps]): super(ps);
+
+  String _bezier() {
+    // Cubic Bezier spline through points (Catmull-Rom to Bezier)
+    // http://processingjs.nihongoresources.com/code%20repository/?get=Catmull-Rom-to-Bezier
+    int o = _stripEnds ? 1 : 0, l = _ps.length;
+    if (l < 3+2*o) return '';
+
+    var ps = trans;
+    XY pT = ps[0], p1 = ps[0+o], p2 = ps[1+o], p3 = ps[2+o];
+
+    String d = 'M' + _seg(p1);
+
+    for (int cmr=6, i=2+o; ;) {
+      XY d1 = (p2 - pT)/cmr, d2 = (p3 - p1)/cmr;
+      d += 'C' + _seg(p1+d1) + _seg(p2-d2) + _seg(p2);
+      if (++i>l-o) break;
+      pT = p1; p1 = p2; p2 = p3; p3 = ps[(i<l)?i:i-1];
+    }
+
+    return d;
+  }
+
+  String _d() => _bezier();
+}
+
+Spline spline(GroupNode g, bool stripEnds,[List<XY> ps, stroke, fill])
+  => g.add(new Spline(stripEnds,ps) ..stroke=stroke ..fill=fill);
+
+loadShapeHelpers() {
+  ExtraMethods.addAll(GroupNode, {
+    const Symbol('line'):     line,
+    const Symbol('rect'):     rect,
+    const Symbol('ellipse'):  ellipse,
+    const Symbol('circle'):   circle,
+    const Symbol('handle'):   handle,
+    const Symbol('label'):    label,
+    const Symbol('path'):     path,
+    const Symbol('spline'):   spline,
+  });
+}
+*/
 // eof
 
-//******
-//******
+// }());
+
+// eof
