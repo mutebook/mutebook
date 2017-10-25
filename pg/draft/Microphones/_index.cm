@@ -12,7 +12,9 @@ Microphones can be classified based on two major principles:
 * Acoustic Operating Principles
 ---
 
-# Add some lines on that microphones behave differently based on transducer type, operating principle, distance, angle, frequency, etc. and that understanding all these is important for using microphones very fluently
+The following sections describe these principles.
+
+
 
 @toc mic_trans;  transducer_principles.cm  ; Transducer Principles
 @toc mic_oper;   operating_principles.cm   ; Acoustic Operating Principles
