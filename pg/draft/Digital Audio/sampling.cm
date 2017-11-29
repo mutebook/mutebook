@@ -1,1 +1,178 @@
 = Sample Frequency
+
+In order for a computer to work with an audio signal we have to create a limited set of numbers. This is achieved through the process of A/D conversion. An audio signal is a change of amplitude over time so we have to create a limited set of values on two axes for both values, the amplitude and the time.
+
+---.diagram
+{img: diagrams/MB_digau_d_01 Amplitude over Time.jpg}
+---
+
+Limiting the number of values on the time axis is done by taking a {/sample} of the signal at regular time intervals. At each sample, the signal is checked for the instantaneous amplitude. How often the signal is checked for its value is defined by the sampling frequency, which is given in Hz. A sampling frequency of 44,100Hz, for example, means that we take 44,100 samples of the instantaneous amplitude of the audio signal per second. A sampling frequency of 48kHz means that we take 48,000 samples per second. This also means that the higher the sampling frequency the large the audio file because we deal with more numbers per second.
+
+== Nyquist-Shannon Sampling Theorem
+The sample frequency is an important parameter when making an analogue signal digital, as it defines which kinds of signals we can represent digitally without creating additional signal components that are not present in the original audio signal. The Nyquist-Shannon Sampling Theorem states that:
+
+"If a function x(t) contains no frequencies higher than B Hertz, is is completely determined by giving its ordinates at a series of points spaced 1/(2B) seconds apart."
+
+# add citation
+
+In other words and related to our audio signal this means that the signal remains the same as long as the highest frequency of the audio file stays below half of the sampling frequency. If f{,s} is the sampling frequency, then f{,s}/2 is the highest frequency that we can define. Half of the sampling frequency is also known as the {/Nyquist Frequency}. If we want to to be able to work with a digital audio signal that covers the full audible frequency spectrum (20-20,000Hz) we have to make sure that the Nyquist Frequency higher than 20,000Hz and f{,s} therefore higher than 40,000Hz. A CD for example uses a sampling frequency of 44.1kHz. Other common sample frequencies are 48kHz, 88.2kHz, 96kHz, and 192kHz. The Nyquist-Shannon Sampling Theorem not just becomes very relevant when working with audio signals that make use of the full audible frequency spectrum, but also in situations whenever the file-size matters. For example, in game audio. You can save valuable space by reducing the sample frequency for audio signals that are limited in terms of the frequency spectrum. For example, a low drone that does not contain any information above 200Hz can simply be sampled with a lower frequency, resulting in a smaller audio file.
+
+But what happens when you let frequencies enter the digital world that are above the Nyquist Frequency?
+
+== Aliasing
+
+In order understand the importance of the Nyquist-Shannon Sampling Theorem, let us sample a few waves with different sample rates.
+
+We start with a sample frequency that is four times the audio frequency:
+
+
+---.diagram
+{img: diagrams/MB_Sfreq x 4 A.jpg}
+---
+
+After A/D conversion we have the following sample points left:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 4 B.jpg}
+---
+
+These sample points are sufficient to restore the original wave during D/A conversion:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 4 C.jpg}
+---
+
+Now let us reduce the sample frequency to three times the audio frequency:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 3 A.jpg}
+---
+
+After A/D conversion we have the following sampled values:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 3 B.jpg}
+---
+
+These contain enough information in order to reconstruct the original wave during D/A conversion:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 3 C.jpg}
+---
+
+
+The above two exaples show that as long as we stay below the Nyquist frequency, the original wave is defined by the samples we took during A/D conversion to fully reconstruct the original wave.
+
+
+Now we approach the Nyquist frequency and sample the audio signal with a sample frequency that is twice the audio frequency:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 2 A.jpg}
+---
+
+We get the following stored sample values:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 2 B.jpg}
+---
+
+The resulting wave could look like this:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 2 C.jpg}
+---
+
+You see that this is a problem. We were pretty unlucky that we just took samples at the zero-crossings, so let us see what happens when we shift the audio signal in phase.
+
+---.diagram
+{img: diagrams/MB_Sfreq x 2 A2.jpg}
+---
+
+This results in the following samples:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 2 B2.jpg}
+---
+
+During D/A conversion this will result in the original wave:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 2 C2.jpg}
+---
+
+So far so good. If we apply a different phase shift to the signal, we have the following situation:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 2 A3.jpg}
+---
+
+This results in the following samples:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 2 B3.jpg}
+---
+
+During D/A conversion this will result in the original wave:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 2 C3.jpg}
+---
+
+So far, so good. BUT...the sampled values could also result in a slightly different wave that looks like this:
+
+---.diagram
+{img: diagrams/MB_Sfreq x 2 C3 alternate.jpg}
+---
+
+You see that this wave has the same frequency as the original audio signal, but a different amplitude and phase, which added to the original wave will result in an alteration.
+
+This shows that once the audio signal is equal to the Nyquist frequency, the sampled values are not sufficient anymore to fully determine the original wave unambiguously.
+
+It can get even worse! If we have an audio frequency that it 0.7 times the sample frequency (so far beyond the Nyquist frequency), we could run into the following problem:
+
+---.diagram
+{img: diagrams/MB_Afreq 0.7 x sfreq A.jpg}
+---
+
+This results in the following samples:
+
+---.diagram
+{img: diagrams/MB_Afreq 0.7 x sfreq B.jpg}
+---
+
+These sampled values are too ambitious to only be interpreted as one sine wave, so the output signal during D/A conversion contains more than just the original sine wave:
+
+---.diagram
+{img: diagrams/MB_Afreq 0.7 x sfreq C.jpg}
+---
+
+
+So by exceeding the Nyquist frequency with our audio signal, we add additional frequencies to it. The frequency of the added signal component is
+
+---.equation
+{$$ f_{total} = f_{sample} - f_{audio} $$}
+---
+
+With a changing audio frequencies, you can imagine that the unwanted component that is created can be rather annoying.
+
+In fact, what happens is that we modulate one signal with another and create so-called side-bands at
+
+---.equation
+{$$ f_{total} = f_{sample} - f_{audio} $$}
+---
+
+and
+
+---.equation
+{$$ f_{total} = f_{sample} + f_{audio} $$}
+---
+
+This happens all the time, but making sure that the highest frequency that the audio signal contains stays below half the sampling frequency, we ensure that no additional frequencies within the audible frequency spectrum are created. The unwanted change that happens to the signal when we do let signal components above the Nyquist frequency enter the system is called {_Aliasing}. In order to ensure that this is not happening an {/Anti-Aliasing Filter} is applied during A/D conversion. This is a low-pass filter that prevents components above the Nyquist frequency to enter the system.
+
+
+
+
+
+
+
+
