@@ -9,8 +9,7 @@ $book = [
 
   'pages'       => 'pg/',
 
-  'sc_project'  => '11395717',
-  'sc_security' => '03ed7177',
+  'piwik_u'     => 'http://piwik.mutebook.me/',
 ];
 
 require(dirname(__FILE__).'/CM/_index.php');
