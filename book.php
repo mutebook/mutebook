@@ -7,7 +7,7 @@ $book = [
   'keywords'    => 'Music technology, online teaching, music production, acoustics, electronics, digital audio',
   'author'      => 'Thilo Schaller & Jan Burle',
 
-  'pages'       => 'pg/',
+  'pages'       => 'pages/',
 ];
 
 // eof

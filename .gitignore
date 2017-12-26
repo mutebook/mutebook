@@ -1,5 +1,5 @@
 .DS_Store
 .*.sh
-pg/toc_.js
-*$
-.idea
+pages/toc_.js
+.idea/
+.vscode/
