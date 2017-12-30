@@ -6,6 +6,11 @@ function isBot() {
   return $isBot;
 }
 
+function sendMail($to, $subj, $body) {
+  $body .= "\n(from IP: ${_SERVER['REMOTE_ADDR']})\n";
+  return @mail($to, $subj, $body, 'From: jan@mutebook.me');
+}
+
 $name  = @$_POST['name'];
 $email = @$_POST['email'];
 $text  = @$_POST['text'];
