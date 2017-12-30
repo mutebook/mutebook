@@ -7,3 +7,7 @@
 
 @def GH   GitHub
 @def CM   Compact Markup
+
+# typographical quotes
+@chr squo '
+@chr dquo "
