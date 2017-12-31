@@ -6,6 +6,11 @@ $Mb is an online interactive textbook created to learn and teach music technolog
 
 As $Mb will be under constant development for quite some time, please send us feedback, comments and suggestions or point out any errors that you find. {todo: Please also register at our {ed: {:bulletin board|https://mutebook.me/bb/} | or mailing list} so that we can keep you updated on additions and revisions of {$Mb}. We promise that we will not spam.}
 
+=== Licence
+
+The content of Mutebook is licensed under the Creative Commons {:{img:/assets/cc-by-nc-sa.png||Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International}|https://creativecommons.org/licenses/by-nc-sa/4.0/} licence.
+
+
 @toc draft/   # Mutebook in making
 @toc contribute; contribute.cm; For contributors
 @toc mb_contact; contact.php ; Contact

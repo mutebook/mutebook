@@ -25,7 +25,7 @@ if (empty($email) || empty($text)) {
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
   $heads = 'Please correct the e-mail address.';
 } else {
-  $subj = 'Message to editors posted at mutebook.me';
+  $subj = 'Message to authors posted at mutebook.me';
   $body = "name: [$name]\nemail: [$email]\n-----\n$text\n-----\n";
   if (!sendMail('authors@mutebook.me', $subj, $body))
      $heads = 'The post office is closed. Try again later.';
