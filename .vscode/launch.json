@@ -1,13 +1,14 @@
 {
   "version": "0.2.0",
   "configurations": [
+
   {
     "type": "chrome",
     "request": "launch",
     "name": "Chrome",
     // "url": "http://localhost:8053/index.php",
     // "url": "http://localhost:8053/index.php?pg=draft/Acoustics/sound_sources_and_waves.cm",
-    "url": "http://localhost:8053/index.php?pg=sandbox.cm",
+    "url": "http://localhost:8053/?pg=sandbox.cm",
     "webRoot": "${workspaceRoot}"
   }
   ]

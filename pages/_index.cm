@@ -10,6 +10,7 @@ As $Mb will be under constant development for quite some time, please send us fe
 
 The content of Mutebook is licensed under the Creative Commons {:{img:/assets/cc-by-nc-sa.png||Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International}|https://creativecommons.org/licenses/by-nc-sa/4.0/} licence.
 
+The underlying source code used to present the content is licensed under the [MIT license](http://opensource.org/licenses/mit-license.php).
 
 @toc draft/   # Mutebook in making
 @toc contribute; contribute.cm; For contributors
@@ -17,3 +18,4 @@ The content of Mutebook is licensed under the Creative Commons {:{img:/assets/cc
 
 # Appendices
 # @toc mb_glossary; glossary.cm ; Glossary
+@toc mb_sandbox; sandbox.cm ; Sandbox
