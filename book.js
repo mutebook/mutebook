@@ -27,10 +27,12 @@ book.hook = function (tag, cs, parts) {
   const quintMachine = function () {
     const [src, fun, caption] = parts(3);
     divId = 'quint_mach_' + (++qmNo);
-    this.sec('div', ['appx']); // TODO
+    this.sec('div', ['app']);
     this.sec('div', ['quint'], ` id="${divId}"`);
     this.secEnd();
-    this.put(caption); // footer
+    this.sec('div');
+    this.put(caption);
+    this.secEnd();
     this.secEnd();
 
     quintSrc = this.link(src.trim());
