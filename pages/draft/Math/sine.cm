@@ -1,6 +1,6 @@
 = Trigonometric Functions
 
-{app: mb_index:apps/circular/index.html|800x260|Unit circle, sine, cosine}
+{quint: mb_index:apps/circular.js | circular | Unit circle, sine, cosine (circular motion)}
 
 The simplest wave is a sine wave and {---} as you will see in the section on {:Acoustics|mb_acou} {---} any periodic wave can be broken down into individual sine waves, so it is essential that you know what a sine wave is and how you can describe one with a function.
 

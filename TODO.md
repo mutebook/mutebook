@@ -8,7 +8,7 @@
 
 * display img alt text better (if offline)
 * typographical quotes
-* app: circular - position labels better; add 'c' to ll, angle indicator, 'sin' + 'cos' moving labels
+* quint: circular - position labels better; add 'c' to ll, angle indicator, 'sin' + 'cos' moving labels
 
 # Bugs
 
