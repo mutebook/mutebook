@@ -447,6 +447,8 @@ class Osc extends hasStartStop(AuNode) {
 
   set phs (phs) {
     this._phs = phs;
+    if ('sine' !== this.node.type)
+      return;
     // TODO phase changes better with delay; setPeriodicWave clicks
     const node = this.node;
     if (node) {
