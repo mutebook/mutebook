@@ -8,9 +8,20 @@ but technological developments have been introduced constantly and have changed 
 #{todo: add more here}
 
 ---.diagram
-{img:.pop diagrams/MB_mupr_d_01.jpg}
-
-# {todo: MB_mupr_d_01}
+# {img:.pop mb_mupr:diagrams/MB_mupr_d_01.jpg}
+--- table
+(.plate Composer)
+({>>/})
+(.plate Score)
+({>>/})
+(.plate Musician)
+({>>/})
+(.plate Instrument/Voice)
+({>>/})
+(.plate Concert Hall)
+({>>/})
+(.plate Audience)
+---
 ---
 
 The diagram above shows the simplified signal flow of the artistic message from the creator (the composer) to the receiver (the audience). The composition is interpreted by the performer and played in front of a live audience. The audience is present in the same room at the same time as the performer. The musicians' voices or instruments can be considered tools the performers use to deliver the composer's message to the audience. Once the music has been transduced into acoustic form it travels through the concert hall to the audience.

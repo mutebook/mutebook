@@ -1,38 +1,54 @@
 = Sandbox
 
-# {quint: mb_index:apps/circular.js | circular | Circular motion}
-
 Try things out:
 
-== Audio
+# {quint: mb_index:apps/circular.js | circular | Circular motion}
 
-These look like buttons, but are not:
-{btn:.r 440}
-{btn:.g 528}
-{btn:.b 660}
-{btn: 1000}
+---.diagram
+--- table
+(.plate Composer) ({>>}) (.plate=1x3 2)
+({>>/})
+(.plate Score)
+({>>/})
+(.plate Musician)
+({>>/})
+(.plate Instrument/Voice)
+({>>/})
+(.plate Concert Hall)
+({>>/})
+(.plate Audience)
+---
+---
 
-This plays 1kHz:
-{btn-sine: 1000}
+#== Audio
 
-These play a minor triad:
-{btn-sine:.r.toggle 440}
-{btn-sine:.g.toggle 528}
-{btn-sine:.b.toggle 660}
+#These look like buttons, but are not:
+#{btn:.r 440}
+#{btn:.g 528}
+#{btn:.b 660}
+#{btn: 1000}
 
-With text:
-{btn-sine:.r.toggle a|440}
-{btn-sine:.g.toggle c|528}
-{btn-sine:.b.toggle e|660}
+#This plays 1kHz:
+#{btn-sine: 1000}
 
-Waveforms (442):
-{btn-sine:.toggle   sine     |442}
-{btn-square:.toggle square   |442}
-{btn-saw:.toggle    sawtooth |442}
-{btn-tri:.toggle    triangle |442}
+#These play a minor triad:
+#{btn-sine:.r.toggle 440}
+#{btn-sine:.g.toggle 528}
+#{btn-sine:.b.toggle 660}
 
-Noise:
-{btn-noise:.toggle white}
-{btn-noise:.toggle pink}
-{btn-noise:.toggle weiß | white}
-{btn-noise:.toggle rosa | pink}
+#With text:
+#{btn-sine:.r.toggle a|440}
+#{btn-sine:.g.toggle c|528}
+#{btn-sine:.b.toggle e|660}
+
+#Waveforms (442):
+#{btn-sine:.toggle   sine     |442}
+#{btn-square:.toggle square   |442}
+#{btn-saw:.toggle    sawtooth |442}
+#{btn-tri:.toggle    triangle |442}
+
+#Noise:
+#{btn-noise:.toggle white}
+#{btn-noise:.toggle pink}
+#{btn-noise:.toggle weiß | white}
+#{btn-noise:.toggle rosa | pink}
