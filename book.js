@@ -2,7 +2,7 @@
 book.hook = function (tag, cs, parts) {
   // this = HtmlPage
   let loadAudio = false;
-  let quintSrc, quintFun, divId;
+  let quintSrc, quintFun, quintCode, divId;
 
   const toneButton = function (type) {
     const [tx, freq] = parts(2);
@@ -39,6 +39,21 @@ book.hook = function (tag, cs, parts) {
     quintFun = fun.trim();
   };
 
+  const quintMachineCode = function () {
+    const [src, caption] = parts(2);
+    divId = 'quint_mach_' + (++qmNo);
+    this.div(['app']);
+    this.div(['quint'], ` id="${divId}"`);
+    this.secEnd();
+    this.div();
+    this.put(caption);
+    this.secEnd();
+    this.secEnd();
+
+    quintFun = 'fun_' + divId;
+    quintCode = `function ${quintFun} () { ${src} }`;
+ };
+
   switch (tag) {
   case 'btn-sine:': {
     toneButton.apply(this, ['sine']);
@@ -70,6 +85,11 @@ book.hook = function (tag, cs, parts) {
     break;
   }
 
+  case 'quint-code:': {
+    quintMachineCode.apply(this, []);
+    break;
+  }
+
   default:
     return false;
   }
@@ -78,8 +98,13 @@ book.hook = function (tag, cs, parts) {
     CM.loadScript('../assets/audio_bundle.js');
   if (quintSrc) {
     CM.loadCSS('../assets/quint.css');
-    CM.loadScripts(['../assets/quint.js', '../' + quintSrc], function () {
+    let qs = ['../assets/quint.js'];
+    if (quintSrc)
+      qs.push('../' + quintSrc);
+    CM.loadScripts(qs, function () {
       try {
+        if (quintCode)
+          eval(quintCode);
         eval(`${quintFun}('${divId}')`);
       } catch (err) {
         // nix

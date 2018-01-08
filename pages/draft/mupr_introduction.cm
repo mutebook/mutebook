@@ -8,18 +8,17 @@ but technological developments have been introduced constantly and have changed 
 #{todo: add more here}
 
 ---.diagram
-# {img:.pop mb_mupr:diagrams/MB_mupr_d_01.jpg}
 --- table
 (.plate Composer)
-({>>/})
+({->>/})
 (.plate Score)
-({>>/})
+({->>/})
 (.plate Musician)
-({>>/})
+({->>/})
 (.plate Instrument/Voice)
-({>>/})
+({->>/})
 (.plate Concert Hall)
-({>>/})
+({->>/})
 (.plate Audience)
 ---
 ---
@@ -31,9 +30,17 @@ The diagram below shows the same signal flow for recorded music. You see that th
 Many contemporary music productions are even created with the listeners at home (or with headphones on the train) in mind, using the medium very specifically to deliver the artistic message directly to the listener.
 
 ---.diagram
-{img:.pop diagrams/MB_mupr_d_02.jpg}
-
-# {todo: MB_mupro_D_02}
+--- table
+(.plate Composer) ({->>}) (.plate Audience)
+({->>/})          ()      ({<<-/})
+(.plate Score)    ()      (.plate=x7 Production Process)
+({->>/})
+(.plate Musician)
+({->>/})
+(.plate Instrument/Voice)
+({->>/})
+(.plate Concert Hall) ({->>})
+---
 ---
 
 So generally speaking one could say that the music production process is the process of capturing a musical performance or idea so that an audience can enjoy it at a different time and a different place than the original performance. This is certainly true for traditional music genres in which the music was created with the performance in mind (e.g., classical music). The rise of recording and the development of technology have provided us with creative possibilities that go far beyond capturing a traditional live performance. In some situations the music might have never been performed as heard by the listener coming from the final medium. Techniques (overdubs, editing, etc.) and tools might have been used that create a listening experience that does not have much to do with how the music was performed inside the studio. The following paragraphs will differentiate between {/natural recording} (even though this is a terrible term and there is nothing unnatural about recording in a studio) and {/studio recording}, so let us first discuss these two approaches.
@@ -140,9 +147,32 @@ This list is just a very rough overview. Each of the items listed could in itsel
 
 The following diagram shows a simplified signal-flow chart of stages a signal goes through during a music production.
 
+@push
+@chr em /
 ---.diagram
-{img:.pop diagrams/MB_mupr_d_04.jpg}
+--- table
+(.plate Instrument)             ()  (.edge=x4 /acoustic/)
+()
+(.plate Recording Room)
+()
+(.plate {:Microphone|mb_mics})  (/Transducer/ 🡶)
+()                              ()  (.edge=x3 /electric/)
+(.plate Console)
+()
+(.plate A\/D Converter)         (/Converter/ 🡶)
+()                              ()  (.edge=x3 /digital/)
+(.plate Computer)
+()
+(.plate D\/A Converter)         (/Converter/ 🡶)
+()                              ()  (.edge=x1 /electric/)
+(.plate Speakers)               (/Transducer/ 🡶)
+()                              ()  (.edge=x4 /acoustic/)
+(.plate Listening Room)
+()
+(.plate Listener)
 ---
+---
+@pop
 
 Once the music is performed it travels through the recording room and reaches the microphone. The microphone is a transducer as it transduces acoustic energy into electric energy. Once we have the signal in an electric form, some analogue signal processing (in the console or outboard equipment) might be applied before it is sent to the audio interface or a dedicated A/D converter (analogue-to-digital converter). The A/D converter takes the analogue signal and makes it digital so that we can work with it in the computer or any other digital signal processor. From the computer it is then sent to a D/A converter (digital-to-analogue converter) that outputs an analogue signal which is traveling to the loudspeakers. Loudspeakers are transducers, too, as they transduce electric energy into acoustic energy. The acoustic signal the loudspeakers output is traveling through the listening room (control room) to the listener. The diagram also shows the various states of the signal you will encounter and will have to work with.
 
