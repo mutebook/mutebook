@@ -96,9 +96,9 @@ book.hook = function (tag, cs, parts) {
 
   if (loadAudio)
     CM.loadScript('../assets/audio_bundle.js');
-  if (quintSrc) {
+  if (quintSrc || quintCode) {
     CM.loadCSS('../assets/quint.css');
-    let qs = ['../assets/quint.js'];
+    const qs = ['../assets/quint.js'];
     if (quintSrc)
       qs.push('../' + quintSrc);
     CM.loadScripts(qs, function () {
@@ -107,6 +107,7 @@ book.hook = function (tag, cs, parts) {
           eval(quintCode);
         eval(`${quintFun}('${divId}')`);
       } catch (err) {
+        console.log(err)
         // nix
       }
     });

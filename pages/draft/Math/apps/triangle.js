@@ -1,23 +1,38 @@
-// circular -> harmonic motion
+// right(-angled) triange
 
 function triangle (divId) {
   const qm = mc.qm.$(divId, 3), [fg, bg] = mc.qm.fb(qm);
 
-  // size without margins
-  let [sx, sy] = mc.qm.sz(qm), pad = Math.min(sx, sy) / 12;
-  sx -= 2*pad; sy -= 2*pad;
+  // size without margins (m)
+  let [sx, sy] = mc.qm.sz(qm), m = 24;
+  sx -= 2*m; sy -= 2*m;
 
-  // the smaller one
-  let sm = Math.min(sx, sy), sm2 = sm/2;
+  // sizes of sides (a:b:c = 3:4:5)
+  let sa = sy, sb = sa/3*4, sc = sa/3*5;
 
   // vertices
-  let B = [pad, pad], C = [pad, pad + sm], A = [pad + 2*sm, pad + sm];
+  let x1 = m + (sx-sb)/2, x2 = x1 + sc, y1 = m, y2 = y1 + sy;
+  let A = [x2, y2], B = [x1, y1], C = [x1, y2];
 
   // sides
-  $ = (p1, p2, col, w) => mc.line.$(fg, p1, p2);
+  let $ = (p1, p2, col, w) => mc.line.$(fg, p1, p2);
   let a = $(B, C, 'black', 2);
   let b = $(A, C, 'black', 2);
   let c = $(A, B, 'black', 2);
+
+  // labels
+  $ = (p, s) => mc.label.$(bg, p, s, true), d = 12;
+  $([x2+d, y2+d], 'A');
+  $([x1-d, y1-d], 'B');
+  $([x1-d, y2+d], 'C');
+
+  $([x2-5*d, y2-d],   'α');
+  $([x1+d,   y1+3*d], 'β');
+  $([x1+d,   y2-d],   'γ');
+
+  $([x1-d,      y1+sa/2],   'a');
+  $([x1+sb/2,   y2+d],      'b');
+  $([x1+sb/2+d, y1+sa/2-d], 'c');
 }
 
 // eof
