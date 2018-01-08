@@ -45,7 +45,6 @@ Click the buttons to hear a sine waves with frequencies of 100Hz, 200Hz, 300Hz, 
 {btn-sine: 100} {btn-sine: 200} {btn-sine: 300} {btn-sine: 400} {btn-sine: 500} {btn-sine: 1000} {btn-sine: 2000} {btn-sine: 4000} {btn-sine: 8000} {btn-sine: 16000}
 
 
-
 ==.u Damped Oscillator
 
 Let us now introduce friction which reduces the energy that is used for moving the weight up and down, damping the movement.

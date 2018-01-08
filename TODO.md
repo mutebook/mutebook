@@ -1,8 +1,18 @@
 # Features
 
-# Nice to have
+Diagrams:
+* wave_atributes: buttons -> put on a spiral
+* operating_principles: polar patterns, ... etc
+* sound_sources_and_waves.cm: simple harmonic motion
 
-* SVG box/text diagrams, clickable as links
+* sound_sources_and_waves.cm: acoustic monopole
+* wave_atributes: peak-to-peak wave
+* soundpressure_spl: calculator
+* sampling: signal ... etc
+* quantization: ... etc
+* transducer_principles: ... etc
+
+# Nice to have
 
 # Cosmetics
 
@@ -12,16 +22,13 @@
 
 # Bugs
 
-* site refresh or browser back/forth buttons should refresh menu
-* {btn: {$$\times$$}} should work
-
 # Text
 
-* replace ° with ° (https://unicode-table.com/en/02DA/ -> https://unicode-table.com/en/00B0/)
+* replace ˚ with ° (https://unicode-table.com/en/02DA/ -> https://unicode-table.com/en/00B0/)
 * remove \n
 
 # Internal - code-related
 
 ---
-GH W css decoration
+GitHub, Wp: css decoration
 

@@ -1,4 +1,8 @@
 /* global CM:false book:false */
+book.loadAudio = function () {
+  CM.loadScript('../assets/audio_bundle.js');
+};
+
 book.hook = function (tag, cs, parts) {
   // this = HtmlPage
   let loadAudio = false;
