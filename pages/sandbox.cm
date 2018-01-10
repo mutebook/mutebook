@@ -2,68 +2,6 @@
 
 Try things out:
 
-{btn-sine: 1000}
-
-@push
-@chr hraw ///
-{quint-code: ///
-  const qm = mc.qm.$(divId, 2, true), [fg, bg, over] = mc.qm.fb(qm);
-  // size without margins
-  let m = 14, [sx, sy] = mc.qm.sz(qm);
-  sx -= 2*m; sy -= 2*m;
-
-  // centre
-  let [cx, cy] = [m + sx/2, m + sy/2];
-
-  // spiral
-  let minPch = mc.toPch(1000/16), ctrPch = mc.toPch(1000), maxPch = mc.toPch(1000*16*Math.sqrt(2));
-  let mp = mc.pitchSpiral;
-  let sp = mp.$(bg, [cx, cy], sy/12, sy/2, minPch, ctrPch, maxPch);
-  mp.markPitch(sp, ctrPch, 'red');
-
-  // sine tones - buttons
-  function sine(freq, label) {
-    if (!label)
-      label = freq,toString();
-    let btn = over.appendChild(document.createElement('button'));
-    btn.innerText = label;
-    btn.classList.add('toggle');
-    btn.onclick = function () {
-      MC.Klang.tone(this, freq, 'sine');
-      btn.classList.toggle('down');
-    };
-
-    let [x, y] = mp.toXY(sp, mc.toPch(freq));
-
-    let style = btn.style;
-    style.position = 'absolute';
-    style.left = (x + cx - btn.clientWidth/2) + 'px';
-    style.top  = (y + cy - btn.clientHeight/2) + 'px';
-  }
-
-  for (fl of [[100], [200], [1000, '1k']]) {
-    let [freq, label] = fl;
-    sine(freq, label);
-  }
-///| Pitch spiral + buttons}
-@pop
-
----.diagram
---- table
-(.plate Composer) ({>>}) (.plate=1x3 2)
-({>>/})
-(.plate Score)
-({>>/})
-(.plate Musician)
-({>>/})
-(.plate Instrument/Voice)
-({>>/})
-(.plate Concert Hall)
-({>>/})
-(.plate Audience)
----
----
-
 #⤊⤋⇚⇛
 #🢀 🢂 🢁 🢃
 #🡸 🡺 🡹 🡻

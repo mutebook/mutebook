@@ -15,41 +15,14 @@ Before going into more detail about acoustic operating principles we should know
 
 Polar patterns show the directional sensitivity for the microphone. The 0°-axis is the front of the microphone and the sensitivity of any angle is referenced to it. This means that by looking at a polar pattern you should be able to predict into which direction the microphone is more sensitive (at least for certain frequencies). Below you see the most common polar patterns.
 
----.diagram
-{img: diagrams/MB_mic_d_03_omni.jpg}
+{quint: mb_mics:apps/polar_patterns.js | polar_patterns | Microphone polar patterns}
 
-Omni-directional
----
-
----.diagram
-{img: diagrams/MB_mic_d_04_subcardioid.jpg}
-
-Subcardioid (wide cardioid)
----
-
----.diagram
-{img: diagrams/MB_mic_d_05_cardioid.jpg}
-
-Cardioid
----
-
----.diagram
-{img: diagrams/MB_mic_d_06_supercardioid.jpg}
-
-Supercardioid
----
-
----.diagram
-{img: diagrams/MB_mic_d_07_hypercardioid.jpg}
-
-Hypercardioid
----
-
----.diagram
-{img: diagrams/MB_mic_d_08_bidirectional.jpg}
-
-Bidirectional (Figure-8)
----
+#{img: diagrams/MB_mic_d_03_omni.jpg}
+#{img: diagrams/MB_mic_d_04_subcardioid.jpg}
+#{img: diagrams/MB_mic_d_05_cardioid.jpg}
+#{img: diagrams/MB_mic_d_06_supercardioid.jpg}
+#{img: diagrams/MB_mic_d_07_hypercardioid.jpg}
+#{img: diagrams/MB_mic_d_08_bidirectional.jpg}
 
 Polar patterns show you where to place a sound source to either record it or reduce it as much as possible. For example, by looking at the bidirectional polar pattern you can tell that sound sources directly in front and behind the microphone will be recorded the most. Sound sources that you wish to not be recorded by this microphone should be placed either at 90 degrees or 270 degrees off-axis so that the sound arrives from directions the microphone does not respond to. Using polar patterns in a smart and effective way during recording sessions is essential to capture exactly what you need for your particular production and reduce cross-talk and comb filtering when recording with multiple microphones simultaneously. Some microphones give you the option to choose from various polar patterns or let you change the microphones' capsules.
 

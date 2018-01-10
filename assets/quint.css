@@ -104,6 +104,10 @@
   pointer-events: all;
 }
 
+.quint div.controls {
+  margin: .7em;
+}
+
 .quint_panel .hidden {
   display: none !important;
 }

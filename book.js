@@ -34,7 +34,7 @@ book.hook = function (tag, cs, parts) {
     this.div(['app']);
     this.div(['quint'], ` id="${divId}"`);
     this.secEnd();
-    this.div();
+    this.div(['caption']);
     this.put(caption);
     this.secEnd();
     this.secEnd();
@@ -49,7 +49,7 @@ book.hook = function (tag, cs, parts) {
     this.div(['app']);
     this.div(['quint'], ` id="${divId}"`);
     this.secEnd();
-    this.div();
+    this.div(['caption']);
     this.put(caption);
     this.secEnd();
     this.secEnd();
@@ -102,7 +102,7 @@ book.hook = function (tag, cs, parts) {
     CM.loadScript('../assets/audio_bundle.js');
   if (quintSrc || quintCode) {
     CM.loadCSS('../assets/quint.css');
-    const qs = ['../assets/quint.js'];
+    const qs = ['../assets/quint.js', '../assets/quint_help.js'];
     if (quintSrc)
       qs.push('../' + quintSrc);
     CM.loadScripts(qs, function () {
