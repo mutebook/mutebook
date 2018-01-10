@@ -3,6 +3,8 @@ book.loadAudio = function () {
   CM.loadScript('../assets/audio_bundle.js');
 };
 
+let qmNo = 0;
+
 book.hook = function (tag, cs, parts) {
   // this = HtmlPage
   let loadAudio = false;
@@ -27,7 +29,6 @@ book.hook = function (tag, cs, parts) {
     loadAudio = true;
   };
 
-  let qmNo = 0;
   const quintMachine = function () {
     const [src, fun, caption] = parts(3);
     divId = 'quint_mach_' + (++qmNo);

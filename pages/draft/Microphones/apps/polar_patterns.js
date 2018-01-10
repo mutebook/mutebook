@@ -17,7 +17,7 @@ function polar_patterns (divId) {
 
   // mic pattern
   let mic = mc.spline.$(fg, true, [], 'red');
-  mc.node.width(mic, '2');
+  mc.node.width(mic, '3');
 
   function setPattern(mixVal) {
     let steps = 48, ps = [];
@@ -44,7 +44,7 @@ function polar_patterns (divId) {
       rio2.checked = true;
     else
       rio1.checked = true;
-    }
+  }
 
   // controls
   let c = over.addChild('div', 'controls');
