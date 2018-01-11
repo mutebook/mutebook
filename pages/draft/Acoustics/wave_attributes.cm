@@ -66,10 +66,9 @@ Let us investigate how the frequency relates to our work as audio engineers, com
 @chr hraw ///
 {quint-code: ///
   book.loadAudio();
-  const qm = mc.qm.$(divId, 1, true), [fg, bg, over] = mc.qm.fb(qm);
+  const qm = QuintMachine(divId, 1), [fg, bg, over] = qm.fbo();
   // size without margins
-  let m = 14, [sx, sy] = mc.qm.sz(qm);
-  sx -= 2*m; sy -= 2*m;
+  let m = 14, [sx, sy] = qm.sz(m);
 
   // centre
   let [cx, cy] = [m + sx/2, m + sy/2];

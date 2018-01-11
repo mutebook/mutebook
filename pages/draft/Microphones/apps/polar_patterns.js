@@ -1,12 +1,10 @@
 // microphone polar patterns
 
 function polar_patterns (divId) {
-  const qm = mc.qm.$(divId, 2, true), [fg, bg, over] = mc.qm.fb(qm);
-  elemHelpers(over);
+  const qm = QuintMachine(divId), [fg, bg, over] = qm.fbo();
 
   // size without margins
-  let m = 14, [sx, sy] = mc.qm.sz(qm);
-  sx -= 2*m; sy -= 2*m;
+  let m = 14, [sx, sy] = qm.sz(m);
 
   // centre
   let [cx, cy] = [m + sx/2, m + sy/2];
@@ -16,7 +14,7 @@ function polar_patterns (divId) {
   let g = mc.polarGrid.$(bg, [cx, cy], r, r1, true);
 
   // mic pattern
-  let mic = mc.spline.$(fg, true, [], 'red');
+  let mic = fg.spline(true, 'red');
   mc.node.width(mic, '3');
 
   function setPattern(mixVal) {
@@ -29,7 +27,7 @@ function polar_patterns (divId) {
       ps.push([x, y]);
     }
 
-    mc.spline.set(mic, ps, null, [cx, cy]);
+    mic.set(ps, null, [cx, cy]);
 
     mix.value = mixVal;
     if (mixVal >= .8)

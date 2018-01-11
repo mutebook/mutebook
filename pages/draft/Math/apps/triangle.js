@@ -1,11 +1,10 @@
 // right(-angled) triange
 
 function triangle (divId) {
-  const qm = mc.qm.$(divId, 3), [fg, bg] = mc.qm.fb(qm);
+  const qm = mc.qm.$(divId, 3), [fg, bg] = qm.fbo();
 
   // size without margins (m)
-  let [sx, sy] = mc.qm.sz(qm), m = 24;
-  sx -= 2*m; sy -= 2*m;
+  let m = 24, [sx, sy] = qm.sz(m);
 
   // sizes of sides (a:b:c = 3:4:5)
   let sa = sy, sb = sa/3*4, sc = sa/3*5;
@@ -15,7 +14,7 @@ function triangle (divId) {
   let A = [x2, y2], B = [x1, y1], C = [x1, y2];
 
   // sides
-  let $ = (p1, p2, col, w) => mc.line.$(fg, p1, p2);
+  let $ = (p1, p2, col, w) => fg.line(p1, p2);
   let a = $(B, C, 'black', 2);
   let b = $(A, C, 'black', 2);
   let c = $(A, B, 'black', 2);

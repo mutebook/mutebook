@@ -1,12 +1,10 @@
 // microphone frequency response
 
 function frequency_response (divId) {
-  const qm = mc.qm.$(divId, 2, true), [fg, bg, over] = mc.qm.fb(qm);
-  elemHelpers(over);
+  const qm = QuintMachine(divId), [fg, bg, over] = qm.fbo();
 
   // size without margins
-  let m = 18, [sx, sy] = mc.qm.sz(qm);
-  sx -= 2*m; sy -= 2*m;
+  let m = 18, [sx, sy] = qm.sz(m);
 
   // log-lin grid
   let llg = mc.loglinGrid;
@@ -15,7 +13,7 @@ function frequency_response (divId) {
   llg.yLegend(g, 'Output (dB)');
 
   // mic pattern
-  let mic = mc.spline.$(g, false, [], 'red');
+  let mic = g.spline(false, 'red');
   mc.node.width(mic, '3');
 
   function setResponse(response, mul) {
@@ -26,7 +24,7 @@ function frequency_response (divId) {
       ps.push([x, y]);
     }
 
-    mc.spline.set(mic, ps);
+    mic.set(ps);
     flat.value = mul;
   }
 

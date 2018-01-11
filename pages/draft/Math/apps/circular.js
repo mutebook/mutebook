@@ -1,7 +1,7 @@
 // circular -> harmonic motion
 
 function circular (divId) {
-  const qm = mc.qm.$(divId, 3), [fg, bg] = mc.qm.fb(qm);
+  const qm = QuintMachine(divId, 3), [fg, bg] = qm.fbo();
 
   // config
   const m = 8;
@@ -9,19 +9,18 @@ function circular (divId) {
   const col_c = 'red';    // color cosine
 
   // size without margins
-  let [sx, sy] = mc.qm.sz(qm);
-  sx -= 2*m; sy -= 2*m;
+  let [sx, sy] = qm.sz(m);
 
   // the smaller one
   let sm = Math.min(sx, sy), sm2 = sm/2;
 
   // grid for circle
-  mc.grid.$(bg, [m, m], [sm, sm], [4, 4]);
+  bg.grid([m, m], [sm, sm], [4, 4]);
 
   // grid for waves
   let [pgx, pgy] = [2*m + sm, m];   // position
   let [sgx, sgy] = [sx - sm - m, sy]; // size
-  mc.grid.$(bg, [pgx, pgy], [sgx, sgy], [12, 4]);
+  bg.grid([pgx, pgy], [sgx, sgy], [12, 4]);
 
   // centered circle
   let [cx, cy] = cc = [m + sm2, sy/2 + m];
@@ -39,14 +38,14 @@ function circular (divId) {
   $([pgx + sgx/4*3, cy], '270');
 
   // lines: sine, cosine, hypotenuse, movable
-  $ = (col, w) => mc.line.$(fg, null, null, col, w);
+  $ = (col, w) => fg.line(null, null, col, w);
   let ls0 = $(col_s, 2), ls1 = $(col_s, 2);
   let lc0 = $(col_c, 2), lc1 = $(col_c, 2);
   let lh  = $('black', 2);
   let lm = $('gray'), lms = $(col_s, 3), lmc = $(col_c, 3);
 
   // waves: sine, cosine
-  $ = (col) => mc.spline.$(fg, true, [], col);
+  $ = (col) => fg.spline(true, col);
   let ws = $(col_s), wc = $(col_c);
 
   function setWave(w, phase) {
@@ -56,7 +55,7 @@ function circular (divId) {
       ps.push([x, - mc.degSin(phase + 360 * x)]);
     }
 
-    mc.spline.set(w, ps, [sgx, sgy/2], [pgx, pgy + sgy/2]);
+    w.set(ps, [sgx, sgy/2], [pgx, pgy + sgy/2]);
   }
 
   let crank = mc.handle.$(fg, [0, 0], 'yellow');
@@ -64,20 +63,18 @@ function circular (divId) {
     let [x, y] = p = mc.circle.closeTo(c, p);
     let angle = mc.circle.atp(c, p);
 
-    let _ = mc.line.set;
-
     // on circle
-    _(lh,  p, cc);
-    _(ls0, [cx, y], cc);
-    _(ls1, p, [x,  cy]);
-    _(lc0, [x, cy], cc);
-    _(lc1, p, [cx, y]);
+    lh.set(p, cc);
+    ls0.set([cx, y], cc);
+    ls1.set(p, [x,  cy]);
+    lc0.set([x, cy], cc);
+    lc1.set(p, [cx, y]);
 
     // on waves
     let lx = angle / 360 * sgx + pgx;
-    _(lm,  [lx, pgy], [lx, pgy + sgy]);
-    _(lms, [lx-1, pgy + sgy/2], [lx-1, pgy + sgy/2 - sgy/2 * mc.degSin(angle)]);
-    _(lmc, [lx+1, pgy + sgy/2], [lx+1, pgy + sgy/2 - sgy/2 * mc.degCos(angle)]);
+    lm.set([lx, pgy], [lx, pgy + sgy]);
+    lms.set([lx-1, pgy + sgy/2], [lx-1, pgy + sgy/2 - sgy/2 * mc.degSin(angle)]);
+    lmc.set([lx+1, pgy + sgy/2], [lx+1, pgy + sgy/2 - sgy/2 * mc.degCos(angle)]);
     return p;
   });
 
