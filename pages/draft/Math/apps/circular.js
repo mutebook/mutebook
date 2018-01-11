@@ -4,27 +4,27 @@ function circular (divId) {
   const qm = mc.qm.$(divId, 3), [fg, bg] = mc.qm.fb(qm);
 
   // config
-  const pad = 6;
+  const m = 8;
   const col_s = 'green';  // color sine
   const col_c = 'red';    // color cosine
 
   // size without margins
   let [sx, sy] = mc.qm.sz(qm);
-  sx -= 2*pad; sy -= 2*pad;
+  sx -= 2*m; sy -= 2*m;
 
   // the smaller one
   let sm = Math.min(sx, sy), sm2 = sm/2;
 
   // grid for circle
-  mc.grid.$(bg, [pad, pad], [sm, sm], [4, 4]);
+  mc.grid.$(bg, [m, m], [sm, sm], [4, 4]);
 
   // grid for waves
-  let [pgx, pgy] = [2*pad + sm, pad];   // position
-  let [sgx, sgy] = [sx - sm - pad, sm]; // size
+  let [pgx, pgy] = [2*m + sm, m];   // position
+  let [sgx, sgy] = [sx - sm - m, sy]; // size
   mc.grid.$(bg, [pgx, pgy], [sgx, sgy], [12, 4]);
 
   // centered circle
-  let [cx, cy] = cc = [pad + sm2, sy/2 + pad];
+  let [cx, cy] = cc = [m + sm2, sy/2 + m];
   let c = mc.circle.$(fg, cc, sm2, 'blue');
 
   // labels

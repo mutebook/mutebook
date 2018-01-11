@@ -92,20 +92,23 @@
   z-index: initial;
 }
 
-.quint div { /* overlay */
+.quint div.overlay {
   position: absolute;
   height: 100%; width: 100%;
   z-index: 1;
   background: transparent;
   pointer-events: none;
+  position: relative;
 }
 
-.quint div * { /* on overlay */
+.quint div.overlay * { /* on overlay */
   pointer-events: all;
 }
 
 .quint div.controls {
   margin: .7em;
+  position: absolute;
+  bottom: 0;
 }
 
 .quint_panel .hidden {

@@ -31,9 +31,8 @@ For most of our work, the effective acoustic pressure is more relevant than the 
 
 The waveform and what it sounds like to our ears depends on the movement of the speaker cone. The simplest wave is created by simple harmonic motion. It is usually and very effectively explained and visualized with help of a spring and a weight (or mass). The weight is attached to the ceiling and the weight is attached to the spring (see diagram below). If you leave it alone for a while the spring which is pulling the weight upwards and the gravity that is pulling the weight down will have found a compromise about where the weight should rest so that they both get their share of it. This position is called equilibrium position.
 
----.diagram
-{img: diagrams/MB_ac_d_02.jpg}
----
+{quint: mb_acou:apps/harmonic_motion.js | harmonic_motion | Harmonic motion}
+#{img: diagrams/MB_ac_d_02.jpg}
 
 If you now pull the weight down a bit
 #(which you can do in the diagram by clicking and dragging)

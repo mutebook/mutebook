@@ -1,8 +1,6 @@
 # Features
 
 Diagrams:
-* wave_atributes: buttons -> put on a spiral
-* operating_principles: polar patterns, ... etc
 * sound_sources_and_waves.cm: simple harmonic motion
 
 * sound_sources_and_waves.cm: acoustic monopole
