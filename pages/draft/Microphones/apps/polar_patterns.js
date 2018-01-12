@@ -11,11 +11,11 @@ function polar_patterns (divId) {
   // full radius, unit radius
   let r = sy/2, r1 = r * .9;
   // polar grid
-  let g = mc.polarGrid.$(bg, [cx, cy], r, r1, true);
+  let g = bg.polarGrid([cx, cy], r, r1, true);
 
   // mic pattern
   let mic = fg.spline(true, 'red');
-  mc.node.width(mic, '3');
+  mic.width('3');
 
   function setPattern(mixVal) {
     let steps = 48, ps = [];
@@ -23,57 +23,44 @@ function polar_patterns (divId) {
       let a = i / steps * 360;
       let mo = 1 - mixVal, mb = mixVal;
       let r = Math.abs(r1*mo + r1*mc.degCos(a)*mb);
-      let [x, y] = mc.polarGrid.toXY(g, r, a); // omni
+      let [x, y] = g.toXY(r, a); // omni
       ps.push([x, y]);
     }
 
     mic.set(ps, null, [cx, cy]);
 
-    mix.value = mixVal;
+    mix.setValue(mixVal);
     if (mixVal >= .8)
-      rio6.checked = true;
+      rio6.check();
     else if (mixVal >= .7)
-      rio5.checked = true;
+      rio5.check();
     else if (mixVal >= .6)
-      rio4.checked = true;
+      rio4.check();
     else if (mixVal >= .4)
-      rio3.checked = true;
+      rio3.check();
     else if (mixVal >= .2)
-      rio2.checked = true;
+      rio2.check();
     else
-      rio1.checked = true;
+      rio1.check();
   }
 
   // controls
-  let c = over.addChild('div', 'controls');
+  let c = over.controls();
 
-  let rio1 = c.br().addRadio('pat', 'Omni-directional');
-  let rio2 = c.br().addRadio('pat', 'Subcardioid (wide cardioid)');
-  let rio3 = c.br().addRadio('pat', 'Cardioid');
-  let rio4 = c.br().addRadio('pat', 'Supercardioid');
-  let rio5 = c.br().addRadio('pat', 'Hypercardioid');
-  let rio6 = c.br().addRadio('pat', 'Bidirectional (Figure-8)');
+  let rio1 = c.br().addRadio('pat', 'Omni-directional',
+    () => setPattern(0));
+  let rio2 = c.br().addRadio('pat', 'Subcardioid (wide cardioid)',
+    () => setPattern(.35));
+  let rio3 = c.br().addRadio('pat', 'Cardioid',
+    () => setPattern(.5));
+  let rio4 = c.br().addRadio('pat', 'Supercardioid',
+    () => setPattern(.65));
+  let rio5 = c.br().addRadio('pat', 'Hypercardioid',
+    () => setPattern(.75));
+  let rio6 = c.br().addRadio('pat', 'Bidirectional (Figure-8)',
+    () => setPattern(1));
 
-  rio1.onclick = () => setPattern(0);
-  rio2.onclick = () => setPattern(.35);
-  rio3.onclick = () => setPattern(.5);
-  rio4.onclick = () => setPattern(.65);
-  rio5.onclick = () => setPattern(.75);
-  rio6.onclick = () => setPattern(1);
-
-  let mix = c.br().addInput('range');
-
-  mix.min  = 0;
-  mix.max  = 1;
-  mix.step = .05;
-
-  mix.onchange = function () {
-    setPattern(this.value);
-  };
-
-  mix.onmousemove = function () {
-    setPattern(this.value);
-  };
+  let mix = c.br().addRange(0, 1, .05, () => setPattern(mix.value()));
 
   setPattern(0);
 }

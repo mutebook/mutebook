@@ -24,10 +24,10 @@ function circular (divId) {
 
   // centered circle
   let [cx, cy] = cc = [m + sm2, sy/2 + m];
-  let c = mc.circle.$(fg, cc, sm2, 'blue');
+  let c = fg.circle(cc, sm2, 'blue');
 
   // labels
-  let $ = (p, s) => mc.label.$(bg, p, s + '\u00B0', true), dr = 8;
+  let $ = (p, s) => bg.label(p, s + '\u00B0', true), dr = 8;
   $([cx + sm2 - dr, cy], '0');
   $([cx, cy - sm2 + dr], '90');
   $([cx - sm2 + dr, cy], '180');
@@ -58,10 +58,10 @@ function circular (divId) {
     w.set(ps, [sgx, sgy/2], [pgx, pgy + sgy/2]);
   }
 
-  let crank = mc.handle.$(fg, [0, 0], 'yellow');
-  mc.shape.movable(crank, function (p) {
-    let [x, y] = p = mc.circle.closeTo(c, p);
-    let angle = mc.circle.atp(c, p);
+  let crank = fg.handle([0, 0], 'yellow');
+  crank.movable(function (p) {
+    let [x, y] = p = c.closeTo(p);
+    let angle = c.atp(p);
 
     // on circle
     lh.set(p, cc);
@@ -81,7 +81,7 @@ function circular (divId) {
   setWave(ws, 0);
   setWave(wc, 90);
 
-  mc.shape.moveTo(crank, cc);
+  crank.moveTo(cc);
 }
 
 // eof

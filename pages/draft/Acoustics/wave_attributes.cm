@@ -62,49 +62,7 @@ Let us investigate how the frequency relates to our work as audio engineers, com
 
 #{btn-sine: 50} {btn-sine: 100} {btn-sine: 150} {btn-sine: 200} {btn-sine: 250} {btn-sine: 300} {btn-sine: 350} {btn-sine: 400} {btn-sine: 450} {btn-sine: 500} {btn-sine: 550} {btn-sine: 600} {btn-sine: 650} {btn-sine: 700} {btn-sine: 750} {btn-sine: 800} {btn-sine: 850} {btn-sine: 900} {btn-sine: 950} {btn-sine: 1000} {btn-sine: 1100} {btn-sine: 1200} {btn-sine: 1300} {btn-sine: 1400} {btn-sine: 1500} {btn-sine: 1600} {btn-sine: 1700} {btn-sine: 1800} {btn-sine: 1900} {btn-sine: 2000} {btn-sine: 2100} {btn-sine: 2200} {btn-sine: 2300} {btn-sine: 2400} {btn-sine: 2500} {btn-sine: 2600} {btn-sine: 2700} {btn-sine: 2800} {btn-sine: 2900} {btn-sine: 3000} {btn-sine: 3200} {btn-sine: 3400} {btn-sine: 3600} {btn-sine: 3800} {btn-sine: 4000} {btn-sine: 4200} {btn-sine: 4400} {btn-sine: 4600} {btn-sine: 4800} {btn-sine: 5000} {btn-sine: 5500} {btn-sine: 6000} {btn-sine: 6500} {btn-sine: 7000} {btn-sine: 7500} {btn-sine: 8000} {btn-sine: 8500} {btn-sine: 9000} {btn-sine: 10000} {btn-sine: 11000} {btn-sine: 12000} {btn-sine: 13000} {btn-sine: 14000} {btn-sine: 15000} {btn-sine: 16000} {btn-sine: 17000} {btn-sine: 18000} {btn-sine: 19000} {btn-sine: 20000}
 
-@push
-@chr hraw ///
-{quint-code: ///
-  book.loadAudio();
-  const qm = QuintMachine(divId, 1), [fg, bg, over] = qm.fbo();
-  // size without margins
-  let m = 14, [sx, sy] = qm.sz(m);
-
-  // centre
-  let [cx, cy] = [m + sx/2, m + sy/2];
-
-  // spiral
-  let minPch = mc.toPch(50), ctrPch = mc.toPch(1000), maxPch = mc.toPch(20000);
-  let mp = mc.pitchSpiral;
-  let sp = mp.$(bg, [cx, cy], sy/12, sy/2, minPch, ctrPch, maxPch);
-  mp.markPitch(sp, ctrPch, 'red');
-
-  // sine tones - buttons
-  function sine(freq, label) {
-    if (!label)
-      label = freq,toString();
-    let btn = over.appendChild(document.createElement('button'));
-    btn.innerText = label;
-    btn.classList.add('toggle');
-    btn.onclick = function () {
-      MC.Klang.tone(this, freq, 'sine');
-      btn.classList.toggle('down');
-    };
-
-    let [x, y] = mp.toXY(sp, mc.toPch(freq));
-
-    let style = btn.style;
-    style.position = 'absolute';
-    style.left = (x + cx - btn.clientWidth/2) + 'px';
-    style.top  = (y + cy - btn.clientHeight/2) + 'px';
-  }
-
-  for (fl of [[50], [100], [150], [200], [250], [300], [350], [400], [450], [500], [550], [600], [650], [700], [750], [800], [850], [900], [950], [1000], [1100], [1200], [1300], [1400], [1500], [1600], [1700], [1800], [1900], [2000], [2100], [2200], [2300], [2400], [2500], [2600], [2700], [2800], [2900], [3000], [3200], [3400], [3600], [3800], [4000], [4200], [4400], [4600], [4800], [5000], [5500], [6000], [6500], [7000], [7500], [8000], [8500], [9000, '9k'], [10000, '10k'], [11000, '11k'], [12000, '12k'], [13000, '13k'], [14000, '14k'], [15000, '15k'], [16000, '16k'], [17000, '17k'], [18000, '18k'], [19000, '19k'], [20000, '20k']]) {
-    let [freq, label] = fl;
-    sine(freq, label);
-  }
-///| Sine waves - frequencies}
-@pop
+{quint: mb_acou:apps/frequencies.js | frequencies | Sine waves - frequencies}
 
 You know that raising the frequency increases the amount of cycles per second. You should also hear that the higher the frequency the higher the pitch you perceive. If you have healthy ears and a playback system that is able to reproduce all frequencies, you should be able to hear hear sounds with frequencies within 20Hz and 20,000Hz. When listening to all the different frequencies you might have noticed that some of them seem louder than others. This has to do with our hearing system and is essential to have in the back of your mind when working on any audio projects. This phenomenon is described in more detail in the chapter on {ed: {:mb_perc}|I've added the link here.}.
 

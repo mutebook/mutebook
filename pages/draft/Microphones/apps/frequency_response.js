@@ -4,28 +4,27 @@ function frequency_response (divId) {
   const qm = QuintMachine(divId), [fg, bg, over] = qm.fbo();
 
   // size without margins
-  let m = 18, [sx, sy] = qm.sz(m);
+  let m = 18, [sx, sy] = qm.sz(m); sy -= m;
 
   // log-lin grid
-  let llg = mc.loglinGrid;
-  let g = llg.$(bg, [m, m], [sx, sy], 10, 28000, -14, 6, true, true);
-  llg.xLegend(g, 'Frequency (Hz)');
-  llg.yLegend(g, 'Output (dB)');
+  let g = bg.loglinGrid([m, m], [sx, sy], 10, 28000, -14, 6, true, true);
+  g.xLegend('Frequency (Hz)');
+  g.yLegend('Output (dB)');
 
   // mic pattern
   let mic = g.spline(false, 'red');
-  mc.node.width(mic, '3');
+  mic.width('3');
 
   function setResponse(response, mul) {
     let ps = [];
     for (var fdb of response) {
       let [freq, dB] = fdb;
-      let [x, y] = llg.toXY(g, freq, dB * mul);
+      let [x, y] = g.toXY(freq, dB * mul);
       ps.push([x, y]);
     }
 
     mic.set(ps);
-    flat.value = mul;
+    flat.setValue(mul);
   }
 
   var response1 = [
@@ -48,21 +47,9 @@ function frequency_response (divId) {
   ];
 
   // controls
-  let c = over.addChild('div', 'controls');
+  let c = over.controls();
   c.br().addLabel('flat');
-  let flat = c.addInput('range');
-
-  flat.min  = 0;
-  flat.max  = 1;
-  flat.step = .05;
-
-  flat.onchange = function () {
-    setResponse(response1, this.value);
-  };
-
-  flat.onmousemove = function () {
-    setResponse(response1, this.value);
-  };
+  let flat = c.addRange(0, 1, .05, () => setResponse(response1, flat.value()));
 
   setResponse(response1, .1);
 }

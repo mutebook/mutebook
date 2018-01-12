@@ -1,7 +1,7 @@
 // right(-angled) triange
 
 function triangle (divId) {
-  const qm = mc.qm.$(divId, 3), [fg, bg] = qm.fbo();
+  const qm = QuintMachine(divId, 3), [fg, bg] = qm.fbo();
 
   // size without margins (m)
   let m = 24, [sx, sy] = qm.sz(m);
@@ -20,7 +20,7 @@ function triangle (divId) {
   let c = $(A, B, 'black', 2);
 
   // labels
-  $ = (p, s) => mc.label.$(bg, p, s, true), d = 12;
+  $ = (p, s) => bg.label(p, s, true), d = 12;
   $([x2+d, y2+d], 'A');
   $([x1-d, y1-d], 'B');
   $([x1-d, y2+d], 'C');

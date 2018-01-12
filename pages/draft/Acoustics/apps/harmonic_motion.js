@@ -23,8 +23,8 @@ function harmonic_motion (divId) {
   }
 
   const wr = m;
-  const weight = mc.circle.$(bg, [0,0], wr, 'green');
-  mc.node.fill(weight, 'green');
+  const weight = bg.circle([0,0], wr, 'green');
+  weight.fill('green');
 
   // grid for wave
   const [pgx, pgy] = [2*m + ww, m];     // position
@@ -53,7 +53,7 @@ function harmonic_motion (divId) {
     const [x, y] = wavePoint(ph);
     ls.set([x*sgx, (y + 1) * sgy/2], [x*sgx, sgy/2]);
     spring.sc([wr*2/3, (y + 1) * sgy/2 - wr + m]);
-    mc.shape.moveTo(weight, [ww/2, m + (y + 1) * sgy/2]);
+    weight.moveTo([ww/2, m + (y + 1) * sgy/2]);
   }
 
   const steps = 360;
@@ -65,27 +65,15 @@ function harmonic_motion (divId) {
 
   let interval;
   function setFreq (Hz) {
-    freq.value = Hz;
+    freq.setValue(Hz);
     clearInterval(interval);
     if (Hz > 0)
       interval = setInterval(step, 1000 / (Hz*steps));
   }
 
   // controls
-  let c = over.addChild('div', 'controls');
-  let freq = c.addInput('range');
-
-  freq.min  = 0;
-  freq.max  = 1;
-  freq.step = .02;
-
-  freq.onchange = function () {
-    setFreq(this.value);
-  };
-
-  freq.onmousemove = function () {
-    setFreq(this.value);
-  };
+  let c = over.controls();
+  let freq = c.addRange(0, 1, .02, () => setFreq(freq.value()));
 
   step();
   setFreq(.1);
