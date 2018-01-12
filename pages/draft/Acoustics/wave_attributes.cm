@@ -1,8 +1,7 @@
 = Amplitude, Frequency and Wavelength
 
----.diagram
-{img: diagrams/MB_ac_d_03.jpg}
----
+# {img: diagrams/MB_ac_d_03.jpg}
+{quint: mb_acou:apps/peak_to_peak.js | peak_to_peak}
 
 Let us go back to the wave that was created by simple harmonic motion in the {:previous section|ac_sound}. The sinusoidal (or sine) wave that results from our loudspeaker is displayed above, it displays the pressure changes over time. There are several parameters of this wave that give us important information about it.
 
@@ -31,7 +30,6 @@ where y(t) is the value of the instantaneous amplitude for any angle {$$\alpha$$
 
 Listen to the following two sound waves:
 
-
 {btn-sine: 1000}
 {btn-square:.toggle square   |1000}
 
@@ -41,10 +39,7 @@ If we do the same exercise for the sine wave, we notice right away that there ar
 
 # To check if our calculations were true, change the peak value of the square wave to 0.707 in the diagram above and listen. Despite having #different peak amplitudes now, both waves should sound more or less equally loud.
 
-
-
 # we might be able to add a diagram to show the samples I am describing in the previous paragraphs
-
 
 ====.u Period and Frequency
 

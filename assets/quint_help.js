@@ -89,44 +89,78 @@ class QM_LoglinGridNode extends QM_GridNode {
 class QM_SceneNode extends QM_Proxy {
   stroke (color) {
     mc.node.stroke(this.dObj, color);
+    return this;
   }
 
   fill (color) {
     mc.node.fill(this.dObj, color);
+    return this;
   }
 
   color (color) {
     mc.node.color(this.dObj, color);
+    return this;
   }
 
   width (width) {
     mc.node.width(this.dObj, width);
+    return this;
+  }
+
+  solidStroke (color) {
+    mc.node.solidStroke(this.dObj, color);
+    return this;
+  }
+
+  dottedStroke (color) {
+    mc.node.dottedStroke(this.dObj, color);
+    return this;
+  }
+
+  dashedStroke (color) {
+    mc.node.dashedStroke(this.dObj, color);
+    return this;
   }
 }
 
 class QM_Shape extends QM_SceneNode {
   movable (onMove) {
     mc.shape.movable(this.dObj, onMove);
+    return this;
   }
 
   moveTo (p) {
     mc.shape.moveTo(this.dObj, p);
+    return this;
+  }
+
+  arrowBeg () {
+    mc.shape.markerBeg(this.dObj, 'url(#arrowBeg)');
+    return this;
+  }
+
+  arrowEnd () {
+    mc.shape.markerEnd(this.dObj, 'url(#arrowEnd)');
+    return this;
   }
 }
 
 class QM_Label extends QM_Shape {
   center () {
-    mc.abel.center();
+    mc.label.center(this.dObj);
+    return this;
   }
 
   leftCenter () {
-    mc.abel.leftCenter();
+    mc.label.leftCenter(this.dObj);
+    return this;
   }
 }
 
 class QM_Line extends QM_Shape {
   set (p1, p2) {
     mc.line.set(this.dObj, p1, p2);
+    return this;
   }
 }
 
@@ -147,14 +181,17 @@ class QM_Circle extends QM_Shape {
 class QM_Path extends QM_SceneNode {
   set (ps, sc, tr) {
     mc.spline.set(this.dObj, ps, sc, tr);
+    return this;
   }
 
   sc (sc) {
     mc.spline.sc(this.dObj, sc);
+    return this;
   }
 
   tr (tr) {
     mc.spline.tr(this.dObj, tr);
+    return this;
   }
 }
 
@@ -173,6 +210,7 @@ class QM_Spiral extends QM_DiscWgt {
 class QM_PitchSpiral extends QM_Spiral {
   markPitch (pch, colorMark, colorRad) {
     mc.pitchSpiral.markPitch(this.dObj, pch, colorMark, colorRad);
+    return this;
   }
 
   toXY (pch) {
@@ -194,7 +232,9 @@ class QM extends QM_Proxy {
 }
 
 function QuintMachine (divId, whRatio = 2, withOver = true) {
-  return QM.$(mc.qm.$(divId, whRatio, withOver));
+  const qm = QM.$(mc.qm.$(divId, whRatio, withOver));
+  mc.qm.arrowBegEnd(qm.dObj);  // TODO on demand, or better
+  return qm;
 }
 
 class QM_Elem extends QM_Proxy {

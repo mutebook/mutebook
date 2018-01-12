@@ -1,10 +1,8 @@
 # Features
 
 Diagrams:
-* sound_sources_and_waves.cm: simple harmonic motion
 
 * sound_sources_and_waves.cm: acoustic monopole
-* wave_atributes: peak-to-peak wave
 * soundpressure_spl: calculator
 * sampling: signal ... etc
 * quantization: ... etc
