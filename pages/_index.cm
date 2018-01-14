@@ -14,8 +14,10 @@ The underlying source code used to present the content is licensed under the {:M
 
 @toc draft/   # Mutebook in making
 @toc contribute; contribute.cm; For contributors
+@thr
 @toc mb_contact; contact.php ; Contact
+@thr
+@toc mb_sandbox; sandbox.cm ; Sandbox
 
 # Appendices
 # @toc mb_glossary; glossary.cm ; Glossary
-@toc mb_sandbox; sandbox.cm ; Sandbox
