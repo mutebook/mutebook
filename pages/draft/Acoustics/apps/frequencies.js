@@ -11,7 +11,7 @@ function frequencies (divId) {
   let [cx, cy] = [m + sx/2, m + sy/2];
 
   // spiral
-  let minPch = mc.toPch(50), ctrPch = mc.toPch(1000), maxPch = mc.toPch(20000);
+  let minPch = qm.toPch(50), ctrPch = qm.toPch(1000), maxPch = qm.toPch(20000);
   let sp = bg.pitchSpiral([cx, cy], sy/12, sy/2, minPch, ctrPch, maxPch);
   sp.markPitch(ctrPch, 'red');
 
@@ -24,7 +24,7 @@ function frequencies (divId) {
       btn.toggle();
     });
 
-    const [x, y] = sp.toXY(mc.toPch(freq));
+    const [x, y] = sp.toXY(qm.toPch(freq));
     btn.centerAt([x + cx, y + cy]);
   }
 

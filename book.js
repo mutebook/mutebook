@@ -103,7 +103,7 @@ book.hook = function (tag, cs, parts) {
     CM.loadScript('../assets/audio_bundle.js');
   if (quintSrc || quintCode) {
     CM.loadCSS('../assets/quint.css');
-    const qs = ['../assets/quint.js', '../assets/quint_help.js'];
+    const qs = ['../assets/quint.js'];
     if (quintSrc)
       qs.push('../' + quintSrc);
     CM.loadScripts(qs, function () {

@@ -22,7 +22,7 @@ function polar_patterns (divId) {
     for (let i = -1; i <= steps + 1; ++i) {
       let a = i / steps * 360;
       let mo = 1 - mixVal, mb = mixVal;
-      let r = Math.abs(r1*mo + r1*mc.degCos(a)*mb);
+      let r = Math.abs(r1*mo + r1*qm.degCos(a)*mb);
       let [x, y] = g.toXY(r, a); // omni
       ps.push([x, y]);
     }

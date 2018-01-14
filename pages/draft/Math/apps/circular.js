@@ -52,7 +52,7 @@ function circular (divId) {
     let steps = 12, ps = [];
     for (let i = -1; i <= steps + 1; ++i) {
       let x = i / steps;
-      ps.push([x, - mc.degSin(phase + 360 * x)]);
+      ps.push([x, - qm.degSin(phase + 360 * x)]);
     }
 
     w.set(ps, [sgx, sgy/2], [pgx, pgy + sgy/2]);
@@ -73,8 +73,8 @@ function circular (divId) {
     // on waves
     let lx = angle / 360 * sgx + pgx;
     lm.set([lx, pgy], [lx, pgy + sgy]);
-    lms.set([lx-1, pgy + sgy/2], [lx-1, pgy + sgy/2 - sgy/2 * mc.degSin(angle)]);
-    lmc.set([lx+1, pgy + sgy/2], [lx+1, pgy + sgy/2 - sgy/2 * mc.degCos(angle)]);
+    lms.set([lx-1, pgy + sgy/2], [lx-1, pgy + sgy/2 - sgy/2 * qm.degSin(angle)]);
+    lmc.set([lx+1, pgy + sgy/2], [lx+1, pgy + sgy/2 - sgy/2 * qm.degCos(angle)]);
     return p;
   });
 

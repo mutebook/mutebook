@@ -8,7 +8,7 @@ function peak_to_peak (divId) {
   // wave
   let ws = bg.spline(true);
   const shift = .1;
-  const wavePoint = (x) => [x, - mc.degSin(360 * (x + shift))];
+  const wavePoint = (x) => [x, - qm.degSin(360 * (x + shift))];
 
   let cycles = 3;
 

@@ -16,7 +16,7 @@ function harmonic_motion (divId) {
   {
     let ps = []; const segments = 28;
     for (let i = -1; i <= segments + 1; ++i) {
-      ps.push([mc.degSin(i*90), 1 / segments * i]);
+      ps.push([qm.degSin(i*90), 1 / segments * i]);
     }
 
     spring.set(ps, null, [ww/2, 0]);
@@ -31,7 +31,7 @@ function harmonic_motion (divId) {
   const [sgx, sgy] = [sx - ww - m, sy]; // size
   const gw = bg.grid([pgx, pgy], [sgx, sgy], [12, 4]);
 
-  const wavePoint = (x) => [x, - mc.degSin(360 * x)];
+  const wavePoint = (x) => [x, - qm.degSin(360 * x)];
 
   // wave
   let ws = gw.spline(true, col_s);
