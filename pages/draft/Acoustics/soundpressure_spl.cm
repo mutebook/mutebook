@@ -51,7 +51,29 @@ Solving this equation gives us a sound pressure level of 140 $dBSPL. This gives 
 The following calculator helps you verifying whether the SPL calculations you do by hand are correct:
 
 ---.diagram
-{todo: interactive_equation, fill in sound pressure, get sound pressure level}
+@push
+@chr hraw ///
+{script:///
+
+book.fun_SPL_change = function () {
+  let SPL = document.querySelector('#input_SPL').value;
+  let Pa = Math.pow(10, SPL/20) * .00002;
+  document.querySelector('#input_Pa').value = Pa;
+}
+
+book.fun_Pa_change = function () {
+  let Pa = document.querySelector('#input_Pa').value;
+  let SPL = 20*Math.log10(Pa/.00002);
+  document.querySelector('#input_SPL').value = SPL;
+}
+
+///}
+@pop
+
+{html:
+SPL <input id="input_SPL" type="number" value="140" style="width:4em" onchange="book.fun_SPL_change()" onkeyup="book.fun_SPL_change()"></input> dB =
+20 × log(<input id="input_Pa" type="number" value="200" style="width:4em" onchange="book.fun_Pa_change()" onkeyup="book.fun_Pa_change()"></input> Pa / 0.00002 Pa)
+}
 ---
 
 # add table with sound pressure levels of common sounds
