@@ -18,7 +18,7 @@ function frequencies (divId) {
   // sine tones - buttons
   function sine(freq, label) {
     if (!label)
-      label = freq,toString();
+      label = freq.toString();
     let btn = over.addButton(label, true, function () {
       MC.Klang.tone(btn, freq, 'sine');
       btn.toggle();
