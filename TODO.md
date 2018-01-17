@@ -3,7 +3,6 @@
 Diagrams:
 
 * sound_sources_and_waves.cm: acoustic monopole
-* soundpressure_spl: calculator
 * sampling: signal ... etc
 * quantization: ... etc
 * transducer_principles: ... etc
@@ -11,10 +10,6 @@ Diagrams:
 # Nice to have
 
 # Cosmetics
-
-* display img alt text better (if offline)
-* typographical quotes
-* quint: circular - position labels better; add 'c' to ll, angle indicator, 'sin' + 'cos' moving labels
 
 # Bugs
 

@@ -2,12 +2,11 @@
 
 function frequency_response (divId) {
   const qm = QuintMachine(divId), [fg, bg, over] = qm.fbo();
-
-  // size without margins
-  let m = 18, [sx, sy] = qm.sz(m); sy -= m;
+  let [sx, sy, cx, cy, x1, x2, y1, y2] = qm.sz();
+  sy *= .92; // space on bottom
 
   // log-lin grid
-  let g = bg.loglinGrid([m, m], [sx, sy], 10, 28000, -14, 6, true, true);
+  let g = bg.loglinGrid([x1, y1], [sx, sy], 10, 28000, -14, 6, true, true);
   g.xLegend('Frequency (Hz)');
   g.yLegend('Output (dB)');
 

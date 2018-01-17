@@ -2,28 +2,25 @@
 
 function circular (divId) {
   const qm = QuintMachine(divId, 3), [fg, bg] = qm.fbo();
+  const [sx, sy, cx_, cy_, x1, x2, y1, y2] = qm.sz();
+  const m = qm.m();
 
-  // config
-  const m = 8;
   const col_s = 'green';  // color sine
   const col_c = 'red';    // color cosine
 
-  // size without margins
-  let [sx, sy] = qm.sz(m);
-
   // the smaller one
-  let sm = Math.min(sx, sy), sm2 = sm/2;
+  let sm = sy, sm2 = sm/2;
 
   // grid for circle
-  bg.grid([m, m], [sm, sm], [4, 4]);
+  bg.grid([x1, y1], [sm, sm], [4, 4]);
 
   // grid for waves
-  let [pgx, pgy] = [2*m + sm, m];   // position
+  let [pgx, pgy] = [x1 + sm + m, y1];   // position
   let [sgx, sgy] = [sx - sm - m, sy]; // size
   bg.grid([pgx, pgy], [sgx, sgy], [12, 4]);
 
   // centered circle
-  let [cx, cy] = cc = [m + sm2, sy/2 + m];
+  let [cx, cy] = cc = [m + sm2, cy_];
   let c = fg.circle(cc, sm2, 'blue');
 
   // labels

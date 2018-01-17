@@ -5,10 +5,7 @@ function frequencies (divId) {
 
   const qm = QuintMachine(divId, 1), [fg, bg, over] = qm.fbo();
   // size without margins
-  let m = 14, [sx, sy] = qm.sz(m);
-
-  // centre
-  let [cx, cy] = [m + sx/2, m + sy/2];
+  const [sx, sy, cx, cy] = qm.sz();
 
   // spiral
   let minPch = qm.toPch(50), ctrPch = qm.toPch(1000), maxPch = qm.toPch(20000);

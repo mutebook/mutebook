@@ -1,16 +1,17 @@
-// right(-angled) triange
+// right(-angled) triangle
 
 function triangle (divId) {
   const qm = QuintMachine(divId, 3), [fg, bg] = qm.fbo();
 
   // size without margins (m)
-  let m = 24, [sx, sy] = qm.sz(m);
+  const m = 24;
+  let [sx, sy, cx, cy, x1, x2, y1, y2] = qm.sz(m);
 
   // sizes of sides (a:b:c = 3:4:5)
   let sa = sy, sb = sa/3*4, sc = sa/3*5;
 
   // vertices
-  let x1 = m + (sx-sb)/2, x2 = x1 + sc, y1 = m, y2 = y1 + sy;
+  x1 = m + (sx-sb)/2; x2 = x1 + sc;
   let A = [x2, y2], B = [x1, y1], C = [x1, y2];
 
   // sides

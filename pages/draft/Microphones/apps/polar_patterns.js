@@ -2,12 +2,8 @@
 
 function polar_patterns (divId) {
   const qm = QuintMachine(divId), [fg, bg, over] = qm.fbo();
+  const [sx, sy, cx, cy] = qm.sz();
 
-  // size without margins
-  let m = 14, [sx, sy] = qm.sz(m);
-
-  // centre
-  let [cx, cy] = [m + sx/2, m + sy/2];
   // full radius, unit radius
   let r = sy/2, r1 = r * .9;
   // polar grid

@@ -2,17 +2,14 @@
 
 function acoustic_pressure (divId) {
   const qm = QuintMachine(divId), [fg, bg, over] = qm.fbo();
-  // size without margins
-  let m = 14, [sx, sy] = qm.sz(m);
 
-  // centre
-  let cx = m + sx / 2;
-  let cy = m + sy * .4;
+  let [sx, sy, cx, cy, x1, x2, y1, y2] = qm.sz();
+  cy -= sy / 8; // a bit higher
 
   // guide lines
-  bg.line([cx, m], [cx, m + sy], 'gray').dashedStroke();
-  bg.line([m, cy], [m + sx, cy], 'gray').dashedStroke();
-  fg.label([m, cy], 'stasis pressure');
+  bg.line([x1, cy], [x2, cy], 'gray').dashedStroke();
+  bg.line([cx, y1], [cx, y2], 'gray').dashedStroke();
+  fg.label([x1, cy], 'stasis pressure');
 
   // wave
   let ws = bg.spline(true);
@@ -22,7 +19,7 @@ function acoustic_pressure (divId) {
   // gauge
   let gauge = over.addInput('text');
   gauge.dObj.style.width = '3em';
-  gauge.centerAt([cx, m]);
+  gauge.centerAt([cx, y1]);
 
   // sine line
   let ls = fg.line(null, null, 'green', 3);
@@ -37,7 +34,7 @@ function acoustic_pressure (divId) {
     }
 
     const ampl = sy * .2;
-    ws.set(ps, [sx/cycles, ampl], [m, cy]);
+    ws.set(ps, [sx/cycles, ampl], [x1, cy]);
 
     const [lx, ly] = wavePoint(360*cycles / 2, ph);
     ls.set([cx, cy], [cx, cy - ly*ampl]);

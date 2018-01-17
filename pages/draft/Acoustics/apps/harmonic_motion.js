@@ -2,9 +2,7 @@
 
 function harmonic_motion (divId) {
   const qm = QuintMachine(divId), [fg, bg, over] = qm.fbo();
-
-  // size without margins
-  let m = 14, [sx, sy] = qm.sz(m);
+  const [sx, sy] = qm.sz(), m = qm.m();
 
   const col_s = 'green';  // color sine
 
@@ -22,7 +20,7 @@ function harmonic_motion (divId) {
     spring.set(ps, null, [ww/2, 0]);
   }
 
-  const wr = m;
+  const wr = m * .8;
   const weight = bg.circle([0,0], wr, 'green');
   weight.fill('green');
 

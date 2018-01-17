@@ -2,8 +2,7 @@
 
 function peak_to_peak (divId) {
   const qm = QuintMachine(divId), [fg, bg] = qm.fbo();
-  // size without margins
-  let m = 14, [sx, sy] = qm.sz(m);
+  const [sx, sy, cx, cy, x1, x2, y1, y2] = qm.sz();
 
   // wave
   let ws = bg.spline(true);
@@ -19,29 +18,28 @@ function peak_to_peak (divId) {
       ps.push(wavePoint(x));
     }
 
-    ws.set(ps, [sx/cycles, sy/2], [m, m+sy/2]);
+    ws.set(ps, [sx/cycles, sy/2], [x1, cy]);
   }
 
   // lines
-  const y0 = m+sy/2;
-  bg.line([m, y0], [m + sx, y0]);
-  const yEff = m+sy*(1 - Math.SQRT1_2)/2;
-  bg.line([m, yEff], [m + sx, yEff]).dottedStroke();
+  bg.line([x1, cy], [x2, cy]);
+  const yEff = cy - sy*Math.SQRT1_2/2;
+  bg.line([x1, yEff], [x2, yEff]).dottedStroke();
 
   // arrows
-  let axf = (d) => m + sx/cycles*(d - shift);
+  let axf = (d) => x1 + sx/cycles*(d - shift);
 
-  let ax = axf(1/4), dy = sy/60;
-  fg.line([ax, y0-dy], [ax, m+dy]).width(2).arrowEnd();
-  fg.label([ax+m, y0-m], 'peak pressure').fill('black');
+  let ax = axf(1/4), dt = 8, dy = sy/60;
+  fg.line([ax, cy-dy], [ax, y1+dy]).width(2).arrowEnd();
+  fg.label([ax+dt, cy-dt], 'peak pressure').fill('black');
 
   ax = axf(5/4);
-  fg.line([ax, sy+m-dy], [ax, m+dy]).width(2).arrowBeg().arrowEnd();
-  fg.label([ax+m, y0-m], 'peak-to-peak pressure').fill('blue');
+  fg.line([ax, y2-dy], [ax, y1+dy]).width(2).arrowBeg().arrowEnd();
+  fg.label([ax+dt, cy-dt], 'peak-to-peak pressure').fill('blue');
 
   ax = axf(9/4);
-  fg.line([ax, y0-dy], [ax, yEff+dy]).width(2).arrowEnd();
-  fg.label([ax+m, y0-m], 'effective pressure').fill('green');
+  fg.line([ax, cy-dy], [ax, yEff+dy]).width(2).arrowEnd();
+  fg.label([ax+dt, cy-dt], 'effective pressure').fill('green');
 }
 
 // eof
