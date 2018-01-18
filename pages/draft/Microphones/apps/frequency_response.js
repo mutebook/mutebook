@@ -22,7 +22,7 @@ function frequency_response (divId) {
       ps.push([x, y]);
     }
 
-    mic.set(ps);
+    mic.setPath(ps);
     flat.setValue(mul);
   }
 

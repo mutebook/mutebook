@@ -23,7 +23,7 @@ function polar_patterns (divId) {
       ps.push([x, y]);
     }
 
-    mic.set(ps, null, [cx, cy]);
+    mic.setPath(ps, null, [cx, cy]);
 
     mix.setValue(mixVal);
     if (mixVal >= .8)

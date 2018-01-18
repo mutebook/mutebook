@@ -2,8 +2,8 @@
 
 Diagrams:
 
+* sampling: ... etc
 * sound_sources_and_waves.cm: acoustic monopole
-* sampling: signal ... etc
 * quantization: ... etc
 * transducer_principles: ... etc
 
@@ -17,9 +17,3 @@ Diagrams:
 
 * replace ˚ with ° (https://unicode-table.com/en/02DA/ -> https://unicode-table.com/en/00B0/)
 * remove \n
-
-# Internal - code-related
-
----
-GitHub, Wp: css decoration
-

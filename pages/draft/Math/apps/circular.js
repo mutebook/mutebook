@@ -42,18 +42,8 @@ function circular (divId) {
   let lm = $('gray'), lms = $(col_s, 3), lmc = $(col_c, 3);
 
   // waves: sine, cosine
-  $ = (col) => fg.spline(true, col);
-  let ws = $(col_s), wc = $(col_c);
-
-  function setWave(w, phase) {
-    let steps = 12, ps = [];
-    for (let i = -1; i <= steps + 1; ++i) {
-      let x = i / steps;
-      ps.push([x, - qm.degSin(phase + 360 * x)]);
-    }
-
-    w.set(ps, [sgx, sgy/2], [pgx, pgy + sgy/2]);
-  }
+  let ws = fg.wave(col_s).set(1, 0,   [sgx, sgy/2], [pgx, pgy + sgy/2]);
+  let wc = fg.wave(col_c).set(1, .25, [sgx, sgy/2], [pgx, pgy + sgy/2]);
 
   let crank = fg.handle([0, 0], 'yellow');
   crank.movable(function (p) {
@@ -70,13 +60,10 @@ function circular (divId) {
     // on waves
     let lx = angle / 360 * sgx + pgx;
     lm.set([lx, pgy], [lx, pgy + sgy]);
-    lms.set([lx-1, pgy + sgy/2], [lx-1, pgy + sgy/2 - sgy/2 * qm.degSin(angle)]);
-    lmc.set([lx+1, pgy + sgy/2], [lx+1, pgy + sgy/2 - sgy/2 * qm.degCos(angle)]);
+    lms.set([lx-1, pgy + sgy/2], [lx-1, pgy + sgy/2 - sgy/2 * ws.ampl(angle/360)]);
+    lmc.set([lx+1, pgy + sgy/2], [lx+1, pgy + sgy/2 - sgy/2 * wc.ampl(angle/360)]);
     return p;
   });
-
-  setWave(ws, 0);
-  setWave(wc, 90);
 
   crank.moveTo(cc);
 }

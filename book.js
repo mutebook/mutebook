@@ -107,20 +107,14 @@ book.hook = function (tag, cs, parts) {
     if (quintSrc)
       qs.push('../' + quintSrc);
     CM.loadScripts(qs, function () {
-      const evil = function () {
+      try {
         if (quintCode)
           eval(quintCode);
         eval(`${quintFun}('${divId}')`);
-      };
-      if (book.isDebug)
-        evil();
-      else
-        try {
-          evil();
-        } catch (err) {
-          console.log(err)
-          // nix
-        }
+      } catch (err) {
+        console.log(err)
+        // nix
+      }
     });
   }
   return true;

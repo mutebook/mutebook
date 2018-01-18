@@ -17,7 +17,7 @@ function harmonic_motion (divId) {
       ps.push([qm.degSin(i*90), 1 / segments * i]);
     }
 
-    spring.set(ps, null, [ww/2, 0]);
+    spring.setPath(ps, null, [ww/2, 0]);
   }
 
   const wr = m * .8;
@@ -29,36 +29,22 @@ function harmonic_motion (divId) {
   const [sgx, sgy] = [sx - ww - m, sy]; // size
   const gw = bg.grid([pgx, pgy], [sgx, sgy], [12, 4]);
 
-  const wavePoint = (x) => [x, - qm.degSin(360 * x)];
-
   // wave
-  let ws = gw.spline(true, col_s);
-
-  {
-    let ps = []; const steps = 12;
-    for (let i = -1; i <= steps + 1; ++i) {
-      let x = i / steps;
-      ps.push(wavePoint(x));
-    }
-
-    ws.set(ps, [sgx, sgy/2], [0, sgy/2]);
-  }
-
+  let ws = gw.wave(col_s).set(1, 0, [sgx, sgy/2], [0, sgy/2]);
   // sine line
   let ls = gw.line(null, null, col_s, 3);
 
   function setPhase (ph) {
-    const [x, y] = wavePoint(ph);
+    const [x, y] = [ph, -ws.ampl(ph)];
     ls.set([x*sgx, (y + 1) * sgy/2], [x*sgx, sgy/2]);
     spring.sc([wr*2/3, (y + 1) * sgy/2 - wr + m]);
     weight.moveTo([ww/2, m + (y + 1) * sgy/2]);
   }
 
-  const steps = 360;
-  let n = 0;
+  let n = 0; const steps = 360;
   function step() {
-    setPhase((n / steps) % 1);
-    n += 1;
+    setPhase(n++ / steps);
+    n %= steps;
   }
 
   let interval;

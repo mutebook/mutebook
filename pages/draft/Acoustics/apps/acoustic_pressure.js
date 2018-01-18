@@ -12,9 +12,7 @@ function acoustic_pressure (divId) {
   fg.label([x1, cy], 'stasis pressure');
 
   // wave
-  let ws = bg.spline(true);
-
-  let cycles = 3;
+  let ws = bg.wave();
 
   // gauge
   let gauge = over.addInput('text');
@@ -24,28 +22,19 @@ function acoustic_pressure (divId) {
   // sine line
   let ls = fg.line(null, null, 'green', 3);
 
-  const wavePoint = (x, ph) => [x, - qm.degSin(360 * (x - ph))];
-
   function setPhase (ph) {
-    let ps = []; const steps = 12;
-    for (let i = -1; i <= steps*cycles + 1; ++i) {
-      let x = i / steps;
-      ps.push(wavePoint(x, ph));
-    }
+    const cycles = 3, ampl = sy * .2;
+    ws.set(cycles, ph, [sx/cycles, ampl], [x1, cy]);
 
-    const ampl = sy * .2;
-    ws.set(ps, [sx/cycles, ampl], [x1, cy]);
-
-    const [lx, ly] = wavePoint(360*cycles / 2, ph);
+    const ly = ws.ampl(cycles / 2, ph);
     ls.set([cx, cy], [cx, cy - ly*ampl]);
     gauge.dObj.value = ly.toFixed(2);
   }
 
-  const steps = 360;
-  let n = 0;
+  let n = 0; const steps = 360; // degree by degree
   function step() {
-    setPhase((n / steps) % 1);
-    n += 1;
+    setPhase(- (n++ / steps));
+    n %= steps;
   }
 
   let interval;
