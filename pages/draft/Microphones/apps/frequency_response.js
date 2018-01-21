@@ -47,7 +47,6 @@ function frequency_response (divId) {
 
   // controls
   let c = over.controls();
-  c.br().addLabel('flat');
   let flat = c.addRange(0, 1, .05, () => setResponse(response1, flat.value()));
 
   setResponse(response1, .1);

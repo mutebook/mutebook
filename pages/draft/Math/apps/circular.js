@@ -23,6 +23,9 @@ function circular (divId) {
   let [cx, cy] = cc = [m + sm2, cy_];
   let c = fg.circle(cc, sm2, 'blue');
 
+  // angle arc
+  let arc = fg.arc();
+
   // labels
   let $ = (p, s) => bg.label(p, s + '\u00B0', true), dr = 8;
   $([cx + sm2 - dr, cy], '0');
@@ -33,6 +36,10 @@ function circular (divId) {
   $([pgx + sgx/4,   cy], '90');
   $([pgx + sgx/4*2, cy], '180');
   $([pgx + sgx/4*3, cy], '270');
+
+  $ = (p, s) => bg.label(p, s);
+  $([pgx, y1+dr], 'cos').fill(col_c);
+  $([pgx + sgx/4, y1+dr], 'sin').fill(col_s);
 
   // lines: sine, cosine, hypotenuse, movable
   $ = (col, w) => fg.line(null, null, col, w);
@@ -49,6 +56,9 @@ function circular (divId) {
   crank.movable(function (p) {
     let [x, y] = p = c.closeTo(p);
     let angle = c.atp(p);
+
+    // arc
+    arc.set(0, angle, [sm2/3, sm2/3], cc);
 
     // on circle
     lh.set(p, cc);

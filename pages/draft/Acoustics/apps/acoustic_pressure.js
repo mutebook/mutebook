@@ -2,7 +2,6 @@
 
 function acoustic_pressure (divId) {
   const qm = QuintMachine(divId), [fg, bg, over] = qm.fbo();
-
   let [sx, sy, cx, cy, x1, x2, y1, y2] = qm.sz();
   cy -= sy / 8; // a bit higher
 
