@@ -10,61 +10,60 @@ function sampling (divId) {
   // guide line
   bg.line([x1, cy], [x2, cy], 'gray').dashedStroke();
 
-  // wave sampled
-  let ws = bg.wave();
-  let cycles = 1, phase = 0;
-
-  fg.slider([x1, y1], [sx/2-m, 0]).onVal((v) =>
-    setPhase(-v));
-  fg.slider([cx, y1], [sx/2, 0]).val(1).onVal((v) =>
-    setCycles(1/Math.max(v,.05)));
-
-  // wave restored
+  // restored wave
   let wr = bg.wave('green');
-  let rcycles, rphase, rampl;
+
+  // sampled wave
+  let ws = bg.wave(), wsCycles, wsPhase;
+  fg.slider([x1, y1], [sx/2-m, 0]).
+    val(wsPhase=0).onVal((v) => setWsPhase(-v));
+  fg.slider([cx, y1], [sx/2, 0]).min(.05).
+    val(wsCycles=1).onVal((v) => setWsCycles(1/v));
 
   // samples
-  let nSamples = 12, ns, gs = null;
-  fg.slider([x1, y2], [sx/2, 0]).val(.5).onVal((v) =>
-    setNSamples(24*(1-v)));
+  let nSamples, ns, gs = null;
+  fg.slider([x1, y2], [sx, 0]).min(36).max(1).
+    val(nSamples = 12).onVal((v) => setNSamples(v));
 
   function set() {
-    ws.set(cycles, phase, [sx/cycles, sy/2], [x1, cy]);
+    // sampled wave
+    ws.set(wsCycles, wsPhase, [sx/wsCycles, sy/2], [x1, cy]);
+
+    // samples
     if (null != gs)
       gs.rem();
     gs = bg.group().p([x1, cy]);
     for (let n = 0; n < nSamples; ++n) {
-      let x = n/nSamples * cycles, y = -ws.ampl(x) * sy/2,
-          xx = x*sx/cycles;
+      let x = n/nSamples * wsCycles, y = -ws.ampl(x) * sy/2,
+          xx = x*sx/wsCycles;
       gs.line([xx, 0], [xx, y], 'red', 2);
     }
 
-    let f = cycles, nf = nSamples / 2;
-    let nc = nSamples/cycles;
-    if (2.1 <= nc) {
-      rcycles = cycles; rphase = phase; rampl = 1;
-    } else if (nc <= 1.9) { // under
-      rcycles = 2; rphase = .3; rampl = .1;
-    } else { // nyq
-      rcycles = 2; rphase = .3; rampl = .1;
-    }
-    wr.set(rcycles, rphase, [sx/rcycles, rampl*sy/2], [x1, cy]);
+    // restored wave
+    let fr = wsCycles, fn = nSamples / 2;
+    let invert = !!(Math.floor(fr / fn) % 2);
+    console.log(invert)
+    if ((fr = fr % (2*fn)) > fn)
+      fr = 2*fn - fr;
+
+    let wrCycles = fr, wrPhase = (invert ? .5 - wsPhase : wsPhase);
+    wr.set(wrCycles, wrPhase, [sx/wrCycles, sy/2], [x1, cy]);
   }
 
   // orig. wave
 
-  function setPhase (ph) {
-    phase = ph; set();
+  function setWsPhase (v) {
+    wsPhase = v; set();
   }
 
-  function setCycles (cs) {
-    cycles = cs; set();
+  function setWsCycles (v) {
+    wsCycles = v; set();
   }
 
   // samples
 
-  function setNSamples (n) {
-    nSamples = n; set();
+  function setNSamples (v) {
+    nSamples = v; set();
   }
 
   set();
