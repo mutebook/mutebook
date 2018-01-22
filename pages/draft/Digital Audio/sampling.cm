@@ -169,10 +169,7 @@ and
 
 This happens all the time, but making sure that the highest frequency that the audio signal contains stays below half the sampling frequency, we ensure that no additional frequencies within the audible frequency spectrum are created. The unwanted change that happens to the signal when we do let signal components above the Nyquist frequency enter the system is called {_Aliasing}. In order to ensure that this is not happening an {/Anti-Aliasing Filter} is applied during A/D conversion. This is a low-pass filter that prevents components above the Nyquist frequency to enter the system.
 
+== Demo
 
-
-
-
-
-
+{quint: mb_diau:apps/sampling.js | sampling | Sampling}
 
