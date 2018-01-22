@@ -4,51 +4,70 @@ function sampling (divId) {
   const qm = QuintMachine(divId), [fg, bg, over] = qm.fbo();
   let [sx, sy, cx, cy, x1, x2, y1, y2] = qm.sz(), m = qm.m();
 
-  sy *= .8; cy = m + sy / 2;
-  // a bit higher
+  // a bit smaller
+  sy -= m;
 
-  // guide lines
+  // guide line
   bg.line([x1, cy], [x2, cy], 'gray').dashedStroke();
 
   // wave sampled
   let ws = bg.wave();
-
   let cycles = 1, phase = 0;
+
+  fg.slider([x1, y1], [sx/2-m, 0]).onVal((v) =>
+    setPhase(-v));
+  fg.slider([cx, y1], [sx/2, 0]).val(1).onVal((v) =>
+    setCycles(1/Math.max(v,.05)));
+
+  // wave restored
+  let wr = bg.wave('green');
+  let rcycles, rphase, rampl;
+
+  // samples
+  let nSamples = 12, ns, gs = null;
+  fg.slider([x1, y2], [sx/2, 0]).val(.5).onVal((v) =>
+    setNSamples(24*(1-v)));
+
   function set() {
     ws.set(cycles, phase, [sx/cycles, sy/2], [x1, cy]);
+    if (null != gs)
+      gs.rem();
+    gs = bg.group().p([x1, cy]);
+    for (let n = 0; n < nSamples; ++n) {
+      let x = n/nSamples * cycles, y = -ws.ampl(x) * sy/2,
+          xx = x*sx/cycles;
+      gs.line([xx, 0], [xx, y], 'red', 2);
+    }
+
+    let f = cycles, nf = nSamples / 2;
+    let nc = nSamples/cycles;
+    if (2.1 <= nc) {
+      rcycles = cycles; rphase = phase; rampl = 1;
+    } else if (nc <= 1.9) { // under
+      rcycles = 2; rphase = .3; rampl = .1;
+    } else { // nyq
+      rcycles = 2; rphase = .3; rampl = .1;
+    }
+    wr.set(rcycles, rphase, [sx/rcycles, rampl*sy/2], [x1, cy]);
   }
 
-  let nyq = .1, nyqPh = 0, np;
-  function setN() {
-    np = [];
+  // orig. wave
 
-    set();
-  }
-
-  // controls
-  let c = over.controls();
-  let wsCs = c.addRange(1, 6, 0, () => setCycles(wsCs.value()));
-  let wsPh = c.br().addRange(0, 1, 0, () => setPhase(wsPh.value()));
-  let smNyq = c.br().addRange(.1, 10, 0, () => setNyq(smNyq.value()));
-  let smPh = c.br().addRange(0, 1, 0, () => setNyqPh(smPh.value()));
-
-  function setPhase(ph) {
+  function setPhase (ph) {
     phase = ph; set();
   }
 
-  function setCycles(cs) {
+  function setCycles (cs) {
     cycles = cs; set();
   }
 
-  function setNyq(cs) {
-    nyq = cs; setN();
+  // samples
+
+  function setNSamples (n) {
+    nSamples = n; set();
   }
 
-  function setNyqPh(cs) {
-    nyqPh = cs; setN();
-  }
-
-  setNyq();
+  set();
 }
 
 
