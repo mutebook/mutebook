@@ -4,15 +4,16 @@ Try things out:
 
 Calc:
 
-{quint: mb_diau:apps/sampling.js | sampling | Sampling}
+{quint: mb_acou:apps/monopole.js | monopole | Acoustic monopole}
 {quint: mb_acou:apps/harmonic_motion.js | harmonic_motion | Harmonic motion}
 {quint: mb_acou:apps/acoustic_pressure.js | acoustic_pressure | Acoustic pressure}
-{quint: mb_mics:apps/polar_patterns.js | polar_patterns | Microphone polar patterns}
-{quint: mb_mics:apps/frequency_response.js | frequency_response | Microphone frequency response}
-{quint: mb_math:apps/triangle.js | triangle | Right triangle}
-{quint: mb_math:apps/circular.js | circular | Unit circle, sine, cosine (circular motion)}
-{quint: mb_acou:apps/peak_to_peak.js | peak_to_peak}
-{quint: mb_acou:apps/frequencies.js | frequencies | Sine waves - frequencies}
+#{quint: mb_diau:apps/sampling.js | sampling | Sampling}
+#{quint: mb_mics:apps/polar_patterns.js | polar_patterns | Microphone polar patterns}
+#{quint: mb_mics:apps/frequency_response.js | frequency_response | Microphone frequency response}
+#{quint: mb_math:apps/triangle.js | triangle | Right triangle}
+#{quint: mb_math:apps/circular.js | circular | Unit circle, sine, cosine (circular motion)}
+#{quint: mb_acou:apps/peak_to_peak.js | peak_to_peak}
+#{quint: mb_acou:apps/frequencies.js | frequencies | Sine waves - frequencies}
 
 #⤊⤋⇚⇛
 #🢀 🢂 🢁 🢃

@@ -42,7 +42,6 @@ function sampling (divId) {
     // restored wave
     let fr = wsCycles, fn = nSamples / 2;
     let invert = !!(Math.floor(fr / fn) % 2);
-    console.log(invert)
     if ((fr = fr % (2*fn)) > fn)
       fr = 2*fn - fr;
 
