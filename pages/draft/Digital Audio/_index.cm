@@ -32,9 +32,6 @@ Last but not least, there are a lot of practical reasons for working with digita
 
 # add some of the problems with digital audio
 
-
-
-
-@toc sampling; sampling.cm ; Sample Frequency
-@toc quantization; quantization.cm ; Quantization and Bit Depth
+@toc mb_sampling; sampling.cm ; Sample Frequency
+@toc mb_quantization; quantization.cm ; Quantization and Bit Depth
 

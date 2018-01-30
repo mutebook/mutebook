@@ -49,7 +49,7 @@ function acoustic_pressure (divId) {
   let freq = c.addRange(0, 1, .02, () => setFreq(freq.value()));
 
   step();
-  setFreq(.1);
+  setFreq(0);
 }
 
 // eof

@@ -1,19 +1,21 @@
-= Sandbox
+= Showcase
 
-Try things out:
+A gallery of applets:
 
-Calc:
+# {quint: mb_math:apps/triangle.js | triangle | Right triangle}
+{quint: mb_math:apps/circular.js | circular | {:Unit circle, sine, cosine (circular motion)|ma_sine}}
 
-{quint: mb_acou:apps/monopole.js | monopole | Acoustic monopole}
-{quint: mb_acou:apps/harmonic_motion.js | harmonic_motion | Harmonic motion}
-{quint: mb_acou:apps/acoustic_pressure.js | acoustic_pressure | Acoustic pressure}
-#{quint: mb_diau:apps/sampling.js | sampling | Sampling}
-#{quint: mb_mics:apps/polar_patterns.js | polar_patterns | Microphone polar patterns}
-#{quint: mb_mics:apps/frequency_response.js | frequency_response | Microphone frequency response}
-#{quint: mb_math:apps/triangle.js | triangle | Right triangle}
-#{quint: mb_math:apps/circular.js | circular | Unit circle, sine, cosine (circular motion)}
+{quint: mb_acou:apps/monopole.js | monopole | {:Acoustic monopole|ac_sound}}
+{quint: mb_acou:apps/acoustic_pressure.js | acoustic_pressure | {:Acoustic pressure|ac_sound}}
+{quint: mb_acou:apps/harmonic_motion.js | harmonic_motion | {:Harmonic motion|ac_sound}}
+
+{quint: mb_acou:apps/frequencies.js | frequencies | {:Sine waves - frequencies|ac_waves}}
+
+{quint: mb_mics:apps/polar_patterns.js | polar_patterns | {:Microphone polar patterns|mic_oper}}
+{quint: mb_mics:apps/frequency_response.js | frequency_response | {:Microphone frequency response|mic_oper}}
 #{quint: mb_acou:apps/peak_to_peak.js | peak_to_peak}
-#{quint: mb_acou:apps/frequencies.js | frequencies | Sine waves - frequencies}
+
+{quint: mb_diau:apps/sampling.js | sampling | {:Sampling|mb_sampling}}
 
 #⤊⤋⇚⇛
 #🢀 🢂 🢁 🢃
