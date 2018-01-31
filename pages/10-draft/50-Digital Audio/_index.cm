@@ -1,0 +1,34 @@
+@toc mb_diau ;; Digital Audio
+
+= Digital Audio
+
+This section introduces the basics of digital audio. We will look at how an analogue signal is made digital and vice versa and learn sampling and quantization and how it relates to what we hear. Before we go into more detail about digital audio, we have to understand the difference between analogue and digital audio signals. If you look at any wave in the acoustic domain or as an analogue electric signal, you will find that at any moment in time the signal has a specific value. Despite the obvious limitations in time we can feel and measure and the limitations defined by the maximum amplitude of the analogue system, there is an infinite number of points in time and an infinite number of values. This is why an analogue audio signal is also referred to as {_time-continuous}.
+
+Digital systems use two states (on/off or 1/0), which means that there is a limited amount of numbers available. This also means that in order to work with an audio signal inside a computer, we have to represent the analogue signal in a way that limits the number of values and points in time. In other words, we have to make the signal time-discrete. This is done by sampling and quantization and is described in this section. Making an analogue signal digital is called {/analog-to-digital conversion} or A/D conversion. Making a digital signal analogue is called {/digital-to-analog conversion} or D/A conversion. Before we take a closer look at how this is done, we should identify a few advantages of digital audio and why we bother to deal with it at all.
+
+== Digital Signal Processing (DSP)
+If we want to change the audio signal with analog signal processors we are limited to what is possible by means of electronic components. What if, for example, we wanted to a processor that randomly selects parts of an audio file, pitches each part up or down and then plays them either forward or backward. This might be difficult to achieve on in the analogue domain. However, once we have a digital audio signal --- which technically is only a series of numbers --- the task we just defined becomes fairly easy, the possibilities in digital audio are extended far beyond those of analogue electronics.
+
+== Binary Numbers
+A computer in simplified terms is a collection of many switches that can have two states - ON or OFF (or 1 or 0). Numbers of the decimal system (which we use to count) are expressed with a combination of ON and OFF values. With the limitations of two states, a computer works with a binary numerical system (using only 1s and 0s), so counting in the binary system works as follows:
+
+0, 1, 10, 11, 100, 101, 110, 111, 1000, 1001, 1010, 1011, 1100, 1101, 1110, 1111, and so on.
+
+You see that we need a lot more binary digits (bits) than in the decimal system in order to express numbers. While in the numerical system we are used to, four digits are enough to count up to 9999, with four bits we can only count up to 15. Just like in the decimal system, the more bits we have available the more numbers we can express with the collection of switches.
+
+In digital audio, this is specifically relevant. A CD for example uses 16 bits to express the instantaneous amplitude of the audio signal. The bit depth (word length) is explained in more detail in the section on quantization.
+
+== More Resistant to Unwanted Signal Changes
+Once an analogue audio signal has been converted into a digital signal it is expressed with binary numbers (1s and 0s). Because the system does not know any states in between, all values above a certain threshold will be interpreted as 1, everything below the threshold will be interpreted as 0. This also means that a digital audio file is less likely to contain any unwanted sounds. For example, let us assume that there is a momentary drop in voltage. For an analogue signal this means that the drop will immediately change the waveform and thus change the sound of the audio file. A digital signal on the other hand will still be read as 1 or 0 as long as the voltage drop is small enough to not fall below the threshold.
+
+#insert picture
+
+== Copying
+Having an audio signal stored as numbers within a computer gives us the possibility to copy the audio file without any loss as the copy is an exact duplication of the numbers of the original.
+
+
+== Practical Reasons
+Last but not least, there are a lot of practical reasons for working with digital audio inside a Digital Audio Workstation (DAW). For example, when recalling a stored session, all digital signal processors and parameter settings can be stored within the session and are available instantly as soon as you load the project. When working on the analogue side, you would have to re-call all parameter setting manually.
+
+# add some of the problems with digital audio
+
