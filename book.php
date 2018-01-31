@@ -19,7 +19,7 @@ if ($_SERVER['SERVER_PORT'] < 8000 /* not debug */) {
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
-    var u="https://mutebook.me/piwik/";
+    var u="https://mutebook.me/+web/piwik/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
     _paq.push(['setSiteId', '1']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
