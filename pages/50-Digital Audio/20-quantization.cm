@@ -1,0 +1,59 @@
+@toc mb_dgau_quant;; Quantization and Bit Depth
+
+= Quantization
+
+In the section on sampling, we have seen how we can limit the amount of samples in time. This section explains how the instantaneous amplitude of the signal is put {/quantized} into finite values in order for a computer to work with the signal.
+
+---.diagram
+{img: diagrams/MB_digau_d_01 Amplitude over Time.jpg}
+---
+
+Instead of working with an infinite number of values to represent the amplitude of the signal at the sample points, we create a grid with possible values.
+
+---.diagram
+{img: diagrams/MB_quantGrid.jpg}
+---
+
+During the A/D conversion, during every sample the audio signal is checked for its instantaneous amplitude and rounded to the nearest possible value that falls onto the grid, which is then expressed in a binary value. During this process we obviously deviate slightly from the original signal as we have to round it to the nearest value. This creates a rounding error that is also known as {/Quantizaion Error}. In the diagram below it is represented for the first few samples on the bottom.
+
+---.diagram
+{img: diagrams/MB_QuantError.jpg}
+---
+
+This error will add a bit of a noise floor to the signal. This noise floor is lower than half an LSB (least significant bit). Technically speaking it is not noise, because noise is defined as random, but unfortunately, the quantization error is not quite so random, but it is signal dependent.
+
+The size of the error depends on the least significant bit, which depends on the amount of bits we have available to represent the amplitude in binary form. Let's assume we only work with one bit. This means that we have only 1 and 0 as possible values. The quantization error will be rather large and our audio signal would not have a very good resolution and we would most likely not be able to recognize it when listening to it. Let us investigate how many values we have available when using more bits, or in other words increase the {/word length}.
+
+If we use 2 bits we have the following binary value at our disposal:
+
+00, 01, 10, 11
+
+So in total, we have 4 different values to represent the amplitude.
+
+With 4 bits we already a few more. 16, to be precise:
+0000, 0001, 0010, 0011, 0100, 0101, 0110, 0111, 1000, 1001, 1010, 1011, 1100, 1101, 1110, 1111
+
+In order to save us counting in binary numbers when working with more bits, we can use the following equation, to calculate the number of binary values (n) for any word length (B):
+
+---.equation
+{$$ n = 2^B$$}
+---
+
+So for an word length of 8 bit, we get 256 possible values, for 16 bit (this is what a CD uses) we get 65,536 possible values and we have reached a usable resolution for audio applications. However the more bits we use, the better the resolution of the audio signal and the lower the quantization error. This is why you most often you will work with 24 bits or more. It is important to note that the size of the quantization error in relation to the audio signal, depends on the signal strength. If you use a very quite signal that only uses half of the available values for the peak amplitude, it technically meant that you reduce the word length and might risk a larger quantization error. This is why it is essential to make sure that you amplify a microphone signal enough in order to make use of the best possible resolution. However, if you increase the signal so much that it exceeds the limits of the digital system, you run into another problem.
+
+== Clipping
+
+Once the maximum voltage a converter can handle is reached, it outputs a certain binary value. If maximum is exceeded it stays at that value until the amplitude drops within the limits of the converter. This means that everything above the maximum is chopped off, which results in a very harsh distortion called clipping.
+
+---.diagram
+{img: diagrams/MB_Clipping.jpg}
+---
+
+How audible clipping is, depends on its amount and the input signal. You are more likely to hear it immediately in a sustained flute note than in the transient of a snare drum. This has to do with the frequency content of the original signal. A flute note contains the fundamental and harmonics, so when you add abrupt square-wave-like (containing all frequencies) changes to the signal it is very audible. A snare transient already contains most frequencies, so you might not immediately hear the effects created by clipping.
+
+All this means, that you want to make sure that you have the signal as high as possible in order to make use of all bits, but also ensure that you stay below the maximum of the system. A general rule is to set the {/gains} of your console or interface as high as possible without clipping.
+
+== Dithering
+
+Even if you use a sufficient word length (aka bit depth) and a strong audio signal, you will most likely (and hopefully) work with dynamics in your productions, so there will be parts within the music that are softer than those parts that get closer to 0dBFS (FS stand for full scale). Also reverb tails could slowly fade from very loud to very quiet. For these quiet elements of your production, the quantization error could become problematic, as it is related to the signal. Therefore, it is common to add a bit of noise to the signal in order to randomize the quantization error. This noise is less than the LSB. While it seems counter-intuitive to add noise to an audio signal to make the noise less audible, it does help. The key to this is that noise is completely random and not related to the signal, while the quantization error changes based on the input signal. Our brain distinguishes sounds that seem to belong to the audio signal as relevant information and it is not possible to not notice the error. However, as noise is not signal-related, we tend to blend it out and not notice it anymore. For example, if you listen to a recording with a bit of a noise floor, you might initially notice the noise as quite prominent. The more you listen the more your brain focuses on the relevant information - the music - and you will not pay attention to the noise. However, if that noise would change all the time with the music you are hearing, your attention is drawn to it and you will continue to hear it. This is why dither is applied whenever you quantize or re-quantize (changing word lengths) the audio signal.
+

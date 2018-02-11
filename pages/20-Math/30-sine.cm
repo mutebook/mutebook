@@ -1,0 +1,121 @@
+@toc mb_math_sine; ; Sine and Cosine
+
+= Trigonometric Functions
+
+{quint: mb_math:apps/circular.js | circular | Unit circle, sine, cosine (circular motion)}
+
+The simplest wave is a sine wave and {---} as you will see in the section on {:Acoustics|mb_acou} {---} any periodic wave can be broken down into individual sine waves, so it is essential that you know what a sine wave is and how you can describe one with a function.
+
+Take a look a the diagram above. It shows a circle with a radius of 1. On the circle we have a fixed point that is marked with a yellow dot. For now we are just placing that dot all the way to the right and connect it with a straight line to the center of the circle. As the radius is 1, we know that the distance between the center of the circle and the yellow dot is 1, too (in fact it is the radius). Grab the yellow dot and move it counter-clockwise. The green line that changes indicates the momentary height of the yellow dot. If you turn it one complete cycle, this value will rise from 0 to 1 during the first quarter of the cycle, because that is when you have reached the maximum and it is equal to the radius. In the next quarter it will go back to 0 before entering the third quarter, where it moves from 0 to -1. The last quarter completes the cycle and the height of the dot goes from -1 to 0. This will repeat over and over again with each turn of the cycle. The green line on the right is called a sine wave which can be described as:
+
+---.equation
+{$$y = \sin{\alpha}$$}
+---
+
+in which {$$\alpha$$} is the angle between the starting point and how far you have turned. Thus for each angle this function gives us a unique value.
+
+We can do the same experiment with measuring the length of the vertical offset of the dot compared to the center of the circle (the y-axis) while we turn it. When we start at the most right point again, we have a maximum offset that equals the radius, thus 1. When we turn counter-clockwise, the vertical offset will reduce to 0 with the first quarter turn, then go to -1 in the next quarter, to 0 again in the third quarter, and back to 1 in the last. This creates the red wave you see in the diagram and it is called a cosine wave. We can describe this with the function:
+
+---.equation
+{$$y = \cos{\alpha}$$}
+---
+
+Look for the triangle within the unit circle when you move the dot. The radius (blue), the sine (green) and the cosine (red) form a right triangle, which means that we can apply the {:Pythagorean Theorem|mb_math_pyth} and conclude that:
+
+---.equation
+{$$ (\sin{\alpha})^2 + (\cos{\alpha})^2 = 1 $$}
+---
+
+== Radians
+
+Instead of using degrees to express how far we have turned the wheel, we can also decide to use the circumference of the circle. The circumference of a circle is:
+
+---.equation
+{$$circumference = 2 \times \pi \times r$$}
+---
+
+where {$$r$$} is the radius and {$$\pi$$} the number pi (3.1415926535897932384626433832...). If you want to know more digits of {$$\pi$$}, you can find them {:here|http://www.geom.uiuc.edu/~huberty/math5337/groupe/digits.html}. In the unit circle we have been using the a radius of 1, so {$$r = 1$$}. This means that the circumference of the unit circle is {$$2{\pi}$$}. This also means that during one full cycle of 360° we travel a the yellow dot travels a distance of {$$2\pi$$}. For half a turn (180°) it travels {$$pi$$}, for 90° it travels {$$0.5\pi$$}, and so on.
+
+# add overlay for sine diagram to show π
+# add things to calculate sides of triangle for calculating the expansion angle
+
+== Amplitude
+
+There are a few parameters of the wave we can change and express with a mathematical function. For example, instead of having the wave's maxima at 1 and -1, we might want to create a larger wave {---} thus, we want to change the amplitude. There are several types of amplitude which we have to define at this point.
+
+* {_instantaneous amplitude}
+* {_peak amplitude}
+* {_peak-to-peak amplitude}
+
+The wave displays the {_instantaneous amplitude} for any given moment in time. For example, the instantaneous amplitude at 90° of a cosine wave is 0. By looking at the wave we can also find those points where the wave has the maximum positive or negative values. We know that for a cosine wave, these maxima occur at 0° and 180°, for sine waves at 90° and 270°. The maxima are called the peaks of the wave. The {_peak amplitude} is the positive or negative maximum of the wave which is 1 because the unit cirle has a radius of 1. The {_peak-to-peak amplitude} is the amplitude from the positive maximum to the negative maximum, so in our case from +1 to -1, thus 2. There is another value which is not immediately visible to us, but which we can generate from the wave form, called the RMS value. The RMS value is very important for audio applications and is explained in separate section.
+
+So let us try to change the amplitude of the wave. In order to do that we multiply the cosine (or sine) function by the value we want to use as our peak value.
+
+Mathematically we can describe this as follows:
+
+---.equation
+{$$ y(t) = A * cos (\alpha) $$}
+---
+
+where y(t) is the value of the instantaneous amplitude for any angle {$$\alpha$$} within the cycle of the wave and A is the peak amplitude. Changing the value for A means that the cosine of every angle and everything in between will be multiplied by that value. Let us make {$$A=2$$} and see how that changes our wave angle by angle:
+
+Cosine of 0 equals 1, 1 multiplied by 2 equals 2   \n
+Cosine of 1 equals 0.999847695156391, 0.999847695156391 multiplied by 2 equals 1.999695390312782  \n
+Cosine of 2 equals 0.999390827019096, 0.999390827019096 multiplied by 2 equals 1.998181654038191  \n
+...  \n
+Cosine of 90 equals 0, 0 multiplied by 2 equals 0  \n
+...  \n
+Cosine of 180 equals -1, -1 multiplied by 2 equals -2  \n
+...  \n
+Cosine of 270 equals 0, 0 multiplied by 2 equals 0  \n
+...  \n
+
+If you have some time feel free to multiply the cosine value for all angles by 2, but you probably get the idea. The waveform stays the same, with maxima, minima and zero-crossings at the same angles, just with a larger amplitude. All that is changed is the instantaneous amplitude (except for the 0 values at 90° and 270°).
+
+== Phase
+
+If you compare the sine wave with the cosine wave, you should notice that they look very much alike. The from looks the same, but the sine wave is just shifted over to the right a little bit. The sine wave is "90° late" compared to the sine wave. This means that we should be able to create a cosine wave with a sine function by "moving" it by 90°. Mathematically this is done by adding something to the angle before calculating the corresponding value of the sine wave.
+
+---.equation
+{$$ y(t) = \sin (\alpha + \phi) $$}
+---
+
+Let us calculate a few values with {$$\phi$$} = 90°, so the equation looks like this:
+
+---.equation
+{$$ y(t) = \sin (\alpha + 90) $$}
+---
+
+For {$$\alpha$$} = 0°, we get {$$ y(t) = \sin (0 + 90) $$} which equals {$$1$$}.  \n
+For {$$\alpha$$} = 1°, we get {$$ y(t) = \sin (1 + 90) $$} which equals {$$0.99984769...$$}.  \n
+For {$$\alpha$$} = 2°, we get {$$ y(t) = \sin (2 + 90) $$} which equals {$$0.99939082...$$}.  \n
+For {$$\alpha$$} = 3°, we get {$$ y(t) = \sin (3 + 90) $$} which equals {$$0.99862695...$$}.  \n
+... \n
+For {$$\alpha$$} = 90°, we get {$$ y(t) = \sin (90 + 90) $$} which equals {$$0$$}.  \n
+... \n
+For {$$\alpha$$} = 180°, we get {$$ y(t) = \sin (180 + 90) $$} which equals {$$-1$$}.  \n
+... \n
+For {$$\alpha$$} = 270°, we get {$$ y(t) = \sin (270 + 90) $$} which equals {$$0$$}.  \n
+... \n
+For {$$\alpha$$} = 360°, we get {$$ y(t) = \sin (360 + 90) $$} which equals {$$1$$}.  \n
+
+If you take these values and sketch them on paper from left to right you will see that we have created a sine wave that is 90° late and looks exactly like the cosine wave. {$$\phi$$} is called the phase angle.
+
+Let us insert the phase angle {$$\phi$$} and A for the amplitude into an equation:
+
+---.equation
+{$$ y(t) = A \times \cos (\alpha + \phi) $$}
+---
+
+With this equation we are able to change the amplitude of the wave and let it start at any given angle.
+{$$A$$} is the {_peak value} and {$$\phi$$} is the {_phase angle}, which can be used to "move" the wave left or right.
+
+
+
+
+
+
+
+
+
+
