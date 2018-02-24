@@ -750,6 +750,23 @@ class Klang {
       return this.pinkNoise(owner);
     return this.tone(owner, 0);
   }
+
+  // ö.cps(..)
+  // ö.amp(...)
+  // ö.del()
+  static sineTone () {
+    if (!owner._klang) {
+      const og = (new MC.OscGain(type)/*:OscGain*/); og.sendToDest();
+      owner._klang = og;
+      og.osc.cps = cps;
+      og.start();
+      og.nowRamps(og.gai.node.gain, .2, .23);
+    } else {
+      const og = (owner._klang/*:OscGain*/); delete owner._klang;
+      og.nowRamps(og.gai.node.gain, 0, .23);
+      og.deleteAfter(.3);
+    }
+  }
 }
 
 MC.Klang = Klang;
