@@ -31,6 +31,8 @@ book.hook = function (tag, cs, parts) {
 
   const quintMachine = function () {
     const [src, fun, caption] = parts(3);
+    loadAudio = true; // TODO
+
     divId = 'quint_mach_' + (++qmNo);
     this.div(['app']);
     this.div(['quint'], ` id="${divId}"`);

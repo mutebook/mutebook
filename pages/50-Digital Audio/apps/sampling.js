@@ -3,6 +3,7 @@
 // TODO: audio, check "enhance singularities"
 
 function sampling (divId) {
+
   const qm = QuintMachine(divId), [fg, bg, over] = qm.fbo();
   let [sx, sy, cx, cy, x1, x2, y1, y2] = qm.sz(), m = qm.m();
 
@@ -13,7 +14,7 @@ function sampling (divId) {
   bg.line([x1, cy], [x2, cy], 'darkgray').dashedStroke();
 
   // sampled wave
-  let ws = bg.wave('blue').width(1.7), wsCycles, wsPhase;
+  let ws = fg.wave('green').width(1.7), wsCycles, wsPhase;
 
   function setWsPhase (v) {
     wsPhase = v; set();
@@ -27,16 +28,16 @@ function sampling (divId) {
   bg.slider([x1, y1], [sx/2-m, 0]).
     val(-(wsPhase=-0)).onVal((v) => setWsPhase(-v));
 
-  bg.label([cx, y1+16], 'wave period (1/f)');
+  bg.label([cx, y1+16], 'wavelength');
   bg.slider([cx, y1], [sx/2, 0]).min(.05).
     val(1/(wsCycles=3)).onVal((v) => setWsCycles(1/v));
 
-    // restored wave
-  let wr = bg.wave('green').width(2), wrCycles, wrPhase;
+  // restored wave
+  let wr = bg.wave('blue').width(2), wrCycles, wrPhase;
 
   // samples
   let gs = bg.group().p([x1, cy]), nSamples;
-  bg.label([cx, y2-8], 'sampling period (1/f)');
+  bg.label([cx, y2-8], 'sampling');
   bg.slider([cx, y2], [sx/2, 0]).min(36).max(1).
     val(nSamples = 6.1).onVal((v) => setNSamples(v));
 
@@ -47,6 +48,10 @@ function sampling (divId) {
   let near = (v1, v2) => Math.abs(v1 - v2) < .04;
 
   let enhance = false;
+
+  // sound
+  let sTone = MC.Klang.sineTone(-1);
+  let rTone = MC.Klang.sineTone(+1);
 
   // put all together
   function set() {
@@ -75,7 +80,7 @@ function sampling (divId) {
       let y = nearNyq ? 0 : -ws.ampl(x) * sy/2,
           xx = x*sx/wsc;
       gs.line([xx, 0], [xx, y], 'red');
-      gs.circle([xx, y], 2).color('red');
+      gs.circle([xx, y], 3).color('red');
     }
 
     // restored wave
@@ -89,6 +94,11 @@ function sampling (divId) {
     wrPhase = (invert ? .5 - wsPhase : wsPhase);
 
     wr.set(wrCycles, wrPhase, [sx/wrCycles, sy/2-1.7], [x1, wrcy]);
+
+    let fBase = 200;
+    sTone.cps(fBase * wsc);
+    rTone.cps(fBase * wrCycles);
+    rTone.amp(null == wr.steady_ ? _amp : 0);
   }
 
   // controls
@@ -97,7 +107,10 @@ function sampling (divId) {
     enhance = on; set();
   });
 
-  c.br().addRange(0, 1, 0, () => {
+  let _amp = 0;
+  let amp = c.br().addRange(0, 1, 0, () => {
+    _amp = amp.value();
+    sTone.amp(_amp); rTone.amp(null == wr.steady_ ? _amp : 0);
   });
 
   // go
