@@ -1,6 +1,2 @@
-.DS_Store
-.*.sh
+.*
 pages/toc_.js
-.idea/
-.vscode/
-QM/
