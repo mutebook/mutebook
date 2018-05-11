@@ -1,0 +1,3 @@
+@toc mb_showcase_frequency_response;; Frequency response
+
+{quint: /apps/frequency_response.js | frequency_response | {:Microphone frequency response|mb_mics_oper}}

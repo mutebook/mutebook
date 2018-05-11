@@ -2,8 +2,7 @@
 
 = Amplitude, Frequency and Wavelength
 
-# {img: diagrams/MB_ac_d_03.jpg}
-{quint: mb_acou:apps0/peak_to_peak.js | peak_to_peak}
+{quint: /apps/peak_to_peak.js | peak_to_peak}
 
 Let us go back to the wave that was created by simple harmonic motion in the {:previous section|mb_acou_sound}. The sinusoidal (or sine) wave that results from our loudspeaker is displayed above, it displays the pressure changes over time. There are several parameters of this wave that give us important information about it.
 
@@ -59,7 +58,7 @@ Let us investigate how the frequency relates to our work as audio engineers, com
 
 #{btn-sine: 50} {btn-sine: 100} {btn-sine: 150} {btn-sine: 200} {btn-sine: 250} {btn-sine: 300} {btn-sine: 350} {btn-sine: 400} {btn-sine: 450} {btn-sine: 500} {btn-sine: 550} {btn-sine: 600} {btn-sine: 650} {btn-sine: 700} {btn-sine: 750} {btn-sine: 800} {btn-sine: 850} {btn-sine: 900} {btn-sine: 950} {btn-sine: 1000} {btn-sine: 1100} {btn-sine: 1200} {btn-sine: 1300} {btn-sine: 1400} {btn-sine: 1500} {btn-sine: 1600} {btn-sine: 1700} {btn-sine: 1800} {btn-sine: 1900} {btn-sine: 2000} {btn-sine: 2100} {btn-sine: 2200} {btn-sine: 2300} {btn-sine: 2400} {btn-sine: 2500} {btn-sine: 2600} {btn-sine: 2700} {btn-sine: 2800} {btn-sine: 2900} {btn-sine: 3000} {btn-sine: 3200} {btn-sine: 3400} {btn-sine: 3600} {btn-sine: 3800} {btn-sine: 4000} {btn-sine: 4200} {btn-sine: 4400} {btn-sine: 4600} {btn-sine: 4800} {btn-sine: 5000} {btn-sine: 5500} {btn-sine: 6000} {btn-sine: 6500} {btn-sine: 7000} {btn-sine: 7500} {btn-sine: 8000} {btn-sine: 8500} {btn-sine: 9000} {btn-sine: 10000} {btn-sine: 11000} {btn-sine: 12000} {btn-sine: 13000} {btn-sine: 14000} {btn-sine: 15000} {btn-sine: 16000} {btn-sine: 17000} {btn-sine: 18000} {btn-sine: 19000} {btn-sine: 20000}
 
-{quint: mb_acou:apps0/frequencies.js | frequencies | Sine waves - frequencies}
+{quint: /apps/frequencies.js | frequencies | Sine waves - frequencies}
 
 You know that raising the frequency increases the amount of cycles per second. You should also hear that the higher the frequency the higher the pitch you perceive. If you have healthy ears and a playback system that is able to reproduce all frequencies, you should be able to hear hear sounds with frequencies within 20Hz and 20,000Hz. When listening to all the different frequencies you might have noticed that some of them seem louder than others. This has to do with our hearing system and is essential to have in the back of your mind when working on any audio projects. This phenomenon is described in more detail in the chapter on {ed: {:mb_perc}|I've added the link here.}.
 

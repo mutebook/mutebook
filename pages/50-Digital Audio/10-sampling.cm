@@ -173,5 +173,5 @@ This happens all the time, but making sure that the highest frequency that the a
 
 == Demo
 
-{quint: mb_dgau:apps0/sampling.js | sampling | Sampling}
+{quint: /apps/sampling.js | sampling | Sampling}
 

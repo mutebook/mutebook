@@ -43,7 +43,7 @@ book.hook = function (tag, cs, parts) {
     this.secEnd();
 
     quintSrc = this.link(src.trim());
-    quintFun = fun.trim();
+    quintFun = 'window.app_' + fun.trim();
   };
 
   const quintMachineCode = function () {
@@ -112,7 +112,7 @@ book.hook = function (tag, cs, parts) {
       try {
         if (quintCode)
           eval(quintCode);
-        eval(`${quintFun}('${divId}')`);
+        eval(`${quintFun}('#${divId}')`);
       } catch (err) {
         console.log(err)
         // nix
