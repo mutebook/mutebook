@@ -4,32 +4,20 @@
 
 A gallery of applets:
 
-{quint: mb_math:apps/triangle.js | triangle | Right triangle}
-{quint: mb_math:apps/circular.js | circular | {:Unit circle, sine, cosine (circular motion)|mb_math_sine}}
+{quint: mb_math:apps0/triangle.js | triangle | Right triangle}
+{quint: mb_math:apps0/circular.js | circular | {:Unit circle, sine, cosine (circular motion)|mb_math_sine}}
 
-{quint: mb_acou:apps/monopole.js | monopole | {:Acoustic monopole|mb_acou_sound}}
-{quint: mb_acou:apps/acoustic_pressure.js | acoustic_pressure | {:Acoustic pressure|mb_acou_sound}}
-{quint: mb_acou:apps/harmonic_motion.js | harmonic_motion | {:Harmonic motion|mb_acou_sound}}
+{quint: mb_acou:apps0/monopole.js | monopole | {:Acoustic monopole|mb_acou_sound}}
+{quint: mb_acou:apps0/acoustic_pressure.js | acoustic_pressure | {:Acoustic pressure|mb_acou_sound}}
+{quint: mb_acou:apps0/harmonic_motion.js | harmonic_motion | {:Harmonic motion|mb_acou_sound}}
 
-{quint: mb_acou:apps/frequencies.js | frequencies | {:Sine waves - frequencies|mb_acou_waves}}
+{quint: mb_acou:apps0/frequencies.js | frequencies | {:Sine waves - frequencies|mb_acou_waves}}
 
-{quint: mb_mics:apps/polar_patterns.js | polar_patterns | {:Microphone polar patterns|mb_mics_oper}}
-{quint: mb_mics:apps/frequency_response.js | frequency_response | {:Microphone frequency response|mb_mics_oper}}
-{quint: mb_acou:apps/peak_to_peak.js | peak_to_peak}
+{quint: mb_mics:apps0/polar_patterns.js | polar_patterns | {:Microphone polar patterns|mb_mics_oper}}
+{quint: mb_mics:apps0/frequency_response.js | frequency_response | {:Microphone frequency response|mb_mics_oper}}
+{quint: mb_acou:apps0/peak_to_peak.js | peak_to_peak}
 
-{quint: mb_dgau:apps/sampling.js | sampling | {:Sampling|mb_dgau_sampl}}
-
-#⤊⤋⇚⇛
-#🢀 🢂 🢁 🢃
-#🡸 🡺 🡹 🡻
-#🡐 🡒 🡑 🡓
-#🡨 🡪 🡩 🡫
-#⇦ ⇨ ⇧ ⇩
-#⬅ ( ⮕ ➡ ) ⬆
-#🠴 🠶 🠵 🠷
-#🡄 🡆 🡅 🡇
-#🠈 🠊 🠉 🠋
-#🠜 🠞 🠝 🠟
+{quint: mb_dgau:apps0/sampling.js | sampling | {:Sampling|mb_dgau_sampl}}
 
 #== Audio
 

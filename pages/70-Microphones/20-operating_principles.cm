@@ -17,7 +17,7 @@ Before going into more detail about acoustic operating principles we should know
 
 Polar patterns show the directional sensitivity for the microphone. The 0°-axis is the front of the microphone and the sensitivity of any angle is referenced to it. This means that by looking at a polar pattern you should be able to predict into which direction the microphone is more sensitive (at least for certain frequencies). Below you see the most common polar patterns.
 
-{quint: mb_mics:apps/polar_patterns.js | polar_patterns | Microphone polar patterns}
+{quint: mb_mics:apps0/polar_patterns.js | polar_patterns | Microphone polar patterns}
 
 #{img: diagrams/MB_mic_d_03_omni.jpg}
 #{img: diagrams/MB_mic_d_04_subcardioid.jpg}
@@ -35,7 +35,7 @@ In addition to choosing a microphone based on its polar pattern, a microphone's 
 
 # {img: diagrams/MB_mic_d_09_linear_frequency_resp.jpg}
 
-{quint: mb_mics:apps/frequency_response.js | frequency_response | Microphone frequency response}
+{quint: mb_mics:apps0/frequency_response.js | frequency_response | Microphone frequency response}
 
 The frequency response you see here is called a linear frequency response (or flat frequency response). This means that the microphone outputs the same voltage for waves with the same amplitude, regardless of the frequency of the incoming sound wave. Most microphones do not behave as "perfect", which is good, as differing frequency responses give microphones their unique sonic character. The graph only shows the frequency response for on-axis sound. This can vary greatly for sound reaching the microphone at other angles, so just looking at the on-axis response does not tell you much about the actual sound of the microphone. Especially in situations where sounds arrive from all around the microphone (e.g., inside a grand piano, in classical recording, or when you record with multiple microphones at the same time within the same room), the off-axis frequency response is just as - or even more - important than the on-axis frequency response. Even if two microphones have very similar on-axis responses, they might sound completely different because of their off-axis responses.
 
