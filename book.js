@@ -1,20 +1,15 @@
-/* global CM:false book:false */
-book.loadAudio = function () {
-  CM.loadScript('../assets/audio_bundle.js');
-};
+/* global book:false CM:false */
 
 let qmNo = 0;
 
 book.hook = function (tag, cs, parts) {
-  // this = HtmlPage
   let loadAudio = false;
   let quintSrc, quintFun, quintCode, divId;
 
   const toneButton = function (type) {
     const [tx, freq] = parts(2);
-    let f = freq || tx;
-    f = parseFloat(f); if (isNaN(f)) f = 0;
-    this.button(cs, `MC.Klang.tone(this,${f},'${type}')`);
+    const f = parseFloat(freq || tx) || 0;
+    this.button(cs, `QM.Klang.tone(this,${f},'${type}')`);
     this.put(tx);
     this.secEnd();
     loadAudio = true;
@@ -23,7 +18,7 @@ book.hook = function (tag, cs, parts) {
   const noiseButton = function () {
     const [tx, kind] = parts(2);
     const type = kind.trim() || tx;
-    this.button(cs, `MC.Klang.noise(this,'${type}')`);
+    this.button(cs, `QM.Klang.noise(this,'${type}')`);
     this.put(tx);
     this.secEnd();
     loadAudio = true;
@@ -31,7 +26,6 @@ book.hook = function (tag, cs, parts) {
 
   const quintMachine = function () {
     const [src, fun, caption] = parts(3);
-    loadAudio = true; // TODO
 
     divId = 'quint_mach_' + (++qmNo);
     this.div(['app']);
@@ -57,7 +51,7 @@ book.hook = function (tag, cs, parts) {
     this.secEnd();
     this.secEnd();
 
-    quintFun = 'fun_' + divId;
+    quintFun  = 'fun_' + divId;
     quintCode = `function ${quintFun} () { ${src} }`;
  };
 
@@ -102,30 +96,25 @@ book.hook = function (tag, cs, parts) {
   }
 
   if (loadAudio)
-    CM.loadScript('../assets/audio_bundle.js');
+    CM.loadScript('../audio/klang.js');
+
   if (quintSrc || quintCode) {
     CM.loadCSS('../assets/quint.css');
-    const qs = ['../assets/quint.dart.js','../assets/quint.js'];
-    if (quintSrc)
-      qs.push('../' + quintSrc);
+    const qs = quintSrc ? ['../' + quintSrc] : [];
     CM.loadScripts(qs, function () {
       try {
         if (quintCode)
           eval(quintCode);
         eval(`${quintFun}('#${divId}')`);
       } catch (err) {
-        console.log(err)
-        // nix
+        // console.log(err);
       }
     });
   }
   return true;
 };
 
-// TODO handle loading error if this file does not exist
-
 book.pragma = function (/* tag, what, par */) {
-  // handle custom pragmas
   return false;
 };
 
