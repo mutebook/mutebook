@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<style>body>pre{display:none;}</style>
+<script>var book = { isStatic: true, title: 'Contact', pages: 'pages/', pagePath: '', pageFile: '92-contact..html'}</script>
+<script src="../CM/load.js"></script>
+
+</head>
+
+<body><pre>
+@chr macro $
+
+@def MB   MUTEBOOK
+@def Mb   Mutebook
+@def MbMe mutebook.me
+@def MbMeUrl https://{$MbMe}
+
+@def GH   GitHub
+@def CM   Compact Markup
+
+# typographical quotes
+@chr dquo &quot;
+
+//toc contact;; Contact
+
+function isBot() {
+  $whois = @$_POST['whois'];
+  if (empty($whois)) return true; // not set - first call
+  $isBot = 'Loompa' != $whois;
+  if ($isBot) sleep(13);
+  return $isBot;
+}
+
+function sendMail($to, $subj, $body) {
+  $body .= &quot;\n(from IP: ${_SERVER['REMOTE_ADDR']})\n&quot;;
+  return @mail($to, $subj, $body, 'From: jan@mutebook.me');
+}
+
+$name  = @$_POST['name'];
+$email = @$_POST['email'];
+$text  = @$_POST['text'];
+
+$success = false; $heads = 'Send a message to the authors:';
+if (isBot() || (empty($name) &amp;&amp; empty($email) &amp;&amp; empty($text))) {
+  $success = true; // quiet fail
+} else
+if (empty($email) || empty($text)) {
+  $heads = 'Please fill in all required fields:';
+} else
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  $heads = 'Please correct the e-mail address.';
+} else {
+  $subj = 'Message to authors posted at mutebook.me';
+  $body = &quot;name: [$name]\nemail: [$email]\n-----\n$text\n-----\n&quot;;
+  if (!sendMail('authors@mutebook.me', $subj, $body))
+     $heads = 'The post office is closed. Try again later.';
+  else {
+    $success = true;
+    $heads = 'Your message has been sent. Thank you!';
+    $name = $email = $text = '';
+  }
+}
+
+?&gt;
+&lt;h1&gt;Contact&lt;/h1&gt;
+&lt;hr/&gt;
+&lt;form action=&quot;&lt;?=$_SERVER['REQUEST_URI']?&gt;&quot; method=&quot;post&quot;&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;?=$heads?&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td class=&quot;label&quot;&gt;your name:&lt;/td&gt;
+      &lt;td&gt;&lt;input type=&quot;text&quot; size=&quot;64&quot; name=&quot;name&quot; value=&quot;&lt;?=@$name?&gt;&quot;/&gt;&lt;/td&gt;
+    &lt;/tr&gt;&lt;tr&gt;
+      &lt;td class=&quot;label required&quot;&gt;your e-mail address:&lt;/td&gt;
+      &lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;&lt;?=@$email?&gt;&quot;/&gt;&lt;/td&gt;
+    &lt;/tr&gt;&lt;tr&gt;
+      &lt;td class=&quot;label required&quot; &gt;text:&lt;/td&gt;
+      &lt;td&gt;&lt;textarea rows=&quot;8&quot; name=&quot;text&quot;&gt;&lt;?=@$text?&gt;&lt;/textarea&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;td class=&quot;legend&quot;&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;input id=&quot;Oompa&quot; type=&quot;hidden&quot; name=&quot;whois&quot; value=&quot;Oompa&quot;/&gt;&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Send!&quot;/&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/thead&gt;
+  &lt;/table&gt;
+&lt;/form&gt;
+&lt;hr/&gt;
+
+&lt;script&gt;document.getElementById('Oompa').value='Loompa';&lt;/script&gt;
+
+</pre>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<style>body>pre{display:none;}</style>
+<script>var book = { isStatic: true, title: 'Sound Sources and Sound Waves', pages: 'pages/', pagePath: '30-Acoustics/', pageFile: '10-sound_sources_and_waves.html'}</script>
+<script src="../../CM/load.js"></script>
+
+</head>
+
+<body><pre>
+@chr macro $
+
+@def MB   MUTEBOOK
+@def Mb   Mutebook
+@def MbMe mutebook.me
+@def MbMeUrl https://{$MbMe}
+
+@def GH   GitHub
+@def CM   Compact Markup
+
+# typographical quotes
+@chr dquo &quot;
+
+@toc mb_acou_sound;; Sound Sources and Sound Waves
+
+= Sound Sources and Sound Waves
+
+Let us imagine a completely silent endless space filled with air particles (though this might be difficult to do with all the noise that is constantly around us). The air particles are peacefully resting in their position and each particle has the same amount of space to enjoy its existence. This means that per square meter, square foot, square centimeter or any other volume unit, we find the same number of particles. Becoming a bit more scientific, we can conclude that the pressure on each particle is the same and that the density per volume unit is the same for all areas of our endless space. Let us decide that the endless space is somewhere on the surface of a planet where the barometric pressure remains forever constant at 100,000 Pa (Pascal) so that each area within the space has exactly that pressure. Even though we would love to remain in this very peaceful quiet place for a little while, we now place an omnidirectional loudspeaker somewhere in that space. You can imagine our loudspeaker looking like a soft billiard ball of which the entire surface serves as speaker cone. We then send a sine wave into the loudspeaker and it starts expanding and contracting pushing the air particles around it outwards and pulling them inwards. Air particles love their own space, so when the loudspeaker pushes the first row of particles outwards and they are getting closer to their outer neighbors, those neighbors want to get out of their way to equalize the pressure again, moving outwards where they find their outer neighbors, and so on. The high pressure is moving outwards. While that high pressure is moving away, the loudspeaker contracts and opens up space around itself where there are no particles, yet, and the pressure is very low. The particles that were just tortured by being pushed outwards, are being rewarded with more space now and they naturally move inwards in order to make use of the additional space they get, trying to equalize the pressure. The outer neighbors {---} jealous of course {---} want to get their part of that additional space as well and follow their inner neighbors inside and so on. If the loudspeaker keeps expanding and contracting, the same thing happens over and over again creating alternating moments of high pressure and low pressure. The high pressure and low pressure parts of the wave follow the movement of the loudspeaker.
+
+{quint: /apps/monopole.js | monopole | Acoustic monopole}
+
+If the movement of the loudspeaker is following the {:simple harmonic motion|#shm} described below and we measure the pressure at a fixed point in our space we get the following wave:
+
+{quint: /apps/acoustic_pressure.js | acoustic_pressure | Acoustic pressure}
+
+The diagram above shows the {/acoustic pressure} at any moment in time. You see that the pressure changes caused by the loudspeaker alternate around the barometric pressure, sometimes being just a bit higher, sometimes just a bit lower. The acoustic pressure is given in Pascal (Pa) and is defined by the equation
+
+---.equation
+{$$ p = p_{total} - p_{static}$$}
+---
+
+where {$$ p $$} is the acoustic pressure in Pascal, {$$ p_{total} $$} is the total pressure (in our case barometric pressure and the pressure superimposed by the loudspeaker) in Pascal and {$$ p_{static} $$} is the static pressure (in our case the barometric pressure of 100,000 Pa) in Pascal.
+
+==.u Effective Acoustic Pressure
+# add some lines on why effective acoustic pressure.
+
+For most of our work, the effective acoustic pressure is more relevant than the instantaneous pressure or the peak pressure. The effective acoustic pressure ({$$ p_{eff} $$}) can be determined by taking an RMS {todo: link} value of the acoustic pressure{todo: create link to perception}. From here on we will use the effective acoustic pressure and {---} unless otherwise indicated {---} the terms acoustic pressure or sound pressure are used to refer to effective sound pressure.
+
+==.u {#shm} Simple Harmonic Motion
+
+The waveform and what it sounds like to our ears depends on the movement of the speaker cone. The simplest wave is created by simple harmonic motion. It is usually and very effectively explained and visualized with help of a spring and a weight (or mass). The weight is attached to the ceiling and the weight is attached to the spring (see diagram below). If you leave it alone for a while the spring which is pulling the weight upwards and the gravity that is pulling the weight down will have found a compromise about where the weight should rest so that they both get their share of it. This position is called equilibrium position.
+
+{quint: /apps/harmonic_motion.js | harmonic_motion | Harmonic motion}
+
+If you now pull the weight down a bit
+#(which you can do in the diagram by clicking and dragging)
+and let it go, the spring will work to pull it back up and {---} because once mass is moving it takes energy to stop it {---} the weight will move through the equilibrium position. This is when the gravity takes over and reduces the movement of the weight trying to pull it back down. The weight slows down until it changes direction and moves downwards. First slowly, picking up speed until it has passed through the equilibrium position again. This is when the pulling of the spring is greater than that of the gravity and the weight is slowed down, until it stops and moves upwards again. This movement would repeat endlessly without any friction or other loss of energy and is called simple harmonic motion. If we sketch the position of the weight over time, we get a sine wave.
+
+
+Click the buttons to hear a sine waves with frequencies of 100Hz, 200Hz, 300Hz, 400Hz, 500Hz, 1000Hz, 2000Hz, 4000Hz, 8000Hz and 16000Hz. Make sure to stop each wave (clicking again) before you start the next one.
+
+{btn-sine: 100} {btn-sine: 200} {btn-sine: 300} {btn-sine: 400} {btn-sine: 500} {btn-sine: 1000} {btn-sine: 2000} {btn-sine: 4000} {btn-sine: 8000} {btn-sine: 16000}
+
+
+==.u Damped Oscillator
+
+Let us now introduce friction which reduces the energy that is used for moving the weight up and down, damping the movement.
+# Select low, medium or high on the friction parameter in the diagram above, pull the weight down and see what happens.
+The higher the friction the quicker the weight will come to its resting position again. This system is called a damped oscillator. When listening to the result, you should notice that just by damping a sine wave it already starts sounding a lot more 'natural'.
+# more on this will be in a chapter on synthesis
+
+==.u Distance from a Point Sound Source
+
+Let us stick with our example for a little while and take a look at what happens to the pressure when we measure it at different distances from the sound source.
+
+{quint: /apps/monopole.js | monopole | Acoustic monopole}
+
+The omnidirectional loudspeaker in our situation is called a {/point sound source} and dissipates the pressure changes into all directions. While the pressure waves move outwards, more and more particles are getting involved or in other words, the area over which the same amount of pressure is distributed is getting larger and larger the further the waves travel outwards. Let us just say that we have a unit-less sound pressure of 10 and unit-less surface sections that equal exactly the surface of the loudspeaker ball. That means that just around the speaker we distribute 10 over 1, so the pressure will be 10. A little further away we have more than one surface unit (let us decide on 5 for now) which means that we distribute 10 pressure over 5 surface, so each surface unit gets 2 pressure. Even further away from the sound source we might have 100 surface units. Distributing 10 pressure over 100 surface would leave only 0.1 pressure for each surface. This is also visible in the animation. You can see that the darker areas for high pressure become less dark the further they move from the sound source. From this we can conclude that just because there is more and more surface to distribute the pressure changes, the amplitude of the sound wave will be lower the larger the distance from the sound source. As sound pressure is related to how loud we perceive a sound, we can further conclude that a sound is quieter the further away you are from the sound source. This is probably not very surprising to you.
+
+# ---.diagram
+# {todo: diagram_interactive, show how 10 is distributed across a larger surface area the further away you move from the sound source, see text # above}
+# ---
+
+For a point sound source {---} which creates a spherical wave {---} the sound pressure level drops by about 6dB per doubling of the distance.
+
+{todo: interactive diagram where you can move a &quot;listener&quot; away and closer from a point sound source, reducing by 6dB per doubling of the distance}
+
+
+== Point Sources and Line Sources
+
+The previous example used a so-called point source which dissipates a spherical sound wave uniformly into all directions. Another form of source is a line source which in theory could be created by placing very many (in theory an infinite number) infinitely small point sources next to each-other and have them all work uniformly.
+
+{: Wave Field Synthesis | http://recherche.ircam.fr/equipes/salles/WFS_WEBSITE/Index_wfs_site.htm} works with this principle. For our purpose let us say that with an infinite number of infinitely small omnidirectional loudspeakers we created an infinitely long line. Now when that line expands and contracts the sound pressure does not equalize over three dimensions, but only over two, so with increasing distance from the source, the sound pressure level drops less than it does for a point source.
+
+
+# ---.diagram
+# {todo: diagram, line sound source, possible one where you can switch from line source to point source and investigate how they are different}
+# ---
+
+# {todo: add equations and section on sound intensity}
+
+For a line sound source {---} which creates a cylindrical wave {---} the sound pressure level drops by about 3 dB per doubling of the distance.
+
+
+Whether a sound source is considered a point source or line source actually depends on the wavelength in relation to the size of the source. For example, a sound with an infinitely long wavelength (which would not be very audible) would not care much about an instrument of 2 meters and just dissipate around it. The result is a spherical wave that travels into all directions. An infinitely short wavelength (which would also not be very audible) on the other hand would probably think of the 2 meter instrument as a pretty endless line source and behave accordingly. The important thing to remember is that because of this behavior musical instruments can be considered a mix of point sources and line sources depending on the frequency. For higher frequencies they are more likely line sources, while for lower frequencies they are more likely point sources. This means that on average they are neither behaving like pure line sources nor like pure point sources and the sound pressure level will drop by something in between 3dB and 6dB per doubling of the distance.
+
+== Doubling the Distance
+
+We saw in the previous section that doubling the distance to the sound source decreases the sound pressure level. This further means that there is no specific drop of the sound pressure level per distance unit (e.g., meters or feet). When you change the distance between a microphone and a sound source from 20cm to 40cm, the difference in SPL will be considerably larger than when you change the distance from 200cm to 220cm. In order to achieve the same drop as for the closer distance, we would actually have to double the distance again, so increasing it by 200cm to a total distance of 400cm.
+
+# {todo: insert diagram}
+
+To calculate the difference of sound pressure level in dB at two distances from a point sound source you can use the following equation:
+
+---.equation
+{$$ {difference \space in \space dB} = 20 \times \log(\dfrac {r1} {r2})$$}
+---
+
+where {$$r1$$} and {$$r2$$} are the two distances from the source.
+
+
+{todo: include that every spherical wave becomes a planar wave at some point. It is all relative. Maybe include an image with zoom settings}
+
+
+
+</pre>
+</body>
+</html>
