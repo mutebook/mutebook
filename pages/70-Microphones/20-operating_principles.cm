@@ -174,9 +174,9 @@ The plot for the frequency response of the pressure microphone above neglects a 
 where f is the critical frequency in Hz, d the diameter of the diaphragm in meters and c the speed of sound in meters per second.
 # add some information about free field
 
----.diagram
+#---.diagram
 {todo: diagram_interactive, Druckstau frequency caluclator}
----
+#---
 
 All sounds above a certain frequency will be reflected and will duplicate the on-axis sensitivity of the microphone. The more you move the sound source away from the 0°-axis towards the side of the microphone, the less the pressure build up will be. So there is a gradual decrease from the maximum raise in sound pressure level of 6 $dBSPL at 0° to 0 $dBSPL at 90°.
 

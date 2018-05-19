@@ -26,7 +26,6 @@ book.hook = function (tag, cs, parts) {
 
   const quintMachine = function () {
     const [src, fun, caption] = parts(3);
-
     divId = 'quint_mach_' + (++qmNo);
     this.div(['app']);
     this.div(['quint'], ` id="${divId}"`);
@@ -100,7 +99,12 @@ book.hook = function (tag, cs, parts) {
 
   if (quintSrc || quintCode) {
     CM.loadCSS('../assets/quint.css');
-    const qs = quintSrc ? ['../' + quintSrc] : [];
+    let qs = [];
+    if (quintSrc)
+      if (0 <= quintSrc.indexOf('://'))
+        qs = [quintSrc];
+      else
+        qs = ['../' + quintSrc];
     CM.loadScripts(qs, function () {
       try {
         if (quintCode)
